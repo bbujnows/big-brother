@@ -8,13 +8,18 @@ async function initDraft() {
 
   if (houseguests.length === 0) {
     show('state-no-cast');
-    drawWheel(_draftData.owners, -1, 'previewWheelCanvas');
+    // Small delay so browser paints the canvas before we draw on it
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      drawWheel(_draftData.owners, -1, 'previewWheelCanvas', 0);
+    }));
     return;
   }
 
   if (draftStatus === 'pending') {
     show('state-wheel');
-    drawWheel(_draftData.owners);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      drawWheel(_draftData.owners, -1, 'wheelCanvas', 0);
+    }));
     return;
   }
 
@@ -31,10 +36,8 @@ async function initDraft() {
 }
 
 // ── WHEEL ─────────────────────────────────────────────────────────────
-let wheelAngle = 0;
-let spinning = false;
-
-function drawWheel(owners, highlightIndex = -1, canvasId = 'wheelCanvas') {
+// angle is passed explicitly so real wheel and preview wheel are independent
+function drawWheel(owners, highlightIndex = -1, canvasId = 'wheelCanvas', angle = 0) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
@@ -46,45 +49,49 @@ function drawWheel(owners, highlightIndex = -1, canvasId = 'wheelCanvas') {
   ctx.clearRect(0, 0, W, H);
 
   owners.forEach((owner, i) => {
-    const start = wheelAngle + i * slice - Math.PI / 2;
+    const start = angle + i * slice - Math.PI / 2;
     const end = start + slice;
 
     ctx.beginPath();
     ctx.moveTo(cx, cy);
     ctx.arc(cx, cy, r, start, end);
     ctx.closePath();
-    ctx.fillStyle = i === highlightIndex ? '#fff' : owner.color;
-    ctx.globalAlpha = i === highlightIndex ? 1 : 0.85;
+    ctx.fillStyle = i === highlightIndex ? '#ffffff' : owner.color;
+    ctx.globalAlpha = i === highlightIndex ? 1 : 0.88;
     ctx.fill();
     ctx.globalAlpha = 1;
-    ctx.strokeStyle = '#0a0a14';
+    ctx.strokeStyle = '#06060e';
     ctx.lineWidth = 3;
     ctx.stroke();
 
-    // Label
+    // Name label
     ctx.save();
     ctx.translate(cx, cy);
     ctx.rotate(start + slice / 2);
     ctx.textAlign = 'right';
-    ctx.fillStyle = '#0a0a14';
-    ctx.font = 'bold 16px Segoe UI, system-ui, sans-serif';
-    ctx.fillText(owner.name, r - 18, 6);
+    ctx.fillStyle = '#06060e';
+    ctx.font = 'bold 15px Inter, Segoe UI, system-ui, sans-serif';
+    ctx.fillText(owner.name, r - 16, 5);
     ctx.restore();
   });
 
-  // Center circle
+  // Center hub
   ctx.beginPath();
   ctx.arc(cx, cy, 22, 0, 2 * Math.PI);
-  ctx.fillStyle = '#0a0a14';
+  ctx.fillStyle = '#06060e';
   ctx.fill();
-  ctx.strokeStyle = '#1c1c3a';
+  ctx.strokeStyle = '#1a1a2e';
   ctx.lineWidth = 2;
   ctx.stroke();
 }
 
+// ── REAL WHEEL (used on draft day) ────────────────────────────────────
+let _wheelAngle = 0;
+let _spinning = false;
+
 function spinWheel() {
-  if (spinning) return;
-  spinning = true;
+  if (_spinning) return;
+  _spinning = true;
   document.getElementById('spinBtn').disabled = true;
   document.getElementById('wheelResult').textContent = '';
   document.getElementById('confirm-order').classList.add('hidden');
@@ -92,32 +99,24 @@ function spinWheel() {
   const owners = _draftData.owners;
   const n = owners.length;
   const slice = (2 * Math.PI) / n;
-
-  // Random extra spins + random stop position
-  const extraSpins = 5 + Math.floor(Math.random() * 5);
-  const randomStop = Math.random() * 2 * Math.PI;
-  const totalRotation = extraSpins * 2 * Math.PI + randomStop;
+  const totalRotation = (5 + Math.floor(Math.random() * 5)) * 2 * Math.PI + Math.random() * 2 * Math.PI;
   const duration = 3500;
-  const start = performance.now();
-  const startAngle = wheelAngle;
+  const startTime = performance.now();
+  const startAngle = _wheelAngle;
 
   function ease(t) { return 1 - Math.pow(1 - t, 4); }
 
   function frame(now) {
-    const elapsed = now - start;
-    const t = Math.min(elapsed / duration, 1);
-    wheelAngle = startAngle + totalRotation * ease(t);
-    drawWheel(owners);
+    const t = Math.min((now - startTime) / duration, 1);
+    _wheelAngle = startAngle + totalRotation * ease(t);
+    drawWheel(owners, -1, 'wheelCanvas', _wheelAngle);
 
     if (t < 1) {
       requestAnimationFrame(frame);
     } else {
-      wheelAngle = startAngle + totalRotation;
-      // The pointer is at the top (12 o'clock = -π/2 from positive x-axis)
-      // Find which segment is at the top
-      const normalizedAngle = (((-Math.PI / 2) - wheelAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-      const winnerIndex = Math.floor(normalizedAngle / slice) % n;
-      drawWheel(owners, winnerIndex);
+      const norm = (((-Math.PI / 2) - _wheelAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+      const winnerIndex = Math.floor(norm / slice) % n;
+      drawWheel(owners, winnerIndex, 'wheelCanvas', _wheelAngle);
       onSpinComplete(winnerIndex);
     }
   }
@@ -126,88 +125,22 @@ function spinWheel() {
 }
 
 function onSpinComplete(winnerIndex) {
-  spinning = false;
+  _spinning = false;
   const owners = _draftData.owners;
   const winner = owners[winnerIndex];
-  const others = owners.filter((_, i) => i !== winnerIndex);
-  // Shuffle remaining order
-  const shuffled = [...others].sort(() => Math.random() - 0.5);
+  const shuffled = [...owners.filter((_, i) => i !== winnerIndex)].sort(() => Math.random() - 0.5);
   const draftOrder = [winner, ...shuffled];
 
   document.getElementById('wheelResult').textContent = `🎉 ${winner.name} picks first!`;
-
-  const orderDisplay = document.getElementById('order-display');
-  orderDisplay.innerHTML = draftOrder.map((o, i) => `
+  document.getElementById('order-display').innerHTML = draftOrder.map((o, i) => `
     <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
-      <span style="font-size:.75rem;color:var(--muted);width:24px;">${i+1}.</span>
+      <span style="font-size:.75rem;color:var(--muted);width:24px;font-weight:700;">${i + 1}.</span>
       <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${o.color};flex-shrink:0;"></span>
       <strong>${o.name}</strong>
     </div>`).join('');
 
   document.getElementById('confirm-order').classList.remove('hidden');
   window._pendingDraftOrder = draftOrder.map(o => o.id);
-}
-
-// ── PREVIEW WHEEL (no cast yet) ───────────────────────────────────────
-let previewWheelAngle = 0;
-let previewSpinning = false;
-
-function spinPreviewWheel() {
-  if (previewSpinning) return;
-  previewSpinning = true;
-  document.getElementById('previewSpinBtn').disabled = true;
-  document.getElementById('previewWheelResult').textContent = '';
-  document.getElementById('preview-order').classList.add('hidden');
-
-  const owners = _draftData.owners;
-  const n = owners.length;
-  const slice = (2 * Math.PI) / n;
-  const extraSpins = 5 + Math.floor(Math.random() * 5);
-  const randomStop = Math.random() * 2 * Math.PI;
-  const totalRotation = extraSpins * 2 * Math.PI + randomStop;
-  const duration = 3500;
-  const start = performance.now();
-  const startAngle = previewWheelAngle;
-
-  function ease(t) { return 1 - Math.pow(1 - t, 4); }
-
-  function frame(now) {
-    const elapsed = now - start;
-    const t = Math.min(elapsed / duration, 1);
-    previewWheelAngle = startAngle + totalRotation * ease(t);
-    drawWheel(owners, -1, 'previewWheelCanvas');
-
-    if (t < 1) {
-      requestAnimationFrame(frame);
-    } else {
-      previewWheelAngle = startAngle + totalRotation;
-      const normalizedAngle = (((-Math.PI / 2) - previewWheelAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-      const winnerIndex = Math.floor(normalizedAngle / slice) % n;
-      drawWheel(owners, winnerIndex, 'previewWheelCanvas');
-
-      const winner = owners[winnerIndex];
-      const others = owners.filter((_, i) => i !== winnerIndex);
-      const shuffled = [...others].sort(() => Math.random() - 0.5);
-      const draftOrder = [winner, ...shuffled];
-
-      document.getElementById('previewWheelResult').textContent = `🎉 ${winner.name} picks first!`;
-
-      const display = document.getElementById('preview-order-display');
-      display.innerHTML = draftOrder.map((o, i) => `
-        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
-          <span style="font-size:.75rem;color:var(--muted);width:20px;font-weight:700;">${i+1}.</span>
-          <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${o.color};flex-shrink:0;"></span>
-          <strong>${o.name}</strong>
-        </div>`).join('');
-
-      document.getElementById('preview-order').classList.remove('hidden');
-      previewSpinning = false;
-      document.getElementById('previewSpinBtn').disabled = false;
-      document.getElementById('previewSpinBtn').textContent = 'Spin Again';
-    }
-  }
-
-  requestAnimationFrame(frame);
 }
 
 async function confirmOrder() {
@@ -217,10 +150,62 @@ async function confirmOrder() {
   _draftData.draftStatus = 'open';
   _draftData.currentPickIndex = 0;
   const ok = await saveData(_draftData);
-  if (ok) {
-    invalidateCache();
-    window.location.reload();
+  if (ok) { invalidateCache(); window.location.reload(); }
+}
+
+// ── PREVIEW WHEEL (pre-season, no cast yet) ───────────────────────────
+let _previewAngle = 0;
+let _previewSpinning = false;
+
+function spinPreviewWheel() {
+  if (_previewSpinning) return;
+  _previewSpinning = true;
+  document.getElementById('previewSpinBtn').disabled = true;
+  document.getElementById('previewWheelResult').textContent = '';
+  document.getElementById('preview-order').classList.add('hidden');
+
+  const owners = _draftData.owners;
+  const n = owners.length;
+  const slice = (2 * Math.PI) / n;
+  const totalRotation = (5 + Math.floor(Math.random() * 5)) * 2 * Math.PI + Math.random() * 2 * Math.PI;
+  const duration = 3500;
+  const startTime = performance.now();
+  const startAngle = _previewAngle;
+
+  function ease(t) { return 1 - Math.pow(1 - t, 4); }
+
+  function frame(now) {
+    const t = Math.min((now - startTime) / duration, 1);
+    _previewAngle = startAngle + totalRotation * ease(t);
+    drawWheel(owners, -1, 'previewWheelCanvas', _previewAngle);
+
+    if (t < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      const norm = (((-Math.PI / 2) - _previewAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+      const winnerIndex = Math.floor(norm / slice) % n;
+      drawWheel(owners, winnerIndex, 'previewWheelCanvas', _previewAngle);
+
+      const winner = owners[winnerIndex];
+      const shuffled = [...owners.filter((_, i) => i !== winnerIndex)].sort(() => Math.random() - 0.5);
+      const draftOrder = [winner, ...shuffled];
+
+      document.getElementById('previewWheelResult').textContent = `🎉 ${winner.name} picks first!`;
+      document.getElementById('preview-order-display').innerHTML = draftOrder.map((o, i) => `
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span style="font-size:.75rem;color:var(--muted);width:20px;font-weight:700;">${i + 1}.</span>
+          <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${o.color};flex-shrink:0;"></span>
+          <strong>${o.name}</strong>
+        </div>`).join('');
+
+      document.getElementById('preview-order').classList.remove('hidden');
+      _previewSpinning = false;
+      document.getElementById('previewSpinBtn').disabled = false;
+      document.getElementById('previewSpinBtn').textContent = 'Spin Again';
+    }
   }
+
+  requestAnimationFrame(frame);
 }
 
 // ── DRAFT UI ─────────────────────────────────────────────────────────
@@ -228,8 +213,6 @@ function renderDraftUI() {
   const data = _draftData;
   const seq = buildPickSequence(data.draftOrder, data.houseguests.length);
   const pickIndex = data.currentPickIndex;
-
-  // Status bar
   const currentOwnerId = seq[pickIndex];
   const currentOwner = data.owners.find(o => o.id === currentOwnerId);
   const round = Math.floor(pickIndex / data.owners.length) + 1;
@@ -239,7 +222,6 @@ function renderDraftUI() {
   document.getElementById('round-badge').textContent = `Round ${round}`;
   document.getElementById('draft-progress').textContent = `Pick ${pickIndex + 1} of ${data.houseguests.length}`;
 
-  // Owner order cards
   const orderRow = document.getElementById('draft-order-row');
   orderRow.innerHTML = '';
   const picksPerOwner = {};
@@ -257,7 +239,6 @@ function renderDraftUI() {
     orderRow.appendChild(card);
   });
 
-  // Available houseguests
   const grid = document.getElementById('available-grid');
   grid.innerHTML = '';
   data.houseguests.forEach(hg => {
@@ -265,16 +246,13 @@ function renderDraftUI() {
     const card = document.createElement('div');
     card.className = `draft-hg-card ${hg.ownerId ? 'picked' : ''}`;
     if (!hg.ownerId) card.onclick = () => makePick(hg.id);
-
     card.innerHTML = `
       <div class="draft-hg-avatar">
         ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}">` : '👤'}
       </div>
       <div class="draft-hg-name">${hg.name}</div>
       <div class="draft-hg-meta">${hg.age ? hg.age + ' · ' : ''}${hg.hometown || ''}</div>
-      ${pickedOwner
-        ? `<div class="draft-picked-by" style="background:${pickedOwner.color}22;color:${pickedOwner.color}">${pickedOwner.name}</div>`
-        : ''}`;
+      ${pickedOwner ? `<div class="draft-picked-by" style="background:${pickedOwner.color}22;color:${pickedOwner.color}">${pickedOwner.name}</div>` : ''}`;
     grid.appendChild(card);
   });
 }
@@ -283,22 +261,13 @@ async function makePick(houseguestId) {
   const data = _draftData;
   const seq = buildPickSequence(data.draftOrder, data.houseguests.length);
   const currentOwnerId = seq[data.currentPickIndex];
-
   const hg = data.houseguests.find(h => h.id === houseguestId);
   if (!hg || hg.ownerId) return;
-
   hg.ownerId = currentOwnerId;
   data.currentPickIndex++;
-
-  if (data.currentPickIndex >= data.houseguests.length) {
-    data.draftStatus = 'complete';
-  }
-
+  if (data.currentPickIndex >= data.houseguests.length) data.draftStatus = 'complete';
   const ok = await saveData(data);
-  if (ok) {
-    invalidateCache();
-    window.location.reload();
-  }
+  if (ok) { invalidateCache(); window.location.reload(); }
 }
 
 // ── COMPLETE STATE ────────────────────────────────────────────────────
