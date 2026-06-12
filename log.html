@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Episode Log · BB28 Fantasy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="index.html">BB<span>28</span></a>
+    <a href="index.html">Leaderboard</a>
+    <a href="draft.html">Draft</a>
+    <a href="players.html">Players</a>
+    <a href="log.html" class="active">Episode Log</a>
+    <a href="admin.html" class="admin-link">Admin</a>
+  </nav>
+
+  <main>
+    <h1 class="page-title">Episode Log</h1>
+    <p class="page-subtitle">Points earned each week — auto-updated after episodes air</p>
+
+    <div id="log-content"></div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    async function init() {
+      const data = await loadData();
+      const container = document.getElementById('log-content');
+
+      if (!data.episodes || data.episodes.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="icon">📅</span>
+            <h3>Season Hasn't Started Yet</h3>
+            <p>Episode results will appear here after BB28 premieres on July 9, 2026. Updates run automatically after each episode airs.</p>
+          </div>`;
+        return;
+      }
+
+      const sorted = [...data.episodes].sort((a,b) => b.week - a.week);
+      sorted.forEach(ep => {
+        const block = document.createElement('div');
+        block.className = 'episode-block';
+        const weekTotal = ep.events ? ep.events.reduce((s,e)=>s+e.points,0) : 0;
+        block.innerHTML = `
+          <div class="episode-header" onclick="toggleBlock(this)">
+            <span class="episode-week">Week ${ep.week}</span>
+            <span class="episode-date">${ep.airDate || ''}</span>
+            <span style="color:var(--muted);font-size:.85rem;margin-left:auto;margin-right:12px;">${ep.events ? ep.events.length : 0} events</span>
+            <span class="episode-chevron">▾</span>
+          </div>
+          <div class="episode-events">
+            ${ep.events && ep.events.length
+              ? ep.events.map(e => {
+                  const owner = data.owners.find(o => o.id === (data.houseguests.find(h=>h.id===e.houseguestId)||{}).ownerId);
+                  const hg = data.houseguests.find(h => h.id === e.houseguestId);
+                  return `
+                    <div class="event-row">
+                      <span class="event-type ${e.type}">${formatType(e.type)}</span>
+                      <div>
+                        <div class="event-name">${hg ? hg.name : e.houseguestId}</div>
+                        ${owner ? `<div class="event-owner" style="color:${owner.color}">${owner.name}'s team</div>` : ''}
+                      </div>
+                      <span class="event-pts ${e.points>0?'pts-pos':'pts-neg'}">${e.points>0?'+':''}${e.points}</span>
+                    </div>`;
+                }).join('')
+              : '<p style="padding:16px 0;color:var(--muted);font-size:.9rem;">No events logged for this week.</p>'}
+          </div>`;
+        container.appendChild(block);
+      });
+
+      // Open the most recent week by default
+      const first = container.querySelector('.episode-block');
+      if (first) { first.classList.add('open'); }
+    }
+
+    function toggleBlock(header) {
+      header.closest('.episode-block').classList.toggle('open');
+    }
+
+    function formatType(t) {
+      const map = {
+        hoh:'HOH', veto:'Veto', nominated:'Nominated', evicted:'Evicted',
+        bbBlockbuster:'BB Blockbuster', wallHang:'Wall Hang', otev:'OTEV',
+        bbComics:'BB Comics', otherComp:'Comp Win', pickedVeto:'Picked for Veto',
+        takenOffBlock:'Off Block', weekSurvived:'Week Survived',
+        madeJury:'Jury', resurrection:'Resurrection',
+        first:'Winner', second:'Runner-Up', third:'3rd Place', afh:'AFH'
+      };
+      return map[t] || t;
+    }
+
+    init();
+  </script>
+</body>
+</html>

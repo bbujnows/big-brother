@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Players · BB28 Fantasy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="index.html">BB<span>28</span></a>
+    <a href="index.html">Leaderboard</a>
+    <a href="draft.html">Draft</a>
+    <a href="players.html" class="active">Players</a>
+    <a href="log.html">Episode Log</a>
+    <a href="admin.html" class="admin-link">Admin</a>
+  </nav>
+
+  <main>
+    <h1 class="page-title">Houseguests</h1>
+    <p class="page-subtitle" id="subtitle">BB28 Season Cast</p>
+
+    <!-- Filter row -->
+    <div id="filter-row" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;" class="hidden">
+      <button class="btn btn-secondary btn-sm filter-btn active" data-filter="all" onclick="setFilter('all',this)">All</button>
+      <button class="btn btn-secondary btn-sm filter-btn" data-filter="active" onclick="setFilter('active',this)">Active</button>
+      <button class="btn btn-secondary btn-sm filter-btn" data-filter="jury" onclick="setFilter('jury',this)">Jury</button>
+      <button class="btn btn-secondary btn-sm filter-btn" data-filter="evicted" onclick="setFilter('evicted',this)">Evicted</button>
+      <div style="flex:1"></div>
+      <select id="owner-filter" onchange="setOwnerFilter(this.value)" style="width:auto;max-width:160px;">
+        <option value="all">All Owners</option>
+      </select>
+    </div>
+
+    <div id="players-grid" class="players-grid"></div>
+
+    <!-- Detail modal -->
+    <div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;">
+      <div id="modal-card" onclick="event.stopPropagation()" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:480px;margin:20px;overflow:hidden;max-height:90vh;overflow-y:auto;">
+        <div id="modal-content"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    let allGuests = [], currentFilter = 'all', currentOwner = 'all';
+
+    async function init() {
+      const data = await loadData();
+      allGuests = data.houseguests;
+
+      if (allGuests.length === 0) {
+        document.getElementById('players-grid').innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1">
+            <span class="icon">👥</span>
+            <h3>Cast Coming Soon</h3>
+            <p>The BB28 houseguests will appear here once CBS makes the announcement.</p>
+          </div>`;
+        return;
+      }
+
+      document.getElementById('filter-row').classList.remove('hidden');
+
+      // Populate owner filter
+      const ownerSel = document.getElementById('owner-filter');
+      data.owners.forEach(o => {
+        const opt = document.createElement('option');
+        opt.value = o.id;
+        opt.textContent = o.name + "'s Team";
+        ownerSel.appendChild(opt);
+      });
+
+      window._data = data;
+      renderGrid();
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('players-grid');
+      const filtered = allGuests.filter(hg => {
+        if (currentFilter !== 'all' && hg.status !== currentFilter) return false;
+        if (currentOwner !== 'all' && hg.ownerId !== currentOwner) return false;
+        return true;
+      }).sort((a,b) => computeGuestScore(b) - computeGuestScore(a));
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="icon">🔍</span><h3>No results</h3></div>`;
+        return;
+      }
+
+      grid.innerHTML = '';
+      filtered.forEach(hg => {
+        const owner = window._data.owners.find(o => o.id === hg.ownerId);
+        const pts = computeGuestScore(hg);
+        const card = document.createElement('div');
+        card.className = `hg-card ${hg.status === 'evicted' ? 'evicted' : ''}`;
+        card.onclick = () => openModal(hg);
+        card.innerHTML = `
+          <span class="status-badge status-${hg.status}">${hg.status}</span>
+          <div class="hg-photo">
+            ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}">` : '👤'}
+          </div>
+          <div class="hg-owner-bar" style="background:${owner ? owner.color : 'var(--border)'}"></div>
+          <div class="hg-info">
+            <div class="hg-name">${hg.name}</div>
+            <div class="hg-meta">${hg.age ? hg.age + ' · ' : ''}${hg.hometown || ''}</div>
+            <div class="hg-points">${pts > 0 ? '+' : ''}${pts}</div>
+            <div class="hg-points-label">${owner ? owner.name + "'s team" : 'Undrafted'}</div>
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    function setFilter(f, btn) {
+      currentFilter = f;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGrid();
+    }
+
+    function setOwnerFilter(v) { currentOwner = v; renderGrid(); }
+
+    function openModal(hg) {
+      const owner = window._data.owners.find(o => o.id === hg.ownerId);
+      const pts = computeGuestScore(hg);
+      const overlay = document.getElementById('modal-overlay');
+      document.getElementById('modal-content').innerHTML = `
+        <div style="display:flex;gap:0;flex-direction:column;">
+          <div style="background:var(--surface2);padding:24px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="width:80px;height:80px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;overflow:hidden;">
+              ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">` : '👤'}
+            </div>
+            <div>
+              <h2 style="font-weight:800;font-size:1.3rem;">${hg.name}</h2>
+              <p style="color:var(--muted);font-size:.85rem;">${hg.age ? hg.age + ' years old · ' : ''}${hg.hometown || ''}</p>
+              <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
+                <span class="status-badge status-${hg.status}">${hg.status}</span>
+                ${owner ? `<span style="font-size:.8rem;color:${owner.color};font-weight:700;">${owner.name}'s team</span>` : ''}
+              </div>
+            </div>
+            <div style="margin-left:auto;text-align:right;">
+              <div style="font-size:2rem;font-weight:900;color:var(--gold);">${pts > 0 ? '+' : ''}${pts}</div>
+              <div style="font-size:.7rem;color:var(--muted);">total points</div>
+            </div>
+          </div>
+          <div style="padding:20px;">
+            <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px;">Point History</h3>
+            ${hg.events && hg.events.length
+              ? hg.events.map(e => `
+                  <div class="event-row">
+                    <span class="event-type ${e.type}">${e.type.replace(/([A-Z])/g,' $1').trim()}</span>
+                    <span class="event-name">${e.description}</span>
+                    <span class="event-pts ${e.points>0?'pts-pos':'pts-neg'}">${e.points>0?'+':''}${e.points}</span>
+                  </div>`).join('')
+              : '<p style="color:var(--muted);font-size:.9rem;">No scored events yet.</p>'}
+          </div>
+          <div style="padding:0 20px 20px;">
+            <button class="btn btn-secondary btn-sm" onclick="closeModal()">Close</button>
+          </div>
+        </div>`;
+      overlay.style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').style.display = 'none';
+    }
+
+    init();
+  </script>
+</body>
+</html>

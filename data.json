@@ -1,0 +1,36 @@
+{
+  "season": 28,
+  "premiereDate": "2026-07-09",
+  "lastUpdated": "2026-06-12",
+  "currentWeek": 0,
+  "draftStatus": "pending",
+  "draftOrder": [],
+  "currentPickIndex": 0,
+  "owners": [
+    { "id": "brittany", "name": "Brittany", "color": "#ff6b9d" },
+    { "id": "brandon",  "name": "Brandon",  "color": "#4ecdc4" },
+    { "id": "vicky",    "name": "Vicky",    "color": "#ffd93d" },
+    { "id": "melissa",  "name": "Melissa",  "color": "#a78bfa" }
+  ],
+  "houseguests": [],
+  "episodes": [],
+  "scoring": {
+    "hoh":          { "label": "Head of Household Win",           "points":  10 },
+    "veto":         { "label": "Veto Win",                        "points":   5 },
+    "bbBlockbuster":{ "label": "BB Blockbuster Win",              "points":   5 },
+    "wallHang":     { "label": "Wall Hang Win",                   "points":   5 },
+    "otev":         { "label": "OTEV Win",                        "points":   5 },
+    "bbComics":     { "label": "BB Comics Win",                   "points":   5 },
+    "otherComp":    { "label": "Other Named Competition Win",     "points":   5 },
+    "nominated":    { "label": "Nominated for Eviction",          "points":  -3 },
+    "pickedVeto":   { "label": "Picked to Play in Veto",          "points":   2 },
+    "takenOffBlock":{ "label": "Taken Off Block by Someone Else", "points":   5 },
+    "weekSurvived": { "label": "Each Week Survived",              "points":   5 },
+    "madeJury":     { "label": "Made It to Jury",                 "points":  10 },
+    "resurrection": { "label": "Resurrection / Battle Back Win",  "points":  15 },
+    "first":        { "label": "Winner (1st Place)",              "points":  60 },
+    "second":       { "label": "Runner-Up (2nd Place)",           "points":  40 },
+    "third":        { "label": "3rd Place",                       "points":  20 },
+    "afh":          { "label": "America's Favorite Houseguest",   "points":  20 }
+  }
+}

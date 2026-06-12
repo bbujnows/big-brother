@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BB28 Fantasy League</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="index.html">BB<span>28</span></a>
+    <a href="index.html" class="active">Leaderboard</a>
+    <a href="draft.html">Draft</a>
+    <a href="players.html">Players</a>
+    <a href="log.html">Episode Log</a>
+    <a href="admin.html" class="admin-link">Admin</a>
+  </nav>
+
+  <main>
+    <h1 class="page-title">Leaderboard</h1>
+    <p class="page-subtitle" id="subtitle">Loading...</p>
+
+    <div id="owner-grid" class="owner-grid"></div>
+
+    <div id="countdown-wrap"></div>
+
+    <div id="hg-table-section">
+      <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">All Players</h2>
+      <div class="card hg-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Houseguest</th>
+              <th>Owner</th>
+              <th>Status</th>
+              <th style="text-align:right">Points</th>
+            </tr>
+          </thead>
+          <tbody id="hg-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Scoring System</h2>
+    <div id="scoring-grid" class="scoring-grid"></div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    async function init() {
+      const data = await loadData();
+      const ownerScores = computeOwnerScores(data);
+      const ranked = [...data.owners].sort((a,b) => (ownerScores[b.id]||0) - (ownerScores[a.id]||0));
+
+      // Subtitle
+      const sub = document.getElementById('subtitle');
+      if (data.currentWeek === 0) {
+        sub.textContent = 'Season premieres July 9, 2026 · Draft picks will appear here once the cast is announced';
+      } else {
+        sub.textContent = `Week ${data.currentWeek} · Last updated ${data.lastUpdated}`;
+      }
+
+      // Owner cards
+      const grid = document.getElementById('owner-grid');
+      ranked.forEach((owner, i) => {
+        const score = ownerScores[owner.id] || 0;
+        const players = data.houseguests.filter(h => h.ownerId === owner.id);
+        const rankLabels = ['1st','2nd','3rd','4th'];
+        const card = document.createElement('div');
+        card.className = 'owner-card';
+        card.style.setProperty('--owner-color', owner.color);
+        card.innerHTML = `
+          <div class="owner-rank">${rankLabels[i]} Place</div>
+          <div class="owner-name">${owner.name}</div>
+          <div class="owner-score">${score}<span> pts</span></div>
+          <div class="owner-players">
+            ${players.length
+              ? players.map(p => `<span class="player-pill ${p.status==='evicted'?'evicted':''}">${p.name}</span>`).join('')
+              : '<span class="player-pill">No players drafted yet</span>'}
+          </div>`;
+        grid.appendChild(card);
+      });
+
+      // Countdown (only pre-season)
+      if (data.currentWeek === 0) {
+        const wrap = document.getElementById('countdown-wrap');
+        const premiere = new Date('2026-07-09T20:00:00');
+        function renderCountdown() {
+          const diff = premiere - new Date();
+          if (diff <= 0) { wrap.innerHTML = ''; return; }
+          const d = Math.floor(diff/86400000);
+          const h = Math.floor((diff%86400000)/3600000);
+          const m = Math.floor((diff%3600000)/60000);
+          const s = Math.floor((diff%60000)/1000);
+          wrap.innerHTML = `
+            <p style="text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;">Time Until Premiere</p>
+            <div class="countdown">
+              <div class="countdown-unit"><div class="countdown-num">${d}</div><div class="countdown-label">Days</div></div>
+              <div class="countdown-unit"><div class="countdown-num">${String(h).padStart(2,'0')}</div><div class="countdown-label">Hours</div></div>
+              <div class="countdown-unit"><div class="countdown-num">${String(m).padStart(2,'0')}</div><div class="countdown-label">Min</div></div>
+              <div class="countdown-unit"><div class="countdown-num">${String(s).padStart(2,'0')}</div><div class="countdown-label">Sec</div></div>
+            </div>`;
+        }
+        renderCountdown();
+        setInterval(renderCountdown, 1000);
+      }
+
+      // Houseguests table
+      const tbody = document.getElementById('hg-tbody');
+      if (data.houseguests.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:32px;color:var(--muted)">Cast not yet announced — check back soon!</td></tr>`;
+      } else {
+        const sorted = [...data.houseguests].sort((a,b) => computeGuestScore(b) - computeGuestScore(a));
+        sorted.forEach(hg => {
+          const owner = data.owners.find(o => o.id === hg.ownerId);
+          const pts = computeGuestScore(hg);
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong>${hg.name}</strong></td>
+            <td>
+              ${owner
+                ? `<span class="owner-dot" style="background:${owner.color}"></span>${owner.name}`
+                : '<span style="color:var(--muted)">Undrafted</span>'}
+            </td>
+            <td><span class="status-badge status-${hg.status}">${hg.status}</span></td>
+            <td style="text-align:right" class="${pts>0?'pts-pos':pts<0?'pts-neg':'pts-zero'}">${pts>0?'+':''}${pts}</td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // Scoring system
+      const sg = document.getElementById('scoring-grid');
+      Object.entries(data.scoring).forEach(([,v]) => {
+        const div = document.createElement('div');
+        div.className = 'scoring-row';
+        const cls = v.points > 0 ? 'pts-pos' : v.points < 0 ? 'pts-neg' : '';
+        div.innerHTML = `<span class="scoring-label">${v.label}</span><span class="scoring-pts ${cls}">${v.points>0?'+':''}${v.points}</span>`;
+        sg.appendChild(div);
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

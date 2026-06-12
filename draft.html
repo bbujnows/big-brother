@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draft · BB28 Fantasy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="index.html">BB<span>28</span></a>
+    <a href="index.html">Leaderboard</a>
+    <a href="draft.html" class="active">Draft</a>
+    <a href="players.html">Players</a>
+    <a href="log.html">Episode Log</a>
+    <a href="admin.html" class="admin-link">Admin</a>
+  </nav>
+
+  <main>
+    <div class="draft-container">
+      <h1 class="page-title">Fantasy Draft</h1>
+      <p class="page-subtitle">BB28 — Season premieres July 9, 2026</p>
+
+      <!-- STATE: no cast yet -->
+      <div id="state-no-cast" class="hidden">
+        <div class="empty-state">
+          <span class="icon">📺</span>
+          <h3>Cast Not Yet Announced</h3>
+          <p>CBS hasn't revealed the BB28 houseguests yet. Once the admin adds the cast, the draft will open here.</p>
+        </div>
+      </div>
+
+      <!-- STATE: wheel spin (determine draft order) -->
+      <div id="state-wheel" class="hidden">
+        <div class="card" style="margin-bottom:24px;">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:4px;">Step 1 of 2</p>
+          <h2 style="font-weight:800;margin-bottom:6px;">Spin to Determine Draft Order</h2>
+          <p style="color:var(--muted);font-size:.9rem;">Whoever the wheel lands on picks first. The snake draft order follows automatically.</p>
+        </div>
+        <div class="wheel-section">
+          <span class="wheel-pointer">▼</span>
+          <canvas id="wheelCanvas" width="300" height="300"></canvas>
+          <br>
+          <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Spin the Wheel</button>
+          <div class="wheel-result" id="wheelResult"></div>
+        </div>
+        <div id="confirm-order" class="hidden" style="margin-top:24px;">
+          <div class="card">
+            <h3 style="margin-bottom:16px;font-weight:700;">Draft Order Set</h3>
+            <div id="order-display" style="margin-bottom:20px;"></div>
+            <button class="btn btn-primary" onclick="confirmOrder()">Start the Draft →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE: draft in progress -->
+      <div id="state-draft" class="hidden">
+        <div class="draft-status-bar">
+          <div>
+            <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Now Picking</div>
+            <div class="draft-turn" id="current-turn">—</div>
+          </div>
+          <div class="draft-round-badge" id="round-badge">Round 1</div>
+          <div class="draft-progress" id="draft-progress">Pick 1 of 16</div>
+        </div>
+
+        <div id="draft-order-row" class="draft-order-row"></div>
+
+        <h3 style="font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:14px;">Available Houseguests — click to draft</h3>
+        <div id="available-grid" class="available-grid"></div>
+      </div>
+
+      <!-- STATE: draft complete -->
+      <div id="state-complete" class="hidden">
+        <div class="card" style="text-align:center;padding:40px;margin-bottom:24px;">
+          <div style="font-size:3rem;margin-bottom:12px;">🏆</div>
+          <h2 style="font-weight:800;margin-bottom:8px;">Draft Complete!</h2>
+          <p style="color:var(--muted);">Teams are locked. Good luck this season!</p>
+        </div>
+        <div id="teams-display" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="draft.js"></script>
+  <script>initDraft();</script>
+</body>
+</html>
