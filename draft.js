@@ -8,6 +8,7 @@ async function initDraft() {
 
   if (houseguests.length === 0) {
     show('state-no-cast');
+    drawWheel(_draftData.owners, -1, 'previewWheelCanvas');
     return;
   }
 
@@ -33,8 +34,9 @@ async function initDraft() {
 let wheelAngle = 0;
 let spinning = false;
 
-function drawWheel(owners, highlightIndex = -1) {
-  const canvas = document.getElementById('wheelCanvas');
+function drawWheel(owners, highlightIndex = -1, canvasId = 'wheelCanvas') {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
   const cx = W / 2, cy = H / 2, r = W / 2 - 8;
@@ -144,6 +146,68 @@ function onSpinComplete(winnerIndex) {
 
   document.getElementById('confirm-order').classList.remove('hidden');
   window._pendingDraftOrder = draftOrder.map(o => o.id);
+}
+
+// ── PREVIEW WHEEL (no cast yet) ───────────────────────────────────────
+let previewWheelAngle = 0;
+let previewSpinning = false;
+
+function spinPreviewWheel() {
+  if (previewSpinning) return;
+  previewSpinning = true;
+  document.getElementById('previewSpinBtn').disabled = true;
+  document.getElementById('previewWheelResult').textContent = '';
+  document.getElementById('preview-order').classList.add('hidden');
+
+  const owners = _draftData.owners;
+  const n = owners.length;
+  const slice = (2 * Math.PI) / n;
+  const extraSpins = 5 + Math.floor(Math.random() * 5);
+  const randomStop = Math.random() * 2 * Math.PI;
+  const totalRotation = extraSpins * 2 * Math.PI + randomStop;
+  const duration = 3500;
+  const start = performance.now();
+  const startAngle = previewWheelAngle;
+
+  function ease(t) { return 1 - Math.pow(1 - t, 4); }
+
+  function frame(now) {
+    const elapsed = now - start;
+    const t = Math.min(elapsed / duration, 1);
+    previewWheelAngle = startAngle + totalRotation * ease(t);
+    drawWheel(owners, -1, 'previewWheelCanvas');
+
+    if (t < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      previewWheelAngle = startAngle + totalRotation;
+      const normalizedAngle = (((-Math.PI / 2) - previewWheelAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+      const winnerIndex = Math.floor(normalizedAngle / slice) % n;
+      drawWheel(owners, winnerIndex, 'previewWheelCanvas');
+
+      const winner = owners[winnerIndex];
+      const others = owners.filter((_, i) => i !== winnerIndex);
+      const shuffled = [...others].sort(() => Math.random() - 0.5);
+      const draftOrder = [winner, ...shuffled];
+
+      document.getElementById('previewWheelResult').textContent = `🎉 ${winner.name} picks first!`;
+
+      const display = document.getElementById('preview-order-display');
+      display.innerHTML = draftOrder.map((o, i) => `
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span style="font-size:.75rem;color:var(--muted);width:20px;font-weight:700;">${i+1}.</span>
+          <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${o.color};flex-shrink:0;"></span>
+          <strong>${o.name}</strong>
+        </div>`).join('');
+
+      document.getElementById('preview-order').classList.remove('hidden');
+      previewSpinning = false;
+      document.getElementById('previewSpinBtn').disabled = false;
+      document.getElementById('previewSpinBtn').textContent = 'Spin Again';
+    }
+  }
+
+  requestAnimationFrame(frame);
 }
 
 async function confirmOrder() {

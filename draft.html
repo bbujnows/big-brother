@@ -21,12 +21,34 @@
       <h1 class="page-title">Fantasy Draft</h1>
       <p class="page-subtitle">BB28 — Season premieres July 9, 2026</p>
 
-      <!-- STATE: no cast yet -->
+      <!-- STATE: no cast yet — shows wheel preview -->
       <div id="state-no-cast" class="hidden">
-        <div class="empty-state">
-          <span class="icon">📺</span>
-          <h3>Cast Not Yet Announced</h3>
-          <p>CBS hasn't revealed the BB28 houseguests yet. Once the admin adds the cast, the draft will open here.</p>
+        <div class="card" style="margin-bottom:24px;border-color:rgba(245,197,24,0.2);background:rgba(245,197,24,0.04);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <span style="font-size:1.2rem;">📺</span>
+            <strong style="color:var(--gold);">Cast Not Yet Announced</strong>
+          </div>
+          <p style="color:var(--muted);font-size:.88rem;line-height:1.6;">CBS hasn't revealed the BB28 houseguests yet — the real draft opens once the admin adds the cast. But you can spin the wheel below to preview how draft order will work on draft day!</p>
+        </div>
+
+        <div class="card" style="margin-bottom:24px;">
+          <p style="font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--orange);margin-bottom:4px;">Wheel Preview</p>
+          <h2 style="font-weight:800;margin-bottom:6px;">Spin to Determine Draft Order</h2>
+          <p style="color:var(--muted);font-size:.9rem;">On draft day, whoever the wheel lands on picks first. The snake order follows automatically. Give it a spin!</p>
+        </div>
+        <div class="wheel-section">
+          <span class="wheel-pointer">▼</span>
+          <canvas id="previewWheelCanvas" width="300" height="300"></canvas>
+          <br>
+          <button class="spin-btn" id="previewSpinBtn" onclick="spinPreviewWheel()">Spin the Wheel</button>
+          <div class="wheel-result" id="previewWheelResult"></div>
+        </div>
+        <div id="preview-order" class="hidden" style="margin-top:24px;">
+          <div class="card">
+            <p style="font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px;">If this were real, the draft order would be:</p>
+            <div id="preview-order-display" style="margin-bottom:16px;"></div>
+            <p style="font-size:.8rem;color:var(--muted);">Spin again any time — on actual draft day this will lock in and start the real picks.</p>
+          </div>
         </div>
       </div>
 
