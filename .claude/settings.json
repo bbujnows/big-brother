@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git pull",
+            "statusMessage": "Pulling latest changes from GitHub...",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git add -A; git commit -m \"auto-sync from Claude Code session\"; git push",
+            "statusMessage": "Saving and pushing your changes to GitHub...",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}
