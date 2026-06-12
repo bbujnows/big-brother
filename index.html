@@ -8,24 +8,47 @@
 </head>
 <body>
   <nav>
-    <a class="nav-logo" href="index.html">BB<span>28</span></a>
+    <a class="nav-logo" href="index.html">BIG BROTHER 28</a>
     <a href="index.html" class="active">Leaderboard</a>
     <a href="draft.html">Draft</a>
     <a href="players.html">Players</a>
     <a href="log.html">Episode Log</a>
-    <a href="admin.html" class="admin-link">Admin</a>
+    <a href="admin.html" class="admin-link">⚙ Admin</a>
   </nav>
 
-  <main>
-    <h1 class="page-title">Leaderboard</h1>
-    <p class="page-subtitle" id="subtitle">Loading...</p>
+  <!-- Hero -->
+  <div class="hero">
+    <div class="bb-eye">
+      <svg viewBox="0 0 80 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 23C4 23 18 6 40 6C62 6 76 23 76 23C76 23 62 40 40 40C18 40 4 23 4 23Z"
+              stroke="url(#eyeGrad)" stroke-width="3" fill="none"/>
+        <circle cx="40" cy="23" r="10" fill="url(#eyeGrad)"/>
+        <circle cx="43" cy="20" r="3" fill="rgba(255,255,255,0.3)"/>
+        <defs>
+          <linearGradient id="eyeGrad" x1="4" y1="23" x2="76" y2="23" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#e8351e"/>
+            <stop offset="50%" stop-color="#ff6b2b"/>
+            <stop offset="100%" stop-color="#f5c518"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <span class="hero-eyebrow">Season 28 · Fantasy League</span>
+    <h1 class="hero-title">
+      <span class="bb">Big Brother</span><br>
+      <span class="fantasy">Fantasy Draft</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub" id="hero-sub">Loading...</p>
+  </div>
 
+  <main class="inner">
     <div id="owner-grid" class="owner-grid"></div>
 
     <div id="countdown-wrap"></div>
 
     <div id="hg-table-section">
-      <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">All Players</h2>
+      <div class="section-label">All Players</div>
       <div class="card hg-table-wrap">
         <table>
           <thead>
@@ -43,23 +66,25 @@
 
     <div class="divider"></div>
 
-    <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Scoring System</h2>
+    <div class="section-label">Scoring System</div>
     <div id="scoring-grid" class="scoring-grid"></div>
   </main>
 
   <script src="app.js"></script>
   <script>
+    const rankEmoji = ['🥇','🥈','🥉','4️⃣'];
+
     async function init() {
       const data = await loadData();
       const ownerScores = computeOwnerScores(data);
       const ranked = [...data.owners].sort((a,b) => (ownerScores[b.id]||0) - (ownerScores[a.id]||0));
 
-      // Subtitle
-      const sub = document.getElementById('subtitle');
+      // Hero subtitle
+      const heroSub = document.getElementById('hero-sub');
       if (data.currentWeek === 0) {
-        sub.textContent = 'Season premieres July 9, 2026 · Draft picks will appear here once the cast is announced';
+        heroSub.textContent = 'Premieres July 9, 2026 · Cast to be announced';
       } else {
-        sub.textContent = `Week ${data.currentWeek} · Last updated ${data.lastUpdated}`;
+        heroSub.textContent = `Week ${data.currentWeek} · Last updated ${data.lastUpdated}`;
       }
 
       // Owner cards
@@ -67,23 +92,26 @@
       ranked.forEach((owner, i) => {
         const score = ownerScores[owner.id] || 0;
         const players = data.houseguests.filter(h => h.ownerId === owner.id);
-        const rankLabels = ['1st','2nd','3rd','4th'];
         const card = document.createElement('div');
-        card.className = 'owner-card';
+        card.className = `owner-card rank-${i+1}`;
         card.style.setProperty('--owner-color', owner.color);
         card.innerHTML = `
-          <div class="owner-rank">${rankLabels[i]} Place</div>
-          <div class="owner-name">${owner.name}</div>
+          <div class="owner-card-top">
+            <div>
+              <div class="owner-name">${owner.name}</div>
+            </div>
+            <div class="owner-rank-badge">${rankEmoji[i]}</div>
+          </div>
           <div class="owner-score">${score}<span> pts</span></div>
           <div class="owner-players">
             ${players.length
               ? players.map(p => `<span class="player-pill ${p.status==='evicted'?'evicted':''}">${p.name}</span>`).join('')
-              : '<span class="player-pill">No players drafted yet</span>'}
+              : '<span class="player-pill">No players yet</span>'}
           </div>`;
         grid.appendChild(card);
       });
 
-      // Countdown (only pre-season)
+      // Countdown
       if (data.currentWeek === 0) {
         const wrap = document.getElementById('countdown-wrap');
         const premiere = new Date('2026-07-09T20:00:00');
@@ -95,7 +123,7 @@
           const m = Math.floor((diff%3600000)/60000);
           const s = Math.floor((diff%60000)/1000);
           wrap.innerHTML = `
-            <p style="text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;">Time Until Premiere</p>
+            <p class="section-label" style="justify-content:center;margin-bottom:16px;">Time Until Premiere</p>
             <div class="countdown">
               <div class="countdown-unit"><div class="countdown-num">${d}</div><div class="countdown-label">Days</div></div>
               <div class="countdown-unit"><div class="countdown-num">${String(h).padStart(2,'0')}</div><div class="countdown-label">Hours</div></div>
@@ -110,7 +138,7 @@
       // Houseguests table
       const tbody = document.getElementById('hg-tbody');
       if (data.houseguests.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:32px;color:var(--muted)">Cast not yet announced — check back soon!</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:36px;color:var(--muted);font-weight:600;">Cast not yet announced — check back soon!</td></tr>`;
       } else {
         const sorted = [...data.houseguests].sort((a,b) => computeGuestScore(b) - computeGuestScore(a));
         sorted.forEach(hg => {
