@@ -114,7 +114,7 @@ function spinWheel() {
     if (t < 1) {
       requestAnimationFrame(frame);
     } else {
-      const norm = (((-Math.PI / 2) - _wheelAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+      const norm = ((-_wheelAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
       const winnerIndex = Math.floor(norm / slice) % n;
       drawWheel(owners, winnerIndex, 'wheelCanvas', _wheelAngle);
       onSpinComplete(winnerIndex);
@@ -182,7 +182,7 @@ function spinPreviewWheel() {
     if (t < 1) {
       requestAnimationFrame(frame);
     } else {
-      const norm = (((-Math.PI / 2) - _previewAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+      const norm = ((-_previewAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
       const winnerIndex = Math.floor(norm / slice) % n;
       drawWheel(owners, winnerIndex, 'previewWheelCanvas', _previewAngle);
 
