@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --bg:       #005f8a;
-  --surface:  rgba(0,18,42,0.82);
-  --surface2: rgba(0,24,54,0.88);
-  --surface3: rgba(0,30,65,0.93);
-  --border:   rgba(0,200,230,0.16);
+  --bg:       #0099bb;
+  --surface:  rgba(0,20,50,0.68);
+  --surface2: rgba(0,25,58,0.76);
+  --surface3: rgba(0,30,66,0.84);
+  --border:   rgba(100,220,255,0.18);
   --blue:     #00b4d8;
   --blue-lt:  #48cae4;
   --blue-dk:  #0077b6;
@@ -27,45 +27,35 @@ body {
   color: var(--text);
   min-height: 100vh;
   padding-top: var(--nav-h);
-  position: relative;
-  /* Pool water base — depth gradient */
-  background-color: #005070;
+  /* Pool water — bright aqua ripple background, fixed so it stays as you scroll */
+  background-color: #0099bb;
+  background-attachment: fixed;
   background-image:
-    radial-gradient(ellipse 50% 30% at 15% 20%, rgba(144,224,239,0.22) 0%, transparent 65%),
-    radial-gradient(ellipse 38% 24% at 78% 42%, rgba(72,202,228,0.18) 0%, transparent 65%),
-    radial-gradient(ellipse 44% 28% at 50% 78%, rgba(0,180,216,0.14) 0%, transparent 65%),
-    radial-gradient(ellipse 30% 20% at 88% 12%, rgba(144,224,239,0.12) 0%, transparent 65%),
-    linear-gradient(180deg, #0088bb 0%, #006699 25%, #005070 55%, #003a58 100%);
-}
-
-/* Animated pool ripple overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
+    /* Wave ripple lines */
     repeating-linear-gradient(
-      -38deg,
-      transparent 0px, transparent 9px,
-      rgba(255,255,255,0.055) 9px, rgba(255,255,255,0.055) 10px
+      -32deg,
+      transparent 0px, transparent 7px,
+      rgba(0,50,100,0.18) 7px, rgba(0,50,100,0.18) 8px,
+      transparent 8px, transparent 17px,
+      rgba(0,50,100,0.1) 17px, rgba(0,50,100,0.1) 18px
     ),
     repeating-linear-gradient(
-      52deg,
-      transparent 0px, transparent 14px,
-      rgba(255,255,255,0.032) 14px, rgba(255,255,255,0.032) 15px
-    );
-  animation: poolRipple 14s ease-in-out infinite;
+      58deg,
+      transparent 0px, transparent 12px,
+      rgba(255,255,255,0.07) 12px, rgba(255,255,255,0.07) 13px
+    ),
+    /* Caustic light blotches (like sunlight on pool floor) */
+    radial-gradient(ellipse 48% 28% at 18% 22%, rgba(180,240,255,0.28) 0%, transparent 70%),
+    radial-gradient(ellipse 36% 22% at 76% 44%, rgba(150,225,255,0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 42% 26% at 50% 80%, rgba(120,210,245,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 18% at 88% 12%, rgba(200,245,255,0.16) 0%, transparent 70%),
+    /* Pool depth — bright aqua at surface, deep blue at bottom */
+    linear-gradient(170deg, #00d4f0 0%, #00b4d8 18%, #0090bb 40%, #006b99 65%, #004a77 100%);
 }
 
-body > * { position: relative; z-index: 1; }
-
 @keyframes poolRipple {
-  0%, 100% { transform: translate(0px,   0px); }
-  25%       { transform: translate(7px,   4px); }
-  50%       { transform: translate(14px,  9px); }
-  75%       { transform: translate(7px,  14px); }
+  0%, 100% { background-position: 0px 0px, 0px 0px, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  50%       { background-position: 20px 12px, -16px 9px, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
 }
 
 /* ── NAV ── */
@@ -133,30 +123,7 @@ nav a.admin-link:hover {
   overflow: hidden;
   padding: 48px 28px 46px;
   text-align: center;
-  /* Extra pool light caustics in the hero */
-  background:
-    radial-gradient(ellipse 60% 40% at 30% 60%, rgba(144,224,239,0.2) 0%, transparent 60%),
-    radial-gradient(ellipse 45% 35% at 70% 30%, rgba(0,212,255,0.18) 0%, transparent 60%),
-    transparent;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  /* Soft shimmer caustic blobs that pulse */
-  background:
-    radial-gradient(ellipse 22% 14% at 12% 45%, rgba(255,255,255,0.1) 0%, transparent 70%),
-    radial-gradient(ellipse 16% 10% at 60% 70%, rgba(255,255,255,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 20% 12% at 88% 35%, rgba(255,255,255,0.07) 0%, transparent 70%);
-  animation: causticPulse 6s ease-in-out infinite alternate;
-}
-
-@keyframes causticPulse {
-  0%   { opacity: 0.6; transform: scale(1)    translateX(0px); }
-  50%  { opacity: 1;   transform: scale(1.06) translateX(6px); }
-  100% { opacity: 0.7; transform: scale(0.97) translateX(-4px); }
+  background: transparent;
 }
 
 .hero-eyebrow {
@@ -210,7 +177,7 @@ nav a.admin-link:hover {
 .bb-eye svg {
   width: 64px;
   height: 37px;
-  filter: drop-shadow(0 0 10px rgba(0,200,230,0.6));
+  filter: drop-shadow(0 0 10px rgba(255,107,43,0.7));
 }
 
 /* ── LAYOUT ── */
