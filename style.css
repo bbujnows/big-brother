@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --bg:       #0099bb;
-  --surface:  rgba(0,20,50,0.68);
-  --surface2: rgba(0,25,58,0.76);
-  --surface3: rgba(0,30,66,0.84);
-  --border:   rgba(100,220,255,0.18);
+  --bg:       #0088bb;
+  --surface:  rgba(0,15,40,0.88);
+  --surface2: rgba(0,20,50,0.92);
+  --surface3: rgba(0,25,58,0.95);
+  --border:   rgba(100,220,255,0.2);
   --blue:     #00b4d8;
   --blue-lt:  #48cae4;
   --blue-dk:  #0077b6;
@@ -27,35 +27,11 @@ body {
   color: var(--text);
   min-height: 100vh;
   padding-top: var(--nav-h);
-  /* Pool water — bright aqua ripple background, fixed so it stays as you scroll */
-  background-color: #0099bb;
+  background-color: #0088bb;
+  background-image: url('pool-bg.jpg');
+  background-size: cover;
+  background-position: center top;
   background-attachment: fixed;
-  background-image:
-    /* Wave ripple lines */
-    repeating-linear-gradient(
-      -32deg,
-      transparent 0px, transparent 7px,
-      rgba(0,50,100,0.18) 7px, rgba(0,50,100,0.18) 8px,
-      transparent 8px, transparent 17px,
-      rgba(0,50,100,0.1) 17px, rgba(0,50,100,0.1) 18px
-    ),
-    repeating-linear-gradient(
-      58deg,
-      transparent 0px, transparent 12px,
-      rgba(255,255,255,0.07) 12px, rgba(255,255,255,0.07) 13px
-    ),
-    /* Caustic light blotches (like sunlight on pool floor) */
-    radial-gradient(ellipse 48% 28% at 18% 22%, rgba(180,240,255,0.28) 0%, transparent 70%),
-    radial-gradient(ellipse 36% 22% at 76% 44%, rgba(150,225,255,0.22) 0%, transparent 70%),
-    radial-gradient(ellipse 42% 26% at 50% 80%, rgba(120,210,245,0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 30% 18% at 88% 12%, rgba(200,245,255,0.16) 0%, transparent 70%),
-    /* Pool depth — bright aqua at surface, deep blue at bottom */
-    linear-gradient(170deg, #00d4f0 0%, #00b4d8 18%, #0090bb 40%, #006b99 65%, #004a77 100%);
-}
-
-@keyframes poolRipple {
-  0%, 100% { background-position: 0px 0px, 0px 0px, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-  50%       { background-position: 20px 12px, -16px 9px, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
 }
 
 /* ── NAV ── */
@@ -63,10 +39,10 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--nav-h);
-  background: rgba(0,35,55,0.96);
+  background: rgba(0,20,45,0.96);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0,200,230,0.2);
+  border-bottom: 1px solid rgba(0,180,220,0.25);
   display: flex;
   align-items: center;
   padding: 0 28px;
@@ -126,14 +102,27 @@ nav a.admin-link:hover {
   background: transparent;
 }
 
+/* Dark gradient behind hero text so it reads over the bright photo */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 90% at 50% 50%, rgba(0,10,30,0.52) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero > * { position: relative; z-index: 1; }
+
 .hero-eyebrow {
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--blue-lt);
+  color: #90e8ff;
   margin-bottom: 10px;
   display: block;
+  text-shadow: 0 1px 8px rgba(0,20,50,0.8);
 }
 
 .hero-title {
@@ -142,6 +131,7 @@ nav a.admin-link:hover {
   letter-spacing: 4px;
   line-height: 0.95;
   margin-bottom: 12px;
+  text-shadow: 0 2px 16px rgba(0,10,40,0.85), 0 4px 32px rgba(0,10,40,0.5);
 }
 
 .hero-title .bb {
@@ -177,7 +167,7 @@ nav a.admin-link:hover {
 .bb-eye svg {
   width: 64px;
   height: 37px;
-  filter: drop-shadow(0 0 10px rgba(255,107,43,0.7));
+  filter: drop-shadow(0 0 10px rgba(0,180,240,0.8));
 }
 
 /* ── LAYOUT ── */
