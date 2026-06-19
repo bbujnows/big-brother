@@ -116,6 +116,10 @@ function spinWheel() {
     } else {
       const norm = ((-_wheelAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
       const winnerIndex = Math.floor(norm / slice) % n;
+      // Snap so winner is centered under the pointer — eliminates boundary ambiguity
+      const snapTarget = -(winnerIndex + 0.5) * slice;
+      const k = Math.round((_wheelAngle - snapTarget) / (2 * Math.PI));
+      _wheelAngle = snapTarget + k * 2 * Math.PI;
       drawWheel(owners, winnerIndex, 'wheelCanvas', _wheelAngle);
       onSpinComplete(winnerIndex);
     }
@@ -184,6 +188,10 @@ function spinPreviewWheel() {
     } else {
       const norm = ((-_previewAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
       const winnerIndex = Math.floor(norm / slice) % n;
+      // Snap so winner is centered under the pointer — eliminates boundary ambiguity
+      const snapTarget = -(winnerIndex + 0.5) * slice;
+      const k = Math.round((_previewAngle - snapTarget) / (2 * Math.PI));
+      _previewAngle = snapTarget + k * 2 * Math.PI;
       drawWheel(owners, winnerIndex, 'previewWheelCanvas', _previewAngle);
 
       const winner = owners[winnerIndex];
