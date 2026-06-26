@@ -11,7 +11,7 @@ import { getDatabase, ref, push, query, orderByChild, limitToLast, onChildAdded,
 const firebaseConfig = {
   apiKey:            'AIzaSyBtZZ7groyieF-kMsvY4ASuZpJ6psQbwak',
   authDomain:        'bb28-fantasy.firebaseapp.com',
-  databaseURL:       'REPLACE_DATABASE_URL',
+  databaseURL:       'https://bb28-fantasy-default-rtdb.firebaseio.com',
   projectId:         'bb28-fantasy',
   storageBucket:     'bb28-fantasy.firebasestorage.app',
   messagingSenderId: '165892895546',
