@@ -8,7 +8,7 @@
 </head>
 <body>
   <nav>
-    <a class="nav-logo" href="index.html">BIG BROTHER 28</a>
+    <a class="nav-logo" href="index.html">BIG BROTHER<span style="color:#5fffc2"> 28</span></a>
     <a href="index.html" class="active">Leaderboard</a>
     <a href="draft.html">Draft</a>
     <a href="players.html">Players</a>
@@ -18,20 +18,13 @@
 
   <!-- Hero -->
   <div class="hero">
+    <div class="hero-hud">
+      <span class="rec"><i></i>REC</span>
+      <span>CAM 01 · LIVE FEED · HOUSE</span>
+      <span id="hud-clock">--·--·--  --:--:--</span>
+    </div>
     <div class="bb-eye">
-      <svg viewBox="0 0 80 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 23C4 23 18 6 40 6C62 6 76 23 76 23C76 23 62 40 40 40C18 40 4 23 4 23Z"
-              stroke="url(#eyeGrad)" stroke-width="3" fill="none"/>
-        <circle cx="40" cy="23" r="10" fill="url(#eyeGrad)"/>
-        <circle cx="43" cy="20" r="3" fill="rgba(255,255,255,0.35)"/>
-        <defs>
-          <linearGradient id="eyeGrad" x1="4" y1="23" x2="76" y2="23" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#0077cc"/>
-            <stop offset="50%" stop-color="#00aaee"/>
-            <stop offset="100%" stop-color="#55ddff"/>
-          </linearGradient>
-        </defs>
-      </svg>
+      <img src="bb-eye.svg" alt="Big Brother eye" width="84" height="50">
     </div>
     <span class="hero-eyebrow">Season 28 · Fantasy League</span>
     <h1 class="hero-title">
@@ -170,6 +163,14 @@
     }
 
     init();
+
+    // HUD clock
+    setInterval(() => {
+      const el = document.getElementById('hud-clock');
+      if (!el) return;
+      const d = new Date(), p = n => String(n).padStart(2,'0');
+      el.textContent = `${p(d.getMonth()+1)}·${p(d.getDate())}·${String(d.getFullYear()).slice(2)}  ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+    }, 1000);
   </script>
 </body>
 </html>

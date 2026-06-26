@@ -1,0 +1,17 @@
+<svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Big Brother surveillance eye">
+  
+  <g stroke="#5fffc2" stroke-width="2.5" fill="none">
+    <path d="M2 14 V2 H14"></path>
+    <path d="M106 2 H118 V14"></path>
+    <path d="M118 66 V78 H106"></path>
+    <path d="M14 78 H2 V66"></path>
+  </g>
+  
+  <circle cx="60" cy="40" r="26" stroke="#5fffc2" stroke-opacity="0.28" stroke-width="1.2" stroke-dasharray="3 5" fill="none"></circle>
+  
+  <path d="M16 40 Q60 12 104 40 Q60 68 16 40 Z" stroke="#5fffc2" stroke-width="3.4" fill="none"></path>
+  
+  <circle cx="60" cy="40" r="15" stroke="#5fffc2" stroke-width="3.4" fill="none"></circle>
+  
+  <circle cx="60" cy="40" r="6.5" fill="#5fffc2"></circle>
+</svg>
