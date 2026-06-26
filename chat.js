@@ -9,13 +9,13 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getDatabase, ref, push, query, orderByChild, limitToLast, onChildAdded, remove } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
 const firebaseConfig = {
-  apiKey:            'REPLACE_API_KEY',
-  authDomain:        'REPLACE_AUTH_DOMAIN',
+  apiKey:            'AIzaSyBtZZ7groyieF-kMsvY4ASuZpJ6psQbwak',
+  authDomain:        'bb28-fantasy.firebaseapp.com',
   databaseURL:       'REPLACE_DATABASE_URL',
-  projectId:         'REPLACE_PROJECT_ID',
-  storageBucket:     'REPLACE_STORAGE_BUCKET',
-  messagingSenderId: 'REPLACE_MESSAGING_SENDER_ID',
-  appId:             'REPLACE_APP_ID',
+  projectId:         'bb28-fantasy',
+  storageBucket:     'bb28-fantasy.firebasestorage.app',
+  messagingSenderId: '165892895546',
+  appId:             '1:165892895546:web:935f2cdd7611307b8d1603',
 };
 
 const app = initializeApp(firebaseConfig);
