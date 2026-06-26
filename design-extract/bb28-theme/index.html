@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BB28 — Live Feed theme preview</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="#">BIG BROTHER<span style="color:#5fffc2"> 28</span></a>
+    <a href="#" class="active">Leaderboard</a>
+    <a href="#">Draft</a>
+    <a href="#">Players</a>
+    <a href="#">Episode Log</a>
+    <a href="#" class="admin-link">⚙ Admin</a>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-hud">
+      <span class="rec"><i></i>REC</span>
+      <span>CAM 01 · LIVE FEED · HOUSE</span>
+      <span id="hud-clock">07·09·26  20:00:14</span>
+    </div>
+    <div class="bb-eye">
+      <svg viewBox="0 0 80 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 23C4 23 18 6 40 6C62 6 76 23 76 23C76 23 62 40 40 40C18 40 4 23 4 23Z" stroke="url(#eyeGrad)" stroke-width="3" fill="none"/>
+        <circle cx="40" cy="23" r="10" fill="url(#eyeGrad)"/>
+        <circle cx="43" cy="20" r="3" fill="rgba(255,255,255,0.35)"/>
+        <defs><linearGradient id="eyeGrad" x1="4" y1="23" x2="76" y2="23" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0077cc"/><stop offset="50%" stop-color="#00aaee"/><stop offset="100%" stop-color="#55ddff"/></linearGradient></defs>
+      </svg>
+    </div>
+    <span class="hero-eyebrow">Season 28 · Fantasy League</span>
+    <h1 class="hero-title"><span class="bb">Big Brother</span><br><span class="fantasy">Fantasy Draft</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">America Is Watching · Premieres July 9</p>
+  </div>
+
+  <main class="inner">
+    <p class="section-label" style="justify-content:center;">Time Until Premiere</p>
+    <div class="countdown">
+      <div class="countdown-unit"><div class="countdown-num">12</div><div class="countdown-label">Days</div></div>
+      <div class="countdown-unit"><div class="countdown-num">04</div><div class="countdown-label">Hours</div></div>
+      <div class="countdown-unit"><div class="countdown-num">37</div><div class="countdown-label">Min</div></div>
+      <div class="countdown-unit"><div class="countdown-num">52</div><div class="countdown-label">Sec</div></div>
+    </div>
+
+    <div class="section-label">Standings</div>
+    <div class="owner-grid">
+      <div class="owner-card rank-1" style="--owner-color:#ff6b9d">
+        <div class="owner-card-top"><div><div class="owner-name">Brittany</div></div><div class="owner-rank-badge">#1</div></div>
+        <div class="owner-score">0<span> pts</span></div>
+        <div class="owner-players"><span class="player-pill">No players yet</span></div>
+      </div>
+      <div class="owner-card rank-2" style="--owner-color:#4ecdc4">
+        <div class="owner-card-top"><div><div class="owner-name">Brandon</div></div><div class="owner-rank-badge">#2</div></div>
+        <div class="owner-score">0<span> pts</span></div>
+        <div class="owner-players"><span class="player-pill">No players yet</span></div>
+      </div>
+      <div class="owner-card rank-3" style="--owner-color:#ffd93d">
+        <div class="owner-card-top"><div><div class="owner-name">Vicky</div></div><div class="owner-rank-badge">#3</div></div>
+        <div class="owner-score">0<span> pts</span></div>
+        <div class="owner-players"><span class="player-pill">No players yet</span></div>
+      </div>
+      <div class="owner-card rank-4" style="--owner-color:#a78bfa">
+        <div class="owner-card-top"><div><div class="owner-name">Melissa</div></div><div class="owner-rank-badge">#4</div></div>
+        <div class="owner-score">0<span> pts</span></div>
+        <div class="owner-players"><span class="player-pill">No players yet</span></div>
+      </div>
+    </div>
+
+    <div class="section-label">All Players</div>
+    <div class="card hg-table-wrap" style="padding:0;">
+      <table>
+        <thead><tr><th>Houseguest</th><th>Owner</th><th>Status</th><th style="text-align:right">Points</th></tr></thead>
+        <tbody>
+          <tr><td colspan="4" style="text-align:center;padding:36px;color:var(--muted);font-weight:600;">Cast not yet announced — check back soon!</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-label">Scoring System</div>
+    <div class="scoring-grid">
+      <div class="scoring-row"><span class="scoring-label">Head of Household Win</span><span class="scoring-pts pts-pos">+10</span></div>
+      <div class="scoring-row"><span class="scoring-label">Veto Win</span><span class="scoring-pts pts-pos">+5</span></div>
+      <div class="scoring-row"><span class="scoring-label">BB Blockbuster Win</span><span class="scoring-pts pts-pos">+5</span></div>
+      <div class="scoring-row"><span class="scoring-label">Wall Hang Win</span><span class="scoring-pts pts-pos">+5</span></div>
+      <div class="scoring-row"><span class="scoring-label">OTEV Win</span><span class="scoring-pts pts-pos">+5</span></div>
+      <div class="scoring-row"><span class="scoring-label">BB Comics Win</span><span class="scoring-pts pts-pos">+5</span></div>
+      <div class="scoring-row"><span class="scoring-label">Other Named Competition Win</span><span class="scoring-pts pts-pos">+5</span></div>
+      <div class="scoring-row"><span class="scoring-label">Nominated for Eviction</span><span class="scoring-pts pts-neg">-3</span></div>
+      <div class="scoring-row"><span class="scoring-label">Picked to Play in Veto</span><span class="scoring-pts pts-pos">+2</span></div>
+      <div class="scoring-row"><span class="scoring-label">Taken Off Block by Someone Else</span><span class="scoring-pts pts-pos">+5</span></div>
+      <div class="scoring-row"><span class="scoring-label">Each Week Survived</span><span class="scoring-pts pts-pos">+5</span></div>
+      <div class="scoring-row"><span class="scoring-label">Made It to Jury</span><span class="scoring-pts pts-pos">+10</span></div>
+      <div class="scoring-row"><span class="scoring-label">Resurrection / Battle Back Win</span><span class="scoring-pts pts-pos">+15</span></div>
+      <div class="scoring-row"><span class="scoring-label">Winner (1st Place)</span><span class="scoring-pts pts-pos">+60</span></div>
+      <div class="scoring-row"><span class="scoring-label">Runner-Up (2nd Place)</span><span class="scoring-pts pts-pos">+40</span></div>
+      <div class="scoring-row"><span class="scoring-label">3rd Place</span><span class="scoring-pts pts-pos">+20</span></div>
+      <div class="scoring-row"><span class="scoring-label">America's Favorite Houseguest</span><span class="scoring-pts pts-pos">+20</span></div>
+    </div>
+  </main>
+
+  <script>
+    setInterval(() => {
+      const el = document.getElementById('hud-clock');
+      if (!el) return;
+      const d = new Date(), p = n => String(n).padStart(2,'0');
+      el.textContent = `${p(d.getMonth()+1)}·${p(d.getDate())}·${String(d.getFullYear()).slice(2)}  ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+    }, 1000);
+  </script>
+</body>
+</html>
