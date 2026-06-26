@@ -140,13 +140,11 @@ nav a.admin-link:hover { background: rgba(255,81,71,0.12); color: var(--rec); }
   padding: 42px 28px 46px;
   text-align: center;
   background:
-    linear-gradient(rgba(8,40,30,0.5), rgba(6,9,13,0.96)),
+    linear-gradient(rgba(4,20,12,0.72) 0%, rgba(4,18,10,0.58) 45%, rgba(6,9,13,0.97) 100%),
     url('pool-bg.jpg');
   background-size: cover;
   background-position: center;
-  filter: saturate(0.4) brightness(0.95);
 }
-.hero > * { filter: saturate(2.5) brightness(1.05); }
 /* optional cam-feed photo behind the hero — add the image back if you like:
    .hero { background-image: linear-gradient(...), url('pool-bg.jpg'); background-size: cover; }
    and add: filter via the ::before below */
