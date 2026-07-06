@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Â· BB28 Fantasy</title>
+  <title>Admin · BB28 Fantasy</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
   <main class="inner">
     <!-- Login gate -->
     <div id="login-panel" class="admin-login">
-      <div style="font-size:2.5rem;margin-bottom:16px;">ðŸ”’</div>
+      <div style="font-size:2.5rem;margin-bottom:16px;">🔒</div>
       <h2>Admin Panel</h2>
       <p>Brittany & Brandon only. Enter the league password to continue.</p>
       <div class="input-group">
@@ -40,13 +40,13 @@
       <!-- GitHub Token notice -->
       <div class="token-notice">
         <strong>Saving changes requires a GitHub token.</strong> You'll be prompted for it when you click Save.
-        Your token is never stored â€” only held in memory for this browser tab.
+        Your token is never stored — only held in memory for this browser tab.
         <br><br>
-        To create one: GitHub â†’ Settings â†’ Developer Settings â†’ Personal Access Tokens â†’ Fine-grained â†’
+        To create one: GitHub → Settings → Developer Settings → Personal Access Tokens → Fine-grained →
         give it <strong>Contents: Read & Write</strong> on the <strong>bbujnows/big-brother</strong> repo.
       </div>
 
-      <!-- â”€â”€ HOUSEGUESTS â”€â”€ -->
+      <!-- ── HOUSEGUESTS ── -->
       <div class="admin-section">
         <h3>Houseguests</h3>
         <p style="color:var(--muted);font-size:.85rem;margin-bottom:16px;">Add the cast once CBS announces them. One at a time, or use the bulk import below.</p>
@@ -76,7 +76,7 @@
         </div>
 
         <div class="card card-sm" style="margin-bottom:16px;">
-          <p style="color:var(--muted);font-size:.82rem;margin-bottom:8px;">Bulk import â€” paste one name per line, then click Import</p>
+          <p style="color:var(--muted);font-size:.82rem;margin-bottom:8px;">Bulk import — paste one name per line, then click Import</p>
           <textarea id="bulk-names" rows="5" placeholder="Jane Smith&#10;John Doe&#10;Alex Johnson"></textarea>
           <div style="margin-top:8px;">
             <button class="btn btn-secondary btn-sm" onclick="bulkImport()">Import Names</button>
@@ -86,11 +86,11 @@
         <div id="hg-list"></div>
       </div>
 
-      <!-- â”€â”€ DRAFT CONTROL â”€â”€ -->
+      <!-- ── DRAFT CONTROL ── -->
       <div class="admin-section">
         <h3>Draft Control</h3>
         <div class="card card-sm">
-          <p style="color:var(--muted);font-size:.85rem;margin-bottom:16px;">Current draft status: <strong id="draft-status-label">â€”</strong></p>
+          <p style="color:var(--muted);font-size:.85rem;margin-bottom:16px;">Current draft status: <strong id="draft-status-label">—</strong></p>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <button class="btn btn-primary btn-sm" onclick="openDraft()">Open Draft</button>
             <button class="btn btn-secondary btn-sm" onclick="resetDraft()">Reset Draft</button>
@@ -99,7 +99,7 @@
         </div>
       </div>
 
-      <!-- â”€â”€ EPISODE EVENTS â”€â”€ -->
+      <!-- ── EPISODE EVENTS ── -->
       <div class="admin-section">
         <h3>Log Episode Events</h3>
         <p style="color:var(--muted);font-size:.85rem;margin-bottom:16px;">The auto-scraper handles most of this. Use this to add anything it missed.</p>
@@ -111,12 +111,12 @@
             </div>
             <div class="input-group">
               <label>Houseguest *</label>
-              <select id="ev-hg"><option value="">â€” select â€”</option></select>
+              <select id="ev-hg"><option value="">— select —</option></select>
             </div>
             <div class="input-group">
               <label>Event Type *</label>
               <select id="ev-type" onchange="autoFillPoints()">
-                <option value="">â€” select â€”</option>
+                <option value="">— select —</option>
                 <option value="hoh">Head of Household (+10)</option>
                 <option value="veto">Veto Win (+5)</option>
                 <option value="bbBlockbuster">BB Blockbuster (+5)</option>
@@ -130,8 +130,8 @@
                 <option value="weekSurvived">Week Survived (+5)</option>
                 <option value="madeJury">Made Jury (+10)</option>
                 <option value="resurrection">Resurrection (+15)</option>
-                <option value="first">Winner â€” 1st (+60)</option>
-                <option value="second">Runner-Up â€” 2nd (+40)</option>
+                <option value="first">Winner — 1st (+60)</option>
+                <option value="second">Runner-Up — 2nd (+40)</option>
                 <option value="third">3rd Place (+20)</option>
                 <option value="afh">America's Favorite (+20)</option>
               </select>
@@ -153,14 +153,14 @@
         </div>
       </div>
 
-      <!-- â”€â”€ HOUSEGUEST STATUS â”€â”€ -->
+      <!-- ── HOUSEGUEST STATUS ── -->
       <div class="admin-section">
         <h3>Update Houseguest Status</h3>
         <div class="card card-sm">
           <div class="form-row">
             <div class="input-group">
               <label>Houseguest</label>
-              <select id="st-hg"><option value="">â€” select â€”</option></select>
+              <select id="st-hg"><option value="">— select —</option></select>
             </div>
             <div class="input-group">
               <label>New Status</label>
@@ -182,7 +182,7 @@
         </div>
       </div>
 
-      <!-- â”€â”€ DANGER ZONE â”€â”€ -->
+      <!-- ── DANGER ZONE ── -->
       <div class="admin-section">
         <h3 style="color:#ff5050;">Danger Zone</h3>
         <div class="card card-sm" style="border-color:rgba(255,80,80,.2);">

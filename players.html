@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Players Â· BB28 Fantasy</title>
+  <title>Players · BB28 Fantasy</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -53,7 +53,7 @@
       if (allGuests.length === 0) {
         document.getElementById('players-grid').innerHTML = `
           <div class="empty-state" style="grid-column:1/-1">
-            <span class="icon">ðŸ‘¥</span>
+            <span class="icon">👥</span>
             <h3>Cast Coming Soon</h3>
             <p>The BB28 houseguests will appear here once CBS makes the announcement.</p>
           </div>`;
@@ -84,7 +84,7 @@
       }).sort((a,b) => computeGuestScore(b) - computeGuestScore(a));
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="icon">ðŸ”</span><h3>No results</h3></div>`;
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="icon">🔍</span><h3>No results</h3></div>`;
         return;
       }
 
@@ -98,12 +98,12 @@
         card.innerHTML = `
           <span class="status-badge status-${hg.status}">${hg.status}</span>
           <div class="hg-photo">
-            ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}">` : 'ðŸ‘¤'}
+            ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}">` : '👤'}
           </div>
           <div class="hg-owner-bar" style="background:${owner ? owner.color : 'var(--border)'}"></div>
           <div class="hg-info">
             <div class="hg-name">${hg.name}</div>
-            <div class="hg-meta">${hg.age ? hg.age + ' Â· ' : ''}${hg.hometown || ''}</div>
+            <div class="hg-meta">${hg.age ? hg.age + ' · ' : ''}${hg.hometown || ''}</div>
             <div class="hg-points">${pts > 0 ? '+' : ''}${pts}</div>
             <div class="hg-points-label">${owner ? owner.name + "'s team" : 'Undrafted'}</div>
           </div>`;
@@ -128,11 +128,11 @@
         <div style="display:flex;gap:0;flex-direction:column;">
           <div style="background:var(--surface2);padding:24px;display:flex;gap:16px;align-items:flex-start;">
             <div style="width:80px;height:80px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;overflow:hidden;">
-              ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">` : 'ðŸ‘¤'}
+              ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">` : '👤'}
             </div>
             <div>
               <h2 style="font-weight:800;font-size:1.3rem;">${hg.name}</h2>
-              <p style="color:var(--muted);font-size:.85rem;">${hg.age ? hg.age + ' years old Â· ' : ''}${hg.hometown || ''}</p>
+              <p style="color:var(--muted);font-size:.85rem;">${hg.age ? hg.age + ' years old · ' : ''}${hg.hometown || ''}</p>
               <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
                 <span class="status-badge status-${hg.status}">${hg.status}</span>
                 ${owner ? `<span style="font-size:.8rem;color:${owner.color};font-weight:700;">${owner.name}'s team</span>` : ''}

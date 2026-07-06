@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Episode Log Â· BB28 Fantasy</title>
+  <title>Episode Log · BB28 Fantasy</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
 
   <main class="inner">
     <h1 class="page-title">Episode Log</h1>
-    <p class="page-subtitle">Points earned each week â€” auto-updated after episodes air</p>
+    <p class="page-subtitle">Points earned each week — auto-updated after episodes air</p>
 
     <div id="log-content"></div>
   </main>
@@ -32,7 +32,7 @@
       if (!data.episodes || data.episodes.length === 0) {
         container.innerHTML = `
           <div class="empty-state">
-            <span class="icon">ðŸ“…</span>
+            <span class="icon">📅</span>
             <h3>Season Hasn't Started Yet</h3>
             <p>Episode results will appear here after BB28 premieres on July 9, 2026. Updates run automatically after each episode airs.</p>
           </div>`;
@@ -49,7 +49,7 @@
             <span class="episode-week">Week ${ep.week}</span>
             <span class="episode-date">${ep.airDate || ''}</span>
             <span style="color:var(--muted);font-size:.85rem;margin-left:auto;margin-right:12px;">${ep.events ? ep.events.length : 0} events</span>
-            <span class="episode-chevron">â–¾</span>
+            <span class="episode-chevron">▾</span>
           </div>
           <div class="episode-events">
             ${ep.events && ep.events.length
