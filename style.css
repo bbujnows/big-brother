@@ -482,6 +482,9 @@ tr:hover td { background: rgba(95,255,194,0.03); }
 }
 @media (hover: hover) {
   .hg-photo:hover .hg-bio-hover { opacity: 1; pointer-events: auto; }
+  /* hide the status badge while the bio overlay is up so it doesn't cover the text */
+  .hg-card:has(.hg-photo:hover) .status-badge { opacity: 0; }
+  .hg-card .status-badge { transition: opacity 0.18s; }
 }
 
 .hg-owner-bar { height: 3px; }
