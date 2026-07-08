@@ -108,7 +108,7 @@
           <div class="hg-owner-bar" style="background:${owner ? owner.color : 'var(--border)'}"></div>
           <div class="hg-info">
             <div class="hg-name">${hg.name}</div>
-            <div class="hg-meta">${hg.age ? hg.age + ' · ' : ''}${hg.hometown || ''}</div>
+            <div class="hg-meta">${hg.age ? hg.age + ' · ' : ''}${hg.hometown || ''}${hg.currentCity ? ' → ' + hg.currentCity : ''}</div>
             <div class="hg-points">${pts > 0 ? '+' : ''}${pts}</div>
             <div class="hg-points-label">${owner ? owner.name + "'s team" : 'Undrafted'}</div>
           </div>`;
