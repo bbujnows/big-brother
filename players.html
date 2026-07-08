@@ -99,6 +99,11 @@
           <span class="status-badge status-${hg.status}">${hg.status}</span>
           <div class="hg-photo">
             ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}">` : '👤'}
+            ${hg.bio ? `
+            <div class="hg-bio-hover">
+              ${hg.occupation ? `<div class="hg-bio-occupation">${hg.occupation}</div>` : ''}
+              <div class="hg-bio-text">${hg.bio}</div>
+            </div>` : ''}
           </div>
           <div class="hg-owner-bar" style="background:${owner ? owner.color : 'var(--border)'}"></div>
           <div class="hg-info">
@@ -132,7 +137,8 @@
             </div>
             <div>
               <h2 style="font-weight:800;font-size:1.3rem;">${hg.name}</h2>
-              <p style="color:var(--muted);font-size:.85rem;">${hg.age ? hg.age + ' years old · ' : ''}${hg.hometown || ''}</p>
+              <p style="color:var(--muted);font-size:.85rem;">${hg.age ? hg.age + ' years old · ' : ''}${hg.hometown || ''}${hg.currentCity ? ' (lives in ' + hg.currentCity + ')' : ''}</p>
+              ${hg.occupation ? `<p style="color:var(--mint);font-size:.78rem;font-weight:700;margin-top:2px;">${hg.occupation}</p>` : ''}
               <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
                 <span class="status-badge status-${hg.status}">${hg.status}</span>
                 ${owner ? `<span style="font-size:.8rem;color:${owner.color};font-weight:700;">${owner.name}'s team</span>` : ''}
@@ -143,6 +149,11 @@
               <div style="font-size:.7rem;color:var(--muted);">total points</div>
             </div>
           </div>
+          ${hg.bio ? `
+          <div style="padding:20px 20px 0;">
+            <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px;">Bio</h3>
+            <p style="font-size:.85rem;line-height:1.55;color:var(--text,#e8edf2);">${hg.bio}</p>
+          </div>` : ''}
           <div style="padding:20px;">
             <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px;">Point History</h3>
             ${hg.events && hg.events.length

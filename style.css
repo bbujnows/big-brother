@@ -461,6 +461,29 @@ tr:hover td { background: rgba(95,255,194,0.03); }
 .hg-photo::before { top: 8px; left: 8px; border-top: 2px solid var(--mint); border-left: 2px solid var(--mint); }
 .hg-photo::after  { bottom: 8px; right: 8px; border-bottom: 2px solid var(--mint); border-right: 2px solid var(--mint); }
 
+/* bio overlay shown when hovering a player photo (hover-capable devices only;
+   on touch, tapping the card opens the detail modal which shows the bio) */
+.hg-bio-hover {
+  position: absolute; inset: 0; z-index: 2;
+  background: rgba(5, 9, 13, 0.9);
+  padding: 14px 12px;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.18s;
+  pointer-events: none;
+}
+.hg-bio-hover .hg-bio-occupation {
+  font-family: var(--mono); font-size: 0.62rem; font-weight: 700;
+  color: var(--mint); text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hg-bio-hover .hg-bio-text {
+  font-size: 0.72rem; line-height: 1.5; color: #e8edf2;
+}
+@media (hover: hover) {
+  .hg-photo:hover .hg-bio-hover { opacity: 1; pointer-events: auto; }
+}
+
 .hg-owner-bar { height: 3px; }
 .hg-info { padding: 14px 12px; }
 .hg-name { font-weight: 800; font-size: 0.95rem; margin-bottom: 2px; letter-spacing: -0.2px; }
