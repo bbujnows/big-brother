@@ -497,7 +497,14 @@ tr:hover td { background: rgba(95,255,194,0.03); }
   line-height: 1;
 }
 .hg-points-label { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); font-weight: 700; margin-top: 1px; text-transform: uppercase; letter-spacing: 1px; }
-.hg-card .status-badge { position: absolute; top: 8px; right: 8px; z-index: 3; }
+/* On photo cards the translucent badge bg disappears against bright portraits —
+   back it with solid dark + colored border so it reads on any photo */
+.hg-card .status-badge {
+  position: absolute; top: 8px; right: 8px; z-index: 3;
+  background: rgba(7, 12, 16, 0.88);
+  border: 1px solid currentColor;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
 
 /* ── EPISODE LOG ── */
 .episode-block {
