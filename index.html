@@ -323,7 +323,7 @@
 
       grid.innerHTML =
         statCard('Current Leader', tied ? 'Tied' : name(leaderId), tied ? 'dead heat at the top' : `${streak} week${streak === 1 ? '' : 's'} on top`, tied ? 'var(--gold)' : color(leaderId)) +
-        statCard('Weeks in First', data.owners.map(o => `${name(o.id).charAt(0)}:${weeksLed[o.id]}`).join(' · '), 'shared credit on ties', 'var(--text)') +
+        statCard('Weeks in First', data.owners.map(o => `<span style="color:${color(o.id)}">${name(o.id).charAt(0)}:${weeksLed[o.id]}</span>`).join('<span style="color:var(--muted)"> · </span>'), 'shared credit on ties', 'var(--text)') +
         statCard('Biggest Lead', `+${bigLead.margin}`, `${name(bigLead.id)} · week ${bigLead.week}`, color(bigLead.id)) +
         statCard('Best Single Week', `${bestWeek.gain > 0 ? '+' : ''}${bestWeek.gain}`, `${name(bestWeek.id)} · week ${bestWeek.week}`, color(bestWeek.id));
     }
