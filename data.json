@@ -3,13 +3,8 @@
   "premiereDate": "2026-07-09",
   "lastUpdated": "2026-07-10",
   "currentWeek": 0,
-  "draftStatus": "open",
-  "draftOrder": [
-    "vicky",
-    "brandon",
-    "brittany",
-    "melissa"
-  ],
+  "draftStatus": "pending",
+  "draftOrder": [],
   "currentPickIndex": 0,
   "owners": [
     {
