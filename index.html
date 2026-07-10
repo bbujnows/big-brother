@@ -72,6 +72,7 @@
 
     <div class="section-label" style="margin-top:32px;">Rivalry Desk</div>
     <div id="rivalry-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;"></div>
+    <div id="beef-wrap" style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;"></div>
 
     <div class="divider"></div>
 
@@ -171,6 +172,7 @@
       const race = weeklySeries(data);
       renderRace(data, race);
       renderRivalry(data, race);
+      renderBeef(data, race);
 
       // Scoring system
       const sg = document.getElementById('scoring-grid');
@@ -324,6 +326,148 @@
         statCard('Weeks in First', data.owners.map(o => `${name(o.id).charAt(0)}:${weeksLed[o.id]}`).join(' · '), 'shared credit on ties', 'var(--text)') +
         statCard('Biggest Lead', `+${bigLead.margin}`, `${name(bigLead.id)} · week ${bigLead.week}`, color(bigLead.id)) +
         statCard('Best Single Week', `${bestWeek.gain > 0 ? '+' : ''}${bestWeek.gain}`, `${name(bestWeek.id)} · week ${bestWeek.week}`, color(bestWeek.id));
+    }
+
+    // ── BEEF ENGINE ─────────────────────────────────────────
+    // Derives team-vs-team incidents by cross-referencing who held
+    // HOH / veto each week with who got nominated / saved / evicted.
+    // Weeks with multiple HOHs or veto winners (twists) are skipped
+    // rather than guessed.
+    function computeBeef(data) {
+      const ownerOf = hg => hg && hg.ownerId ? data.owners.find(o => o.id === hg.ownerId) : null;
+      let maxWeek = 0;
+      data.houseguests.forEach(h => (h.events || []).forEach(e => { maxWeek = Math.max(maxWeek, e.week); }));
+
+      const incidents = [];
+      const clashes = {};
+      const pairKey = (a, b) => [a, b].sort().join('|');
+      const bump = (a, b) => { const k = pairKey(a, b); clashes[k] = (clashes[k] || 0) + 1; };
+      const records = {};
+      data.owners.forEach(o => records[o.id] = { fired: 0, taken: 0, saves: 0, kills: 0 });
+
+      for (let w = 1; w <= maxWeek; w++) {
+        const withEv = t => data.houseguests.filter(h => (h.events || []).some(e => e.type === t && e.week === w));
+        const hohs  = withEv('hoh');
+        const vetos = withEv('veto');
+        const noms  = withEv('nominated');
+        const saved = withEv('takenOffBlock');
+        const evictedNow = data.houseguests.filter(h => h.weekEvicted === w);
+
+        if (hohs.length === 1) {
+          const hoh = hohs[0], atk = ownerOf(hoh);
+          noms.forEach(n => {
+            const vic = ownerOf(n);
+            if (!atk || !vic) return;
+            if (atk.id === vic.id) {
+              incidents.push({ week: w, icon: '🔫', tag: 'FRIENDLY FIRE', clr: 'var(--gold)',
+                text: `${atk.name}'s own ${hoh.name} put ${vic.name}'s ${n.name} on the block` });
+            } else {
+              incidents.push({ week: w, icon: '🎯', tag: 'SHOT FIRED', clr: 'var(--rec)',
+                text: `${atk.name}'s ${hoh.name} put ${vic.name}'s ${n.name} on the block` });
+              records[atk.id].fired++; records[vic.id].taken++;
+              bump(atk.id, vic.id);
+            }
+          });
+          evictedNow.forEach(ev => {
+            const vic = ownerOf(ev);
+            if (!atk || !vic) return;
+            if (atk.id === vic.id) {
+              incidents.push({ week: w, icon: '💥', tag: 'SELF-DESTRUCT', clr: 'var(--gold)',
+                text: `${atk.name}'s HOH week ended with ${vic.name}'s own ${ev.name} evicted` });
+            } else {
+              incidents.push({ week: w, icon: '⚰️', tag: 'ELIMINATION', clr: 'var(--rec)',
+                text: `${atk.name}'s ${hoh.name} sent ${vic.name}'s ${ev.name} packing` });
+              records[atk.id].kills++;
+              bump(atk.id, vic.id);
+            }
+          });
+        }
+
+        if (vetos.length === 1) {
+          const v = vetos[0], sav = ownerOf(v);
+          saved.forEach(s => {
+            if (s.id === v.id) return; // self-save isn't beef
+            const ben = ownerOf(s);
+            if (!sav || !ben) return;
+            if (sav.id === ben.id) {
+              incidents.push({ week: w, icon: '🛡️', tag: 'TEAM RESCUE', clr: 'var(--mint)',
+                text: `${sav.name}'s ${v.name} pulled teammate ${s.name} off the block` });
+            } else {
+              incidents.push({ week: w, icon: '🛟', tag: 'BAILOUT', clr: 'var(--mint)',
+                text: `${sav.name}'s ${v.name} pulled ${ben.name}'s ${s.name} off the block` });
+              records[sav.id].saves++;
+            }
+          });
+        }
+      }
+      return { incidents, clashes, records };
+    }
+
+    function renderBeef(data, race) {
+      const wrap = document.getElementById('beef-wrap');
+      if (!race) { wrap.innerHTML = ''; return; }
+      const { incidents, clashes, records } = computeBeef(data);
+
+      // Feud meter: every owner pair, hostile incidents only
+      const pairs = [];
+      for (let i = 0; i < data.owners.length; i++)
+        for (let j = i + 1; j < data.owners.length; j++) {
+          const a = data.owners[i], b = data.owners[j];
+          pairs.push({ a, b, n: clashes[[a.id, b.id].sort().join('|')] || 0 });
+        }
+      pairs.sort((x, y) => y.n - x.n);
+      const top = pairs[0] && pairs[0].n > 0 ? pairs[0] : null;
+
+      const dot = o => `<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${o.color};margin-right:5px;"></span>`;
+
+      const feudCard = `
+        <div class="card" style="padding:18px;">
+          <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;">⚔️ Feud Meter</div>
+          ${top ? `
+            <div style="text-align:center;padding:10px 0 14px;border-bottom:1px solid var(--border);margin-bottom:10px;">
+              <div style="font-size:.6rem;font-family:var(--mono);letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;">SEASON RIVALRY</div>
+              <div style="font-size:1.15rem;font-weight:900;">
+                <span style="color:${top.a.color}">${top.a.name}</span>
+                <span style="color:var(--rec);margin:0 8px;">⚔️</span>
+                <span style="color:${top.b.color}">${top.b.name}</span>
+              </div>
+              <div style="font-size:.7rem;color:var(--muted);margin-top:4px;">${top.n} clash${top.n === 1 ? '' : 'es'} and counting</div>
+            </div>` : `
+            <div style="text-align:center;padding:14px 0;color:var(--muted);font-size:.8rem;">No feuds yet. The house is peaceful — it won't last.</div>`}
+          ${pairs.map(p => `
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-lt,rgba(255,255,255,0.04));font-size:.78rem;">
+              <span>${dot(p.a)}${p.a.name} <span style="color:var(--muted)">vs</span> ${dot(p.b)}${p.b.name}</span>
+              <strong style="color:${p.n > 0 ? 'var(--rec)' : 'var(--muted)'}">${p.n}</strong>
+            </div>`).join('')}
+          <div style="margin-top:14px;">
+            <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">Rap Sheets</div>
+            ${data.owners.map(o => {
+              const r = records[o.id];
+              return `<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:.72rem;font-family:var(--mono);">
+                <span style="color:${o.color};font-weight:700;">${o.name}</span>
+                <span style="color:var(--muted)">🎯${r.fired} fired · 🩸${r.taken} taken · 🛟${r.saves} saved · ⚰️${r.kills} evicted</span>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+
+      const sortedIncidents = [...incidents].sort((a, b) => b.week - a.week);
+      const logCard = `
+        <div class="card" style="padding:18px;">
+          <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;">🥩 The Beef Log</div>
+          <div style="max-height:340px;overflow-y:auto;">
+          ${sortedIncidents.length
+            ? sortedIncidents.map(i => `
+                <div style="font-family:var(--mono);font-size:.68rem;line-height:1.55;padding:8px 0;border-bottom:1px solid var(--border-lt,rgba(255,255,255,0.04));">
+                  <span style="color:var(--muted)">WK${i.week}</span> · ${i.icon}
+                  <span style="color:${i.clr};font-weight:700;">${i.tag}</span><br>
+                  <span style="color:var(--text)">${i.text}</span>
+                </div>`).join('')
+            : '<div style="color:var(--muted);font-size:.8rem;padding:14px 0;text-align:center;">Nothing logged yet — beef appears here as HOHs nominate and vetoes save.</div>'}
+          </div>
+        </div>`;
+
+      wrap.innerHTML = feudCard + logCard;
     }
 
     init();
