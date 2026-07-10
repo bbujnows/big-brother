@@ -135,7 +135,7 @@ function injectDrawer() {
     <aside id="chat-drawer" aria-hidden="true" aria-label="Live Chat">
       <div class="chat-hdr">
         <span class="rec"><i></i>COMM&nbsp;LINK</span>
-        <span class="chat-hdr-sub">AFTER DARK</span>
+        <span class="chat-hdr-sub">AFTER DARK · IR CAM 07</span>
         <button id="chat-close" aria-label="Close chat">✕</button>
       </div>
       <div id="chat-msgs"></div>
