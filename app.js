@@ -10,12 +10,22 @@ async function loadData() {
   if (snap) { try { return JSON.parse(snap); } catch (e) { sessionStorage.removeItem('bb28_test_data'); } }
   if (_dataCache) return _dataCache;
   try {
-    const res = await fetch(`${DATA_PATH}?nocache=${Date.now()}`);
+    // Fetch via GitHub API to bypass GitHub Pages CDN caching
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
+      headers: { 'Accept': 'application/vnd.github.v3.raw' }
+    });
     _dataCache = await res.json();
     return _dataCache;
   } catch (e) {
-    console.error('Failed to load data.json', e);
-    return { owners:[], houseguests:[], episodes:[], scoring:{}, draftStatus:'pending', draftOrder:[], currentPickIndex:0 };
+    // Fallback to relative URL
+    try {
+      const res2 = await fetch(`${DATA_PATH}?nocache=${Date.now()}`);
+      _dataCache = await res2.json();
+      return _dataCache;
+    } catch (e2) {
+      console.error('Failed to load data.json', e2);
+      return { owners:[], houseguests:[], episodes:[], scoring:{}, draftStatus:'pending', draftOrder:[], currentPickIndex:0 };
+    }
   }
 }
 
