@@ -285,9 +285,9 @@
       "label": "BB Comics Win",
       "points": 5
     },
-    "otherComp": {
-      "label": "Other Named Competition Win",
-      "points": 5
+    "safety": {
+      "label": "Safety for the Week",
+      "points": 3
     },
     "nominated": {
       "label": "Nominated for Eviction",

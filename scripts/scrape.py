@@ -24,7 +24,7 @@ SCORING = {
     "wallHang":       5,
     "otev":           5,
     "bbComics":       5,
-    "otherComp":      5,
+    "safety":         3,
     "nominated":     -3,
     "pickedVeto":     2,
     "takenOffBlock":  5,
