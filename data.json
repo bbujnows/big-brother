@@ -3,14 +3,9 @@
   "premiereDate": "2026-07-09",
   "lastUpdated": "2026-07-10",
   "currentWeek": 0,
-  "draftStatus": "open",
-  "draftOrder": [
-    "brittany",
-    "vicky",
-    "brandon",
-    "melissa"
-  ],
-  "currentPickIndex": 5,
+  "draftStatus": "pending",
+  "draftOrder": [],
+  "currentPickIndex": 0,
   "owners": [
     {
       "id": "brittany",
@@ -44,7 +39,7 @@
       "bio": "High-energy and expects to make close friendships in the house. Plans to bring fun, strong morals and 'chitter-chatter' to Season 28, while noting people sometimes underestimate her as 'ditzy' or 'air-heady.'",
       "photo": "photos/ashley.jpg",
       "status": "active",
-      "ownerId": "melissa",
+      "ownerId": null,
       "weekEvicted": null,
       "events": []
     },
@@ -58,7 +53,7 @@
       "bio": "Has watched BB since he was 8 and applied for years. Charming, spicy and social — strategy is becoming everyone's best friend. At 6'6\" he's often underestimated and thinks the game could be a 'breeze.' Admits his mouth can get ahead of his brain; could become a villain by smiling in someone's face while planning to stab them in the back. Wears his emotions on his sleeve.",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "ownerId": "melissa",
+      "ownerId": null,
       "weekEvicted": null,
       "events": []
     },
@@ -72,7 +67,7 @@
       "bio": "Fun, easygoing and bubbly; plans a strong social game. A first-generation immigrant who believes he can talk to anyone. Strategy: win over the women first, build trust, make people feel like he's 'one of us.' People may assume he's conceited, but he's 'super chill.' Open to a showmance but would hate to be stuck in one. Handles conflict straight-up.",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "ownerId": "brandon",
+      "ownerId": null,
       "weekEvicted": null,
       "events": []
     },
@@ -86,7 +81,7 @@
       "bio": "Outgoing, fun and unpredictable; watched BB since he was 8. Plans to make friends while knowing when to cut them. Viewers may see a 'beach bum without a brain,' but he graduated summa cum laude. Biggest strength: connecting with people; biggest weakness: his 'big fat mouth.' Expects to play from the shadows — and jokes the house may be rocking the 'Drewth' haircut by season's end.",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "ownerId": "vicky",
+      "ownerId": null,
       "weekEvicted": null,
       "events": []
     },
@@ -100,7 +95,7 @@
       "bio": "Outgoing, bubbly and fun — but a new watcher, not a longtime fan. Believes she can win with strategy, intelligence and physical ability. Plan: listen, make friends fast, be everyone's friend early, then turn up the pressure. People may find her intimidating, but she's a bubbly non-stop talker. Biggest strength: her heart and handling conflict well.",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "ownerId": "brittany",
+      "ownerId": null,
       "weekEvicted": null,
       "events": []
     },
