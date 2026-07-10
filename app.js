@@ -1,28 +1,26 @@
 const REPO = 'bbujnows/big-brother';
 const DATA_PATH = 'data.json';
+const FB = 'https://bb28-fantasy-default-rtdb.firebaseio.com/gameData.json';
 
-// Cache so pages don't re-fetch on every render
 let _dataCache = null;
 
 async function loadData() {
-  // Test mode: serve the in-session snapshot instead of live data
+  // Test mode
   const snap = sessionStorage.getItem('bb28_test_data');
   if (snap) { try { return JSON.parse(snap); } catch (e) { sessionStorage.removeItem('bb28_test_data'); } }
   if (_dataCache) return _dataCache;
   try {
-    // raw.githubusercontent.com bypasses Pages CDN lag and avoids URL collision with saveData
-    const res = await fetch(`https://raw.githubusercontent.com/${REPO}/main/${DATA_PATH}?nocache=${Date.now()}`);
-    _dataCache = await res.json();
+    const res = await fetch(`${FB}?nocache=${Date.now()}`);
+    const d = await res.json();
+    if (d && d.owners) { _dataCache = d; return _dataCache; }
+    // Firebase empty — seed from GitHub then return
+    const res2 = await fetch(`https://raw.githubusercontent.com/${REPO}/main/${DATA_PATH}?nocache=${Date.now()}`);
+    _dataCache = await res2.json();
+    fetch(FB, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(_dataCache) });
     return _dataCache;
   } catch (e) {
-    try {
-      const res2 = await fetch(`${DATA_PATH}?nocache=${Date.now()}`);
-      _dataCache = await res2.json();
-      return _dataCache;
-    } catch (e2) {
-      console.error('Failed to load data.json', e2);
-      return { owners:[], houseguests:[], episodes:[], scoring:{}, draftStatus:'pending', draftOrder:[], currentPickIndex:0 };
-    }
+    console.error('loadData failed', e);
+    return { owners:[], houseguests:[], episodes:[], scoring:{}, draftStatus:'pending', draftOrder:[], currentPickIndex:0 };
   }
 }
 
@@ -65,50 +63,16 @@ function getPointsForType(data, type) {
   return data.scoring[type] ? data.scoring[type].points : 0;
 }
 
-// ── GITHUB API ───────────────────────────────────────────────────────
-function getToken() {
-  let tok = localStorage.getItem('gh_token');
-  if (!tok) {
-    tok = prompt('Enter your GitHub Personal Access Token to save changes:\n(Fine-grained token with Contents: Read & Write on bbujnows/big-brother)');
-    if (!tok) return null;
-    localStorage.setItem('gh_token', tok.trim());
-  }
-  return tok;
-}
-
+// ── FIREBASE SAVE (no token, no SHA, instant) ────────────────────────
 async function saveData(data) {
-  const tok = getToken();
-  if (!tok) return false;
-
-  // 1. Get current file SHA
-  let sha;
   try {
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
-      headers: { 'Authorization': `Bearer ${tok}`, 'Accept': 'application/vnd.github.v3+json' },
-      cache: 'no-store'
-    });
-    if (!r.ok) throw new Error(await r.text());
-    sha = (await r.json()).sha;
-  } catch (e) {
-    showMsg('Could not connect to GitHub: ' + e.message, 'error');
-    localStorage.removeItem('gh_token');
-    return false;
-  }
-
-  // 2. Write updated file
-  data.lastUpdated = new Date().toISOString().slice(0, 10);
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-  try {
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
+    data.lastUpdated = new Date().toISOString().slice(0, 10);
+    const res = await fetch(FB, {
       method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${tok}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/vnd.github.v3+json'
-      },
-      body: JSON.stringify({ message: 'Admin update via BB28 site', content, sha })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     });
-    if (!r.ok) throw new Error(await r.text());
+    if (!res.ok) throw new Error(await res.text());
     invalidateCache();
     return true;
   } catch (e) {

@@ -19,13 +19,12 @@ async function initAdmin() {
 }
 
 async function loadAdminData() {
-  // Admin always reads live data — never the test-mode sessionStorage snapshot
-  try {
-    const res = await fetch(`data.json?nocache=${Date.now()}`);
-    _adminData = await res.json();
-  } catch (e) {
-    _adminData = await loadData();
-  }
+  // Always read live Firebase data — skip test-mode sessionStorage
+  const saved = sessionStorage.getItem('bb28_test_data');
+  if (saved) sessionStorage.removeItem('bb28_test_data');
+  invalidateCache();
+  _adminData = await loadData();
+  if (saved) sessionStorage.setItem('bb28_test_data', saved);
   refreshAdminUI();
 }
 
