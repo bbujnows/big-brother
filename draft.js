@@ -207,7 +207,12 @@ async function confirmOrder() {
     return;
   }
   const ok = await saveData(_draftData);
-  if (ok) { invalidateCache(); window.location.reload(); }
+  if (ok) {
+    invalidateCache();
+    hide('state-wheel');
+    show('state-draft');
+    renderDraftUI();
+  }
 }
 
 // ── PREVIEW WHEEL (pre-season, no cast yet) ───────────────────────────
@@ -306,6 +311,7 @@ function renderDraftUI() {
     const pickedOwner = hg.ownerId ? data.owners.find(o => o.id === hg.ownerId) : null;
     const card = document.createElement('div');
     card.className = `draft-hg-card ${hg.ownerId ? 'picked' : ''}`;
+    card.dataset.hgId = hg.id;
     if (!hg.ownerId) card.onclick = () => makePick(hg.id);
     card.innerHTML = `
       <div class="draft-hg-avatar">
@@ -340,7 +346,18 @@ async function makePick(houseguestId) {
     return;
   }
   const ok = await saveData(data);
-  if (ok) { invalidateCache(); window.location.reload(); }
+  if (ok) {
+    invalidateCache();
+    // No reload — redraw in place; other devices update via live.js push
+    if (data.draftStatus === 'complete') {
+      hide('state-draft');
+      document.getElementById('teams-display').innerHTML = '';
+      show('state-complete');
+      renderTeams();
+    } else {
+      renderDraftUI();
+    }
+  }
 }
 
 // ── COMPLETE STATE ────────────────────────────────────────────────────
@@ -371,3 +388,62 @@ function renderTeams() {
 // ── HELPERS ───────────────────────────────────────────────────────────
 function show(id) { document.getElementById(id).classList.remove('hidden'); }
 function hide(id) { document.getElementById(id).classList.add('hidden'); }
+
+// ── LIVE SYNC ─────────────────────────────────────────────────────────
+// live.js pushes every Firebase change here — no refresh needed on any device
+window.addEventListener('bb28-live-data', e => {
+  const incoming = e.detail;
+  if (_testMode || sessionStorage.getItem('bb28_test_data')) return; // local simulation running
+  if (_spinning) return;                                             // don't yank the wheel mid-spin
+  if (!_draftData) { _draftData = incoming; _dataCache = incoming; return; }
+
+  const sig = d => JSON.stringify([
+    d.draftStatus, d.draftOrder, d.currentPickIndex,
+    (d.houseguests || []).map(h => h.ownerId || null)
+  ]);
+  if (sig(incoming) === sig(_draftData)) return; // nothing draft-relevant changed
+
+  // Which houseguests just got picked (for the flash effect)
+  const prevOwner = {};
+  (_draftData.houseguests || []).forEach(h => { prevOwner[h.id] = h.ownerId || null; });
+  const newlyPicked = (incoming.houseguests || [])
+    .filter(h => h.ownerId && prevOwner[h.id] !== h.ownerId)
+    .map(h => h.id);
+
+  _draftData = incoming;
+  _dataCache = incoming;
+  applyLiveState(newlyPicked);
+});
+
+function applyLiveState(newlyPicked = []) {
+  const { draftStatus, houseguests } = _draftData;
+  hide('state-no-cast'); hide('state-wheel'); hide('state-draft'); hide('state-complete');
+
+  if (!houseguests || houseguests.length === 0) { show('state-no-cast'); return; }
+
+  if (draftStatus === 'pending') {
+    show('state-wheel');
+    document.getElementById('wheelResult').textContent = '';
+    hide('confirm-order');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      drawWheel(_draftData.owners, -1, 'wheelCanvas', _wheelAngle);
+    }));
+    return;
+  }
+
+  if (draftStatus === 'open') {
+    show('state-draft');
+    renderDraftUI();
+    newlyPicked.forEach(id => {
+      document.querySelector(`.draft-hg-card[data-hg-id="${CSS.escape(id)}"]`)
+        ?.classList.add('just-picked');
+    });
+    return;
+  }
+
+  if (draftStatus === 'complete') {
+    document.getElementById('teams-display').innerHTML = '';
+    show('state-complete');
+    renderTeams();
+  }
+}

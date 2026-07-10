@@ -654,6 +654,14 @@ tr:hover td { background: rgba(95,255,194,0.03); }
 }
 .draft-hg-card.picked { opacity: 0.28; cursor: default; pointer-events: none; }
 
+/* Flash when a pick lands live from another device */
+.draft-hg-card.just-picked { animation: bb-pick-flash 1.4s ease-out; }
+@keyframes bb-pick-flash {
+  0%   { opacity: 1; box-shadow: 0 0 0 3px var(--gold), 0 0 24px rgba(255, 211, 61, 0.5); transform: scale(1.05); }
+  60%  { opacity: 1; }
+  100% { box-shadow: 0 0 0 0 transparent; transform: scale(1); }
+}
+
 .draft-hg-avatar {
   width: 56px; height: 56px;
   border-radius: 50%;
