@@ -19,7 +19,13 @@ async function initAdmin() {
 }
 
 async function loadAdminData() {
-  _adminData = await loadData();
+  // Admin always reads live data — never the test-mode sessionStorage snapshot
+  try {
+    const res = await fetch(`data.json?nocache=${Date.now()}`);
+    _adminData = await res.json();
+  } catch (e) {
+    _adminData = await loadData();
+  }
   refreshAdminUI();
 }
 
@@ -174,7 +180,18 @@ async function resetDraft() {
   _adminData.currentPickIndex = 0;
   _adminData.houseguests.forEach(h => { h.ownerId = null; });
   const ok = await saveData(_adminData);
-  if (ok) { showMsg('Draft reset.'); document.getElementById('draft-status-label').textContent = 'pending'; }
+  if (ok) {
+    sessionStorage.removeItem('bb28_test_data');
+    showMsg('Draft reset.');
+    document.getElementById('draft-status-label').textContent = 'pending';
+  }
+}
+
+function clearTestDataAdmin() {
+  sessionStorage.removeItem('bb28_test_data');
+  _dataCache = null;
+  showMsg('Test data cleared — site is back to live data.');
+  document.getElementById('global-test-bar')?.remove();
 }
 
 async function undoLastPick() {
