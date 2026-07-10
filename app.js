@@ -60,11 +60,11 @@ function getPointsForType(data, type) {
 
 // ── GITHUB API ───────────────────────────────────────────────────────
 function getToken() {
-  let tok = sessionStorage.getItem('gh_token');
+  let tok = localStorage.getItem('gh_token');
   if (!tok) {
     tok = prompt('Enter your GitHub Personal Access Token to save changes:\n(Fine-grained token with Contents: Read & Write on bbujnows/big-brother)');
     if (!tok) return null;
-    sessionStorage.setItem('gh_token', tok.trim());
+    localStorage.setItem('gh_token', tok.trim());
   }
   return tok;
 }
@@ -83,7 +83,7 @@ async function saveData(data) {
     sha = (await r.json()).sha;
   } catch (e) {
     showMsg('Could not connect to GitHub: ' + e.message, 'error');
-    sessionStorage.removeItem('gh_token');
+    localStorage.removeItem('gh_token');
     return false;
   }
 
@@ -112,11 +112,28 @@ async function saveData(data) {
 // ── UTILITIES ────────────────────────────────────────────────────────
 function showMsg(text, type = 'success') {
   const el = document.getElementById('msg');
-  if (!el) return;
-  el.className = `alert alert-${type}`;
-  el.textContent = text;
-  el.classList.remove('hidden');
-  setTimeout(() => el.classList.add('hidden'), 4000);
+  if (el) {
+    el.className = `alert alert-${type}`;
+    el.textContent = text;
+    el.classList.remove('hidden');
+    setTimeout(() => el.classList.add('hidden'), 4000);
+    return;
+  }
+  // Fallback toast for pages without a #msg element (e.g. draft.html)
+  let toast = document.getElementById('_toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = '_toast';
+    toast.style.cssText = 'position:fixed;top:72px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:4px;font-family:"Space Mono",monospace;font-size:.75rem;z-index:9999;pointer-events:none;transition:opacity .3s;';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = text;
+  toast.style.background = type === 'error' ? 'rgba(255,81,71,0.95)' : 'rgba(95,255,194,0.15)';
+  toast.style.color      = type === 'error' ? '#fff' : 'var(--mint)';
+  toast.style.border     = type === 'error' ? '1px solid rgba(255,81,71,0.6)' : '1px solid var(--border)';
+  toast.style.opacity    = '1';
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => { toast.style.opacity = '0'; }, 4000);
 }
 
 function slugify(name) {
