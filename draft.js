@@ -3,6 +3,8 @@ let _testMode  = false;
 
 async function initDraft() {
   _draftData = await loadData();
+  // Restore test mode flag if returning to this page mid-test
+  if (sessionStorage.getItem('bb28_test_data')) _testMode = true;
   const { draftStatus, houseguests } = _draftData;
 
   hide('state-no-cast'); hide('state-wheel'); hide('state-draft'); hide('state-complete');
@@ -158,10 +160,13 @@ function toggleTestMode() {
     btn.style.borderColor = 'rgba(255,211,61,0.6)';
     banner.classList.remove('hidden');
   } else {
+    sessionStorage.removeItem('bb28_test_data');
+    _dataCache = null;
     btn.textContent = '🧪 ENABLE TEST MODE';
     btn.style.color = 'var(--muted)';
     btn.style.borderColor = 'var(--muted)';
     banner.classList.add('hidden');
+    document.getElementById('global-test-bar')?.remove();
   }
 }
 
@@ -170,12 +175,19 @@ function resetTestDraft() {
   _draftData.draftOrder  = [];
   _draftData.currentPickIndex = 0;
   _draftData.houseguests.forEach(hg => { hg.ownerId = null; });
+  sessionStorage.removeItem('bb28_test_data');
+  _dataCache = null;
+  document.getElementById('global-test-bar')?.remove();
   hide('state-draft'); hide('state-complete');
   document.getElementById('teams-display').innerHTML = '';
   document.getElementById('wheelResult').textContent = '';
   hide('confirm-order');
   show('state-wheel');
   _wheelAngle = 0;
+  _testMode = false;
+  const btn = document.getElementById('test-mode-btn');
+  if (btn) { btn.textContent = '🧪 ENABLE TEST MODE'; btn.style.color = 'var(--muted)'; btn.style.borderColor = 'var(--muted)'; }
+  document.getElementById('test-mode-banner').classList.add('hidden');
   requestAnimationFrame(() => requestAnimationFrame(() => {
     drawWheel(_draftData.owners, -1, 'wheelCanvas', 0);
   }));
@@ -188,6 +200,7 @@ async function confirmOrder() {
   _draftData.draftStatus = 'open';
   _draftData.currentPickIndex = 0;
   if (_testMode) {
+    sessionStorage.setItem('bb28_test_data', JSON.stringify(_draftData));
     hide('state-wheel');
     show('state-draft');
     renderDraftUI();
@@ -315,6 +328,7 @@ async function makePick(houseguestId) {
   data.currentPickIndex++;
   if (data.currentPickIndex >= data.houseguests.length) data.draftStatus = 'complete';
   if (_testMode) {
+    sessionStorage.setItem('bb28_test_data', JSON.stringify(data));
     if (data.draftStatus === 'complete') {
       hide('state-draft');
       document.getElementById('teams-display').innerHTML = '';

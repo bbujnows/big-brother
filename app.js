@@ -5,6 +5,9 @@ const DATA_PATH = 'data.json';
 let _dataCache = null;
 
 async function loadData() {
+  // Test mode: serve the in-session snapshot instead of live data
+  const snap = sessionStorage.getItem('bb28_test_data');
+  if (snap) { try { return JSON.parse(snap); } catch (e) { sessionStorage.removeItem('bb28_test_data'); } }
   if (_dataCache) return _dataCache;
   try {
     const res = await fetch(`${DATA_PATH}?nocache=${Date.now()}`);
@@ -17,6 +20,22 @@ async function loadData() {
 }
 
 function invalidateCache() { _dataCache = null; }
+
+function clearTestData() {
+  sessionStorage.removeItem('bb28_test_data');
+  _dataCache = null;
+  window.location.reload();
+}
+
+// Show a persistent bottom banner on every page while test data is active
+document.addEventListener('DOMContentLoaded', () => {
+  if (!sessionStorage.getItem('bb28_test_data')) return;
+  const bar = document.createElement('div');
+  bar.id = 'global-test-bar';
+  bar.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:rgba(20,16,4,0.96);border-top:1px solid rgba(255,211,61,0.4);padding:9px 20px;font-family:"Space Mono",monospace;font-size:.68rem;color:#ffd93d;letter-spacing:.5px;z-index:300;display:flex;align-items:center;justify-content:space-between;gap:12px;';
+  bar.innerHTML = `<span>🧪 TEST MODE ACTIVE — this is a simulated draft, no data has been saved</span><button onclick="clearTestData()" style="background:none;border:1px solid rgba(255,211,61,0.5);color:#ffd93d;font-size:.65rem;padding:3px 12px;border-radius:3px;cursor:pointer;font-family:inherit;white-space:nowrap;">CLEAR TEST DATA</button>`;
+  document.body.appendChild(bar);
+});
 
 // ── SCORING ──────────────────────────────────────────────────────────
 function computeGuestScore(hg) {
