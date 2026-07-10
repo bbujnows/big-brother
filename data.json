@@ -86,7 +86,7 @@
       "bio": "Outgoing, fun and unpredictable; watched BB since he was 8. Plans to make friends while knowing when to cut them. Viewers may see a 'beach bum without a brain,' but he graduated summa cum laude. Biggest strength: connecting with people; biggest weakness: his 'big fat mouth.' Expects to play from the shadows — and jokes the house may be rocking the 'Drewth' haircut by season's end.",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "ownerId": null,
+      "ownerId": "vicky",
       "weekEvicted": null,
       "events": []
     },
@@ -226,7 +226,7 @@
       "bio": "Watched BB since she was a little girl; bringing realness, light and relatability. Strategy: the 'Big B Blowout' — a three-part team approach with floaters and two tethered teams moving votes and comps. Social game is her biggest strength; likable to the young ones, an 'old soul' to the older ones. Looks sweet and innocent, but she's a hero coming out of a villain era — and may need to go back in.",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "ownerId": "vicky",
+      "ownerId": null,
       "weekEvicted": null,
       "events": []
     },
