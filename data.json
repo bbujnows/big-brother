@@ -5,10 +5,10 @@
   "currentWeek": 0,
   "draftStatus": "open",
   "draftOrder": [
-    "brandon",
     "brittany",
     "vicky",
-    "melissa"
+    "melissa",
+    "brandon"
   ],
   "currentPickIndex": 0,
   "owners": [
