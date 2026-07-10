@@ -22,13 +22,10 @@ const app = initializeApp(firebaseConfig);
 const db  = getDatabase(app);
 
 const TOPICS = [
-  { id: 'episode',   label: 'EPISODE'    },
   { id: 'afterdark', label: 'AFTER DARK' },
-  { id: 'draft',     label: 'DRAFT'      },
-  { id: 'general',   label: 'GENERAL'    },
 ];
 
-let currentTopic = 'episode';
+let currentTopic = 'afterdark';
 let unsubscribe  = null;
 let isOpen       = false;
 
@@ -128,10 +125,6 @@ function playBoop() {
 
 // ── Inject drawer HTML into body ────────────────────────
 function injectDrawer() {
-  const topicBtns = TOPICS.map((t, i) =>
-    `<button class="chat-topic-btn${i === 0 ? ' active' : ''}" data-topic="${t.id}">${t.label}</button>`
-  ).join('');
-
   document.body.insertAdjacentHTML('beforeend', `
     <div id="chat-tab" role="button" tabindex="0" aria-label="Open live chat">
       <span id="chat-tab-badge" class="hidden"></span>
@@ -142,10 +135,9 @@ function injectDrawer() {
     <aside id="chat-drawer" aria-hidden="true" aria-label="Live Chat">
       <div class="chat-hdr">
         <span class="rec"><i></i>COMM&nbsp;LINK</span>
-        <span class="chat-hdr-sub">LIVE FEED · HOUSE</span>
+        <span class="chat-hdr-sub">AFTER DARK</span>
         <button id="chat-close" aria-label="Close chat">✕</button>
       </div>
-      <div id="chat-topics">${topicBtns}</div>
       <div id="chat-msgs"></div>
       <div class="chat-footer">
         <input id="chat-name" placeholder="YOUR NAME" maxlength="20" autocomplete="off" spellcheck="false">
@@ -167,16 +159,6 @@ function toggleChat() {
   drawer.setAttribute('aria-hidden', String(!isOpen));
   tab.classList.toggle('hidden', isOpen);
   if (isOpen) { loadMessages(currentTopic); clearNotifications(); }
-}
-
-// ── Switch topic tab ────────────────────────────────────
-function switchTopic(id) {
-  if (id === currentTopic) return;
-  currentTopic = id;
-  document.querySelectorAll('.chat-topic-btn').forEach(b =>
-    b.classList.toggle('active', b.dataset.topic === id)
-  );
-  loadMessages(id);
 }
 
 // ── Load messages via Firebase realtime listener ────────
@@ -290,9 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('chat-close').addEventListener('click', toggleChat);
-  document.getElementById('chat-topics').addEventListener('click', e => {
-    if (e.target.matches('.chat-topic-btn')) switchTopic(e.target.dataset.topic);
-  });
   document.getElementById('chat-send').addEventListener('click', sendMessage);
   document.getElementById('chat-text').addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
