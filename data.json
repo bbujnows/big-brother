@@ -1,7 +1,7 @@
 {
   "season": 28,
   "premiereDate": "2026-07-09",
-  "lastUpdated": "2026-06-12",
+  "lastUpdated": "2026-07-10",
   "currentWeek": 0,
   "draftStatus": "pending",
   "draftOrder": [],
@@ -154,6 +154,17 @@
       "occupation": "Elementary school counselor",
       "bio": "Watched BB since she was a little girl; bringing realness, light and relatability. Strategy: the 'Big B Blowout' — a three-part team approach with floaters and two tethered teams moving votes and comps. Social game is her biggest strength; likable to the young ones, an 'old soul' to the older ones. Looks sweet and innocent, but she's a hero coming out of a villain era — and may need to go back in.",
       "photo": "photos/taylor.jpg",
+      "status": "active", "ownerId": null, "weekEvicted": null, "events": []
+    },
+    {
+      "id": "hg_angela_murray",
+      "name": "Angela Murray",
+      "age": 52,
+      "hometown": "Long Beach, CA",
+      "currentCity": "Syracuse, UT",
+      "occupation": "Real estate agent",
+      "bio": "Returning fan favorite from BB26 (2024), announced as a surprise entrant on premiere night. She won the very first HOH of her season, was nominated seven times and saved by veto three times on her way to a sixth-place finish, and landed in the top three for America's Favorite Player. Known for her fiery confrontations — including the infamous 'Crazy Eyes' blowup. A mother of four and grandmother of three who helps retirees find their forever homes; also ran The Amazing Race with her daughter Lexi.",
+      "photo": "photos/angela.jpg",
       "status": "active", "ownerId": null, "weekEvicted": null, "events": []
     },
     {
