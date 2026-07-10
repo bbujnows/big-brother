@@ -909,9 +909,21 @@ input:focus, select:focus, textarea:focus {
 @media (max-width: 640px) {
   .owner-grid { grid-template-columns: 1fr 1fr; }
   .players-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-  nav a:not(.active):not(.admin-link) { display: none; }
+  /* All tabs stay visible — the bar scrolls sideways instead of hiding links */
+  nav {
+    overflow-x: auto;
+    padding: 0 12px;
+    gap: 2px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a { padding: 8px 9px; font-size: 0.62rem; letter-spacing: 1px; flex-shrink: 0; }
+  .nav-logo { flex-shrink: 0; font-size: 0.85rem; }
   .hero-title { font-size: 2.6rem; }
   .page-title { font-size: 2rem; }
+  /* iOS zooms the whole page when focusing inputs under 16px — prevent it */
+  #chat-name, #chat-text { font-size: 16px; }
 }
 
 /* ════════════════════════════════════════════════════════
@@ -1458,3 +1470,14 @@ input:focus, select:focus, textarea:focus {
   animation: bb-blink 1.4s step-end infinite;
 }
 .sched-chip.aired { color: var(--muted); }
+
+/* ══════════════════════════════════════════════════════════
+   iPHONE FIXES — chat drawer viewport + home-indicator space
+   ══════════════════════════════════════════════════════════ */
+/* Safari counts the URL bar inside 100vh, hiding the compose box.
+   dvh tracks the *visible* viewport; older browsers keep the vh rule. */
+#chat-drawer { height: 100dvh; }
+
+/* Keep the compose box clear of the iPhone home indicator */
+.chat-footer { padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+#chat-tab { padding-right: calc(10px + env(safe-area-inset-right)); }
