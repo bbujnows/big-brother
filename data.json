@@ -72,7 +72,7 @@
       "bio": "Fun, easygoing and bubbly; plans a strong social game. A first-generation immigrant who believes he can talk to anyone. Strategy: win over the women first, build trust, make people feel like he's 'one of us.' People may assume he's conceited, but he's 'super chill.' Open to a showmance but would hate to be stuck in one. Handles conflict straight-up.",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "ownerId": null,
+      "ownerId": "brittany",
       "weekEvicted": null,
       "events": []
     },
@@ -128,7 +128,7 @@
       "bio": "Full name Kamuela 'Kamu' Kirk. Battle-tested from MMA — 11 or 12 surgeries from fighting. Plans a strong social game plus comp wins, but doesn't want to be pegged as a physical threat right away; may hide that he's fought at the sport's highest level and that his family owns his training facility. People may assume he's mean, but he cares about people. Possible weakness: too trusting.",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "ownerId": "brittany",
+      "ownerId": null,
       "weekEvicted": null,
       "events": []
     },
