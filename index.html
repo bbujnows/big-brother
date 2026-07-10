@@ -92,7 +92,7 @@
       // Hero subtitle
       const heroSub = document.getElementById('hero-sub');
       if (data.currentWeek === 0) {
-        heroSub.textContent = 'Premieres July 9, 2026 · Cast to be announced';
+        heroSub.textContent = `${data.houseguests.length} houseguests · Season 28 is live`;
       } else {
         heroSub.textContent = `Week ${data.currentWeek} · Last updated ${data.lastUpdated}`;
       }
