@@ -171,8 +171,22 @@ function esc(s) {
 document.addEventListener('DOMContentLoaded', () => {
   injectDrawer();
 
-  const saved = localStorage.getItem('bb28-chat-name');
-  if (saved) document.getElementById('chat-name').value = saved;
+  // Name pre-fill: ?name= in the URL wins (bookmark-friendly for browsers
+  // that clear site data on exit), then last saved name
+  const nameEl   = document.getElementById('chat-name');
+  const urlName  = new URLSearchParams(location.search).get('name');
+  const saved    = localStorage.getItem('bb28-chat-name');
+  if (urlName) {
+    nameEl.value = urlName.slice(0, 20);
+    localStorage.setItem('bb28-chat-name', nameEl.value);
+  } else if (saved) {
+    nameEl.value = saved;
+  }
+  // Save as soon as it's typed, not only on send
+  nameEl.addEventListener('input', () => {
+    const v = nameEl.value.trim();
+    if (v) localStorage.setItem('bb28-chat-name', v);
+  });
 
   const tab = document.getElementById('chat-tab');
   tab.addEventListener('click', toggleChat);
