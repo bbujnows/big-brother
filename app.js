@@ -10,14 +10,11 @@ async function loadData() {
   if (snap) { try { return JSON.parse(snap); } catch (e) { sessionStorage.removeItem('bb28_test_data'); } }
   if (_dataCache) return _dataCache;
   try {
-    // Fetch via GitHub API to bypass GitHub Pages CDN caching
-    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
-      headers: { 'Accept': 'application/vnd.github.v3.raw' }
-    });
+    // raw.githubusercontent.com bypasses Pages CDN lag and avoids URL collision with saveData
+    const res = await fetch(`https://raw.githubusercontent.com/${REPO}/main/${DATA_PATH}?nocache=${Date.now()}`);
     _dataCache = await res.json();
     return _dataCache;
   } catch (e) {
-    // Fallback to relative URL
     try {
       const res2 = await fetch(`${DATA_PATH}?nocache=${Date.now()}`);
       _dataCache = await res2.json();
@@ -87,7 +84,8 @@ async function saveData(data) {
   let sha;
   try {
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
-      headers: { 'Authorization': `Bearer ${tok}`, 'Accept': 'application/vnd.github.v3+json' }
+      headers: { 'Authorization': `Bearer ${tok}`, 'Accept': 'application/vnd.github.v3+json' },
+      cache: 'no-store'
     });
     if (!r.ok) throw new Error(await r.text());
     sha = (await r.json()).sha;
