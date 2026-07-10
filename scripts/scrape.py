@@ -28,7 +28,6 @@ SCORING = {
     "nominated":     -3,
     "pickedVeto":     2,
     "takenOffBlock":  5,
-    "weekSurvived":   5,
     "madeJury":      10,
     "resurrection":  15,
     "first":         60,
@@ -182,21 +181,6 @@ def parse_competition_tables(soup, data):
     return changes
 
 
-def add_weekly_survival_points(data):
-    """Give +5 per week survived to all active/jury houseguests."""
-    changes = 0
-    max_week = max((ep["week"] for ep in data["episodes"]), default=0)
-    if max_week == 0:
-        return 0
-    for hg in data["houseguests"]:
-        weeks_survived = hg.get("weekEvicted") or max_week
-        current_survived = len([e for e in (hg.get("events") or []) if e.get("type") == "weekSurvived"])
-        for w in range(current_survived + 1, weeks_survived + 1):
-            if add_event(data, hg, w, "weekSurvived", f"Survived Week {w}"):
-                changes += 1
-    return changes
-
-
 def main():
     if not DATA_FILE.exists():
         print(f"data.json not found at {DATA_FILE}")
@@ -215,7 +199,6 @@ def main():
         return
 
     changes = parse_competition_tables(soup, data)
-    changes += add_weekly_survival_points(data)
     data["lastUpdated"] = str(date.today())
 
     if changes > 0:

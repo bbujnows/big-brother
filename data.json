@@ -301,10 +301,6 @@
       "label": "Taken Off Block by Someone Else",
       "points": 5
     },
-    "weekSurvived": {
-      "label": "Each Week Survived",
-      "points": 5
-    },
     "madeJury": {
       "label": "Made It to Jury",
       "points": 10

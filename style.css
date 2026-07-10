@@ -1345,8 +1345,9 @@ input:focus, select:focus, textarea:focus {
    MEMORY WALL — the house photo wall; greys out on eviction
    ══════════════════════════════════════════════════════════ */
 .memory-wall {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 36px;
   padding: 16px;
@@ -1356,6 +1357,7 @@ input:focus, select:focus, textarea:focus {
 }
 .mw-tile {
   display: block;
+  width: 92px;
   text-decoration: none;
   text-align: center;
 }
