@@ -10,7 +10,7 @@
     "brandon",
     "melissa"
   ],
-  "currentPickIndex": 0,
+  "currentPickIndex": 1,
   "owners": [
     {
       "id": "brittany",
@@ -44,7 +44,7 @@
       "bio": "High-energy and expects to make close friendships in the house. Plans to bring fun, strong morals and 'chitter-chatter' to Season 28, while noting people sometimes underestimate her as 'ditzy' or 'air-heady.'",
       "photo": "photos/ashley.jpg",
       "status": "active",
-      "ownerId": null,
+      "ownerId": "brittany",
       "weekEvicted": null,
       "events": []
     },
