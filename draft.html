@@ -21,6 +21,11 @@
       <h1 class="page-title">Fantasy Draft</h1>
       <p class="page-subtitle">BB28 — Season premieres July 9, 2026</p>
 
+      <div id="test-mode-banner" class="hidden" style="background:rgba(255,211,61,0.1);border:1px solid rgba(255,211,61,0.35);border-radius:4px;padding:10px 16px;margin-bottom:20px;font-family:var(--mono);font-size:.72rem;color:var(--gold);letter-spacing:.5px;display:flex;align-items:center;justify-content:space-between;">
+        <span>🧪 TEST MODE — picks will NOT be saved to GitHub</span>
+        <button onclick="resetTestDraft()" style="background:none;border:1px solid rgba(255,211,61,0.4);color:var(--gold);font-size:.7rem;padding:4px 12px;border-radius:3px;cursor:pointer;font-family:var(--mono);letter-spacing:.5px;">↺ RESET</button>
+      </div>
+
       <!-- STATE: no cast yet — shows wheel preview -->
       <div id="state-no-cast" class="hidden">
         <div class="card" style="margin-bottom:24px;border-color:rgba(245,197,24,0.2);background:rgba(245,197,24,0.04);">
@@ -65,6 +70,9 @@
           <br>
           <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Spin the Wheel</button>
           <div class="wheel-result" id="wheelResult"></div>
+          <div style="margin-top:14px;">
+            <button id="test-mode-btn" onclick="toggleTestMode()" style="background:none;border:1px solid var(--muted);color:var(--muted);font-size:.7rem;padding:6px 16px;border-radius:3px;cursor:pointer;font-family:var(--mono);letter-spacing:.5px;transition:all .15s;">🧪 ENABLE TEST MODE</button>
+          </div>
         </div>
         <div id="confirm-order" class="hidden" style="margin-top:24px;">
           <div class="card">

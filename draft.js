@@ -1,4 +1,5 @@
 let _draftData = null;
+let _testMode  = false;
 
 async function initDraft() {
   _draftData = await loadData();
@@ -147,12 +148,51 @@ function onSpinComplete(winnerIndex) {
   window._pendingDraftOrder = draftOrder.map(o => o.id);
 }
 
+function toggleTestMode() {
+  _testMode = !_testMode;
+  const btn    = document.getElementById('test-mode-btn');
+  const banner = document.getElementById('test-mode-banner');
+  if (_testMode) {
+    btn.textContent = '✓ TEST MODE ON';
+    btn.style.color = 'var(--gold)';
+    btn.style.borderColor = 'rgba(255,211,61,0.6)';
+    banner.classList.remove('hidden');
+  } else {
+    btn.textContent = '🧪 ENABLE TEST MODE';
+    btn.style.color = 'var(--muted)';
+    btn.style.borderColor = 'var(--muted)';
+    banner.classList.add('hidden');
+  }
+}
+
+function resetTestDraft() {
+  _draftData.draftStatus = 'pending';
+  _draftData.draftOrder  = [];
+  _draftData.currentPickIndex = 0;
+  _draftData.houseguests.forEach(hg => { hg.ownerId = null; });
+  hide('state-draft'); hide('state-complete');
+  document.getElementById('teams-display').innerHTML = '';
+  document.getElementById('wheelResult').textContent = '';
+  hide('confirm-order');
+  show('state-wheel');
+  _wheelAngle = 0;
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    drawWheel(_draftData.owners, -1, 'wheelCanvas', 0);
+  }));
+}
+
 async function confirmOrder() {
   const order = window._pendingDraftOrder;
   if (!order) return;
   _draftData.draftOrder = order;
   _draftData.draftStatus = 'open';
   _draftData.currentPickIndex = 0;
+  if (_testMode) {
+    hide('state-wheel');
+    show('state-draft');
+    renderDraftUI();
+    return;
+  }
   const ok = await saveData(_draftData);
   if (ok) { invalidateCache(); window.location.reload(); }
 }
@@ -274,6 +314,17 @@ async function makePick(houseguestId) {
   hg.ownerId = currentOwnerId;
   data.currentPickIndex++;
   if (data.currentPickIndex >= data.houseguests.length) data.draftStatus = 'complete';
+  if (_testMode) {
+    if (data.draftStatus === 'complete') {
+      hide('state-draft');
+      document.getElementById('teams-display').innerHTML = '';
+      show('state-complete');
+      renderTeams();
+    } else {
+      renderDraftUI();
+    }
+    return;
+  }
   const ok = await saveData(data);
   if (ok) { invalidateCache(); window.location.reload(); }
 }
