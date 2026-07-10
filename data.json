@@ -128,7 +128,7 @@
       "bio": "Full name Kamuela 'Kamu' Kirk. Battle-tested from MMA — 11 or 12 surgeries from fighting. Plans a strong social game plus comp wins, but doesn't want to be pegged as a physical threat right away; may hide that he's fought at the sport's highest level and that his family owns his training facility. People may assume he's mean, but he cares about people. Possible weakness: too trusting.",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "ownerId": null,
+      "ownerId": "brittany",
       "weekEvicted": null,
       "events": []
     },
@@ -198,7 +198,7 @@
       "bio": "Survivor legend crossing over as a surprise premiere-night entrant — his first time playing Big Brother. Finished fourth on Survivor: Edge of Extinction (2019), falling in the fire-making challenge, then became the breakout star of Survivor 50: saved himself at back-to-back Tribal Councils and won a MrBeast coin flip that doubled the season's prize to $2 million, finishing seventh. A morning news anchor whose hometown declared an official 'Rick Devens Day' for his charity work with wheelchair sports and animal rescue.",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "ownerId": "brittany",
+      "ownerId": null,
       "weekEvicted": null,
       "events": []
     },
