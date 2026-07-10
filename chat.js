@@ -32,6 +32,100 @@ let currentTopic = 'episode';
 let unsubscribe  = null;
 let isOpen       = false;
 
+// ── Notifications ───────────────────────────────────────
+const BOOT_TIME  = Date.now();
+let unreadCount  = 0;
+let titleFlasher = null;
+const origTitle  = document.title;
+
+function myName() {
+  return (localStorage.getItem('bb28-chat-name') || '').trim().toLowerCase();
+}
+
+// Watch every topic in the background; announce posts from other people
+function startBackgroundListeners() {
+  TOPICS.forEach(t => {
+    const q = query(ref(db, `posts/${t.id}`), orderByChild('timestamp'), limitToLast(1));
+    onChildAdded(q, snap => {
+      const msg = snap.val();
+      if (!msg || (msg.timestamp || 0) <= BOOT_TIME) return;          // old news
+      if ((msg.author || '').trim().toLowerCase() === myName()) return; // own post
+      if (isOpen && t.id === currentTopic) return;                     // already reading it
+      notifyNewMessage(msg.author, t.label);
+    });
+  });
+}
+
+function notifyNewMessage(author, topicLabel) {
+  // 1. Unread badge + pulsing tab
+  unreadCount++;
+  const badge = document.getElementById('chat-tab-badge');
+  const tab   = document.getElementById('chat-tab');
+  if (badge) { badge.textContent = unreadCount > 9 ? '9+' : unreadCount; badge.classList.remove('hidden'); }
+  if (tab) tab.classList.add('unread');
+
+  // 2. Production announcement toast
+  showAnnouncement(`${author} has posted to ${topicLabel}`);
+
+  // 3. Feed-switch boop
+  playBoop();
+
+  // 4. Flash the browser tab title if the page is hidden
+  if (document.hidden && !titleFlasher) {
+    let on = false;
+    titleFlasher = setInterval(() => {
+      document.title = on ? origTitle : '🔴 NEW FEED ACTIVITY';
+      on = !on;
+    }, 1200);
+  }
+}
+
+function clearNotifications() {
+  unreadCount = 0;
+  document.getElementById('chat-tab-badge')?.classList.add('hidden');
+  document.getElementById('chat-tab')?.classList.remove('unread');
+  stopTitleFlash();
+}
+
+function stopTitleFlash() {
+  if (titleFlasher) { clearInterval(titleFlasher); titleFlasher = null; document.title = origTitle; }
+}
+
+// "HOUSEGUESTS, THIS IS BIG BROTHER" style toast
+function showAnnouncement(text) {
+  document.getElementById('bb-announce')?.remove();
+  const el = document.createElement('div');
+  el.id = 'bb-announce';
+  el.innerHTML = `<span class="bb-announce-rec"></span><span class="bb-announce-hdr">📢 HOUSEGUESTS —</span> ${esc(text.toUpperCase())}`;
+  document.body.appendChild(el);
+  requestAnimationFrame(() => el.classList.add('show'));
+  setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 400); }, 4500);
+}
+
+// Two-tone live-feed switch blip, synthesized (no audio file).
+// Browsers allow sound only after the user's first click on the page;
+// before that this silently does nothing.
+let _audioCtx = null;
+function playBoop() {
+  try {
+    _audioCtx = _audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (_audioCtx.state === 'suspended') { _audioCtx.resume(); }
+    [[520, 0], [390, 0.14]].forEach(([freq, delay]) => {
+      const osc  = _audioCtx.createOscillator();
+      const gain = _audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      const t = _audioCtx.currentTime + delay;
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(0.05, t + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+      osc.connect(gain).connect(_audioCtx.destination);
+      osc.start(t);
+      osc.stop(t + 0.14);
+    });
+  } catch (e) { /* sound blocked — badge and toast still fire */ }
+}
+
 // ── Inject drawer HTML into body ────────────────────────
 function injectDrawer() {
   const topicBtns = TOPICS.map((t, i) =>
@@ -40,6 +134,7 @@ function injectDrawer() {
 
   document.body.insertAdjacentHTML('beforeend', `
     <div id="chat-tab" role="button" tabindex="0" aria-label="Open live chat">
+      <span id="chat-tab-badge" class="hidden"></span>
       <span class="chat-tab-dot"></span>
       <span class="chat-tab-lbl">LIVE</span>
     </div>
@@ -71,7 +166,7 @@ function toggleChat() {
   drawer.classList.toggle('open', isOpen);
   drawer.setAttribute('aria-hidden', String(!isOpen));
   tab.classList.toggle('hidden', isOpen);
-  if (isOpen) loadMessages(currentTopic);
+  if (isOpen) { loadMessages(currentTopic); clearNotifications(); }
 }
 
 // ── Switch topic tab ────────────────────────────────────
@@ -202,4 +297,17 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('chat-text').addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
   });
+
+  startBackgroundListeners();
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) stopTitleFlash(); });
+  // Unlock audio on the first interaction so later boops can play
+  document.addEventListener('click', () => playBoopUnlock(), { once: true });
 });
+
+// Prime the AudioContext silently on first click (browser autoplay rule)
+function playBoopUnlock() {
+  try {
+    _audioCtx = _audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (_audioCtx.state === 'suspended') _audioCtx.resume();
+  } catch (e) { /* no audio support */ }
+}
