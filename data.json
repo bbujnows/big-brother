@@ -10,7 +10,7 @@
     "brandon",
     "melissa"
   ],
-  "currentPickIndex": 1,
+  "currentPickIndex": 2,
   "owners": [
     {
       "id": "brittany",
@@ -58,7 +58,7 @@
       "bio": "Has watched BB since he was 8 and applied for years. Charming, spicy and social — strategy is becoming everyone's best friend. At 6'6\" he's often underestimated and thinks the game could be a 'breeze.' Admits his mouth can get ahead of his brain; could become a villain by smiling in someone's face while planning to stab them in the back. Wears his emotions on his sleeve.",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "ownerId": null,
+      "ownerId": "vicky",
       "weekEvicted": null,
       "events": []
     },
