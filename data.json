@@ -135,6 +135,17 @@
       "status": "active", "ownerId": null, "weekEvicted": null, "events": []
     },
     {
+      "id": "hg_rick_devens",
+      "name": "Rick Devens",
+      "age": 42,
+      "hometown": "Macon, GA",
+      "currentCity": null,
+      "occupation": "News anchor",
+      "bio": "Survivor legend crossing over as a surprise premiere-night entrant — his first time playing Big Brother. Finished fourth on Survivor: Edge of Extinction (2019), falling in the fire-making challenge, then became the breakout star of Survivor 50: saved himself at back-to-back Tribal Councils and won a MrBeast coin flip that doubled the season's prize to $2 million, finishing seventh. A morning news anchor whose hometown declared an official 'Rick Devens Day' for his charity work with wheelchair sports and animal rescue.",
+      "photo": "photos/rick.jpg",
+      "status": "active", "ownerId": null, "weekEvicted": null, "events": []
+    },
+    {
       "id": "hg_rome_seymour",
       "name": "Rome Seymour",
       "age": 28,
