@@ -20,12 +20,58 @@
     <h1 class="page-title">Episode Log</h1>
     <p class="page-subtitle">Points earned each week — auto-updated after episodes air</p>
 
+    <div class="section-label">Broadcast Schedule</div>
+    <div class="card" id="schedule-list" style="padding:6px 0;margin-bottom:36px;"></div>
+    <p style="font-size:.72rem;color:var(--muted);margin:-24px 0 36px;font-family:var(--mono);letter-spacing:.5px;">
+      // CBS announces episodes a few weeks out — this list grows as new dates are confirmed
+    </p>
+
+    <div class="section-label">Weekly Results</div>
     <div id="log-content"></div>
   </main>
 
   <script src="app.js"></script>
   <script>
+    // Known episodes (from the official CBS schedule). Add rows as more are announced.
+    const EPISODE_SCHEDULE = [
+      { ep: 1,  title: 'Season Premiere',        date: '2026-07-09' },
+      { ep: 2,  title: 'Big Brother: Unlocked',  date: '2026-07-10' },
+      { ep: 3,  title: 'Episode 3',              date: '2026-07-12' },
+      { ep: 4,  title: 'Episode 4',              date: '2026-07-15' },
+      { ep: 5,  title: 'Episode 5',              date: '2026-07-16' },
+      { ep: 6,  title: 'Episode 6',              date: '2026-07-19' },
+      { ep: 7,  title: 'Episode 7',              date: '2026-07-22' },
+      { ep: 8,  title: 'Episode 8',              date: '2026-07-23' },
+      { ep: 9,  title: 'Big Brother: Unlocked',  date: '2026-07-24' },
+      { ep: 10, title: 'Episode 10',             date: '2026-07-26' },
+      { ep: 11, title: 'Episode 11',             date: '2026-07-29' },
+      { ep: 12, title: 'Episode 12',             date: '2026-07-30' },
+      { ep: 13, title: 'Episode 13',             date: '2026-08-02' },
+    ];
+
+    function renderSchedule() {
+      const el = document.getElementById('schedule-list');
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      const todayStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+      el.innerHTML = EPISODE_SCHEDULE.map(e => {
+        const d = new Date(e.date + 'T20:00:00');
+        const state = e.date === todayStr ? 'tonight' : (e.date < todayStr ? 'aired' : 'upcoming');
+        const chip = state === 'tonight' ? 'TONIGHT' : state === 'aired' ? 'AIRED' : 'UPCOMING';
+        return `
+          <div class="sched-row ${state}">
+            <span class="sched-date">${days[d.getDay()]} · ${months[d.getMonth()]} ${d.getDate()}</span>
+            <span class="sched-title">Ep ${e.ep} — ${e.title}</span>
+            <span class="sched-chip ${state}">${chip}</span>
+          </div>`;
+      }).join('');
+    }
+
     async function init() {
+      renderSchedule();
       const data = await loadData();
       const container = document.getElementById('log-content');
 
@@ -33,8 +79,8 @@
         container.innerHTML = `
           <div class="empty-state">
             <span class="icon">📅</span>
-            <h3>Season Hasn't Started Yet</h3>
-            <p>Episode results will appear here after BB28 premieres on July 9, 2026. Updates run automatically after each episode airs.</p>
+            <h3>No Scored Weeks Yet</h3>
+            <p>Weekly results and points will appear here as they're logged after episodes air.</p>
           </div>`;
         return;
       }

@@ -36,6 +36,11 @@
   </div>
 
   <main class="inner">
+    <div id="memory-wall-section">
+      <div class="section-label">Memory Wall</div>
+      <div id="memory-wall" class="memory-wall"></div>
+    </div>
+
     <div id="owner-grid" class="owner-grid"></div>
 
     <div id="countdown-wrap"></div>
@@ -56,6 +61,17 @@
         </table>
       </div>
     </div>
+
+    <div class="divider"></div>
+
+    <div class="section-label">Season Race</div>
+    <div class="card" id="race-wrap" style="padding:22px;">
+      <canvas id="race-chart" style="width:100%;height:280px;display:block;"></canvas>
+      <div id="race-legend" style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;"></div>
+    </div>
+
+    <div class="section-label" style="margin-top:32px;">Rivalry Desk</div>
+    <div id="rivalry-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;"></div>
 
     <div class="divider"></div>
 
@@ -151,6 +167,11 @@
         });
       }
 
+      renderMemoryWall(data);
+      const race = weeklySeries(data);
+      renderRace(data, race);
+      renderRivalry(data, race);
+
       // Scoring system
       const sg = document.getElementById('scoring-grid');
       Object.entries(data.scoring).forEach(([,v]) => {
@@ -160,6 +181,149 @@
         div.innerHTML = `<span class="scoring-label">${v.label}</span><span class="scoring-pts ${cls}">${v.points>0?'+':''}${v.points}</span>`;
         sg.appendChild(div);
       });
+    }
+
+    // ── MEMORY WALL ─────────────────────────────────────────
+    function renderMemoryWall(data) {
+      const section = document.getElementById('memory-wall-section');
+      if (!data.houseguests.length) { section.remove(); return; }
+      document.getElementById('memory-wall').innerHTML = data.houseguests.map(hg => `
+        <a class="mw-tile ${hg.status}" href="players.html" title="${hg.name}">
+          <div class="mw-photo">
+            ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}" loading="lazy">` : '👤'}
+            ${hg.status === 'evicted' ? `<div class="mw-stamp">EVICTED${hg.weekEvicted ? '·WK' + hg.weekEvicted : ''}</div>` : ''}
+            ${hg.status === 'jury' ? `<div class="mw-stamp jury">JURY</div>` : ''}
+          </div>
+          <div class="mw-name">${hg.name.split(' ')[0]}</div>
+        </a>`).join('');
+    }
+
+    // ── SEASON RACE DATA ────────────────────────────────────
+    // Cumulative team points per week, computed from houseguest events
+    function weeklySeries(data) {
+      let maxWeek = 0;
+      data.houseguests.forEach(h => (h.events || []).forEach(e => { if (e.week > maxWeek) maxWeek = e.week; }));
+      if (maxWeek === 0) return null;
+      const series = data.owners.map(o => {
+        const mine = data.houseguests.filter(h => h.ownerId === o.id);
+        const pts = [0]; // week 0 = everyone starts at zero
+        for (let w = 1; w <= maxWeek; w++) {
+          let sum = 0;
+          mine.forEach(h => (h.events || []).forEach(e => { if (e.week <= w) sum += e.points; }));
+          pts.push(sum);
+        }
+        return { owner: o, pts };
+      });
+      return { maxWeek, series };
+    }
+
+    // ── SEASON RACE CHART ───────────────────────────────────
+    function renderRace(data, race) {
+      const wrap = document.getElementById('race-wrap');
+      if (!race) {
+        wrap.innerHTML = `<div style="text-align:center;padding:26px 10px;color:var(--muted);">
+          <div style="font-size:1.6rem;margin-bottom:8px;">📈</div>
+          The race chart draws itself as weekly points come in.</div>`;
+        return;
+      }
+      const { maxWeek, series } = race;
+      const canvas = document.getElementById('race-chart');
+      const dpr = window.devicePixelRatio || 1;
+      const W = canvas.clientWidth, H = canvas.clientHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const all = series.flatMap(s => s.pts);
+      const yMin = Math.min(0, ...all), yMax = Math.max(10, ...all);
+      const padL = 38, padR = 14, padT = 12, padB = 26;
+      const x = w => padL + (W - padL - padR) * (w / maxWeek);
+      const y = v => padT + (H - padT - padB) * (1 - (v - yMin) / (yMax - yMin));
+
+      // horizontal gridlines
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      ctx.font = '10px monospace';
+      ctx.textAlign = 'right';
+      const steps = 4;
+      for (let i = 0; i <= steps; i++) {
+        const v = yMin + (yMax - yMin) * i / steps;
+        ctx.beginPath(); ctx.moveTo(padL, y(v)); ctx.lineTo(W - padR, y(v)); ctx.stroke();
+        ctx.fillText(Math.round(v), padL - 6, y(v) + 3);
+      }
+      // week labels
+      ctx.textAlign = 'center';
+      for (let w = 0; w <= maxWeek; w++) {
+        ctx.fillText(w === 0 ? '' : 'W' + w, x(w), H - 8);
+      }
+      // team lines
+      series.forEach(s => {
+        ctx.strokeStyle = s.owner.color;
+        ctx.lineWidth = 2.5;
+        ctx.shadowColor = s.owner.color;
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        s.pts.forEach((v, w) => w === 0 ? ctx.moveTo(x(w), y(v)) : ctx.lineTo(x(w), y(v)));
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        s.pts.forEach((v, w) => {
+          ctx.beginPath(); ctx.arc(x(w), y(v), 3, 0, 2 * Math.PI);
+          ctx.fillStyle = s.owner.color; ctx.fill();
+        });
+      });
+      // legend
+      document.getElementById('race-legend').innerHTML = series.map(s => `
+        <span style="display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:${s.owner.color}">
+          <span style="width:14px;height:3px;background:${s.owner.color};border-radius:2px;box-shadow:0 0 6px ${s.owner.color}"></span>
+          ${s.owner.name} (${s.pts[s.pts.length - 1]})
+        </span>`).join('');
+    }
+
+    // ── RIVALRY DESK ────────────────────────────────────────
+    function renderRivalry(data, race) {
+      const grid = document.getElementById('rivalry-grid');
+      if (!race) {
+        grid.innerHTML = `<div class="card" style="grid-column:1/-1;text-align:center;padding:22px;color:var(--muted);">
+          🏁 Rivalry records unlock once Week 1 scores post.</div>`;
+        return;
+      }
+      const { maxWeek, series } = race;
+      const name = id => (data.owners.find(o => o.id === id) || {}).name || id;
+      const color = id => (data.owners.find(o => o.id === id) || {}).color || 'var(--text)';
+
+      // Leader each week (ties share credit)
+      const weeksLed = {}; data.owners.forEach(o => weeksLed[o.id] = 0);
+      let bigLead = { margin: -1 }, bestWeek = { gain: -Infinity };
+      for (let w = 1; w <= maxWeek; w++) {
+        const vals = series.map(s => ({ id: s.owner.id, v: s.pts[w], gain: s.pts[w] - s.pts[w - 1] }))
+                           .sort((a, b) => b.v - a.v);
+        vals.filter(s => s.v === vals[0].v).forEach(s => weeksLed[s.id]++);
+        const margin = vals[0].v - (vals[1] ? vals[1].v : 0);
+        if (margin > bigLead.margin) bigLead = { margin, id: vals[0].id, week: w };
+        vals.forEach(s => { if (s.gain > bestWeek.gain) bestWeek = { gain: s.gain, id: s.id, week: w }; });
+      }
+      // Current leader + streak
+      const finals = series.map(s => ({ id: s.owner.id, v: s.pts[maxWeek] })).sort((a, b) => b.v - a.v);
+      const leaderId = finals[0].id;
+      const tied = finals.filter(f => f.v === finals[0].v).length > 1;
+      let streak = 0;
+      for (let w = maxWeek; w >= 1; w--) {
+        const top = Math.max(...series.map(s => s.pts[w]));
+        if (series.find(s => s.owner.id === leaderId).pts[w] === top) streak++; else break;
+      }
+
+      const statCard = (label, value, sub, clr) => `
+        <div class="card" style="padding:16px;text-align:center;">
+          <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">${label}</div>
+          <div style="font-size:1.25rem;font-weight:900;color:${clr};">${value}</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">${sub}</div>
+        </div>`;
+
+      grid.innerHTML =
+        statCard('Current Leader', tied ? 'Tied' : name(leaderId), tied ? 'dead heat at the top' : `${streak} week${streak === 1 ? '' : 's'} on top`, tied ? 'var(--gold)' : color(leaderId)) +
+        statCard('Weeks in First', data.owners.map(o => `${name(o.id).charAt(0)}:${weeksLed[o.id]}`).join(' · '), 'shared credit on ties', 'var(--text)') +
+        statCard('Biggest Lead', `+${bigLead.margin}`, `${name(bigLead.id)} · week ${bigLead.week}`, color(bigLead.id)) +
+        statCard('Best Single Week', `${bestWeek.gain > 0 ? '+' : ''}${bestWeek.gain}`, `${name(bestWeek.id)} · week ${bestWeek.week}`, color(bestWeek.id));
     }
 
     init();

@@ -1340,3 +1340,119 @@ input:focus, select:focus, textarea:focus {
 #chat-drawer #chat-send {
   box-shadow: 0 0 14px rgba(95, 255, 194, 0.25);
 }
+
+/* ══════════════════════════════════════════════════════════
+   MEMORY WALL — the house photo wall; greys out on eviction
+   ══════════════════════════════════════════════════════════ */
+.memory-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+  gap: 10px;
+  margin-bottom: 36px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(10, 16, 20, 0.9), rgba(6, 8, 11, 0.95));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.mw-tile {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+}
+.mw-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border: 2px solid rgba(95, 255, 194, 0.45);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--surface2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.mw-tile:hover .mw-photo {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(95, 255, 194, 0.18);
+}
+.mw-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.mw-name {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mint-dim);
+  margin-top: 5px;
+}
+/* Evicted: grey out like the real wall */
+.mw-tile.evicted .mw-photo {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.mw-tile.evicted .mw-photo img {
+  filter: grayscale(1) brightness(0.45) contrast(1.1);
+}
+.mw-tile.evicted .mw-name { color: rgba(255, 255, 255, 0.25); }
+.mw-tile.jury .mw-photo { border-color: rgba(255, 217, 61, 0.55); }
+.mw-tile.jury .mw-photo img { filter: grayscale(0.6) brightness(0.75); }
+.mw-stamp {
+  position: absolute;
+  inset: auto 0 0 0;
+  background: rgba(5, 7, 10, 0.85);
+  color: var(--rec);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 2px;
+  border-top: 1px solid rgba(255, 81, 71, 0.4);
+}
+.mw-stamp.jury { color: var(--gold); border-top-color: rgba(255, 217, 61, 0.4); }
+
+/* ══════════════════════════════════════════════════════════
+   BROADCAST SCHEDULE — episode log page
+   ══════════════════════════════════════════════════════════ */
+.sched-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.sched-row:last-child { border-bottom: none; }
+.sched-row.aired { opacity: 0.45; }
+.sched-row.tonight {
+  background: rgba(95, 255, 194, 0.06);
+  border-left: 3px solid var(--mint);
+}
+.sched-date {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--mint-dim);
+  width: 110px;
+  flex-shrink: 0;
+}
+.sched-title { font-size: 0.88rem; font-weight: 600; flex: 1; }
+.sched-chip {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 3px 9px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.sched-chip.tonight {
+  color: var(--mint);
+  border-color: rgba(95, 255, 194, 0.5);
+  animation: bb-blink 1.4s step-end infinite;
+}
+.sched-chip.aired { color: var(--muted); }
