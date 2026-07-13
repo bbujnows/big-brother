@@ -31,22 +31,28 @@
           "type": "safety"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 1)",
           "houseguestId": "hg_taylor_brown",
           "points": -3,
-          "description": "Nominated for eviction (Week 1)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 1)",
           "houseguestId": "hg_yash_patel",
           "points": -3,
-          "description": "Nominated for eviction (Week 1)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 1)",
           "houseguestId": "hg_mallory_aurichio",
           "points": -3,
-          "description": "Nominated for eviction (Week 1)"
+          "type": "nominated"
+        },
+        {
+          "type": "hoh",
+          "houseguestId": "hg_dee_valladares",
+          "points": 10,
+          "description": "Won Head of Household (Week 1)"
         }
       ],
       "week": 1
@@ -178,22 +184,22 @@
     {
       "age": 24,
       "bio": "Fun, outgoing and energetic; will lean on social game, athleticism and confidence. People may assume she's an airhead — a major misconception. Plans to hide how smart she is, including not telling the full truth about her job. Has a side that gets a little villainous when push comes to shove — wants to crush enemies with 'logic.'",
+      "events": [
+        {
+          "addedAt": "2026-07-13T15:03:29.811665+00:00",
+          "description": "Nominated for eviction (Week 1)",
+          "points": -3,
+          "type": "nominated",
+          "week": 1
+        }
+      ],
       "hometown": "Washington Township, NJ",
       "id": "hg_mallory_aurichio",
       "name": "Mallory Aurichio",
       "occupation": "Rocket scientist",
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
-      "status": "active",
-      "events": [
-        {
-          "week": 1,
-          "type": "nominated",
-          "points": -3,
-          "description": "Nominated for eviction (Week 1)",
-          "addedAt": "2026-07-13T15:03:29.811665+00:00"
-        }
-      ]
+      "status": "active"
     },
     {
       "age": 24,
@@ -242,22 +248,22 @@
     {
       "age": 27,
       "bio": "Watched BB since she was a little girl; bringing realness, light and relatability. Strategy: the 'Big B Blowout' — a three-part team approach with floaters and two tethered teams moving votes and comps. Social game is her biggest strength; likable to the young ones, an 'old soul' to the older ones. Looks sweet and innocent, but she's a hero coming out of a villain era — and may need to go back in.",
+      "events": [
+        {
+          "addedAt": "2026-07-13T15:03:29.810666+00:00",
+          "description": "Nominated for eviction (Week 1)",
+          "points": -3,
+          "type": "nominated",
+          "week": 1
+        }
+      ],
       "hometown": "Deerfield Beach, FL",
       "id": "hg_taylor_brown",
       "name": "Taylor Brown",
       "occupation": "Elementary school counselor",
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
-      "status": "active",
-      "events": [
-        {
-          "week": 1,
-          "type": "nominated",
-          "points": -3,
-          "description": "Nominated for eviction (Week 1)",
-          "addedAt": "2026-07-13T15:03:29.810666+00:00"
-        }
-      ]
+      "status": "active"
     },
     {
       "age": 52,
@@ -274,20 +280,39 @@
     {
       "age": 24,
       "bio": "Funny, smart and fresh — feels 'born for this.' A casual viewer, secretly a nerd with a hidden talent for mazes. May lie about being a financial analyst. Brushes off conflict aimed at him, but if conflict breaks out between others, he'll get involved and look for opportunity. Jokes his weakness is a hairdresser — a 5'4\" brunette who cuts hair could make him throw his game away.",
+      "events": [
+        {
+          "addedAt": "2026-07-13T15:03:29.811665+00:00",
+          "description": "Nominated for eviction (Week 1)",
+          "points": -3,
+          "type": "nominated",
+          "week": 1
+        }
+      ],
       "hometown": "Monroe Township, NJ",
       "id": "hg_yash_patel",
       "name": "Yash Patel",
       "occupation": "Financial analyst",
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
+      "status": "active"
+    },
+    {
+      "age": 29,
+      "bio": "Winner of Survivor 45. Julie's time-travel twist pulled her into the BB28 house at the end of premiere night as the seventeenth houseguest, replacing Rachel Reilly. Undrafted — her points are tracked for the season but don't count toward any team.",
+      "hometown": "Miami, FL",
+      "id": "hg_dee_valladares",
+      "name": "Dee Valladares",
+      "occupation": "Entrepreneur",
+      "photo": "photos/dee.png",
       "status": "active",
       "events": [
         {
           "week": 1,
-          "type": "nominated",
-          "points": -3,
-          "description": "Nominated for eviction (Week 1)",
-          "addedAt": "2026-07-13T15:03:29.811665+00:00"
+          "type": "hoh",
+          "points": 10,
+          "description": "Won Head of Household (Week 1)",
+          "addedAt": "2026-07-13T21:10:34.074077+00:00"
         }
       ]
     }
