@@ -446,9 +446,19 @@
             <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">Rap Sheets</div>
             ${data.owners.map(o => {
               const r = records[o.id];
-              return `<div style="display:flex;flex-wrap:wrap;gap:2px 10px;justify-content:space-between;padding:5px 0;font-size:.72rem;font-family:var(--mono);">
-                <span style="color:${o.color};font-weight:700;">${o.name}</span>
-                <span style="color:var(--muted);text-align:right;">🎯${r.fired} fired · 🩸${r.taken} taken · 🛟${r.saves} saved · ⚰️${r.kills} evicted · 🛡️${r.rescues} rescued · 🤡${r.ownGoals} own-goals</span>
+              const stats = [
+                ['🎯', r.fired,    'fired',     'Shots fired — your HOH put a rival team&#39;s player on the block'],
+                ['🩸', r.taken,    'taken',     'Shots taken — a rival&#39;s HOH put your player on the block'],
+                ['⚰️', r.kills,    'evicted',   'Eliminations — a rival&#39;s player was evicted during your HOH&#39;s week'],
+                ['🛟', r.saves,    'saved',     'Bailouts — your veto winner pulled a rival&#39;s player off the block'],
+                ['🛡️', r.rescues,  'rescued',   'Team rescues — your veto winner pulled your own teammate off the block'],
+                ['🤡', r.ownGoals, 'own-goals', 'Own-goals — your HOH nominated your own player, or your player was evicted during your own HOH&#39;s week']
+              ];
+              return `<div style="padding:6px 0;font-family:var(--mono);">
+                <div style="color:${o.color};font-weight:700;font-size:.72rem;">${o.name}</div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px 12px;margin-top:4px;font-size:.7rem;color:var(--muted);">
+                  ${stats.map(([icon, n, label, def]) => `<span title="${def}" style="cursor:help;white-space:nowrap;">${icon} ${n} ${label}</span>`).join('')}
+                </div>
               </div>`;
             }).join('')}
           </div>
