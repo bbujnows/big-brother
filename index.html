@@ -462,9 +462,11 @@
             </div>` : `
             <div style="text-align:center;padding:14px 0;color:var(--muted);font-size:.8rem;">No feuds yet. The house is peaceful — it won't last.</div>`}
           ${pairs.map(p => `
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-lt,rgba(255,255,255,0.04));font-size:.78rem;">
-              <span>${dot(p.a)}${p.a.name} <span style="color:var(--muted)">vs</span> ${dot(p.b)}${p.b.name}</span>
-              <strong style="color:${p.n > 0 ? 'var(--rec)' : 'var(--muted)'}">${p.n}</strong>
+            <div style="display:grid;grid-template-columns:7.5em 2em 1fr auto;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-lt,rgba(255,255,255,0.04));font-size:.78rem;">
+              <span>${dot(p.a)}${p.a.name}</span>
+              <span style="color:var(--muted);text-align:center;">vs</span>
+              <span>${dot(p.b)}${p.b.name}</span>
+              <strong style="text-align:right;color:${p.n > 0 ? 'var(--rec)' : 'var(--muted)'}">${p.n}</strong>
             </div>`).join('')}
           <div style="margin-top:14px;">
             <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">Rap Sheets</div>
