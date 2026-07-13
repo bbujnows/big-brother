@@ -2,7 +2,9 @@ name: Scrape BB28 Scores
 
 on:
   schedule:
-    # Runs at 2am ET (6am UTC) daily during season — catches Wed/Thu/Sun episodes
+    # 10:35pm ET (2:35am UTC next day) — right after East Coast episodes end
+    - cron: '35 2 * * *'
+    # 2am ET (6am UTC) daily backstop — catches late Wikipedia edits
     - cron: '0 6 * * *'
   workflow_dispatch:  # Manual trigger from GitHub Actions tab
 

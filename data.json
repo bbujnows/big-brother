@@ -1,329 +1,386 @@
 {
-  "season": 28,
-  "premiereDate": "2026-07-09",
-  "lastUpdated": "2026-07-10",
+  "currentPickIndex": 16,
   "currentWeek": 0,
-  "draftStatus": "open",
   "draftOrder": [
+    "brandon",
     "brittany",
     "vicky",
-    "brandon",
     "melissa"
   ],
-  "currentPickIndex": 5,
-  "owners": [
+  "draftStatus": "complete",
+  "episodes": [
     {
-      "id": "brittany",
-      "name": "Brittany",
-      "color": "#ff6b9d"
-    },
-    {
-      "id": "brandon",
-      "name": "Brandon",
-      "color": "#4ecdc4"
-    },
-    {
-      "id": "vicky",
-      "name": "Vicky",
-      "color": "#ffd93d"
-    },
-    {
-      "id": "melissa",
-      "name": "Melissa",
-      "color": "#a78bfa"
+      "airDate": "2026-07-09",
+      "events": [
+        {
+          "description": "Won safety — 1988 mall comp (premiere)",
+          "houseguestId": "hg_rome_seymour",
+          "points": 3,
+          "type": "safety"
+        },
+        {
+          "description": "Won safety — 2018 Fiji jungle comp (premiere)",
+          "houseguestId": "hg_chuk_anyanwu",
+          "points": 3,
+          "type": "safety"
+        },
+        {
+          "description": "Won safety — 2010 Vegas slushy comp (premiere)",
+          "houseguestId": "hg_jason_de_puy",
+          "points": 3,
+          "type": "safety"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_taylor_brown",
+          "points": -3,
+          "description": "Nominated for eviction (Week 1)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_yash_patel",
+          "points": -3,
+          "description": "Nominated for eviction (Week 1)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_mallory_aurichio",
+          "points": -3,
+          "description": "Nominated for eviction (Week 1)"
+        }
+      ],
+      "week": 1
     }
   ],
   "houseguests": [
     {
+      "age": 24,
+      "bio": "High-energy and expects to make close friendships in the house. Plans to bring fun, strong morals and 'chitter-chatter' to Season 28, while noting people sometimes underestimate her as 'ditzy' or 'air-heady.'",
+      "currentCity": "Chicago, IL",
+      "hometown": "Alton, IL",
       "id": "hg_ashley_trail",
       "name": "Ashley Trail",
-      "age": 24,
-      "hometown": "Alton, IL",
-      "currentCity": "Chicago, IL",
       "occupation": "Bartender",
-      "bio": "High-energy and expects to make close friendships in the house. Plans to bring fun, strong morals and 'chitter-chatter' to Season 28, while noting people sometimes underestimate her as 'ditzy' or 'air-heady.'",
+      "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
-      "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 27,
+      "bio": "Has watched BB since he was 8 and applied for years. Charming, spicy and social — strategy is becoming everyone's best friend. At 6'6\" he's often underestimated and thinks the game could be a 'breeze.' Admits his mouth can get ahead of his brain; could become a villain by smiling in someone's face while planning to stab them in the back. Wears his emotions on his sleeve.",
+      "currentCity": "Austin, TX",
+      "hometown": "Benton, AR",
       "id": "hg_barrett_pfeiffer",
       "name": "Barrett Pfeiffer",
-      "age": 27,
-      "hometown": "Benton, AR",
-      "currentCity": "Austin, TX",
       "occupation": "Jumbotron engineer",
-      "bio": "Has watched BB since he was 8 and applied for years. Charming, spicy and social — strategy is becoming everyone's best friend. At 6'6\" he's often underestimated and thinks the game could be a 'breeze.' Admits his mouth can get ahead of his brain; could become a villain by smiling in someone's face while planning to stab them in the back. Wears his emotions on his sleeve.",
+      "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
-      "status": "active",
-      "ownerId": "melissa",
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 27,
+      "bio": "Fun, easygoing and bubbly; plans a strong social game. A first-generation immigrant who believes he can talk to anyone. Strategy: win over the women first, build trust, make people feel like he's 'one of us.' People may assume he's conceited, but he's 'super chill.' Open to a showmance but would hate to be stuck in one. Handles conflict straight-up.",
+      "events": [
+        {
+          "addedAt": "2026-07-10T23:05:55.238268+00:00",
+          "description": "Won safety — 2018 Fiji jungle comp (premiere)",
+          "points": 3,
+          "type": "safety",
+          "week": 1
+        }
+      ],
+      "hometown": "Dallas, TX",
       "id": "hg_chuk_anyanwu",
       "name": "Chuk Anyanwu",
-      "age": 27,
-      "hometown": "Dallas, TX",
-      "currentCity": null,
       "occupation": "Supply chain analyst",
-      "bio": "Fun, easygoing and bubbly; plans a strong social game. A first-generation immigrant who believes he can talk to anyone. Strategy: win over the women first, build trust, make people feel like he's 'one of us.' People may assume he's conceited, but he's 'super chill.' Open to a showmance but would hate to be stuck in one. Handles conflict straight-up.",
+      "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
-      "status": "active",
-      "ownerId": "brandon",
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 22,
+      "bio": "Outgoing, fun and unpredictable; watched BB since he was 8. Plans to make friends while knowing when to cut them. Viewers may see a 'beach bum without a brain,' but he graduated summa cum laude. Biggest strength: connecting with people; biggest weakness: his 'big fat mouth.' Expects to play from the shadows — and jokes the house may be rocking the 'Drewth' haircut by season's end.",
+      "hometown": "Temecula, CA",
       "id": "hg_drew_campbell",
       "name": "Drew Campbell",
-      "age": 22,
-      "hometown": "Temecula, CA",
-      "currentCity": null,
       "occupation": "Surgical dental assistant",
-      "bio": "Outgoing, fun and unpredictable; watched BB since he was 8. Plans to make friends while knowing when to cut them. Viewers may see a 'beach bum without a brain,' but he graduated summa cum laude. Biggest strength: connecting with people; biggest weakness: his 'big fat mouth.' Expects to play from the shadows — and jokes the house may be rocking the 'Drewth' haircut by season's end.",
+      "ownerId": "brandon",
       "photo": "photos/drew.jpg",
-      "status": "active",
-      "ownerId": "vicky",
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 29,
+      "bio": "Outgoing, bubbly and fun — but a new watcher, not a longtime fan. Believes she can win with strategy, intelligence and physical ability. Plan: listen, make friends fast, be everyone's friend early, then turn up the pressure. People may find her intimidating, but she's a bubbly non-stop talker. Biggest strength: her heart and handling conflict well.",
+      "currentCity": "Wildwood, MO",
+      "hometown": "Neosho, MO",
       "id": "hg_haley_thogmartin",
       "name": "Haley Thogmartin",
-      "age": 29,
-      "hometown": "Neosho, MO",
-      "currentCity": "Wildwood, MO",
       "occupation": "Telemedicine executive",
-      "bio": "Outgoing, bubbly and fun — but a new watcher, not a longtime fan. Believes she can win with strategy, intelligence and physical ability. Plan: listen, make friends fast, be everyone's friend early, then turn up the pressure. People may find her intimidating, but she's a bubbly non-stop talker. Biggest strength: her heart and handling conflict well.",
+      "ownerId": "melissa",
       "photo": "photos/haley.jpg",
-      "status": "active",
-      "ownerId": "brittany",
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 35,
+      "bio": "Known by the stage name Salina EsTitties — appeared on RuPaul's Drag Race Season 15 and All Stars Season 11. A low-key BB superfan since Season 16. Ready to ruffle feathers and plans to take a page from Taylor Hale's playbook.",
+      "currentCity": "Los Angeles, CA",
+      "events": [
+        {
+          "addedAt": "2026-07-10T23:05:55.238268+00:00",
+          "description": "Won safety — 2010 Vegas slushy comp (premiere)",
+          "points": 3,
+          "type": "safety",
+          "week": 1
+        }
+      ],
+      "hometown": "San Francisco, CA",
       "id": "hg_jason_de_puy",
       "name": "Jason De Puy",
-      "age": 35,
-      "hometown": "San Francisco, CA",
-      "currentCity": "Los Angeles, CA",
       "occupation": "Professional drag queen",
-      "bio": "Known by the stage name Salina EsTitties — appeared on RuPaul's Drag Race Season 15 and All Stars Season 11. A low-key BB superfan since Season 16. Ready to ruffle feathers and plans to take a page from Taylor Hale's playbook.",
+      "ownerId": "vicky",
       "photo": "photos/jason.jpg",
-      "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 32,
+      "bio": "Full name Kamuela 'Kamu' Kirk. Battle-tested from MMA — 11 or 12 surgeries from fighting. Plans a strong social game plus comp wins, but doesn't want to be pegged as a physical threat right away; may hide that he's fought at the sport's highest level and that his family owns his training facility. People may assume he's mean, but he cares about people. Possible weakness: too trusting.",
+      "hometown": "Phoenix, AZ",
       "id": "hg_kamu_kirk",
       "name": "Kamu Kirk",
-      "age": 32,
-      "hometown": "Phoenix, AZ",
-      "currentCity": null,
       "occupation": "MMA fighter and coach",
-      "bio": "Full name Kamuela 'Kamu' Kirk. Battle-tested from MMA — 11 or 12 surgeries from fighting. Plans a strong social game plus comp wins, but doesn't want to be pegged as a physical threat right away; may hide that he's fought at the sport's highest level and that his family owns his training facility. People may assume he's mean, but he cares about people. Possible weakness: too trusting.",
+      "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
-      "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 57,
+      "bio": "Goes by 'Lala' — 'fantabulistic fantastic,' watching BB since Season 2. Wants to become the oldest winner in BB history; social game plus physical play (she's competed in bodybuilding). Divorced mother of four; her weakness may be caring too much. Open to a showmance. Was part of Sounds of Blackness and is now tour coordinator for Kool & the Gang — Kool is her uncle.",
+      "currentCity": "Maplewood, NJ",
+      "hometown": "Kankakee, IL",
       "id": "hg_latrice_verrett",
       "name": "LaTrice Verrett",
-      "age": 57,
-      "hometown": "Kankakee, IL",
-      "currentCity": "Maplewood, NJ",
       "occupation": "Boutique salesperson",
-      "bio": "Goes by 'Lala' — 'fantabulistic fantastic,' watching BB since Season 2. Wants to become the oldest winner in BB history; social game plus physical play (she's competed in bodybuilding). Divorced mother of four; her weakness may be caring too much. Open to a showmance. Was part of Sounds of Blackness and is now tour coordinator for Kool & the Gang — Kool is her uncle.",
+      "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
-      "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 25,
+      "bio": "Outgoing, positive and funny — often underestimated. Passed the bar at 23 (youngest in Hawaii, she says). Plans to be both a social player and comp threat; people see sweet and kind but don't realize she's athletic (gym twice a day, sings in a luau show). Open to a showmance if it doesn't hurt her game. Her father sang 'Nothing's Gonna Change My Love for You' in the '80s.",
+      "hometown": "Honolulu, HI",
       "id": "hg_lyric_medeiros",
       "name": "Lyric Medeiros",
-      "age": 25,
-      "hometown": "Honolulu, HI",
-      "currentCity": null,
       "occupation": "Attorney",
-      "bio": "Outgoing, positive and funny — often underestimated. Passed the bar at 23 (youngest in Hawaii, she says). Plans to be both a social player and comp threat; people see sweet and kind but don't realize she's athletic (gym twice a day, sings in a luau show). Open to a showmance if it doesn't hurt her game. Her father sang 'Nothing's Gonna Change My Love for You' in the '80s.",
+      "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
-      "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 24,
+      "bio": "Fun, outgoing and energetic; will lean on social game, athleticism and confidence. People may assume she's an airhead — a major misconception. Plans to hide how smart she is, including not telling the full truth about her job. Has a side that gets a little villainous when push comes to shove — wants to crush enemies with 'logic.'",
+      "hometown": "Washington Township, NJ",
       "id": "hg_mallory_aurichio",
       "name": "Mallory Aurichio",
-      "age": 24,
-      "hometown": "Washington Township, NJ",
-      "currentCity": null,
       "occupation": "Rocket scientist",
-      "bio": "Fun, outgoing and energetic; will lean on social game, athleticism and confidence. People may assume she's an airhead — a major misconception. Plans to hide how smart she is, including not telling the full truth about her job. Has a side that gets a little villainous when push comes to shove — wants to crush enemies with 'logic.'",
+      "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "ownerId": "melissa",
-      "weekEvicted": null,
-      "events": []
+      "events": [
+        {
+          "week": 1,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 1)",
+          "addedAt": "2026-07-13T15:03:29.811665+00:00"
+        }
+      ]
     },
     {
+      "age": 24,
+      "bio": "Ambitious, bold and funny — watched BB since she was 'in the womb.' Strategy: align with the right people and let others underestimate the 'dumb blonde sorority girl' look; she's intelligent and quick-witted. Won't reveal her real job — she'll say she's a waitress (also true). Not interested in a showmance; sensitivity is a weakness.",
+      "currentCity": "Maricopa, AZ",
+      "hometown": "Thornton, CO",
       "id": "hg_melody_morris",
       "name": "Melody Morris",
-      "age": 24,
-      "hometown": "Thornton, CO",
-      "currentCity": "Maricopa, AZ",
       "occupation": "Corporate game show host",
-      "bio": "Ambitious, bold and funny — watched BB since she was 'in the womb.' Strategy: align with the right people and let others underestimate the 'dumb blonde sorority girl' look; she's intelligent and quick-witted. Won't reveal her real job — she'll say she's a waitress (also true). Not interested in a showmance; sensitivity is a weakness.",
+      "ownerId": "melissa",
       "photo": "photos/melody.jpg",
-      "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 42,
+      "bio": "Survivor legend crossing over as a surprise premiere-night entrant — his first time playing Big Brother. Finished fourth on Survivor: Edge of Extinction (2019), falling in the fire-making challenge, then became the breakout star of Survivor 50: saved himself at back-to-back Tribal Councils and won a MrBeast coin flip that doubled the season's prize to $2 million, finishing seventh. A morning news anchor whose hometown declared an official 'Rick Devens Day' for his charity work with wheelchair sports and animal rescue.",
+      "hometown": "Macon, GA",
       "id": "hg_rick_devens",
       "name": "Rick Devens",
-      "age": 42,
-      "hometown": "Macon, GA",
-      "currentCity": null,
       "occupation": "News anchor",
-      "bio": "Survivor legend crossing over as a surprise premiere-night entrant — his first time playing Big Brother. Finished fourth on Survivor: Edge of Extinction (2019), falling in the fire-making challenge, then became the breakout star of Survivor 50: saved himself at back-to-back Tribal Councils and won a MrBeast coin flip that doubled the season's prize to $2 million, finishing seventh. A morning news anchor whose hometown declared an official 'Rick Devens Day' for his charity work with wheelchair sports and animal rescue.",
+      "ownerId": "brandon",
       "photo": "photos/rick.jpg",
-      "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 28,
+      "bio": "Real name Jack — friends call him Rome; his mom still calls him Jack. Bashful, extroverted, extremely excitable — wants to be seen as an alpha athlete, but he's also a nerd who collects trading cards. Goal: protect the 'betas and submissives' and be their warrior. Sees himself as a hero; others may see a villain because he talks trash. Extremely competitive and open to a showmance.",
+      "currentCity": "Delray Beach, FL",
+      "events": [
+        {
+          "addedAt": "2026-07-10T23:05:55.238268+00:00",
+          "description": "Won safety — 1988 mall comp (premiere)",
+          "points": 3,
+          "type": "safety",
+          "week": 1
+        }
+      ],
+      "hometown": "Traverse City, MI",
       "id": "hg_rome_seymour",
       "name": "Rome Seymour",
-      "age": 28,
-      "hometown": "Traverse City, MI",
-      "currentCity": "Delray Beach, FL",
       "occupation": "Pickleball coach",
-      "bio": "Real name Jack — friends call him Rome; his mom still calls him Jack. Bashful, extroverted, extremely excitable — wants to be seen as an alpha athlete, but he's also a nerd who collects trading cards. Goal: protect the 'betas and submissives' and be their warrior. Sees himself as a hero; others may see a villain because he talks trash. Extremely competitive and open to a showmance.",
+      "ownerId": "brittany",
       "photo": "photos/rome.jpg",
-      "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 27,
+      "bio": "Watched BB since she was a little girl; bringing realness, light and relatability. Strategy: the 'Big B Blowout' — a three-part team approach with floaters and two tethered teams moving votes and comps. Social game is her biggest strength; likable to the young ones, an 'old soul' to the older ones. Looks sweet and innocent, but she's a hero coming out of a villain era — and may need to go back in.",
+      "hometown": "Deerfield Beach, FL",
       "id": "hg_taylor_brown",
       "name": "Taylor Brown",
-      "age": 27,
-      "hometown": "Deerfield Beach, FL",
-      "currentCity": null,
       "occupation": "Elementary school counselor",
-      "bio": "Watched BB since she was a little girl; bringing realness, light and relatability. Strategy: the 'Big B Blowout' — a three-part team approach with floaters and two tethered teams moving votes and comps. Social game is her biggest strength; likable to the young ones, an 'old soul' to the older ones. Looks sweet and innocent, but she's a hero coming out of a villain era — and may need to go back in.",
+      "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "events": [
+        {
+          "week": 1,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 1)",
+          "addedAt": "2026-07-13T15:03:29.810666+00:00"
+        }
+      ]
     },
     {
+      "age": 52,
+      "bio": "Returning fan favorite from BB26 (2024), announced as a surprise entrant on premiere night. She won the very first HOH of her season, was nominated seven times and saved by veto three times on her way to a sixth-place finish, and landed in the top three for America's Favorite Player. Known for her fiery confrontations — including the infamous 'Crazy Eyes' blowup. A mother of four and grandmother of three who helps retirees find their forever homes; also ran The Amazing Race with her daughter Lexi.",
+      "currentCity": "Syracuse, UT",
+      "hometown": "Long Beach, CA",
       "id": "hg_angela_murray",
       "name": "Angela Murray",
-      "age": 52,
-      "hometown": "Long Beach, CA",
-      "currentCity": "Syracuse, UT",
       "occupation": "Real estate agent",
-      "bio": "Returning fan favorite from BB26 (2024), announced as a surprise entrant on premiere night. She won the very first HOH of her season, was nominated seven times and saved by veto three times on her way to a sixth-place finish, and landed in the top three for America's Favorite Player. Known for her fiery confrontations — including the infamous 'Crazy Eyes' blowup. A mother of four and grandmother of three who helps retirees find their forever homes; also ran The Amazing Race with her daughter Lexi.",
+      "ownerId": "brandon",
       "photo": "photos/angela.jpg",
-      "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "status": "active"
     },
     {
+      "age": 24,
+      "bio": "Funny, smart and fresh — feels 'born for this.' A casual viewer, secretly a nerd with a hidden talent for mazes. May lie about being a financial analyst. Brushes off conflict aimed at him, but if conflict breaks out between others, he'll get involved and look for opportunity. Jokes his weakness is a hairdresser — a 5'4\" brunette who cuts hair could make him throw his game away.",
+      "hometown": "Monroe Township, NJ",
       "id": "hg_yash_patel",
       "name": "Yash Patel",
-      "age": 24,
-      "hometown": "Monroe Township, NJ",
-      "currentCity": null,
       "occupation": "Financial analyst",
-      "bio": "Funny, smart and fresh — feels 'born for this.' A casual viewer, secretly a nerd with a hidden talent for mazes. May lie about being a financial analyst. Brushes off conflict aimed at him, but if conflict breaks out between others, he'll get involved and look for opportunity. Jokes his weakness is a hairdresser — a 5'4\" brunette who cuts hair could make him throw his game away.",
+      "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "ownerId": null,
-      "weekEvicted": null,
-      "events": []
+      "events": [
+        {
+          "week": 1,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 1)",
+          "addedAt": "2026-07-13T15:03:29.811665+00:00"
+        }
+      ]
     }
   ],
-  "episodes": [],
-  "scoring": {
-    "hoh": {
-      "label": "Head of Household Win",
-      "points": 10
+  "lastUpdated": "2026-07-13",
+  "owners": [
+    {
+      "color": "#ff6b9d",
+      "id": "brittany",
+      "name": "Brittany"
     },
-    "veto": {
-      "label": "Veto Win",
-      "points": 5
+    {
+      "color": "#4ecdc4",
+      "id": "brandon",
+      "name": "Brandon"
+    },
+    {
+      "color": "#ffd93d",
+      "id": "vicky",
+      "name": "Vicky"
+    },
+    {
+      "color": "#a78bfa",
+      "id": "melissa",
+      "name": "Melissa"
+    }
+  ],
+  "premiereDate": "2026-07-09",
+  "scoring": {
+    "afh": {
+      "label": "America's Favorite Houseguest",
+      "points": 20
     },
     "bbBlockbuster": {
       "label": "BB Blockbuster Win",
-      "points": 5
-    },
-    "wallHang": {
-      "label": "Wall Hang Win",
-      "points": 5
-    },
-    "otev": {
-      "label": "OTEV Win",
       "points": 5
     },
     "bbComics": {
       "label": "BB Comics Win",
       "points": 5
     },
-    "safety": {
-      "label": "Safety for the Week",
-      "points": 3
+    "first": {
+      "label": "Winner (1st Place)",
+      "points": 60
     },
-    "nominated": {
-      "label": "Nominated for Eviction",
-      "points": -3
-    },
-    "pickedVeto": {
-      "label": "Picked to Play in Veto",
-      "points": 2
-    },
-    "takenOffBlock": {
-      "label": "Taken Off Block by Someone Else",
-      "points": 5
+    "hoh": {
+      "label": "Head of Household Win",
+      "points": 10
     },
     "madeJury": {
       "label": "Made It to Jury",
       "points": 10
     },
+    "nominated": {
+      "label": "Nominated for Eviction",
+      "points": -3
+    },
+    "otev": {
+      "label": "OTEV Win",
+      "points": 5
+    },
+    "pickedVeto": {
+      "label": "Picked to Play in Veto",
+      "points": 2
+    },
     "resurrection": {
       "label": "Resurrection / Battle Back Win",
       "points": 15
     },
-    "first": {
-      "label": "Winner (1st Place)",
-      "points": 60
+    "safety": {
+      "label": "Safety for the Week",
+      "points": 3
     },
     "second": {
       "label": "Runner-Up (2nd Place)",
       "points": 40
     },
+    "takenOffBlock": {
+      "label": "Taken Off Block by Someone Else",
+      "points": 5
+    },
     "third": {
       "label": "3rd Place",
       "points": 20
     },
-    "afh": {
-      "label": "America's Favorite Houseguest",
-      "points": 20
+    "veto": {
+      "label": "Veto Win",
+      "points": 5
+    },
+    "wallHang": {
+      "label": "Wall Hang Win",
+      "points": 5
     }
-  }
+  },
+  "season": 28
 }

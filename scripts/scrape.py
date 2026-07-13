@@ -1,11 +1,21 @@
 """
 BB28 Wikipedia scraper.
-Reads data.json, fetches the Wikipedia season page, finds new weekly results,
-updates houseguest events and episode log, then writes data.json back.
+
+Fetches the Wikipedia season page, parses the results grid (weeks as COLUMNS,
+event types as rows), and writes new scoring events to the live Firebase
+database that the website reads. Also writes data.json as a versioned backup.
+
+Spoiler gate: Wikipedia editors fill in results from the live feeds BEFORE
+episodes air on CBS. Each event type only publishes once the episode that
+reveals it has finished airing (Wed/Thu/Sun cadence — see REVEAL_CADENCE).
+
+Usage:
+    python scripts/scrape.py            # scrape and publish
+    python scripts/scrape.py --dry-run  # show what would publish, write nothing
 """
 
 import json, re, sys
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 try:
@@ -16,56 +26,214 @@ except ImportError:
     sys.exit(1)
 
 DATA_FILE = Path(__file__).parent.parent / "data.json"
-
-SCORING = {
-    "hoh":           10,
-    "veto":           5,
-    "bbBlockbuster":  5,
-    "wallHang":       5,
-    "otev":           5,
-    "bbComics":       5,
-    "safety":         3,
-    "nominated":     -3,
-    "pickedVeto":     2,
-    "takenOffBlock":  5,
-    "madeJury":      10,
-    "resurrection":  15,
-    "first":         60,
-    "second":        40,
-    "third":         20,
-    "afh":           20,
-}
-
-# Wikipedia page for BB28 — update this URL once CBS announces the season
-WIKI_URLS = [
-    "https://en.wikipedia.org/wiki/Big_Brother_(American_season_28)",
-    "https://en.wikipedia.org/wiki/Big_Brother_28_(American_TV_series)",
-]
-
+FIREBASE_URL = "https://bb28-fantasy-default-rtdb.firebaseio.com/gameData.json"
+WIKI_URL = "https://en.wikipedia.org/wiki/Big_Brother_28_(American_season)"
 HEADERS = {"User-Agent": "BB28FantasyBot/1.0 (github.com/bbujnows/big-brother)"}
 
+# ── Spoiler gate configuration ────────────────────────────────────────────
+# BB28 runs July-September, entirely within Eastern Daylight Time (UTC-4).
+ET = timezone(timedelta(hours=-4))
+REVEAL_HOUR = (22, 5)  # an episode counts as aired at 10:05 PM ET that night
 
+# Week 1 broadcast dates; week N = these + 7*(N-1) days.
+WEEK1_DATES = {
+    "sun": date(2026, 7, 12),
+    "wed": date(2026, 7, 15),
+    "thu": date(2026, 7, 16),
+}
+
+# Which night of the cycle reveals each event type on CBS.
+# Best guess at BB28's cadence — adjust these as we observe the real pattern.
+REVEAL_CADENCE = {
+    "hoh":            "sun",  # HOH comp airs Sunday
+    "nominated":      "sun",  # nomination ceremony airs Sunday
+    "veto":           "wed",  # veto comp + ceremony air Wednesday
+    "takenOffBlock":  "wed",
+    "replacementNom": "wed",  # replacement nominee revealed at veto ceremony
+    "bbBlockbuster":  "thu",
+    "evicted":        "thu",  # live eviction Thursday
+}
+
+# Fallback points if a type is missing from the database's scoring config.
+SCORING_FALLBACK = {
+    "hoh": 10, "veto": 5, "bbBlockbuster": 5, "nominated": -3,
+    "takenOffBlock": 5, "safety": 3, "madeJury": 10,
+}
+
+
+def week_date(week, day_key):
+    return WEEK1_DATES[day_key] + timedelta(weeks=week - 1)
+
+
+def is_aired(week, event_type, now_et=None):
+    """Has the episode that reveals this event finished airing?"""
+    day_key = REVEAL_CADENCE.get(event_type, "thu")  # unknown types wait for Thursday (safest)
+    d = week_date(week, day_key)
+    reveal_at = datetime(d.year, d.month, d.day, *REVEAL_HOUR, tzinfo=ET)
+    now = now_et or datetime.now(ET)
+    return now >= reveal_at
+
+
+# ── Fetch ─────────────────────────────────────────────────────────────────
 def fetch_wiki():
-    for url in WIKI_URLS:
-        try:
-            r = requests.get(url, headers=HEADERS, timeout=15)
-            if r.status_code == 200:
-                print(f"Fetched: {url}")
-                return BeautifulSoup(r.text, "html.parser")
-        except Exception as e:
-            print(f"Failed {url}: {e}")
+    try:
+        r = requests.get(WIKI_URL, headers=HEADERS, timeout=20)
+        if r.status_code == 200:
+            print(f"Fetched: {WIKI_URL}")
+            return BeautifulSoup(r.text, "html.parser")
+        print(f"Wikipedia returned HTTP {r.status_code}")
+    except Exception as e:
+        print(f"Failed to fetch Wikipedia: {e}")
     return None
+
+
+def fetch_firebase():
+    r = requests.get(FIREBASE_URL, timeout=20)
+    r.raise_for_status()
+    return r.json()
+
+
+def push_firebase(data):
+    r = requests.put(FIREBASE_URL, json=data, timeout=20)
+    r.raise_for_status()
+
+
+# ── Table parsing (weeks as columns) ──────────────────────────────────────
+def expand_table(table):
+    """Expand a <table> into a 2D matrix of cells, resolving rowspan/colspan."""
+    grid = {}
+    for row_i, tr in enumerate(table.find_all("tr")):
+        col_i = 0
+        for cell in tr.find_all(["td", "th"]):
+            while (row_i, col_i) in grid:
+                col_i += 1
+            try:
+                rs = int(cell.get("rowspan") or 1)
+            except ValueError:
+                rs = 1
+            try:
+                cs = int(cell.get("colspan") or 1)
+            except ValueError:
+                cs = 1
+            for r in range(rs):
+                for c in range(cs):
+                    grid[(row_i + r, col_i + c)] = cell
+            col_i += cs
+    if not grid:
+        return []
+    n_rows = max(r for r, _ in grid) + 1
+    n_cols = max(c for _, c in grid) + 1
+    return [[grid.get((r, c)) for c in range(n_cols)] for r in range(n_rows)]
+
+
+def cell_text(cell):
+    if cell is None:
+        return ""
+    t = cell.get_text("\n", strip=True)
+    return re.sub(r"\[[^\]]*\]", "", t).strip()  # drop footnote refs like [a]
+
+
+PLACEHOLDERS = {"none", "no nominations", "no nominees", "not used", "n/a", "tbd", "tba", ""}
+
+
+def cell_names(cell):
+    """Split a grid cell into individual houseguest names."""
+    text = cell_text(cell)
+    names = []
+    for part in re.split(r"[\n,]| & | and ", text):
+        part = re.sub(r"\s*\d[\d\s:to&–—-]*$", "", part).strip()  # strip vote tallies
+        part = part.strip("()")
+        if part and part.lower() not in PLACEHOLDERS:
+            names.append(part)
+    return names
+
+
+def find_results_table(soup):
+    """Find the voting-history-style grid: rows labeled HOH/Nominations/etc."""
+    for table in soup.find_all("table", class_=re.compile(r"wikitable", re.I)):
+        matrix = expand_table(table)
+        labels = " | ".join(cell_text(row[0]).lower() for row in matrix if row)
+        if "head of household" in labels and "evicted" in labels:
+            return matrix
+    return None
+
+
+ROW_TYPES = [
+    (re.compile(r"head of household", re.I), "hoh"),
+    (re.compile(r"nominations.*initial|initial.*nominations", re.I), "noms_initial"),
+    (re.compile(r"nominations.*final|final.*nominations", re.I), "noms_final"),
+    (re.compile(r"veto", re.I), "veto"),
+    (re.compile(r"block\s*buster", re.I), "blockbuster"),
+    (re.compile(r"^evicted", re.I), "evicted"),
+]
+
+
+def parse_weeks(matrix):
+    """Return {week_number: {category: set(names)}} from the expanded grid."""
+    # Map column index -> week number from the header row containing "Week N" cells
+    col_week = {}
+    for row in matrix:
+        hits = {}
+        for i, cell in enumerate(row):
+            m = re.search(r"week\s*(\d+)", cell_text(cell), re.I)
+            if m:
+                hits[i] = int(m.group(1))
+        if len(set(hits.values())) >= 2:
+            col_week = hits
+            break
+    if not col_week:
+        print("Could not find a 'Week N' header row in the results table.")
+        return {}
+
+    weeks = {}
+    seen_noms_plain = False
+    for row in matrix:
+        label = re.sub(r"\s+", " ", cell_text(row[0]))
+        category = None
+        for pattern, cat in ROW_TYPES:
+            if pattern.search(label):
+                category = cat
+                break
+        # A row labeled just "Nominations" (no initial/final split) counts as initial
+        if category is None and re.fullmatch(r"nominations?", label, re.I) and not seen_noms_plain:
+            category = "noms_initial"
+            seen_noms_plain = True
+        if category is None:
+            continue
+        for i, cell in enumerate(row):
+            wk = col_week.get(i)
+            if wk is None or cell is row[0]:
+                continue
+            bucket = weeks.setdefault(wk, {})
+            bucket.setdefault(category, set()).update(cell_names(cell))
+    return weeks
+
+
+# ── Roster matching / event helpers ───────────────────────────────────────
+def _norm(s):
+    return re.sub(r"[^a-z]", "", s.lower())
 
 
 def find_guest_by_name(data, name):
-    name_clean = name.strip().lower()
+    """Match a scraped name against the roster by full name, first or last name.
+    Returns None on no match or an ambiguous match."""
+    n = _norm(name)
+    if not n:
+        return None
+    matches = []
     for hg in data["houseguests"]:
-        if hg["name"].lower() == name_clean:
-            return hg
-        # Partial match on first name
-        if hg["name"].lower().split()[0] == name_clean.split()[0]:
-            return hg
-    return None
+        tokens = hg["name"].split()
+        candidates = {_norm(hg["name"])} | {_norm(t) for t in tokens}
+        if n in candidates:
+            matches.append(hg)
+    return matches[0] if len(matches) == 1 else None
+
+
+def get_points(data, event_type):
+    cfg = (data.get("scoring") or {}).get(event_type)
+    if cfg and isinstance(cfg.get("points"), (int, float)):
+        return cfg["points"]
+    return SCORING_FALLBACK.get(event_type, 0)
 
 
 def already_has_event(hg, week, event_type):
@@ -75,122 +243,94 @@ def already_has_event(hg, week, event_type):
     return False
 
 
-def add_event(data, hg, week, event_type, description, air_date=""):
+def add_event(data, hg, week, event_type, description):
     if already_has_event(hg, week, event_type):
         return False
-    pts = SCORING.get(event_type, 0)
-    ev = {"week": week, "type": event_type, "points": pts,
-          "description": description, "addedAt": str(date.today())}
-    hg.setdefault("events", []).append(ev)
+    pts = get_points(data, event_type)
+    hg["events"] = hg.get("events") or []
+    hg["events"].append({
+        "week": week, "type": event_type, "points": pts,
+        "description": description, "addedAt": datetime.now(timezone.utc).isoformat(),
+    })
 
-    # Add to episodes log
-    ep = next((e for e in data["episodes"] if e["week"] == week), None)
+    data["episodes"] = data.get("episodes") or []
+    ep = next((e for e in data["episodes"] if e.get("week") == week), None)
     if not ep:
-        ep = {"week": week, "airDate": air_date, "events": []}
+        ep = {"week": week, "airDate": str(week_date(week, "sun")), "events": []}
         data["episodes"].append(ep)
         data["episodes"].sort(key=lambda x: x["week"])
-    ep.setdefault("events", []).append({
-        "type": event_type, "houseguestId": hg["id"], "points": pts, "description": description
+    ep["events"] = ep.get("events") or []
+    ep["events"].append({
+        "type": event_type, "houseguestId": hg["id"], "points": pts, "description": description,
     })
     return True
 
 
-def parse_competition_tables(soup, data):
-    """
-    Wikipedia BB pages typically have a weekly summary table with columns:
-    Week | Airdate | HOH | Nominees | POV | POV Used | Evicted
-    Column names vary by season — we try common patterns.
-    """
-    changes = 0
-    tables = soup.find_all("table", class_=re.compile(r"wikitable", re.I))
+# ── Apply scraped results ─────────────────────────────────────────────────
+def apply_week(data, week, results, published, held, unmatched):
+    def resolve(names):
+        out = []
+        for name in names:
+            hg = find_guest_by_name(data, name)
+            if hg:
+                out.append(hg)
+            else:
+                unmatched.add(name)
+        return out
 
-    for table in tables:
-        headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
-        if not any(h in headers for h in ["hoh", "head of household", "head of\nhousehold"]):
-            continue
+    def emit(names, event_type, desc_fn, gate_type=None):
+        gate = gate_type or event_type
+        if not names:
+            return
+        if not is_aired(week, gate):
+            held.append((week, gate, len(names)))
+            return
+        for hg in resolve(names):
+            if add_event(data, hg, week, event_type, desc_fn(hg)):
+                pts = get_points(data, event_type)
+                published.append(f"Week {week}: {hg['name']} {'+' if pts >= 0 else ''}{pts} ({event_type})")
 
-        # Map column indices
-        col = {}
-        for i, h in enumerate(headers):
-            if "week" in h:               col["week"]     = col.get("week", i)
-            if "hoh" in h or "head" in h: col["hoh"]      = i
-            if "nomin" in h:              col["nominated"] = i
-            if "pov" in h or "veto" in h: col["veto"]     = col.get("veto", i)
-            if "evict" in h:              col["evicted"]   = i
-            if "air" in h or "date" in h: col["date"]      = col.get("date", i)
+    emit(results.get("hoh", ()), "hoh", lambda h: f"Won Head of Household (Week {week})")
+    emit(results.get("noms_initial", ()), "nominated", lambda h: f"Nominated for eviction (Week {week})")
+    emit(results.get("veto", ()), "veto", lambda h: f"Won Power of Veto (Week {week})")
+    emit(results.get("blockbuster", ()), "bbBlockbuster", lambda h: f"Won BB Blockbuster (Week {week})")
 
-        if "hoh" not in col:
-            continue
+    # Compare initial vs final nominations: saved / replacement nominees
+    initial = results.get("noms_initial") or set()
+    final = results.get("noms_final") or set()
+    if final:
+        init_ids = {h["id"]: h for h in resolve(initial)}
+        final_ids = {h["id"]: h for h in resolve(final)}
+        saved = [h for hid, h in init_ids.items() if hid not in final_ids]
+        replacements = [h for hid, h in final_ids.items() if hid not in init_ids]
+        emit([h["name"] for h in saved], "takenOffBlock",
+             lambda h: f"Taken off the block (Week {week})")
+        emit([h["name"] for h in replacements], "nominated",
+             lambda h: f"Named replacement nominee (Week {week})", gate_type="replacementNom")
 
-        for row in table.find_all("tr")[1:]:
-            cells = row.find_all(["td", "th"])
-            if len(cells) < 3:
-                continue
-
-            def cell_text(key):
-                if key not in col or col[key] >= len(cells):
-                    return ""
-                return cells[col[key]].get_text(separator=", ", strip=True)
-
-            # Determine week number
-            week_str = cell_text("week").strip()
-            week_num = None
-            m = re.search(r"\d+", week_str)
-            if m:
-                week_num = int(m.group())
-            if not week_num:
-                continue
-
-            air_date = cell_text("date")
-
-            # HOH
-            hoh_name = cell_text("hoh").split(",")[0].strip()
-            hoh_hg = find_guest_by_name(data, hoh_name)
-            if hoh_hg:
-                if add_event(data, hoh_hg, week_num, "hoh", f"Won Head of Household (Week {week_num})", air_date):
-                    changes += 1
-
-            # Nominees
-            nom_text = cell_text("nominated")
-            if nom_text:
-                for name in re.split(r",|&|and", nom_text):
-                    name = name.strip()
-                    hg = find_guest_by_name(data, name)
-                    if hg:
-                        if add_event(data, hg, week_num, "nominated", f"Nominated for eviction (Week {week_num})", air_date):
-                            changes += 1
-
-            # Veto winner (first name listed, or just the POV cell)
-            veto_text = cell_text("veto")
-            if veto_text:
-                veto_name = veto_text.split(",")[0].strip()
-                veto_hg = find_guest_by_name(data, veto_name)
-                if veto_hg:
-                    if add_event(data, veto_hg, week_num, "veto", f"Won Power of Veto (Week {week_num})", air_date):
-                        changes += 1
-
-            # Evicted
-            evicted_text = cell_text("evicted")
-            if evicted_text:
-                evicted_name = evicted_text.split(",")[0].strip()
-                evicted_hg = find_guest_by_name(data, evicted_name)
-                if evicted_hg and evicted_hg.get("status") == "active":
-                    evicted_hg["status"] = "evicted"
-                    evicted_hg["weekEvicted"] = week_num
-
-    return changes
+    # Evictions: status change only (no points)
+    evicted = results.get("evicted") or set()
+    if evicted:
+        if not is_aired(week, "evicted"):
+            held.append((week, "evicted", len(evicted)))
+        else:
+            for hg in resolve(evicted):
+                if hg.get("status") == "active":
+                    hg["status"] = "evicted"
+                    hg["weekEvicted"] = week
+                    published.append(f"Week {week}: {hg['name']} marked evicted")
 
 
 def main():
-    if not DATA_FILE.exists():
-        print(f"data.json not found at {DATA_FILE}")
+    dry_run = "--dry-run" in sys.argv
+
+    try:
+        data = fetch_firebase()
+    except Exception as e:
+        print(f"Could not read Firebase: {e}")
         sys.exit(1)
-
-    with open(DATA_FILE) as f:
-        data = json.load(f)
-
-    if not data.get("houseguests"):
-        print("No houseguests in data.json yet — nothing to update.")
+    if not data or not data.get("houseguests"):
+        print("No houseguests in Firebase data — nothing to update.")
         return
 
     soup = fetch_wiki()
@@ -198,15 +338,42 @@ def main():
         print("Could not fetch Wikipedia page. Skipping update.")
         return
 
-    changes = parse_competition_tables(soup, data)
-    data["lastUpdated"] = str(date.today())
+    matrix = find_results_table(soup)
+    if not matrix:
+        print("No results grid on the Wikipedia page yet. Skipping update.")
+        return
 
-    if changes > 0:
-        with open(DATA_FILE, "w") as f:
-            json.dump(data, f, indent=2)
-        print(f"Updated data.json with {changes} new event(s).")
-    else:
-        print("No new events found.")
+    weeks = parse_weeks(matrix)
+    if not weeks:
+        print("Results grid found but no week columns parsed. Skipping update.")
+        return
+    print(f"Parsed results grid: weeks {sorted(weeks)}")
+
+    published, held, unmatched = [], [], set()
+    for week in sorted(weeks):
+        apply_week(data, week, weeks[week], published, held, unmatched)
+
+    for line in published:
+        print(f"PUBLISH  {line}")
+    # Held items are logged WITHOUT names so even the Action log stays spoiler-free
+    for week, gate, count in held:
+        print(f"HELD     Week {week}: {count} {gate} result(s) — episode hasn't aired yet")
+    for name in sorted(unmatched):
+        print(f"UNMATCHED name on Wikipedia (not on our roster): {name}")
+
+    if not published:
+        print("No new aired events to publish.")
+        return
+
+    if dry_run:
+        print(f"DRY RUN — {len(published)} event(s) would publish. Nothing written.")
+        return
+
+    data["lastUpdated"] = str(date.today())
+    push_firebase(data)
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    print(f"Published {len(published)} update(s) to Firebase; data.json backup written.")
 
 
 if __name__ == "__main__":
