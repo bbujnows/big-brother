@@ -73,6 +73,13 @@
 
       window._data = data;
       renderGrid();
+
+      // Deep link: players.html?hg=<id> opens that player's pop-up directly
+      const wantId = new URLSearchParams(location.search).get('hg');
+      if (wantId) {
+        const target = allGuests.find(h => h.id === wantId);
+        if (target) openModal(target);
+      }
     }
 
     function renderGrid() {
@@ -157,12 +164,17 @@
           <div style="padding:20px;">
             <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px;">Point History</h3>
             ${hg.events && hg.events.length
-              ? hg.events.map(e => `
+              ? [...hg.events].sort((a,b) => (a.week||0) - (b.week||0)).map(e => `
                   <div class="event-row">
+                    <span style="font-family:var(--mono);font-size:.62rem;font-weight:700;color:var(--muted);flex-shrink:0;">WK${e.week}</span>
                     <span class="event-type ${e.type}">${e.type.replace(/([A-Z])/g,' $1').trim()}</span>
-                    <span class="event-name">${e.description}</span>
+                    <span class="event-name" style="font-size:.82rem;">${e.description}</span>
                     <span class="event-pts ${e.points>0?'pts-pos':'pts-neg'}">${e.points>0?'+':''}${e.points}</span>
-                  </div>`).join('')
+                  </div>`).join('') + `
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-family:var(--mono);">
+                    <span style="font-size:.62rem;letter-spacing:1.5px;color:var(--muted);">TOTAL</span>
+                    <strong style="font-size:.95rem;color:var(--gold);">${pts>0?'+':''}${pts}</strong>
+                  </div>`
               : '<p style="color:var(--muted);font-size:.9rem;">No scored events yet.</p>'}
           </div>
           <div style="padding:0 20px 20px;">

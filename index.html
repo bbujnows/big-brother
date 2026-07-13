@@ -123,12 +123,15 @@
 
       // Owner cards
       const grid = document.getElementById('owner-grid');
+      const ptsColor = n => n > 0 ? 'var(--mint)' : n < 0 ? 'var(--rec)' : 'var(--muted)';
       ranked.forEach((owner, i) => {
         const score = ownerScores[owner.id] || 0;
-        const players = data.houseguests.filter(h => h.ownerId === owner.id);
+        const players = data.houseguests.filter(h => h.ownerId === owner.id)
+          .sort((a,b) => computeGuestScore(b) - computeGuestScore(a));
         const card = document.createElement('div');
         card.className = `owner-card rank-${i+1}`;
         card.style.setProperty('--owner-color', owner.color);
+        card.style.cursor = 'pointer';
         card.innerHTML = `
           <div class="owner-card-top">
             <div>
@@ -141,7 +144,35 @@
             ${players.length
               ? players.map(p => `<span class="player-pill ${p.status==='evicted'?'evicted':''}">${p.name}</span>`).join('')
               : '<span class="player-pill">No players yet</span>'}
-          </div>`;
+          </div>
+          <div class="owner-breakdown" style="display:none;margin-top:14px;border-top:1px solid var(--border-lt,rgba(255,255,255,0.06));padding-top:8px;">
+            ${players.map(p => {
+              const pPts = computeGuestScore(p);
+              const evs = [...(p.events || [])].sort((a,b) => (a.week||0) - (b.week||0));
+              return `
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0 2px;">
+                  <a href="players.html?hg=${p.id}" onclick="event.stopPropagation()"
+                     style="font-weight:700;font-size:.8rem;color:var(--text);text-decoration:none;border-bottom:1px dotted var(--muted);${p.status==='evicted'?'opacity:.45;text-decoration:line-through;':''}">${p.name}</a>
+                  <span style="font-family:var(--mono);font-weight:800;font-size:.8rem;color:${ptsColor(pPts)}">${pPts > 0 ? '+' : ''}${pPts}</span>
+                </div>
+                ${evs.length
+                  ? evs.map(e => `
+                    <div style="display:flex;gap:8px;align-items:baseline;font-family:var(--mono);font-size:.65rem;color:var(--muted);padding:2px 0 2px 10px;">
+                      <span style="flex-shrink:0;">WK${e.week}</span>
+                      <span style="color:var(--text);opacity:.7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${e.description || e.type}</span>
+                      <span style="margin-left:auto;flex-shrink:0;font-weight:700;color:${ptsColor(e.points)}">${e.points > 0 ? '+' : ''}${e.points}</span>
+                    </div>`).join('')
+                  : '<div style="font-family:var(--mono);font-size:.65rem;color:var(--muted);padding:2px 0 2px 10px;">no scored events yet</div>'}`;
+            }).join('')}
+          </div>
+          <div class="owner-expand-hint" style="text-align:center;margin-top:10px;font-family:var(--mono);font-size:.58rem;letter-spacing:1.5px;color:var(--muted);">▾ POINT BREAKDOWN</div>`;
+        card.onclick = () => {
+          const bd = card.querySelector('.owner-breakdown');
+          const hint = card.querySelector('.owner-expand-hint');
+          const open = bd.style.display !== 'none';
+          bd.style.display = open ? 'none' : 'block';
+          hint.textContent = open ? '▾ POINT BREAKDOWN' : '▴ HIDE';
+        };
         grid.appendChild(card);
       });
 
