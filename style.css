@@ -378,7 +378,7 @@ table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 
 th {
   text-align: left;
-  padding: 13px 18px;
+  padding: 10px 18px;
   color: var(--muted);
   font-family: var(--mono);
   font-size: 0.62rem;
@@ -388,7 +388,7 @@ th {
   font-weight: 700;
 }
 
-td { padding: 14px 18px; border-bottom: 1px solid rgba(95,255,194,0.06); }
+td { padding: 8px 18px; border-bottom: 1px solid rgba(95,255,194,0.06); }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: rgba(95,255,194,0.03); }
 
