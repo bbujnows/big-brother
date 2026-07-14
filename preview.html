@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>BB28 Fantasy League</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="index.html">BIG BROTHER<span style="color:#5fffc2"> 28</span></a>
+    <a href="index.html" class="active">Leaderboard</a>
+    <a href="draft.html">Draft</a>
+    <a href="players.html">Players</a>
+    <a href="log.html">Episode Log</a>
+    <a href="admin.html" class="admin-link">⚙ Admin</a>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-hud">
+      <span class="rec"><i></i>REC</span>
+      <span>CAM 01 · LIVE FEED · HOUSE</span>
+      <span id="hud-clock">--·--·--  --:--:--</span>
+    </div>
+    <div class="bb-eye">
+      <img src="bb-eye.svg" alt="Big Brother eye" width="84" height="50">
+    </div>
+    <span class="hero-eyebrow">Season 28 · Fantasy League</span>
+    <h1 class="hero-title">
+      <span class="bb">Big Brother</span><br>
+      <span class="fantasy">Fantasy Draft</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub" id="hero-sub">Loading...</p>
+  </div>
+
+  <main class="inner">
+    <div id="memory-wall-section">
+      <div class="section-label">Memory Wall</div>
+      <div id="memory-wall" class="memory-wall"></div>
+    </div>
+
+    <div id="owner-grid" class="owner-grid"></div>
+
+    <!-- Point breakdown pop-up -->
+    <div id="bd-overlay" onclick="closeBreakdown()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;align-items:center;justify-content:center;">
+      <div onclick="event.stopPropagation()" style="background:#0b1216;border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:440px;margin:20px;max-height:85vh;overflow-y:auto;">
+        <div id="bd-content" style="padding:22px;"></div>
+      </div>
+    </div>
+
+    <div id="countdown-wrap"></div>
+
+    <div id="hg-table-section">
+      <div class="section-label">All Players</div>
+      <div class="card hg-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Houseguest</th>
+              <th>Owner</th>
+              <th>Status</th>
+              <th style="text-align:right">Points</th>
+            </tr>
+          </thead>
+          <tbody id="hg-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-label">Season Race</div>
+    <div class="card" id="race-wrap" style="padding:22px;">
+      <canvas id="race-chart" style="width:100%;height:280px;display:block;"></canvas>
+      <div id="race-legend" style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:14px;"></div>
+    </div>
+
+    <style>
+      /* Stat-definition tooltips (Rap Sheets) */
+      [data-tip] { position: relative; cursor: help; }
+      [data-tip]:hover::after {
+        content: attr(data-tip);
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 0;
+        width: 220px;
+        white-space: normal;
+        background: #0d1117;
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 9px 11px;
+        font-size: .68rem;
+        line-height: 1.45;
+        box-shadow: 0 6px 18px rgba(0,0,0,.55);
+        z-index: 50;
+      }
+      /* Right-hand column: anchor tooltip to the right so it stays inside the card */
+      [data-tip]:nth-child(3n):hover::after { left: auto; right: 0; }
+    </style>
+
+    <div class="section-label" style="margin-top:32px;">Rivalry Desk</div>
+    <div id="rivalry-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;"></div>
+    <div id="beef-wrap" style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;"></div>
+
+    <div class="divider"></div>
+
+    <div class="section-label">Scoring System</div>
+    <div id="scoring-grid" class="scoring-grid"></div>
+  </main>
+
+  <!-- ══ PREVIEW SANDBOX ENHANCEMENTS (not in index.html) ══ -->
+  <style>
+    @keyframes reveal-in { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform:none; } }
+    .reveal { opacity:0; animation: reveal-in .55s cubic-bezier(.2,.7,.2,1) both; }
+    .owner-score .score-num, .stat-num { font-variant-numeric: tabular-nums; }
+  </style>
+  <script>
+    // Ease-out count-up: animates an element's number from 0 → target.
+    function countUp(el, target, dur = 1000) {
+      const start = performance.now();
+      function frame(now) {
+        const p = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = Math.round(target * eased);
+        el.textContent = (val > 0 ? '+' : '') + val;
+        if (p < 1) requestAnimationFrame(frame);
+        else el.textContent = (target > 0 ? '+' : '') + target;
+      }
+      requestAnimationFrame(frame);
+    }
+    // Adds the .reveal class to a list of nodes with an increasing delay.
+    function staggerReveal(nodes, step = 85) {
+      nodes.forEach((n, i) => { n.style.animationDelay = (i * step) + 'ms'; n.classList.add('reveal'); });
+    }
+  </script>
+  <script>
+    // PREVIEW: seed a rich *simulated* 6-week season so the animations are
+    // clearly visible even when the real (early-season) data is sparse.
+    // Writes to sessionStorage only (the app's built-in Test Mode) — it never
+    // touches Firebase or real data, and clears when the tab closes.
+    // Open http://localhost:8099/?live to view the REAL Firebase data instead.
+    (function seedDemo(){
+      if (new URLSearchParams(location.search).has('live')) { sessionStorage.removeItem('bb28_test_data'); return; }
+      const ev = (w,t,p,d) => ({week:w, type:t, points:p, description:d});
+      const hg = (id,name,ownerId,status,events,weekEvicted) => ({id,name,ownerId,status,events,weekEvicted});
+      const owners = [
+        {id:'o_mint',   name:'Mint Machine',  color:'#5fffc2'},
+        {id:'o_gold',   name:'Gold Rush',     color:'#ffd93d'},
+        {id:'o_rose',   name:'Rose Riot',     color:'#ff5147'},
+        {id:'o_violet', name:'Violet Vipers', color:'#a78bfa'},
+      ];
+      const houseguests = [
+        hg('hg_dana','Dana K.','o_mint','active',[ev(1,'hoh',3,'Won HOH'),ev(2,'survived',1,'Survived'),ev(3,'survived',1,'Survived'),ev(4,'veto',2,'Won Veto'),ev(5,'survived',1,'Survived'),ev(6,'nominated',-1,'Nominated'),ev(6,'survived',1,'Survived eviction')]),
+        hg('hg_priya','Priya S.','o_mint','active',[ev(1,'survived',1,'Survived'),ev(2,'survived',1,'Survived'),ev(3,'nominated',-1,'Nominated'),ev(3,'takenOffBlock',1,'Saved by veto'),ev(4,'survived',1,'Survived'),ev(5,'survived',1,'Survived'),ev(6,'hoh',3,'Won HOH')]),
+        hg('hg_marcus','Marcus L.','o_mint','evicted',[ev(1,'survived',1,'Survived'),ev(2,'nominated',-1,'Nominated'),ev(2,'evicted',-2,'Evicted')],2),
+        hg('hg_trey','Trey B.','o_gold','active',[ev(1,'survived',1,'Survived'),ev(2,'hoh',3,'Won HOH'),ev(3,'survived',1,'Survived'),ev(4,'survived',1,'Survived'),ev(5,'hoh',3,'Won HOH'),ev(5,'veto',2,'Won Veto'),ev(6,'survived',1,'Survived')]),
+        hg('hg_omar','Omar J.','o_gold','active',[ev(1,'survived',1,'Survived'),ev(2,'survived',1,'Survived'),ev(3,'survived',1,'Survived'),ev(4,'nominated',-1,'Nominated'),ev(4,'survived',1,'Survived'),ev(5,'survived',1,'Survived'),ev(6,'veto',2,'Won Veto'),ev(6,'survived',1,'Survived')]),
+        hg('hg_nina','Nina F.','o_gold','jury',[ev(1,'veto',2,'Won Veto'),ev(2,'survived',1,'Survived'),ev(3,'nominated',-1,'Nominated'),ev(3,'evicted',-2,'Evicted')],3),
+        hg('hg_kayla','Kayla M.','o_rose','active',[ev(1,'survived',1,'Survived'),ev(2,'survived',1,'Survived'),ev(3,'hoh',3,'Won HOH'),ev(3,'veto',2,'Won Veto'),ev(4,'survived',1,'Survived'),ev(5,'survived',1,'Survived'),ev(6,'survived',1,'Survived')]),
+        hg('hg_rosa','Rosa V.','o_rose','active',[ev(1,'survived',1,'Survived'),ev(2,'survived',1,'Survived'),ev(3,'survived',1,'Survived'),ev(4,'survived',1,'Survived'),ev(5,'nominated',-1,'Nominated'),ev(5,'takenOffBlock',1,'Saved by veto'),ev(6,'survived',1,'Survived')]),
+        hg('hg_devon','Devon P.','o_rose','evicted',[ev(1,'nominated',-1,'Nominated'),ev(1,'survived',1,'Survived'),ev(2,'survived',1,'Survived'),ev(3,'survived',1,'Survived'),ev(4,'nominated',-1,'Nominated'),ev(4,'evicted',-2,'Evicted')],4),
+        hg('hg_ellis','Ellis W.','o_violet','active',[ev(1,'survived',1,'Survived'),ev(2,'survived',1,'Survived'),ev(3,'nominated',-1,'Nominated'),ev(3,'takenOffBlock',1,'Saved by veto'),ev(4,'hoh',3,'Won HOH'),ev(5,'survived',1,'Survived'),ev(6,'survived',1,'Survived')]),
+        hg('hg_grace','Grace H.','o_violet','jury',[ev(2,'nominated',-1,'Nominated'),ev(2,'veto',2,'Won Veto — saved self'),ev(2,'takenOffBlock',1,'Saved self'),ev(3,'survived',1,'Survived'),ev(4,'survived',1,'Survived'),ev(5,'nominated',-1,'Nominated'),ev(5,'evicted',-2,'Evicted')],5),
+        hg('hg_theo','Theo N.','o_violet','evicted',[ev(1,'nominated',-1,'Nominated'),ev(1,'evicted',-2,'Evicted')],1),
+      ];
+      const scoring = {
+        hoh:{label:'Head of Household',points:3},
+        veto:{label:'Power of Veto',points:2},
+        takenOffBlock:{label:'Saved off the block',points:1},
+        survived:{label:'Survived the week',points:1},
+        nominated:{label:'Nominated',points:-1},
+        evicted:{label:'Evicted',points:-2},
+      };
+      sessionStorage.setItem('bb28_test_data', JSON.stringify({
+        owners, houseguests, scoring, currentWeek:6, lastUpdated:'2026-08-15',
+        episodes:[], draftStatus:'complete', draftOrder:owners.map(o=>o.id), currentPickIndex:0
+      }));
+    })();
+  </script>
+  <script>
+    const rankEmoji = ['🥇','🥈','🥉','4️⃣'];
+
+    function openBreakdown(ownerId) {
+      const html = (window._breakdowns || {})[ownerId];
+      if (!html) return;
+      document.getElementById('bd-content').innerHTML = html;
+      document.getElementById('bd-overlay').style.display = 'flex';
+    }
+    function closeBreakdown() {
+      document.getElementById('bd-overlay').style.display = 'none';
+    }
+
+    async function init() {
+      const data = await loadData();
+      const ownerScores = computeOwnerScores(data);
+      const ranked = [...data.owners].sort((a,b) => (ownerScores[b.id]||0) - (ownerScores[a.id]||0));
+
+      // Hero subtitle
+      const heroSub = document.getElementById('hero-sub');
+      if (data.currentWeek === 0) {
+        heroSub.textContent = `${data.houseguests.length} houseguests · Season 28 is live`;
+      } else {
+        heroSub.textContent = `Week ${data.currentWeek} · Last updated ${data.lastUpdated}`;
+      }
+
+      // Owner cards
+      const grid = document.getElementById('owner-grid');
+      const ptsColor = n => n > 0 ? 'var(--mint)' : n < 0 ? 'var(--rec)' : 'var(--muted)';
+      window._breakdowns = {};
+      ranked.forEach((owner, i) => {
+        const score = ownerScores[owner.id] || 0;
+        const players = data.houseguests.filter(h => h.ownerId === owner.id)
+          .sort((a,b) => computeGuestScore(b) - computeGuestScore(a));
+        const card = document.createElement('div');
+        card.className = `owner-card rank-${i+1}`;
+        card.style.setProperty('--owner-color', owner.color);
+        card.style.cursor = 'pointer';
+        card.innerHTML = `
+          <div class="owner-card-top">
+            <div>
+              <div class="owner-name">${owner.name}</div>
+            </div>
+            <div class="owner-rank-badge">${rankEmoji[i]}</div>
+          </div>
+          <div class="owner-score"><span class="score-num" data-target="${score}">0</span><span> pts</span></div>
+          <div class="owner-players">
+            ${players.length
+              ? players.map(p => `<span class="player-pill ${p.status==='evicted'?'evicted':''}">${p.name}</span>`).join('')
+              : '<span class="player-pill">No players yet</span>'}
+          </div>
+          <div class="owner-expand-hint" style="text-align:center;margin-top:10px;font-family:var(--mono);font-size:.58rem;letter-spacing:1.5px;color:var(--muted);">▾ POINT BREAKDOWN</div>`;
+        window._breakdowns[owner.id] = `
+          <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:6px;">
+            <div>
+              <div style="font-weight:800;font-size:1.15rem;color:${owner.color};">${owner.name}'s Team</div>
+              <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);margin-top:2px;">POINT BREAKDOWN</div>
+            </div>
+            <div style="font-family:var(--mono);font-weight:900;font-size:1.6rem;color:${ptsColor(score)}">${score > 0 ? '+' : ''}${score}</div>
+          </div>
+          ${players.length ? players.map(p => {
+            const pPts = computeGuestScore(p);
+            const evs = [...(p.events || [])].sort((a,b) => (a.week||0) - (b.week||0));
+            return `
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0 3px;">
+                <a href="players.html?hg=${p.id}"
+                   style="font-weight:700;font-size:.85rem;color:var(--text);text-decoration:none;border-bottom:1px dotted var(--muted);${p.status==='evicted'?'opacity:.45;text-decoration:line-through;':''}">${p.name}</a>
+                <span style="font-family:var(--mono);font-weight:800;font-size:.85rem;color:${ptsColor(pPts)}">${pPts > 0 ? '+' : ''}${pPts}</span>
+              </div>
+              ${evs.length
+                ? evs.map(e => `
+                  <div style="display:flex;gap:8px;align-items:baseline;font-family:var(--mono);font-size:.68rem;color:var(--muted);padding:2px 0 2px 12px;">
+                    <span style="flex-shrink:0;">WK${e.week}</span>
+                    <span style="color:var(--text);opacity:.7;">${e.description || e.type}</span>
+                    <span style="margin-left:auto;flex-shrink:0;font-weight:700;color:${ptsColor(e.points)}">${e.points > 0 ? '+' : ''}${e.points}</span>
+                  </div>`).join('')
+                : '<div style="font-family:var(--mono);font-size:.68rem;color:var(--muted);padding:2px 0 2px 12px;">no scored events yet</div>'}`;
+          }).join('') : '<p style="color:var(--muted);font-size:.85rem;padding:10px 0;">No players drafted yet.</p>'}
+          <div style="margin-top:18px;text-align:right;">
+            <button class="btn btn-secondary btn-sm" onclick="closeBreakdown()">Close</button>
+          </div>`;
+        card.onclick = () => openBreakdown(owner.id);
+        grid.appendChild(card);
+      });
+
+      // Countdown
+      if (data.currentWeek === 0) {
+        const wrap = document.getElementById('countdown-wrap');
+        const premiere = new Date('2026-07-09T20:00:00');
+        function renderCountdown() {
+          const diff = premiere - new Date();
+          if (diff <= 0) { wrap.innerHTML = ''; return; }
+          const d = Math.floor(diff/86400000);
+          const h = Math.floor((diff%86400000)/3600000);
+          const m = Math.floor((diff%3600000)/60000);
+          const s = Math.floor((diff%60000)/1000);
+          wrap.innerHTML = `
+            <p class="section-label" style="justify-content:center;margin-bottom:16px;">Time Until Premiere</p>
+            <div class="countdown">
+              <div class="countdown-unit"><div class="countdown-num">${d}</div><div class="countdown-label">Days</div></div>
+              <div class="countdown-unit"><div class="countdown-num">${String(h).padStart(2,'0')}</div><div class="countdown-label">Hours</div></div>
+              <div class="countdown-unit"><div class="countdown-num">${String(m).padStart(2,'0')}</div><div class="countdown-label">Min</div></div>
+              <div class="countdown-unit"><div class="countdown-num">${String(s).padStart(2,'0')}</div><div class="countdown-label">Sec</div></div>
+            </div>`;
+        }
+        renderCountdown();
+        setInterval(renderCountdown, 1000);
+      }
+
+      // Houseguests table
+      const tbody = document.getElementById('hg-tbody');
+      if (data.houseguests.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:36px;color:var(--muted);font-weight:600;">Cast not yet announced — check back soon!</td></tr>`;
+      } else {
+        const sorted = [...data.houseguests].sort((a,b) => computeGuestScore(b) - computeGuestScore(a));
+        sorted.forEach(hg => {
+          const owner = data.owners.find(o => o.id === hg.ownerId);
+          const pts = computeGuestScore(hg);
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong>${hg.name}</strong></td>
+            <td>
+              ${owner
+                ? `<span class="owner-dot" style="background:${owner.color}"></span>${owner.name}`
+                : '<span style="color:var(--muted)">Undrafted</span>'}
+            </td>
+            <td><span class="status-badge status-${hg.status}">${hg.status}</span></td>
+            <td style="text-align:right" class="${pts>0?'pts-pos':pts<0?'pts-neg':'pts-zero'}">${pts>0?'+':''}${pts}</td>`;
+          tbody.appendChild(tr);
+        });
+      }
+
+      renderMemoryWall(data);
+      const race = weeklySeries(data);
+      renderRace(data, race);
+      renderRivalry(data, race);
+      renderBeef(data, race);
+
+      // Scoring system
+      const sg = document.getElementById('scoring-grid');
+      Object.entries(data.scoring).forEach(([,v]) => {
+        const div = document.createElement('div');
+        div.className = 'scoring-row';
+        const cls = v.points > 0 ? 'pts-pos' : v.points < 0 ? 'pts-neg' : '';
+        div.innerHTML = `<span class="scoring-label">${v.label}</span><span class="scoring-pts ${cls}">${v.points>0?'+':''}${v.points}</span>`;
+        sg.appendChild(div);
+      });
+
+      // ── PREVIEW enhancements: staggered reveals + count-up scores ──
+      staggerReveal([...document.querySelectorAll('.owner-card')], 90);
+      document.querySelectorAll('.owner-score .score-num[data-target]').forEach(el => countUp(el, +el.dataset.target, 1100));
+      staggerReveal([...document.querySelectorAll('.mw-tile')], 35);
+      staggerReveal([...document.querySelectorAll('#rivalry-grid .card')], 90);
+    }
+
+    // ── MEMORY WALL ─────────────────────────────────────────
+    function renderMemoryWall(data) {
+      const section = document.getElementById('memory-wall-section');
+      if (!data.houseguests.length) { section.remove(); return; }
+      document.getElementById('memory-wall').innerHTML = data.houseguests.map(hg => `
+        <a class="mw-tile ${hg.status}" href="players.html" title="${hg.name}">
+          <div class="mw-photo">
+            ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}" loading="lazy">` : '👤'}
+            ${hg.status === 'evicted' ? `<div class="mw-stamp">EVICTED${hg.weekEvicted ? '·WK' + hg.weekEvicted : ''}</div>` : ''}
+            ${hg.status === 'jury' ? `<div class="mw-stamp jury">JURY</div>` : ''}
+          </div>
+          <div class="mw-name">${hg.name.split(' ')[0]}</div>
+        </a>`).join('');
+    }
+
+    // ── SEASON RACE DATA ────────────────────────────────────
+    // Cumulative team points per week, computed from houseguest events
+    function weeklySeries(data) {
+      let maxWeek = 0;
+      data.houseguests.forEach(h => (h.events || []).forEach(e => { if (e.week > maxWeek) maxWeek = e.week; }));
+      if (maxWeek === 0) return null;
+      const series = data.owners.map(o => {
+        const mine = data.houseguests.filter(h => h.ownerId === o.id);
+        const pts = [0]; // week 0 = everyone starts at zero
+        for (let w = 1; w <= maxWeek; w++) {
+          let sum = 0;
+          mine.forEach(h => (h.events || []).forEach(e => { if (e.week <= w) sum += e.points; }));
+          pts.push(sum);
+        }
+        return { owner: o, pts };
+      });
+      return { maxWeek, series };
+    }
+
+    // ── SEASON RACE CHART ───────────────────────────────────
+    function renderRace(data, race) {
+      const wrap = document.getElementById('race-wrap');
+      if (!race) {
+        wrap.innerHTML = `<div style="text-align:center;padding:26px 10px;color:var(--muted);">
+          <div style="font-size:1.6rem;margin-bottom:8px;">📈</div>
+          The race chart draws itself as weekly points come in.</div>`;
+        return;
+      }
+      const { maxWeek, series } = race;
+      const canvas = document.getElementById('race-chart');
+      const dpr = window.devicePixelRatio || 1;
+      const W = canvas.clientWidth, H = canvas.clientHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const all = series.flatMap(s => s.pts);
+      const yMin = Math.min(0, ...all), yMax = Math.max(10, ...all);
+      const padL = 38, padR = 14, padT = 12, padB = 26;
+      const x = w => padL + (W - padL - padR) * (w / maxWeek);
+      const y = v => padT + (H - padT - padB) * (1 - (v - yMin) / (yMax - yMin));
+
+      // Static layer (gridlines + week labels), redrawn under the lines each frame
+      function drawStatic() {
+        ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+        ctx.fillStyle = 'rgba(255,255,255,0.35)';
+        ctx.font = '10px monospace';
+        ctx.textAlign = 'right';
+        const steps = 4;
+        for (let i = 0; i <= steps; i++) {
+          const v = yMin + (yMax - yMin) * i / steps;
+          ctx.beginPath(); ctx.moveTo(padL, y(v)); ctx.lineTo(W - padR, y(v)); ctx.stroke();
+          ctx.fillText(Math.round(v), padL - 6, y(v) + 3);
+        }
+        ctx.textAlign = 'center';
+        for (let w = 0; w <= maxWeek; w++) {
+          ctx.fillText(w === 0 ? '' : 'W' + w, x(w), H - 8);
+        }
+      }
+      // A team's line height at a fractional week (drives the moving head)
+      function valAt(pts, f) {
+        if (f <= 0) return pts[0];
+        if (f >= maxWeek) return pts[maxWeek];
+        const i = Math.floor(f);
+        return pts[i] + (pts[i + 1] - pts[i]) * (f - i);
+      }
+      // Draw the whole chart with each team line grown to fractional week f = t*maxWeek
+      function drawFrame(t) {
+        ctx.clearRect(0, 0, W, H);
+        drawStatic();
+        const f = t * maxWeek, fullW = Math.floor(f);
+        series.forEach(s => {
+          ctx.strokeStyle = s.owner.color;
+          ctx.lineWidth = 2.5;
+          ctx.shadowColor = s.owner.color;
+          ctx.shadowBlur = 8;
+          ctx.beginPath();
+          ctx.moveTo(x(0), y(s.pts[0]));
+          for (let w = 1; w <= fullW; w++) ctx.lineTo(x(w), y(s.pts[w]));
+          if (f > fullW) ctx.lineTo(x(f), y(valAt(s.pts, f)));
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+          for (let w = 0; w <= fullW; w++) {
+            ctx.beginPath(); ctx.arc(x(w), y(s.pts[w]), 3, 0, 2 * Math.PI);
+            ctx.fillStyle = s.owner.color; ctx.fill();
+          }
+          // glowing head that leads the line across the screen
+          ctx.beginPath(); ctx.arc(x(f), y(valAt(s.pts, f)), 3.6, 0, 2 * Math.PI);
+          ctx.fillStyle = s.owner.color; ctx.fill();
+        });
+      }
+      // Animate the season "replaying" left → right on load
+      const RACE_DUR = 1700, raceStart = performance.now();
+      (function raceAnim(now) {
+        const p = Math.min(1, (now - raceStart) / RACE_DUR);
+        drawFrame(1 - Math.pow(1 - p, 3));
+        if (p < 1) requestAnimationFrame(raceAnim);
+      })(performance.now());
+      // legend
+      document.getElementById('race-legend').innerHTML = series.map(s => `
+        <span style="display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:${s.owner.color}">
+          <span style="width:14px;height:3px;background:${s.owner.color};border-radius:2px;box-shadow:0 0 6px ${s.owner.color}"></span>
+          ${s.owner.name} (${s.pts[s.pts.length - 1]})
+        </span>`).join('');
+    }
+
+    // ── RIVALRY DESK ────────────────────────────────────────
+    function renderRivalry(data, race) {
+      const grid = document.getElementById('rivalry-grid');
+      if (!race) {
+        grid.innerHTML = `<div class="card" style="grid-column:1/-1;text-align:center;padding:22px;color:var(--muted);">
+          🏁 Rivalry records unlock once Week 1 scores post.</div>`;
+        return;
+      }
+      const { maxWeek, series } = race;
+      const name = id => (data.owners.find(o => o.id === id) || {}).name || id;
+      const color = id => (data.owners.find(o => o.id === id) || {}).color || 'var(--text)';
+
+      // Leader each week (ties share credit)
+      const weeksLed = {}; data.owners.forEach(o => weeksLed[o.id] = 0);
+      let bigLead = { margin: -1 }, bestWeek = { gain: -Infinity };
+      for (let w = 1; w <= maxWeek; w++) {
+        const vals = series.map(s => ({ id: s.owner.id, v: s.pts[w], gain: s.pts[w] - s.pts[w - 1] }))
+                           .sort((a, b) => b.v - a.v);
+        vals.filter(s => s.v === vals[0].v).forEach(s => weeksLed[s.id]++);
+        const margin = vals[0].v - (vals[1] ? vals[1].v : 0);
+        if (margin > bigLead.margin) bigLead = { margin, id: vals[0].id, week: w };
+        vals.forEach(s => { if (s.gain > bestWeek.gain) bestWeek = { gain: s.gain, id: s.id, week: w }; });
+      }
+      // Current leader + streak
+      const finals = series.map(s => ({ id: s.owner.id, v: s.pts[maxWeek] })).sort((a, b) => b.v - a.v);
+      const leaderId = finals[0].id;
+      const tied = finals.filter(f => f.v === finals[0].v).length > 1;
+      let streak = 0;
+      for (let w = maxWeek; w >= 1; w--) {
+        const top = Math.max(...series.map(s => s.pts[w]));
+        if (series.find(s => s.owner.id === leaderId).pts[w] === top) streak++; else break;
+      }
+
+      const statCard = (label, value, sub, clr) => `
+        <div class="card" style="padding:16px;text-align:center;">
+          <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">${label}</div>
+          <div style="font-size:1.25rem;font-weight:900;color:${clr};">${value}</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">${sub}</div>
+        </div>`;
+
+      grid.innerHTML =
+        statCard('Current Leader', tied ? 'Tied' : name(leaderId), tied ? 'dead heat at the top' : `${streak} week${streak === 1 ? '' : 's'} on top`, tied ? 'var(--gold)' : color(leaderId)) +
+        statCard('Weeks in First', data.owners.map(o => `<span style="color:${color(o.id)}">${name(o.id).charAt(0)}:${weeksLed[o.id]}</span>`).join('<span style="color:var(--muted)"> · </span>'), 'shared credit on ties', 'var(--text)') +
+        statCard('Biggest Lead', `+${bigLead.margin}`, `${name(bigLead.id)} · week ${bigLead.week}`, color(bigLead.id)) +
+        statCard('Best Single Week', `${bestWeek.gain > 0 ? '+' : ''}${bestWeek.gain}`, `${name(bestWeek.id)} · week ${bestWeek.week}`, color(bestWeek.id));
+    }
+
+    // ── BEEF ENGINE ─────────────────────────────────────────
+    // Derives team-vs-team incidents by cross-referencing who held
+    // HOH / veto each week with who got nominated / saved / evicted.
+    // Weeks with multiple HOHs or veto winners (twists) are skipped
+    // rather than guessed.
+    function computeBeef(data) {
+      const ownerOf = hg => hg && hg.ownerId ? data.owners.find(o => o.id === hg.ownerId) : null;
+      let maxWeek = 0;
+      data.houseguests.forEach(h => (h.events || []).forEach(e => { maxWeek = Math.max(maxWeek, e.week); }));
+
+      const incidents = [];
+      const clashes = {};
+      const pairKey = (a, b) => [a, b].sort().join('|');
+      const bump = (a, b) => { const k = pairKey(a, b); clashes[k] = (clashes[k] || 0) + 1; };
+      const records = {};
+      data.owners.forEach(o => records[o.id] = { fired: 0, taken: 0, saves: 0, kills: 0, rescues: 0, ownGoals: 0 });
+
+      for (let w = 1; w <= maxWeek; w++) {
+        const withEv = t => data.houseguests.filter(h => (h.events || []).some(e => e.type === t && e.week === w));
+        const hohs  = withEv('hoh');
+        const vetos = withEv('veto');
+        const noms  = withEv('nominated');
+        const saved = withEv('takenOffBlock');
+        const evictedNow = data.houseguests.filter(h => h.weekEvicted === w);
+
+        if (hohs.length === 1) {
+          const hoh = hohs[0], atk = ownerOf(hoh);
+          noms.forEach(n => {
+            const vic = ownerOf(n);
+            if (!atk || !vic) return;
+            if (atk.id === vic.id) {
+              incidents.push({ week: w, icon: '🔫', tag: 'FRIENDLY FIRE', clr: 'var(--gold)',
+                text: `${atk.name}'s own ${hoh.name} put ${vic.name}'s ${n.name} on the block` });
+              records[atk.id].ownGoals++;
+            } else {
+              incidents.push({ week: w, icon: '🎯', tag: 'SHOT FIRED', clr: 'var(--rec)',
+                text: `${atk.name}'s ${hoh.name} put ${vic.name}'s ${n.name} on the block` });
+              records[atk.id].fired++; records[vic.id].taken++;
+              bump(atk.id, vic.id);
+            }
+          });
+          evictedNow.forEach(ev => {
+            const vic = ownerOf(ev);
+            if (!atk || !vic) return;
+            if (atk.id === vic.id) {
+              incidents.push({ week: w, icon: '💥', tag: 'SELF-DESTRUCT', clr: 'var(--gold)',
+                text: `${atk.name}'s HOH week ended with ${vic.name}'s own ${ev.name} evicted` });
+              records[atk.id].ownGoals++;
+            } else {
+              incidents.push({ week: w, icon: '⚰️', tag: 'ELIMINATION', clr: 'var(--rec)',
+                text: `${atk.name}'s ${hoh.name} sent ${vic.name}'s ${ev.name} packing` });
+              records[atk.id].kills++;
+              bump(atk.id, vic.id);
+            }
+          });
+        }
+
+        if (vetos.length === 1) {
+          const v = vetos[0], sav = ownerOf(v);
+          saved.forEach(s => {
+            if (s.id === v.id) return; // self-save isn't beef
+            const ben = ownerOf(s);
+            if (!sav || !ben) return;
+            if (sav.id === ben.id) {
+              incidents.push({ week: w, icon: '🛡️', tag: 'TEAM RESCUE', clr: 'var(--mint)',
+                text: `${sav.name}'s ${v.name} pulled teammate ${s.name} off the block` });
+              records[sav.id].rescues++;
+            } else {
+              incidents.push({ week: w, icon: '🛟', tag: 'BAILOUT', clr: 'var(--mint)',
+                text: `${sav.name}'s ${v.name} pulled ${ben.name}'s ${s.name} off the block` });
+              records[sav.id].saves++;
+            }
+          });
+        }
+      }
+      return { incidents, clashes, records };
+    }
+
+    function renderBeef(data, race) {
+      const wrap = document.getElementById('beef-wrap');
+      if (!race) { wrap.innerHTML = ''; return; }
+      const { incidents, clashes, records } = computeBeef(data);
+
+      // Feud meter: every owner pair, hostile incidents only
+      const pairs = [];
+      for (let i = 0; i < data.owners.length; i++)
+        for (let j = i + 1; j < data.owners.length; j++) {
+          const a = data.owners[i], b = data.owners[j];
+          pairs.push({ a, b, n: clashes[[a.id, b.id].sort().join('|')] || 0 });
+        }
+      pairs.sort((x, y) => y.n - x.n);
+      const top = pairs[0] && pairs[0].n > 0 ? pairs[0] : null;
+
+      const dot = o => `<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${o.color};margin-right:5px;"></span>`;
+
+      const feudCard = `
+        <div class="card" style="padding:18px;">
+          <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;">⚔️ Feud Meter</div>
+          ${top ? `
+            <div style="text-align:center;padding:10px 0 14px;border-bottom:1px solid var(--border);margin-bottom:10px;">
+              <div style="font-size:.6rem;font-family:var(--mono);letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;">SEASON RIVALRY</div>
+              <div style="font-size:1.15rem;font-weight:900;">
+                <span style="color:${top.a.color}">${top.a.name}</span>
+                <span style="color:var(--rec);margin:0 8px;">⚔️</span>
+                <span style="color:${top.b.color}">${top.b.name}</span>
+              </div>
+              <div style="font-size:.7rem;color:var(--muted);margin-top:4px;">${top.n} clash${top.n === 1 ? '' : 'es'} and counting</div>
+            </div>` : `
+            <div style="text-align:center;padding:14px 0;color:var(--muted);font-size:.8rem;">No feuds yet. The house is peaceful — it won't last.</div>`}
+          ${pairs.map(p => `
+            <div style="display:grid;grid-template-columns:6.5em 2em 1fr auto;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-lt,rgba(255,255,255,0.04));font-size:.78rem;">
+              <span>${dot(p.a)}${p.a.name}</span>
+              <span style="color:var(--muted);text-align:center;">vs</span>
+              <span>${dot(p.b)}${p.b.name}</span>
+              <strong style="text-align:right;color:${p.n > 0 ? 'var(--rec)' : 'var(--muted)'}">${p.n}</strong>
+            </div>`).join('')}
+          <div style="margin-top:14px;">
+            <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">Rap Sheets</div>
+            ${data.owners.map(o => {
+              const r = records[o.id];
+              const stats = [
+                ['🎯', r.fired,    'fired',     'Shots fired — your HOH put a rival team&#39;s player on the block'],
+                ['🩸', r.taken,    'taken',     'Shots taken — a rival&#39;s HOH put your player on the block'],
+                ['⚰️', r.kills,    'evicted',   'Eliminations — a rival&#39;s player was evicted during your HOH&#39;s week'],
+                ['🛟', r.saves,    'saved',     'Bailouts — your veto winner pulled a rival&#39;s player off the block'],
+                ['🛡️', r.rescues,  'rescued',   'Team rescues — your veto winner pulled your own teammate off the block'],
+                ['🤡', r.ownGoals, 'own-goals', 'Own-goals — your HOH nominated your own player, or your player was evicted during your own HOH&#39;s week']
+              ];
+              return `<div style="padding:6px 0;font-family:var(--mono);">
+                <div style="color:${o.color};font-weight:700;font-size:.72rem;">${o.name}</div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px 12px;margin-top:4px;font-size:.7rem;color:var(--muted);">
+                  ${stats.map(([icon, n, label, def]) => `<span data-tip="${def}" style="white-space:nowrap;">${icon} ${n} ${label}</span>`).join('')}
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+
+      const sortedIncidents = [...incidents].sort((a, b) => b.week - a.week);
+      const logCard = `
+        <div class="card" style="padding:18px;">
+          <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;">🥩 The Beef Log</div>
+          <div style="max-height:340px;overflow-y:auto;">
+          ${sortedIncidents.length
+            ? sortedIncidents.map(i => `
+                <div style="font-family:var(--mono);font-size:.68rem;line-height:1.55;padding:8px 0;border-bottom:1px solid var(--border-lt,rgba(255,255,255,0.04));">
+                  <span style="color:var(--muted)">WK${i.week}</span> · ${i.icon}
+                  <span style="color:${i.clr};font-weight:700;">${i.tag}</span><br>
+                  <span style="color:var(--text)">${i.text}</span>
+                </div>`).join('')
+            : '<div style="color:var(--muted);font-size:.8rem;padding:14px 0;text-align:center;">Nothing logged yet — beef appears here as HOHs nominate and vetoes save.</div>'}
+          </div>
+        </div>`;
+
+      wrap.innerHTML = feudCard + logCard;
+    }
+
+    init();
+
+    // HUD clock
+    setInterval(() => {
+      const el = document.getElementById('hud-clock');
+      if (!el) return;
+      const d = new Date(), p = n => String(n).padStart(2,'0');
+      el.textContent = `${p(d.getMonth()+1)}·${p(d.getDate())}·${String(d.getFullYear()).slice(2)}  ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+    }, 1000);
+  </script>
+  <script type="module" src="chat.js"></script>
+</body>
+</html>
