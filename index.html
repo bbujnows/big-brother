@@ -112,25 +112,6 @@
   </main>
 
   <script src="app.js"></script>
-  <!-- ══ Graphics: count-up owner scores ══ -->
-  <style>
-    .owner-score .score-num { font-variant-numeric: tabular-nums; }
-  </style>
-  <script>
-    // Ease-out count-up: animates an element's number from 0 → target.
-    function countUp(el, target, dur = 1000) {
-      const start = performance.now();
-      function frame(now) {
-        const p = Math.min(1, (now - start) / dur);
-        const eased = 1 - Math.pow(1 - p, 3);
-        const val = Math.round(target * eased);
-        el.textContent = (val > 0 ? '+' : '') + val;
-        if (p < 1) requestAnimationFrame(frame);
-        else el.textContent = (target > 0 ? '+' : '') + target;
-      }
-      requestAnimationFrame(frame);
-    }
-  </script>
   <script>
     const rankEmoji = ['🥇','🥈','🥉','4️⃣'];
 
@@ -176,7 +157,7 @@
             </div>
             <div class="owner-rank-badge">${rankEmoji[i]}</div>
           </div>
-          <div class="owner-score"><span class="score-num" data-target="${score}">0</span><span> pts</span></div>
+          <div class="owner-score">${score}<span> pts</span></div>
           <div class="owner-players">
             ${players.length
               ? players.map(p => `<span class="player-pill ${p.status==='evicted'?'evicted':''}">${p.name}</span>`).join('')
@@ -278,9 +259,6 @@
         div.innerHTML = `<span class="scoring-label">${v.label}</span><span class="scoring-pts ${cls}">${v.points>0?'+':''}${v.points}</span>`;
         sg.appendChild(div);
       });
-
-      // Graphics: count-up owner scores on load
-      document.querySelectorAll('.owner-score .score-num[data-target]').forEach(el => countUp(el, +el.dataset.target, 1100));
     }
 
     // ── MEMORY WALL ─────────────────────────────────────────
