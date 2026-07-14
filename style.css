@@ -161,14 +161,18 @@ nav a.admin-link:hover { background: rgba(255,81,71,0.12); color: var(--rec); }
 .hero-hud {
   max-width: 1100px;
   margin: 0 auto 26px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   font-family: var(--mono);
   font-size: 0.7rem;
   letter-spacing: 1px;
   color: var(--mint-dim);
 }
+/* Keep REC hard-left and the timestamp hard-right so the middle label
+   (CAM 01 · LIVE FEED · HOUSE) stays truly centered under the title. */
+.hero-hud > :first-child { justify-self: start; }
+.hero-hud > :last-child  { justify-self: end; }
 .hero-hud .rec { color: var(--rec); display: flex; align-items: center; gap: 6px; }
 .hero-hud .rec i {
   width: 8px; height: 8px; border-radius: 50%;
