@@ -112,6 +112,32 @@
   </main>
 
   <script src="app.js"></script>
+  <!-- ══ GRAPHICS ENHANCEMENTS: count-up numbers + staggered reveals ══ -->
+  <style>
+    @keyframes reveal-in { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform:none; } }
+    .reveal { opacity:0; animation: reveal-in .55s cubic-bezier(.2,.7,.2,1) both; }
+    .owner-score .score-num, .stat-num { font-variant-numeric: tabular-nums; }
+    @media (prefers-reduced-motion: reduce) { .reveal { animation: none; opacity: 1; } }
+  </style>
+  <script>
+    // Ease-out count-up: animates an element's number from 0 → target.
+    function countUp(el, target, dur = 1000) {
+      const start = performance.now();
+      function frame(now) {
+        const p = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = Math.round(target * eased);
+        el.textContent = (val > 0 ? '+' : '') + val;
+        if (p < 1) requestAnimationFrame(frame);
+        else el.textContent = (target > 0 ? '+' : '') + target;
+      }
+      requestAnimationFrame(frame);
+    }
+    // Adds the .reveal class to a list of nodes with an increasing delay.
+    function staggerReveal(nodes, step = 85) {
+      nodes.forEach((n, i) => { n.style.animationDelay = (i * step) + 'ms'; n.classList.add('reveal'); });
+    }
+  </script>
   <script>
     const rankEmoji = ['🥇','🥈','🥉','4️⃣'];
 
@@ -157,7 +183,7 @@
             </div>
             <div class="owner-rank-badge">${rankEmoji[i]}</div>
           </div>
-          <div class="owner-score">${score}<span> pts</span></div>
+          <div class="owner-score"><span class="score-num" data-target="${score}">0</span><span> pts</span></div>
           <div class="owner-players">
             ${players.length
               ? players.map(p => `<span class="player-pill ${p.status==='evicted'?'evicted':''}">${p.name}</span>`).join('')
@@ -259,6 +285,12 @@
         div.innerHTML = `<span class="scoring-label">${v.label}</span><span class="scoring-pts ${cls}">${v.points>0?'+':''}${v.points}</span>`;
         sg.appendChild(div);
       });
+
+      // ── Graphics enhancements: staggered reveals + count-up scores ──
+      staggerReveal([...document.querySelectorAll('.owner-card')], 90);
+      document.querySelectorAll('.owner-score .score-num[data-target]').forEach(el => countUp(el, +el.dataset.target, 1100));
+      staggerReveal([...document.querySelectorAll('.mw-tile')], 35);
+      staggerReveal([...document.querySelectorAll('#rivalry-grid .card')], 90);
     }
 
     // ── MEMORY WALL ─────────────────────────────────────────
@@ -318,37 +350,66 @@
       const x = w => padL + (W - padL - padR) * (w / maxWeek);
       const y = v => padT + (H - padT - padB) * (1 - (v - yMin) / (yMax - yMin));
 
-      // horizontal gridlines
-      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-      ctx.fillStyle = 'rgba(255,255,255,0.35)';
-      ctx.font = '10px monospace';
-      ctx.textAlign = 'right';
-      const steps = 4;
-      for (let i = 0; i <= steps; i++) {
-        const v = yMin + (yMax - yMin) * i / steps;
-        ctx.beginPath(); ctx.moveTo(padL, y(v)); ctx.lineTo(W - padR, y(v)); ctx.stroke();
-        ctx.fillText(Math.round(v), padL - 6, y(v) + 3);
+      // Static layer (gridlines + week labels), redrawn under the lines each frame
+      function drawStatic() {
+        ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+        ctx.fillStyle = 'rgba(255,255,255,0.35)';
+        ctx.font = '10px monospace';
+        ctx.textAlign = 'right';
+        const steps = 4;
+        for (let i = 0; i <= steps; i++) {
+          const v = yMin + (yMax - yMin) * i / steps;
+          ctx.beginPath(); ctx.moveTo(padL, y(v)); ctx.lineTo(W - padR, y(v)); ctx.stroke();
+          ctx.fillText(Math.round(v), padL - 6, y(v) + 3);
+        }
+        ctx.textAlign = 'center';
+        for (let w = 0; w <= maxWeek; w++) {
+          ctx.fillText(w === 0 ? '' : 'W' + w, x(w), H - 8);
+        }
       }
-      // week labels
-      ctx.textAlign = 'center';
-      for (let w = 0; w <= maxWeek; w++) {
-        ctx.fillText(w === 0 ? '' : 'W' + w, x(w), H - 8);
+      // A team's line height at a fractional week (drives the moving head)
+      function valAt(pts, f) {
+        if (f <= 0) return pts[0];
+        if (f >= maxWeek) return pts[maxWeek];
+        const i = Math.floor(f);
+        return pts[i] + (pts[i + 1] - pts[i]) * (f - i);
       }
-      // team lines
-      series.forEach(s => {
-        ctx.strokeStyle = s.owner.color;
-        ctx.lineWidth = 2.5;
-        ctx.shadowColor = s.owner.color;
-        ctx.shadowBlur = 8;
-        ctx.beginPath();
-        s.pts.forEach((v, w) => w === 0 ? ctx.moveTo(x(w), y(v)) : ctx.lineTo(x(w), y(v)));
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-        s.pts.forEach((v, w) => {
-          ctx.beginPath(); ctx.arc(x(w), y(v), 3, 0, 2 * Math.PI);
+      // Draw the whole chart with each team line grown to fractional week f = t*maxWeek
+      function drawFrame(t) {
+        ctx.clearRect(0, 0, W, H);
+        drawStatic();
+        const f = t * maxWeek, fullW = Math.floor(f);
+        series.forEach(s => {
+          ctx.strokeStyle = s.owner.color;
+          ctx.lineWidth = 2.5;
+          ctx.shadowColor = s.owner.color;
+          ctx.shadowBlur = 8;
+          ctx.beginPath();
+          ctx.moveTo(x(0), y(s.pts[0]));
+          for (let w = 1; w <= fullW; w++) ctx.lineTo(x(w), y(s.pts[w]));
+          if (f > fullW) ctx.lineTo(x(f), y(valAt(s.pts, f)));
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+          for (let w = 0; w <= fullW; w++) {
+            ctx.beginPath(); ctx.arc(x(w), y(s.pts[w]), 3, 0, 2 * Math.PI);
+            ctx.fillStyle = s.owner.color; ctx.fill();
+          }
+          // glowing head that leads the line across the screen
+          ctx.beginPath(); ctx.arc(x(f), y(valAt(s.pts, f)), 3.6, 0, 2 * Math.PI);
           ctx.fillStyle = s.owner.color; ctx.fill();
         });
-      });
+      }
+      // Animate the season "replaying" left → right on load (respects reduced-motion)
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) { drawFrame(1); }
+      else {
+        const RACE_DUR = 1700, raceStart = performance.now();
+        (function raceAnim(now) {
+          const p = Math.min(1, (now - raceStart) / RACE_DUR);
+          drawFrame(1 - Math.pow(1 - p, 3));
+          if (p < 1) requestAnimationFrame(raceAnim);
+        })(performance.now());
+      }
       // legend
       document.getElementById('race-legend').innerHTML = series.map(s => `
         <span style="display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:${s.owner.color}">
