@@ -112,6 +112,18 @@
   </main>
 
   <script src="app.js"></script>
+  <!-- ══ Graphics: staggered reveals ══ -->
+  <style>
+    @keyframes reveal-in { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform:none; } }
+    .reveal { opacity:0; animation: reveal-in .55s cubic-bezier(.2,.7,.2,1) both; }
+    @media (prefers-reduced-motion: reduce) { .reveal { animation: none; opacity: 1; } }
+  </style>
+  <script>
+    // Adds the .reveal class to a list of nodes with an increasing delay.
+    function staggerReveal(nodes, step = 85) {
+      nodes.forEach((n, i) => { n.style.animationDelay = (i * step) + 'ms'; n.classList.add('reveal'); });
+    }
+  </script>
   <script>
     const rankEmoji = ['🥇','🥈','🥉','4️⃣'];
 
@@ -259,6 +271,11 @@
         div.innerHTML = `<span class="scoring-label">${v.label}</span><span class="scoring-pts ${cls}">${v.points>0?'+':''}${v.points}</span>`;
         sg.appendChild(div);
       });
+
+      // Graphics: staggered reveal of owner cards, memory wall, and rivalry cards
+      staggerReveal([...document.querySelectorAll('.owner-card')], 90);
+      staggerReveal([...document.querySelectorAll('.mw-tile')], 35);
+      staggerReveal([...document.querySelectorAll('#rivalry-grid .card')], 90);
     }
 
     // ── MEMORY WALL ─────────────────────────────────────────
