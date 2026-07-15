@@ -439,7 +439,7 @@ def build_summary(hg, current_week, evicted_weeks):
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_MODEL = "claude-sonnet-4-6"
 MAX_BLURBS = 6  # most recent aired episodes sent to the API (facts + previous blurbs carry older context)
-PROMPT_VERSION = 3  # bump to force a fresh AI pass after prompt changes
+PROMPT_VERSION = 4  # bump to force a fresh AI pass after prompt changes
 
 
 def _strip_wiki_markup(text):
@@ -487,11 +487,23 @@ def fetch_episode_blurbs():
     return blurbs[-MAX_BLURBS:]
 
 
+WIN_LABELS = {"hoh": "HOH", "veto": "veto", "bbBlockbuster": "Blockbuster", "safety": "safety",
+              "wallHang": "wall hang", "otev": "OTEV", "bbComics": "BB Comics"}
+
+
+def _verified_wins(hg):
+    wins = [f"{WIN_LABELS[ev['type']]} (Week {ev.get('week', '?')})"
+            for ev in (hg.get("events") or []) if ev.get("type") in WIN_LABELS]
+    return "; ".join(wins) if wins else "NONE — this player has won nothing this season"
+
+
 def ai_color_pass(api_key, hgs, facts, blurbs):
     """Ask Claude to blend facts + recap color. Returns {hg_id: blurb} or None."""
     recap_lines = "\n\n".join(f"[aired {b['date']}] {b['text']}" for b in blurbs)
-    fact_lines = "\n".join(f"- {hg['id']} | {hg['name']} | status: {hg.get('status', 'active')} | {facts[hg['id']]}"
-                           for hg in hgs)
+    fact_lines = "\n".join(
+        f"- {hg['id']} | {hg['name']} | status: {hg.get('status', 'active')} | "
+        f"verified wins: {_verified_wins(hg)} | {facts[hg['id']]}"
+        for hg in hgs)
     prev_lines = "\n".join(f"- {hg['id']}: {hg['summary']}" for hg in hgs if hg.get("summary"))
 
     prompt = f"""You write the "Season So Far" blurbs for a Big Brother 28 fan website.
@@ -502,7 +514,7 @@ Write a fresh 1-3 sentence "Season So Far" blurb for EVERY houseguest listed, bl
 
 Rules:
 - Use ONLY information present in the recaps and facts below. Never invent or speculate beyond them.
-- The HOUSEGUEST FACTS lines are authoritative for competition results. Never credit a player with winning a competition, safety, HOH, or veto unless their own facts line says so — being in the group whose member won does NOT make them a winner.
+- Each player's "verified wins" field is the complete, authoritative list of everything they have won. If it says NONE, that player has won nothing — no comps, no safety — no matter how a recap sentence reads. Being in the group whose member won does NOT make them a winner.
 - Only describe a player as a member of an alliance if the recap explicitly names them as one of its members. Re-read the recap sentence carefully before attributing membership.
 - Lead with the player's current situation, then their most significant storylines. Old news should compress or drop as bigger things happen.
 - If the recaps never mention a player, write from their facts alone.
@@ -520,18 +532,25 @@ HOUSEGUEST FACTS:
 PREVIOUS BLURBS:
 {prev_lines if prev_lines else "(none yet)"}
 
-Reply with ONLY a JSON object mapping every houseguest id to their new blurb string."""
+First, inside a <scratch> block, extract from the recaps: (a) every alliance with its exact member list as literally named in the recap text, and (b) every competition or safety win with the exact winner's name. Cross-check each against the verified-wins fields before writing.
+
+Then, after the scratch block, reply with a JSON object mapping every houseguest id to their new blurb string. No other text after the JSON."""
 
     try:
         r = requests.post(ANTHROPIC_URL, timeout=120,
                           headers={"x-api-key": api_key, "anthropic-version": "2023-06-01",
                                    "content-type": "application/json"},
-                          json={"model": ANTHROPIC_MODEL, "max_tokens": 3000,
+                          json={"model": ANTHROPIC_MODEL, "max_tokens": 5000,
                                 "messages": [{"role": "user", "content": prompt}]})
         r.raise_for_status()
-        text = r.json()["content"][0]["text"].strip()
-        text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text)
-        result = json.loads(text)
+        text = r.json()["content"][0]["text"]
+        # The response is a <scratch> verification block followed by the JSON object
+        after_scratch = text.find("</scratch>")
+        start = text.find("{", after_scratch if after_scratch != -1 else 0)
+        end = text.rfind("}")
+        if start == -1 or end <= start:
+            raise ValueError("no JSON object in response")
+        result = json.loads(text[start:end + 1])
         if not isinstance(result, dict):
             raise ValueError("response is not a JSON object")
         return {k: str(v).strip() for k, v in result.items() if str(v).strip()}
