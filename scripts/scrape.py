@@ -321,6 +321,127 @@ def apply_week(data, week, results, published, held, unmatched):
                     published.append(f"Week {week}: {hg['name']} marked evicted")
 
 
+# ── Season So Far summaries ───────────────────────────────────────────────
+# Each run REWRITES every houseguest's `summary` from their full aired event
+# history, so the text always leads with what's most significant right now
+# (old news compresses or drops instead of accumulating line by line).
+# Hand-written color lives in `storyNotes` (Admin page) and is never touched.
+
+COMP_WINS = {
+    "hoh":           ("an", "HOH win", "HOH wins"),
+    "veto":          ("a", "veto win", "veto wins"),
+    "bbBlockbuster": ("a", "Blockbuster win", "Blockbuster wins"),
+    "wallHang":      ("a", "wall-hang win", "wall-hang wins"),
+    "otev":          ("an", "OTEV win", "OTEV wins"),
+    "bbComics":      ("a", "BB Comics win", "BB Comics wins"),
+    "safety":        ("a", "safety win", "safety wins"),
+}
+
+_NUM_WORDS = {2: "two", 3: "three", 4: "four", 5: "five",
+              6: "six", 7: "seven", 8: "eight", 9: "nine"}
+
+
+def _count_phrase(n, article, singular, plural):
+    if n == 1:
+        return f"{article} {singular}"
+    return f"{_NUM_WORDS.get(n, str(n))} {plural}"
+
+
+def _join(items):
+    if len(items) <= 1:
+        return "".join(items)
+    if len(items) == 2:
+        return f"{items[0]} and {items[1]}"
+    return ", ".join(items[:-1]) + f", and {items[-1]}"
+
+
+def build_summary(hg, current_week, evicted_weeks):
+    """Compose the spoiler-safe 'Season So Far' paragraph for one houseguest.
+    Works only from already-published (i.e., aired) events."""
+    events = hg.get("events") or []
+    weeks_of = {}
+    for ev in events:
+        if ev.get("week"):
+            weeks_of.setdefault(ev.get("type"), set()).add(ev["week"])
+
+    nom_weeks = sorted(weeks_of.get("nominated", set()))
+    saved_weeks = weeks_of.get("takenOffBlock", set())
+    status = hg.get("status", "active")
+    sents = []
+    reigning = False
+
+    # 1. Current situation leads
+    if status == "winner":
+        sents.append("Winner of Big Brother 28.")
+    elif status in ("evicted", "jury"):
+        wk = hg.get("weekEvicted")
+        lead = f"Evicted in Week {wk}" if wk else "Evicted from the house"
+        if status == "jury":
+            lead += " and now sits on the jury"
+        sents.append(lead + ".")
+    else:
+        hoh_weeks = weeks_of.get("hoh", set())
+        if current_week in hoh_weeks and current_week not in evicted_weeks:
+            reigning = True
+            sents.append(f"Reigning Head of Household after winning the Week {current_week} comp.")
+        elif (current_week in nom_weeks and current_week not in saved_weeks
+              and current_week not in evicted_weeks):
+            sents.append("Currently on the block ahead of the next eviction.")
+
+    # 2. Comp resume (skip the HOH already covered by a reigning lead)
+    resume = []
+    for etype, (article, singular, plural) in COMP_WINS.items():
+        n = len(weeks_of.get(etype, set()))
+        if etype == "hoh" and reigning:
+            n -= 1
+        if n > 0:
+            phrase = _count_phrase(n, article, singular, plural)
+            if etype == "safety" and weeks_of.get("safety") == {1}:
+                phrase += " from premiere night"
+            resume.append(phrase)
+    if resume:
+        verb = "Finished with" if status in ("evicted", "jury", "winner") else "Owns"
+        tail = "." if status in ("evicted", "jury", "winner") else " so far."
+        sents.append(f"{verb} {_join(resume)}{tail}")
+
+    # 3. Block record (past weeks; the lead already covers a current nomination)
+    survived = [w for w in nom_weeks
+                if w not in saved_weeks and w in evicted_weeks and hg.get("weekEvicted") != w]
+    bits = []
+    if saved_weeks:
+        if len(saved_weeks) == 1:
+            bits.append(f"was pulled off the block in Week {min(saved_weeks)}")
+        else:
+            bits.append(f"was pulled off the block {_NUM_WORDS.get(len(saved_weeks), len(saved_weeks))} times")
+    if survived:
+        if len(survived) == 1:
+            bits.append(f"survived the Week {survived[0]} eviction vote")
+        else:
+            bits.append(f"survived {_NUM_WORDS.get(len(survived), len(survived))} eviction votes on the block")
+    if bits:
+        s = " and ".join(bits)
+        sents.append(s[0].upper() + s[1:] + ".")
+
+    if not sents:
+        return "Has stayed off the block and out of the comp spotlight so far — the quiet game."
+    return " ".join(sents)
+
+
+def update_summaries(data):
+    """Regenerate every houseguest's summary; returns how many changed."""
+    hgs = data.get("houseguests") or []
+    all_weeks = [ev["week"] for hg in hgs for ev in (hg.get("events") or []) if ev.get("week")]
+    current_week = max(all_weeks) if all_weeks else 1
+    evicted_weeks = {hg.get("weekEvicted") for hg in hgs if hg.get("weekEvicted")}
+    changed = 0
+    for hg in hgs:
+        new = build_summary(hg, current_week, evicted_weeks)
+        if hg.get("summary") != new:
+            hg["summary"] = new
+            changed += 1
+    return changed
+
+
 def main():
     dry_run = "--dry-run" in sys.argv
 
@@ -353,6 +474,10 @@ def main():
     for week in sorted(weeks):
         apply_week(data, week, weeks[week], published, held, unmatched)
 
+    refreshed = update_summaries(data)
+    if refreshed:
+        print(f"SUMMARY  rewrote 'Season So Far' text for {refreshed} houseguest(s)")
+
     for line in published:
         print(f"PUBLISH  {line}")
     # Held items are logged WITHOUT names so even the Action log stays spoiler-free
@@ -361,19 +486,19 @@ def main():
     for name in sorted(unmatched):
         print(f"UNMATCHED name on Wikipedia (not on our roster): {name}")
 
-    if not published:
-        print("No new aired events to publish.")
+    if not published and not refreshed:
+        print("No new aired events to publish; summaries already current.")
         return
 
     if dry_run:
-        print(f"DRY RUN — {len(published)} event(s) would publish. Nothing written.")
+        print(f"DRY RUN — {len(published)} event(s) and {refreshed} summary rewrite(s) would publish. Nothing written.")
         return
 
     data["lastUpdated"] = str(date.today())
     push_firebase(data)
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-    print(f"Published {len(published)} update(s) to Firebase; data.json backup written.")
+    print(f"Published {len(published)} event(s) and {refreshed} summary rewrite(s) to Firebase; data.json backup written.")
 
 
 if __name__ == "__main__":

@@ -80,7 +80,7 @@ function renderHgList() {
 
 function populateHgSelects() {
   const data = _adminData;
-  ['ev-hg', 'st-hg'].forEach(id => {
+  ['ev-hg', 'st-hg', 'note-hg'].forEach(id => {
     const sel = document.getElementById(id);
     if (!sel) return;
     sel.innerHTML = '<option value="">— select —</option>';
@@ -250,6 +250,32 @@ async function addEvent() {
     document.getElementById('ev-type').value = '';
     document.getElementById('ev-points').value = '';
     document.getElementById('ev-note').value = '';
+    invalidateCache();
+    _adminData = await loadData();
+    refreshAdminUI();
+  }
+}
+
+// ── SEASON STORY NOTES ────────────────────────────────────────────────
+function loadStoryNote() {
+  const hg = _adminData.houseguests.find(h => h.id === document.getElementById('note-hg').value);
+  document.getElementById('note-text').value = (hg && hg.storyNotes) ? hg.storyNotes : '';
+}
+
+async function saveStoryNote() {
+  const hgId = document.getElementById('note-hg').value;
+  if (!hgId) { showMsg('Select a houseguest.', 'error'); return; }
+  const hg = _adminData.houseguests.find(h => h.id === hgId);
+  if (!hg) return;
+
+  const text = document.getElementById('note-text').value.trim();
+  if (text) hg.storyNotes = text;
+  else delete hg.storyNotes;
+
+  const ok = await saveData(_adminData);
+  if (ok) {
+    showMsg(text ? `Story note saved for ${hg.name}.` : `Story note cleared for ${hg.name}.`);
+    document.getElementById('note-text').value = '';
     invalidateCache();
     _adminData = await loadData();
     refreshAdminUI();

@@ -49,10 +49,10 @@
           "type": "nominated"
         },
         {
-          "type": "hoh",
+          "description": "Won Head of Household (Week 1)",
           "houseguestId": "hg_dee_valladares",
           "points": 10,
-          "description": "Won Head of Household (Week 1)"
+          "type": "hoh"
         }
       ],
       "week": 1
@@ -69,7 +69,8 @@
       "occupation": "Bartender",
       "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game."
     },
     {
       "age": 27,
@@ -81,7 +82,8 @@
       "occupation": "Jumbotron engineer",
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game."
     },
     {
       "age": 27,
@@ -101,7 +103,8 @@
       "occupation": "Supply chain analyst",
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Owns a safety win from premiere night so far."
     },
     {
       "age": 22,
@@ -112,7 +115,8 @@
       "occupation": "Surgical dental assistant",
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game."
     },
     {
       "age": 29,
@@ -124,7 +128,8 @@
       "occupation": "Telemedicine executive",
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game."
     },
     {
       "age": 35,
@@ -145,7 +150,8 @@
       "occupation": "Professional drag queen",
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Owns a safety win from premiere night so far."
     },
     {
       "age": 32,
@@ -156,7 +162,8 @@
       "occupation": "MMA fighter and coach",
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game."
     },
     {
       "age": 57,
@@ -168,7 +175,8 @@
       "occupation": "Boutique salesperson",
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game."
     },
     {
       "age": 25,
@@ -179,7 +187,8 @@
       "occupation": "Attorney",
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game."
     },
     {
       "age": 24,
@@ -199,7 +208,8 @@
       "occupation": "Rocket scientist",
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Currently on the block ahead of the next eviction."
     },
     {
       "age": 24,
@@ -211,7 +221,8 @@
       "occupation": "Corporate game show host",
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game."
     },
     {
       "age": 42,
@@ -222,7 +233,8 @@
       "occupation": "News anchor",
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game."
     },
     {
       "age": 28,
@@ -243,7 +255,8 @@
       "occupation": "Pickleball coach",
       "ownerId": "brittany",
       "photo": "photos/rome.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Owns a safety win from premiere night so far."
     },
     {
       "age": 27,
@@ -263,7 +276,8 @@
       "occupation": "Elementary school counselor",
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Currently on the block ahead of the next eviction."
     },
     {
       "age": 52,
@@ -275,7 +289,8 @@
       "occupation": "Real estate agent",
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game."
     },
     {
       "age": 24,
@@ -295,29 +310,31 @@
       "occupation": "Financial analyst",
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
-      "status": "active"
+      "status": "active",
+      "summary": "Currently on the block ahead of the next eviction."
     },
     {
       "age": 29,
       "bio": "Winner of Survivor 45. Julie's time-travel twist pulled her into the BB28 house at the end of premiere night as the seventeenth houseguest, replacing Rachel Reilly. Undrafted — her points are tracked for the season but don't count toward any team.",
+      "events": [
+        {
+          "addedAt": "2026-07-13T21:10:34.074077+00:00",
+          "description": "Won Head of Household (Week 1)",
+          "points": 10,
+          "type": "hoh",
+          "week": 1
+        }
+      ],
       "hometown": "Miami, FL",
       "id": "hg_dee_valladares",
       "name": "Dee Valladares",
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "events": [
-        {
-          "week": 1,
-          "type": "hoh",
-          "points": 10,
-          "description": "Won Head of Household (Week 1)",
-          "addedAt": "2026-07-13T21:10:34.074077+00:00"
-        }
-      ]
+      "summary": "Reigning Head of Household after winning the Week 1 comp."
     }
   ],
-  "lastUpdated": "2026-07-13",
+  "lastUpdated": "2026-07-15",
   "owners": [
     {
       "color": "#ff6b9d",

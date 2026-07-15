@@ -153,6 +153,27 @@
         </div>
       </div>
 
+      <!-- ── SEASON STORY NOTES ── -->
+      <div class="admin-section">
+        <h3>Season Story Notes</h3>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:16px;">The scraper auto-writes each player's factual "Season So Far" summary after every episode. Use this for the color it can't see — alliances, funny moments, catchphrases. Notes appear beneath the summary in the player pop-up and survive scraper rewrites.</p>
+        <div class="card card-sm">
+          <div class="form-row">
+            <div class="input-group">
+              <label>Houseguest</label>
+              <select id="note-hg" onchange="loadStoryNote()"><option value="">— select —</option></select>
+            </div>
+          </div>
+          <div class="input-group" style="margin-top:12px;">
+            <label>Notes (leave empty and save to clear)</label>
+            <textarea id="note-text" rows="3" placeholder="e.g. Founded the 'Time Bandits' alliance; keeps calling the Have-Not room 'the dungeon'"></textarea>
+          </div>
+          <div style="margin-top:12px;">
+            <button class="btn btn-primary btn-sm" onclick="saveStoryNote()">Save Note</button>
+          </div>
+        </div>
+      </div>
+
       <!-- ── HOUSEGUEST STATUS ── -->
       <div class="admin-section">
         <h3>Update Houseguest Status</h3>

@@ -161,6 +161,12 @@
             <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px;">Bio</h3>
             <p style="font-size:.85rem;line-height:1.55;color:var(--text,#e8edf2);">${hg.bio}</p>
           </div>` : ''}
+          ${(hg.summary || hg.storyNotes) ? `
+          <div style="padding:20px 20px 0;">
+            <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px;">Season So Far</h3>
+            ${hg.summary ? `<p style="font-size:.85rem;line-height:1.55;color:var(--text,#e8edf2);">${hg.summary}</p>` : ''}
+            ${hg.storyNotes ? `<p style="font-size:.83rem;line-height:1.5;color:var(--mint);margin-top:8px;">📝 ${hg.storyNotes}</p>` : ''}
+          </div>` : ''}
           <div style="padding:20px;">
             <h3 style="font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px;">Point History</h3>
             ${hg.events && hg.events.length
