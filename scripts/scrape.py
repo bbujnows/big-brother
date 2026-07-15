@@ -14,7 +14,7 @@ Usage:
     python scripts/scrape.py --dry-run  # show what would publish, write nothing
 """
 
-import json, re, sys
+import hashlib, json, os, re, sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -427,17 +427,153 @@ def build_summary(hg, current_week, evicted_weeks):
     return " ".join(sents)
 
 
-def update_summaries(data):
-    """Regenerate every houseguest's summary; returns how many changed."""
+# ── AI color pass ─────────────────────────────────────────────────────────
+# When ANTHROPIC_API_KEY is set (GitHub Actions secret), aired episode recap
+# blurbs from Wikipedia are sent to the Claude API along with each player's
+# verified facts, and the returned story-aware blurbs replace the rules-based
+# summaries. Blurbs for unaired episodes are empty on Wikipedia, so this
+# source is spoiler-safe by construction. Falls back to rules-based text on
+# any failure. `summaryDigest` in the data records what the last AI pass saw,
+# so the API is only called when the recaps or facts actually change.
+
+ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
+ANTHROPIC_MODEL = "claude-sonnet-4-6"
+MAX_BLURBS = 6  # most recent aired episodes sent to the API (facts + previous blurbs carry older context)
+
+
+def _strip_wiki_markup(text):
+    text = re.sub(r"\[\[(?:[^|\]]*\|)?([^\]]+)\]\]", r"\1", text)  # [[A|B]] -> B
+    text = re.sub(r"\{\{efn\|[^}]*\}\}", "", text)
+    text = re.sub(r"\{\{[^{}]*\}\}", "", text)                     # leftover templates
+    text = re.sub(r"<ref[^>]*/>|<ref[^>]*>.*?</ref>", "", text, flags=re.S)
+    text = text.replace("''", "")
+    text = text.replace("&nbsp;", " ")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def fetch_episode_blurbs():
+    """Return aired, non-empty episode recap texts from Wikipedia, oldest first."""
+    api = "https://en.wikipedia.org/w/api.php"
+    try:
+        r = requests.get(api, params={"action": "parse", "page": "Big_Brother_28_(American_season)",
+                                      "prop": "sections", "format": "json"},
+                         headers=HEADERS, timeout=20)
+        sections = r.json()["parse"]["sections"]
+        idx = next(s["index"] for s in sections if s["line"].lower() == "episodes")
+        r = requests.get(api, params={"action": "parse", "page": "Big_Brother_28_(American_season)",
+                                      "prop": "wikitext", "section": idx, "format": "json"},
+                         headers=HEADERS, timeout=20)
+        wikitext = r.json()["parse"]["wikitext"]["*"]
+    except Exception as e:
+        print(f"Could not fetch episode recaps: {e}")
+        return []
+
+    blurbs = []
+    now = datetime.now(ET)
+    for block in wikitext.split("{{Episode list/sublist")[1:]:
+        m_date = re.search(r"OriginalAirDate\s*=\s*\{\{Start date\|(\d{4})\|(\d{1,2})\|(\d{1,2})", block)
+        m_sum = re.search(r"ShortSummary\s*=\s*(.*?)\n\s*\|\s*LineColor", block, re.S)
+        if not m_date or not m_sum:
+            continue
+        text = _strip_wiki_markup(m_sum.group(1))
+        if not text:
+            continue
+        d = date(int(m_date.group(1)), int(m_date.group(2)), int(m_date.group(3)))
+        aired_at = datetime(d.year, d.month, d.day, *REVEAL_HOUR, tzinfo=ET)
+        if now >= aired_at:
+            blurbs.append({"date": str(d), "text": text})
+    blurbs.sort(key=lambda b: b["date"])
+    return blurbs[-MAX_BLURBS:]
+
+
+def ai_color_pass(api_key, hgs, facts, blurbs):
+    """Ask Claude to blend facts + recap color. Returns {hg_id: blurb} or None."""
+    recap_lines = "\n\n".join(f"[aired {b['date']}] {b['text']}" for b in blurbs)
+    fact_lines = "\n".join(f"- {hg['id']} | {hg['name']} | status: {hg.get('status', 'active')} | {facts[hg['id']]}"
+                           for hg in hgs)
+    prev_lines = "\n".join(f"- {hg['id']}: {hg['summary']}" for hg in hgs if hg.get("summary"))
+
+    prompt = f"""You write the "Season So Far" blurbs for a Big Brother 28 fan website.
+
+Below are (1) this season's aired episode recaps, (2) each houseguest's verified competition/nomination facts, and (3) the previously published blurbs.
+
+Write a fresh 1-3 sentence "Season So Far" blurb for EVERY houseguest listed, blending the facts with story color from the recaps (alliances, big moves, betrayals, funny moments).
+
+Rules:
+- Use ONLY information present in the recaps and facts below. Never invent or speculate beyond them.
+- Lead with the player's current situation, then their most significant storylines. Old news should compress or drop as bigger things happen.
+- If the recaps never mention a player, write from their facts alone.
+- Carry forward still-relevant storylines from the previous blurbs (like alliance membership) even when the latest recap doesn't repeat them; drop anything the newer material makes obsolete.
+- Keep each blurb under 60 words. Plain text, no markdown.
+- Refer to houseguests by first name.
+
+EPISODE RECAPS (aired episodes only):
+{recap_lines}
+
+HOUSEGUEST FACTS:
+{fact_lines}
+
+PREVIOUS BLURBS:
+{prev_lines if prev_lines else "(none yet)"}
+
+Reply with ONLY a JSON object mapping every houseguest id to their new blurb string."""
+
+    try:
+        r = requests.post(ANTHROPIC_URL, timeout=120,
+                          headers={"x-api-key": api_key, "anthropic-version": "2023-06-01",
+                                   "content-type": "application/json"},
+                          json={"model": ANTHROPIC_MODEL, "max_tokens": 3000,
+                                "messages": [{"role": "user", "content": prompt}]})
+        r.raise_for_status()
+        text = r.json()["content"][0]["text"].strip()
+        text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text)
+        result = json.loads(text)
+        if not isinstance(result, dict):
+            raise ValueError("response is not a JSON object")
+        return {k: str(v).strip() for k, v in result.items() if str(v).strip()}
+    except Exception as e:
+        print(f"AI color pass failed ({e}); using rules-based summaries.")
+        return None
+
+
+def update_summaries(data, dry_run=False):
+    """Regenerate every houseguest's summary; returns how many changed.
+
+    With ANTHROPIC_API_KEY set: facts + aired recaps go through the Claude API
+    (only when they've changed since the last successful pass).
+    Without the key: rules-based facts text — unless an AI pass has published
+    before (summaryDigest present), in which case summaries are left alone so
+    a local run can't clobber the Action's AI-written text."""
     hgs = data.get("houseguests") or []
+    if not hgs:
+        return 0
     all_weeks = [ev["week"] for hg in hgs for ev in (hg.get("events") or []) if ev.get("week")]
     current_week = max(all_weeks) if all_weeks else 1
     evicted_weeks = {hg.get("weekEvicted") for hg in hgs if hg.get("weekEvicted")}
+    facts = {hg["id"]: build_summary(hg, current_week, evicted_weeks) for hg in hgs}
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    new_texts = facts
+
+    if api_key:
+        blurbs = fetch_episode_blurbs()
+        digest = hashlib.sha256(json.dumps([facts, blurbs], sort_keys=True).encode()).hexdigest()
+        if data.get("summaryDigest") == digest:
+            return 0  # nothing the AI saw has changed; keep current summaries
+        if dry_run:
+            print(f"DRY RUN — AI color pass would run on {len(blurbs)} recap(s). Skipping the API call.")
+            return 0
+        ai = ai_color_pass(api_key, hgs, facts, blurbs)
+        if ai:
+            new_texts = {hg["id"]: ai.get(hg["id"]) or facts[hg["id"]] for hg in hgs}
+            data["summaryDigest"] = digest  # only marks SUCCESSFUL passes; failures retry next run
+    elif data.get("summaryDigest"):
+        return 0  # AI pipeline owns summaries; don't overwrite them with plain facts
+
     changed = 0
     for hg in hgs:
-        new = build_summary(hg, current_week, evicted_weeks)
-        if hg.get("summary") != new:
-            hg["summary"] = new
+        if hg.get("summary") != new_texts[hg["id"]]:
+            hg["summary"] = new_texts[hg["id"]]
             changed += 1
     return changed
 
@@ -474,7 +610,7 @@ def main():
     for week in sorted(weeks):
         apply_week(data, week, weeks[week], published, held, unmatched)
 
-    refreshed = update_summaries(data)
+    refreshed = update_summaries(data, dry_run=dry_run)
     if refreshed:
         print(f"SUMMARY  rewrote 'Season So Far' text for {refreshed} houseguest(s)")
 
