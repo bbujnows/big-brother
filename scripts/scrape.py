@@ -439,6 +439,7 @@ def build_summary(hg, current_week, evicted_weeks):
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_MODEL = "claude-sonnet-4-6"
 MAX_BLURBS = 6  # most recent aired episodes sent to the API (facts + previous blurbs carry older context)
+PROMPT_VERSION = 2  # bump to force a fresh AI pass after prompt changes
 
 
 def _strip_wiki_markup(text):
@@ -501,6 +502,8 @@ Write a fresh 1-3 sentence "Season So Far" blurb for EVERY houseguest listed, bl
 
 Rules:
 - Use ONLY information present in the recaps and facts below. Never invent or speculate beyond them.
+- The HOUSEGUEST FACTS lines are authoritative for competition results. Never credit a player with winning a competition, safety, HOH, or veto unless their own facts line says so — being in the group whose member won does NOT make them a winner.
+- Only describe a player as a member of an alliance if the recap explicitly names them as one of its members. Re-read the recap sentence carefully before attributing membership.
 - Lead with the player's current situation, then their most significant storylines. Old news should compress or drop as bigger things happen.
 - If the recaps never mention a player, write from their facts alone.
 - Carry forward still-relevant storylines from the previous blurbs (like alliance membership) even when the latest recap doesn't repeat them; drop anything the newer material makes obsolete.
@@ -557,7 +560,7 @@ def update_summaries(data, dry_run=False):
 
     if api_key:
         blurbs = fetch_episode_blurbs()
-        digest = hashlib.sha256(json.dumps([facts, blurbs], sort_keys=True).encode()).hexdigest()
+        digest = hashlib.sha256(json.dumps([PROMPT_VERSION, facts, blurbs], sort_keys=True).encode()).hexdigest()
         if data.get("summaryDigest") == digest:
             return 0  # nothing the AI saw has changed; keep current summaries
         if dry_run:
