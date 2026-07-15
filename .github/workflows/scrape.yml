@@ -6,6 +6,8 @@ on:
     - cron: '35 2 * * *'
     # 2am ET (6am UTC) daily backstop — catches late Wikipedia edits
     - cron: '0 6 * * *'
+    # 3pm ET (7pm UTC) — picks up episode recap blurbs written during the day
+    - cron: '0 19 * * *'
   workflow_dispatch:  # Manual trigger from GitHub Actions tab
 
 permissions:
