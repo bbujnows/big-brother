@@ -439,7 +439,7 @@ def build_summary(hg, current_week, evicted_weeks):
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_MODEL = "claude-sonnet-4-6"
 MAX_BLURBS = 6  # most recent aired episodes sent to the API (facts + previous blurbs carry older context)
-PROMPT_VERSION = 2  # bump to force a fresh AI pass after prompt changes
+PROMPT_VERSION = 3  # bump to force a fresh AI pass after prompt changes
 
 
 def _strip_wiki_markup(text):
@@ -506,7 +506,8 @@ Rules:
 - Only describe a player as a member of an alliance if the recap explicitly names them as one of its members. Re-read the recap sentence carefully before attributing membership.
 - Lead with the player's current situation, then their most significant storylines. Old news should compress or drop as bigger things happen.
 - If the recaps never mention a player, write from their facts alone.
-- Carry forward still-relevant storylines from the previous blurbs (like alliance membership) even when the latest recap doesn't repeat them; drop anything the newer material makes obsolete.
+- The previous blurbs are a continuity reference only and MAY CONTAIN ERRORS. Never treat them as a source of facts: re-verify every claim you carry forward against the recaps and facts, and silently correct anything they got wrong (a misattributed win, a wrong alliance roster). When previous blurbs conflict with the recaps or facts, the recaps and facts always win.
+- Carry forward still-relevant, verified storylines (like alliance membership) even when the latest recap doesn't repeat them; drop anything the newer material makes obsolete.
 - Keep each blurb under 60 words. Plain text, no markdown.
 - Refer to houseguests by first name.
 
