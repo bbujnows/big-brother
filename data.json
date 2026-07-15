@@ -83,7 +83,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett also missed out on competing for safety on premiere night, yet landed a spot in the Crossovers alliance alongside Dee, Angela, Drew, and Kamu. He narrowly avoided the block after Kamu lobbied Dee to nominate him, but Dee stuck to her original plan."
+      "summary": "Barrett missed out on competing for safety on premiere night, yet landed a spot in the Crossovers alliance alongside Dee, Angela, Drew, Kamu, and Devens. He narrowly avoided the block after Kamu lobbied Dee to nominate him instead, but Dee stuck to her original plan and spared him."
     },
     {
       "age": 27,
@@ -116,7 +116,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew is a member of both the Red Corner and Crossovers alliances, giving him strong protection on both sides of the house. The downside: his group's poor HOH showing earned him a week as a Have-Not."
+      "summary": "Drew is a member of both the Red Corner and Crossovers alliances, giving him protection on both sides of the house. The downside: his group's poor HOH showing earned him a week as a Have-Not alongside Chuk, Haley, and Taylor."
     },
     {
       "age": 29,
@@ -176,7 +176,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "LaTrice competed in the premiere night balance challenge but didn't win safety, and has kept a low profile since, staying off the block as the house heads into its first eviction vote."
+      "summary": "LaTrice competed in the premiere night balance challenge but didn't win safety, and has kept a low profile since, staying off the block and out of alliance conversations as the house heads into its first eviction vote."
     },
     {
       "age": 25,
@@ -234,7 +234,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens entered as a reality icon, quickly buried his Survivor 50 history with Dee, and co-founded the Red Corner alliance. His group's last-place HOH finish made them all Have-Nots, but his social game looks strong heading into the first vote."
+      "summary": "Devens entered as a reality icon, quickly buried his Survivor history with Dee, and co-founded the Red Corner alliance. His group's last-place HOH finish made them all Have-Nots, but his social game looks strong heading into the first vote."
     },
     {
       "age": 28,
@@ -290,7 +290,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela entered as the season's first returning icon and has wasted no time making moves, giving Dee valuable HOH advice and securing a spot in the Crossovers alliance alongside Dee, Devens, Kamu, Barrett, and Drew."
+      "summary": "Angela entered as the season's first returning icon, gave Dee valuable HOH advice after her win, and secured a spot in the Crossovers alliance alongside Dee, Devens, Kamu, Barrett, and Drew. She's well-connected heading into the first eviction."
     },
     {
       "age": 24,
@@ -311,7 +311,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash won his group's premiere night memory challenge, helping bring Rachel Reilly into the house, but that contribution didn't earn him protection — Dee still placed him on the block as her group's representative. He now fights for survival in the first eviction."
+      "summary": "Yash won his group's premiere night memory challenge, helping bring Rachel Reilly into the house, but that contribution didn't earn him protection — Dee still placed him on the block as his group's representative. He now fights for survival in the first eviction."
     },
     {
       "age": 29,
@@ -425,5 +425,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "432ba19ebbed544570ba1164cbfc5dddc23243682462f587b335aa81ce65a135"
+  "summaryDigest": "3548677bda8367a58ab60ace5048e3aa8fedaa741bf8f2a2f4f7cd711db8b17d"
 }
