@@ -53,6 +53,24 @@
           "houseguestId": "hg_dee_valladares",
           "points": 10,
           "type": "hoh"
+        },
+        {
+          "type": "veto",
+          "houseguestId": "hg_mallory_aurichio",
+          "points": 5,
+          "description": "Won Power of Veto (Week 1)"
+        },
+        {
+          "type": "takenOffBlock",
+          "houseguestId": "hg_mallory_aurichio",
+          "points": 5,
+          "description": "Taken off the block (Week 1)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_ashley_trail",
+          "points": -3,
+          "description": "Named replacement nominee (Week 1)"
         }
       ],
       "week": 1
@@ -70,7 +88,16 @@
       "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
       "status": "active",
-      "summary": "Ashley missed her shot at premiere night safety but has avoided the block entirely, staying under the radar as the house's first eviction approaches. With no comp wins or alliance mentions to her name yet, she's playing the quietest game in the house."
+      "summary": "Ashley missed her shot at premiere night safety and is now on the block ahead of the first eviction, after Mallory won the Week 1 veto and came off. With no comp wins and no alliance to her name, she enters the first vote in a genuinely dangerous spot.",
+      "events": [
+        {
+          "week": 1,
+          "type": "nominated",
+          "points": -3,
+          "description": "Named replacement nominee (Week 1)",
+          "addedAt": "2026-07-16T05:25:11.029658+00:00"
+        }
+      ]
     },
     {
       "age": 27,
@@ -83,7 +110,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett missed out on competing for safety on premiere night yet landed a spot in the Crossovers alliance alongside Dee, Devens, Angela, and Drew. He narrowly avoided the block after Kamu lobbied Dee to nominate him instead, but Dee stuck to her original plan and spared him."
+      "summary": "Barrett missed out on competing for safety on premiere night yet landed a spot in the Crossovers alliance alongside Dee, Devens, Angela, and Drew. He narrowly avoided the block after Kamu lobbied Dee to nominate him, but Dee stuck to her plan and spared him for now."
     },
     {
       "age": 27,
@@ -104,7 +131,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Chuk won premiere night safety, then bonded quickly with Kamu and Haley and joined Dee and Devens in forming the Red Corner alliance. The downside: his group's poor HOH showing earned him a week as a Have-Not heading into the first eviction."
+      "summary": "Chuk won premiere night safety, quickly bonded with Kamu and Haley, and joined Dee and Devens as a founding member of the Red Corner alliance. The downside: his group's poor HOH showing earned him a week as a Have-Not heading into the first eviction."
     },
     {
       "age": 22,
@@ -116,7 +143,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew is a member of the Crossovers alliance, giving him protection as the first eviction approaches. The downside: his group's last-place HOH finish earned him a week as a Have-Not alongside Chuk, Haley, and Taylor."
+      "summary": "Drew is a member of the Crossovers alliance with Dee, Devens, Angela, and Barrett, giving him solid protection heading into the first eviction. The downside: his group's last-place HOH finish earned him a week as a Have-Not alongside Chuk, Haley, and Taylor."
     },
     {
       "age": 29,
@@ -129,7 +156,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley is enduring a week as a Have-Not after her group finished last in the HOH comp, but she's already a founding member of the Red Corner alliance with Dee, Devens, Chuk, and Kamu, giving her a solid foundation heading into the first eviction."
+      "summary": "Haley is enduring a Have-Not week after her group finished last in the HOH comp, but she's already a founding member of the Red Corner alliance with Dee, Devens, Chuk, and Kamu. A rough start physically, but her social footing looks strong heading into the first vote."
     },
     {
       "age": 35,
@@ -151,7 +178,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "active",
-      "summary": "Jason won his group's premiere night memory challenge, bringing Rachel Reilly into the house, but has stayed off the block and out of the alliance spotlight since. He heads into the first eviction quietly safe."
+      "summary": "Jason won his group's premiere night memory challenge, bringing Rachel Reilly into the house, but has stayed off the block and out of the alliance spotlight since. He heads into the first eviction quietly safe with a comp win already on his résumé."
     },
     {
       "age": 32,
@@ -163,7 +190,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu is a founding member of the Red Corner alliance but already flashed an independent streak, lobbying Dee to nominate Barrett instead of following her original plan — a push Dee ultimately rejected. A bold early move that could define how his allies see him."
+      "summary": "Kamu is a founding member of the Red Corner alliance with Dee, Devens, Chuk, and Haley, but already flashed an independent streak by lobbying Dee to nominate Barrett instead of following her original plan — a push Dee ultimately rejected. A bold early move that could define how allies see him."
     },
     {
       "age": 57,
@@ -200,6 +227,20 @@
           "points": -3,
           "type": "nominated",
           "week": 1
+        },
+        {
+          "week": 1,
+          "type": "veto",
+          "points": 5,
+          "description": "Won Power of Veto (Week 1)",
+          "addedAt": "2026-07-16T05:25:11.029380+00:00"
+        },
+        {
+          "week": 1,
+          "type": "takenOffBlock",
+          "points": 5,
+          "description": "Taken off the block (Week 1)",
+          "addedAt": "2026-07-16T05:25:11.029619+00:00"
         }
       ],
       "hometown": "Washington Township, NJ",
@@ -209,7 +250,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory is on the block this week as one of Dee's three nominees, selected as the representative from her premiere night group as part of Dee's one-from-each-group strategy. She'll need to fight to survive the season's first eviction."
+      "summary": "Mallory was nominated as part of Dee's one-from-each-group strategy, but fought back by winning the Week 1 veto and pulling herself off the block. She survives the immediate danger and now has both a comp win and a narrow escape on her early résumé."
     },
     {
       "age": 24,
@@ -234,7 +275,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens entered as a reality icon, quickly buried his Survivor history with Dee, and co-founded the Red Corner alliance alongside Dee, Kamu, Chuk, and Haley, while also helping form the Crossovers with Angela, Barrett, and Drew. His social game looks strong heading into the first vote."
+      "summary": "Devens entered as a reality icon, quickly buried his Survivor rivalry with Dee, and co-founded both the Red Corner alliance with Dee, Kamu, Chuk, and Haley and the Crossovers with Dee, Angela, Barrett, and Drew. His web of connections makes him one of the best-positioned players heading into the first vote."
     },
     {
       "age": 28,
@@ -277,7 +318,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor is on the block this week after her group finished last in the HOH comp and became Have-Nots, making her one of Dee's three Week 1 nominees. She faces a tough uphill battle to survive the season's first eviction."
+      "summary": "Taylor is on the block this week after her group finished last in the HOH comp and became Have-Nots, making her one of Dee's three Week 1 nominees. With Mallory off the block after winning the veto, Taylor now faces Ashley and Yash as her co-nominees in a fight for survival."
     },
     {
       "age": 52,
@@ -290,7 +331,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela entered as the season's first returning icon, gave Dee valuable HOH advice after her win, and secured a spot in the Crossovers alliance alongside Dee, Devens, Barrett, and Drew. She's well-connected heading into the first eviction."
+      "summary": "Angela entered as the season's first returning icon, gave Dee valuable HOH advice after her win, and secured a spot in the Crossovers alliance alongside Dee, Devens, Barrett, and Drew. She's well-connected and comfortable heading into the first eviction."
     },
     {
       "age": 24,
@@ -311,7 +352,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash competed in premiere night's memory challenge but came up short, and that contribution didn't earn him protection — Dee placed him on the block as his group's representative. He now fights for survival in the first eviction."
+      "summary": "Yash competed in premiere night's memory challenge but came up short, and Dee placed him on the block as his group's representative. With Mallory having won the veto and come off, he now sits alongside Taylor and Ashley fighting for survival in the season's first eviction."
     },
     {
       "age": 29,
@@ -331,10 +372,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee entered late as Rachel Reilly's replacement, won the Week 1 HOH, and immediately built two overlapping alliances — the Red Corner with Devens, Kamu, Chuk, and Haley, and the Crossovers adding Angela, Barrett, and Drew. She rebuffed Kamu's push to spare Barrett and nominated Mallory, Taylor, and Yash."
+      "summary": "Dee entered late as Rachel Reilly's replacement, won the Week 1 HOH, and immediately built two overlapping alliances — the Red Corner with Devens, Kamu, Chuk, and Haley, and the Crossovers adding Angela, Barrett, and Drew. She rebuffed Kamu's push to spare Barrett and nominated Mallory, Taylor, and Yash, though Mallory's veto win shook up the block."
     }
   ],
-  "lastUpdated": "2026-07-15",
+  "lastUpdated": "2026-07-16",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -425,5 +466,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "52c688dc78a75cc3363f60c7da5be2ee95676081508e1c09f993c30024f2ad81"
+  "summaryDigest": "98e81948e55660100dc63d780fc015774106a02e6374dbbe4b510c5eb78f3d1b"
 }
