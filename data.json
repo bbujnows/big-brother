@@ -61,10 +61,10 @@
           "type": "veto"
         },
         {
-          "description": "Taken off the block (Week 1)",
+          "description": "Took themselves off the block (Week 1)",
           "houseguestId": "hg_mallory_aurichio",
-          "points": 5,
-          "type": "takenOffBlock"
+          "points": 3,
+          "type": "savedSelf"
         },
         {
           "description": "Named replacement nominee (Week 1)",
@@ -73,16 +73,16 @@
           "type": "nominated"
         },
         {
-          "type": "bbBlockbuster",
+          "description": "Won BB Blockbuster (Week 1)",
           "houseguestId": "hg_yash_patel",
           "points": 5,
-          "description": "Won BB Blockbuster (Week 1)"
+          "type": "bbBlockbuster"
         },
         {
-          "type": "takenOffBlock",
+          "description": "Took themselves off the block (Week 1)",
           "houseguestId": "hg_yash_patel",
-          "points": 5,
-          "description": "Taken off the block (Week 1)"
+          "points": 3,
+          "type": "savedSelf"
         }
       ],
       "week": 1
@@ -123,7 +123,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett also missed out on premiere night safety but landed a cushioned spot in the Crossovers alliance with Dee, Devens, Angela, and Drew. He dodged a bullet when Kamu lobbied Dee to target him — Dee refused — and he heads into Week 2 quietly safe."
+      "summary": "Barrett missed out on premiere night safety but landed a spot in the Crossovers alliance with Dee, Devens, Angela, and Drew. He dodged a bullet when Kamu lobbied Dee to target him — Dee refused — and he heads into Week 2 quietly safe with no comp wins but solid cover."
     },
     {
       "age": 27,
@@ -144,7 +144,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Chuk won premiere night safety and quickly bonded with Kamu and Haley, parlaying that chemistry into founding membership in the Red Corner alliance with Dee, Devens, Kamu, and Haley. The trade-off: his group's HOH stumble earned him a Have-Not week to open the season."
+      "summary": "Chuk won premiere night safety and bonded fast with Kamu and Haley, parlaying that chemistry into founding membership in the Red Corner with Dee, Devens, Kamu, and Haley. The trade-off: his group's last-place HOH finish earned him a Have-Not week to open the season."
     },
     {
       "age": 22,
@@ -169,7 +169,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley endured a Have-Not week after her group's poor HOH showing, but she's a founding member of the Red Corner alongside Dee, Devens, Chuk, and Kamu. A rough physical start, but her social game looks strong heading into Week 2."
+      "summary": "Haley endured a Have-Not week after her group's poor HOH showing, but she's a founding member of the Red Corner alongside Dee, Devens, Chuk, and Kamu. A rough start physically, but her social game looks strong heading into Week 2."
     },
     {
       "age": 35,
@@ -203,7 +203,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu is a founding member of the Red Corner with Dee, Devens, Chuk, and Haley, but already flashed independence by lobbying Dee to nominate Barrett over her original plan — a push Dee rejected. That bold early move could shape how his allies view him going forward."
+      "summary": "Kamu is a founding member of the Red Corner with Dee, Devens, Chuk, and Haley, but already flashed independence by lobbying Dee to nominate Barrett over her original plan — a push Dee firmly rejected. That bold early move could shape how his allies view him going forward."
     },
     {
       "age": 57,
@@ -216,7 +216,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "LaTrice competed in the premiere night balance challenge but came away without safety, and has kept a low profile since — no block appearances, no alliances mentioned, no comp wins. She enters Week 2 as one of the quietest players in the house."
+      "summary": "LaTrice competed in the premiere night balance challenge but came away without safety and has kept a low profile since — no block appearances, no alliances mentioned, no comp wins. She enters Week 2 as one of the quietest players in the house."
     },
     {
       "age": 25,
@@ -250,9 +250,9 @@
         },
         {
           "addedAt": "2026-07-16T05:25:11.029619+00:00",
-          "description": "Taken off the block (Week 1)",
-          "points": 5,
-          "type": "takenOffBlock",
+          "description": "Took themselves off the block (Week 1)",
+          "points": 3,
+          "type": "savedSelf",
           "week": 1
         }
       ],
@@ -358,18 +358,18 @@
           "week": 1
         },
         {
-          "week": 1,
-          "type": "bbBlockbuster",
-          "points": 5,
+          "addedAt": "2026-07-17T05:26:55.744731+00:00",
           "description": "Won BB Blockbuster (Week 1)",
-          "addedAt": "2026-07-17T05:26:55.744731+00:00"
+          "points": 5,
+          "type": "bbBlockbuster",
+          "week": 1
         },
         {
-          "week": 1,
-          "type": "takenOffBlock",
-          "points": 5,
-          "description": "Taken off the block (Week 1)",
-          "addedAt": "2026-07-17T05:26:55.745007+00:00"
+          "addedAt": "2026-07-17T05:26:55.745007+00:00",
+          "description": "Took themselves off the block (Week 1)",
+          "points": 3,
+          "type": "savedSelf",
+          "week": 1
         }
       ],
       "hometown": "Monroe Township, NJ",
@@ -379,7 +379,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash landed on the block as Dee's representative from his time-travel group, then won the Blockbuster competition to earn his way off. He escapes Week 1 eviction with both a comp win and a dramatic survival story already on his résumé."
+      "summary": "Yash landed on the block as Dee's representative from his time-travel group, then won the Blockbuster competition to pull himself off. He escapes Week 1 eviction with both a comp win and a dramatic survival story already on his résumé."
     },
     {
       "age": 29,
@@ -399,7 +399,7 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee entered late as Rachel's replacement, won the Week 1 HOH, and immediately built two overlapping alliances — the Red Corner with Devens, Kamu, Chuk, and Haley, and the Crossovers adding Angela, Barrett, and Drew. She rebuffed Kamu's push to spare Barrett, held her original nomination plan, and watched Mallory's veto shake up the block before the first eviction."
+      "summary": "Dee entered late as Rachel's replacement, won the Week 1 HOH, and immediately built two overlapping alliances — the Red Corner with Devens, Kamu, Chuk, and Haley, and the Crossovers adding Angela, Barrett, and Drew. She rebuffed Kamu's push to change her nominations, held her original plan, and watched Mallory's veto shake up the block before the first eviction."
     }
   ],
   "lastUpdated": "2026-07-17",
@@ -490,8 +490,12 @@
     "wallHang": {
       "label": "Wall Hang Win",
       "points": 5
+    },
+    "savedSelf": {
+      "label": "Took Themselves Off Block",
+      "points": 3
     }
   },
   "season": 28,
-  "summaryDigest": "90aace0964ad823b43787bc3a544cc9bc557b0ea465e09429d8edd2d7fd5503d"
+  "summaryDigest": "150d3fc88c301afdd983c02981da223850cb9306512953e6248401145324c01e"
 }
