@@ -472,7 +472,8 @@
         const hohs  = withEv('hoh');
         const vetos = withEv('veto');
         const noms  = withEv('nominated');
-        const saved = withEv('takenOffBlock');
+        const saved = data.houseguests.filter(h => (h.events || []).some(e =>
+          (e.type === 'takenOffBlock' || e.type === 'savedSelf') && e.week === w));
         const evictedNow = data.houseguests.filter(h => h.weekEvicted === w);
 
         if (hohs.length === 1) {
