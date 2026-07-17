@@ -63,6 +63,26 @@ function getPointsForType(data, type) {
   return data.scoring[type] ? data.scoring[type].points : 0;
 }
 
+// ── STATUS DISPLAY ───────────────────────────────────────────────────
+// "On the block" is derived, not stored: nominated in the latest week they
+// were nominated, not saved that week, and that week's eviction hasn't
+// aired yet. Clears automatically when the scraper publishes results.
+function isOnBlock(data, hg) {
+  if (hg.status !== 'active') return false;
+  const evs = hg.events || [];
+  const nomWeeks = evs.filter(e => e.type === 'nominated').map(e => e.week);
+  if (nomWeeks.length === 0) return false;
+  const w = Math.max(...nomWeeks);
+  if (evs.some(e => (e.type === 'savedSelf' || e.type === 'takenOffBlock') && e.week === w)) return false;
+  if (data.houseguests.some(h => h.weekEvicted === w)) return false;
+  return true;
+}
+
+function statusBadge(data, hg) {
+  if (isOnBlock(data, hg)) return '<span class="status-badge status-onblock">on the block</span>';
+  return `<span class="status-badge status-${hg.status}">${hg.status}</span>`;
+}
+
 // ── FIREBASE SAVE (no token, no SHA, instant) ────────────────────────
 async function saveData(data) {
   try {

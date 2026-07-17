@@ -250,7 +250,7 @@
                 ? `<span class="owner-dot" style="background:${owner.color}"></span>${owner.name}`
                 : '<span style="color:var(--muted)">Undrafted</span>'}
             </td>
-            <td><span class="status-badge status-${hg.status}">${hg.status}</span></td>
+            <td>${statusBadge(data, hg)}</td>
             <td style="text-align:right" class="${pts>0?'pts-pos':pts<0?'pts-neg':'pts-zero'}">${pts>0?'+':''}${pts}</td>`;
           tbody.appendChild(tr);
         });

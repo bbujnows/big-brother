@@ -103,7 +103,7 @@
         card.className = `hg-card ${hg.status === 'evicted' ? 'evicted' : ''}`;
         card.onclick = () => openModal(hg);
         card.innerHTML = `
-          <span class="status-badge status-${hg.status}">${hg.status}</span>
+          ${statusBadge(window._data, hg)}
           <div class="hg-photo">
             ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}">` : '👤'}
             ${hg.bio ? `
@@ -147,7 +147,7 @@
               <p style="color:var(--muted);font-size:.85rem;">${hg.age ? hg.age + ' years old · ' : ''}${hg.hometown || ''}${hg.currentCity ? ' (lives in ' + hg.currentCity + ')' : ''}</p>
               ${hg.occupation ? `<p style="color:var(--mint);font-size:.78rem;font-weight:700;margin-top:2px;">${hg.occupation}</p>` : ''}
               <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
-                <span class="status-badge status-${hg.status}">${hg.status}</span>
+                ${statusBadge(window._data, hg)}
                 ${owner ? `<span style="font-size:.8rem;color:${owner.color};font-weight:700;">${owner.name}'s team</span>` : ''}
               </div>
             </div>
