@@ -78,7 +78,20 @@ function isOnBlock(data, hg) {
   return true;
 }
 
+// Reigning HOH = won the most recent week's HOH comp; the badge hands off
+// automatically when the next HOH win publishes.
+function isReigningHOH(data, hg) {
+  if (hg.status !== 'active') return false;
+  let maxHohWeek = 0;
+  data.houseguests.forEach(h => (h.events || []).forEach(e => {
+    if (e.type === 'hoh') maxHohWeek = Math.max(maxHohWeek, e.week);
+  }));
+  if (!maxHohWeek) return false;
+  return (hg.events || []).some(e => e.type === 'hoh' && e.week === maxHohWeek);
+}
+
 function statusBadge(data, hg) {
+  if (isReigningHOH(data, hg)) return '<span class="status-badge status-hoh">HOH 👑</span>';
   if (isOnBlock(data, hg)) return '<span class="status-badge status-onblock">on the block</span>';
   return `<span class="status-badge status-${hg.status}">${hg.status}</span>`;
 }
