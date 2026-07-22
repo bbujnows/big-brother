@@ -466,8 +466,10 @@
 
       const incidents = [];
       const clashes = {};
+      const goodwill = {};
       const pairKey = (a, b) => [a, b].sort().join('|');
       const bump = (a, b) => { const k = pairKey(a, b); clashes[k] = (clashes[k] || 0) + 1; };
+      const bumpGood = (a, b) => { const k = pairKey(a, b); goodwill[k] = (goodwill[k] || 0) + 1; };
       const records = {};
       data.owners.forEach(o => records[o.id] = { fired: 0, taken: 0, saves: 0, kills: 0, rescues: 0, ownGoals: 0 });
 
@@ -476,8 +478,10 @@
         const hohs  = withEv('hoh');
         const vetos = withEv('veto');
         const noms  = withEv('nominated');
+        // Only saves by someone else count as beef/goodwill — savedSelf
+        // (veto or Blockbuster self-save) credits nobody.
         const saved = data.houseguests.filter(h => (h.events || []).some(e =>
-          (e.type === 'takenOffBlock' || e.type === 'savedSelf') && e.week === w));
+          e.type === 'takenOffBlock' && e.week === w));
         const evictedNow = data.houseguests.filter(h => h.weekEvicted === w);
 
         if (hohs.length === 1) {
@@ -526,24 +530,26 @@
               incidents.push({ week: w, icon: '🛟', tag: 'BAILOUT', clr: 'var(--mint)',
                 text: `${sav.name}'s ${v.name} pulled ${ben.name}'s ${s.name} off the block` });
               records[sav.id].saves++;
+              bumpGood(sav.id, ben.id);
             }
           });
         }
       }
-      return { incidents, clashes, records };
+      return { incidents, clashes, goodwill, records };
     }
 
     function renderBeef(data, race) {
       const wrap = document.getElementById('beef-wrap');
       if (!race) { wrap.innerHTML = ''; return; }
-      const { incidents, clashes, records } = computeBeef(data);
+      const { incidents, clashes, goodwill, records } = computeBeef(data);
 
-      // Feud meter: every owner pair, hostile incidents only
+      // Feud meter: every owner pair — hostile clashes (red) + friendly saves (green)
       const pairs = [];
       for (let i = 0; i < data.owners.length; i++)
         for (let j = i + 1; j < data.owners.length; j++) {
           const a = data.owners[i], b = data.owners[j];
-          pairs.push({ a, b, n: clashes[[a.id, b.id].sort().join('|')] || 0 });
+          const k = [a.id, b.id].sort().join('|');
+          pairs.push({ a, b, n: clashes[k] || 0, g: goodwill[k] || 0 });
         }
       pairs.sort((x, y) => y.n - x.n);
       const top = pairs[0] && pairs[0].n > 0 ? pairs[0] : null;
@@ -564,12 +570,18 @@
               <div style="font-size:.7rem;color:var(--muted);margin-top:4px;">${top.n} clash${top.n === 1 ? '' : 'es'} and counting</div>
             </div>` : `
             <div style="text-align:center;padding:14px 0;color:var(--muted);font-size:.8rem;">No feuds yet. The house is peaceful — it won't last.</div>`}
+          <div style="display:grid;grid-template-columns:6.5em 2em 1fr 2.4em 2.4em;align-items:center;padding:2px 0 4px;font-family:var(--mono);font-size:.62rem;color:var(--muted);">
+            <span></span><span></span><span></span>
+            <span style="text-align:right;" title="Friendly — bailouts between these two teams">🛟</span>
+            <span style="text-align:right;" title="Hostile — nominations and evictions between these two teams">⚔️</span>
+          </div>
           ${pairs.map(p => `
-            <div style="display:grid;grid-template-columns:6.5em 2em 1fr auto;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-lt,rgba(255,255,255,0.04));font-size:.78rem;">
+            <div style="display:grid;grid-template-columns:6.5em 2em 1fr 2.4em 2.4em;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-lt,rgba(255,255,255,0.04));font-size:.78rem;">
               <span>${dot(p.a)}${p.a.name}</span>
               <span style="color:var(--muted);text-align:center;">vs</span>
               <span>${dot(p.b)}${p.b.name}</span>
-              <strong style="text-align:right;color:${p.n > 0 ? 'var(--rec)' : 'var(--muted)'}">${p.n}</strong>
+              <strong title="Friendly saves" style="text-align:right;color:${p.g > 0 ? 'var(--mint)' : 'var(--muted)'}">${p.g}</strong>
+              <strong title="Hostile clashes" style="text-align:right;color:${p.n > 0 ? 'var(--rec)' : 'var(--muted)'}">${p.n}</strong>
             </div>`).join('')}
           <div style="margin-top:14px;">
             <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">Rap Sheets</div>
