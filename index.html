@@ -572,16 +572,16 @@
             <div style="text-align:center;padding:14px 0;color:var(--muted);font-size:.8rem;">No feuds yet. The house is peaceful — it won't last.</div>`}
           <div style="display:grid;grid-template-columns:6.5em 2em 1fr 2.4em 2.4em;align-items:center;padding:2px 0 4px;font-family:var(--mono);font-size:.62rem;color:var(--muted);">
             <span></span><span></span><span></span>
-            <span style="text-align:right;" title="Friendly — bailouts between these two teams">🛟</span>
             <span style="text-align:right;" title="Hostile — nominations and evictions between these two teams">⚔️</span>
+            <span style="text-align:right;" title="Friendly — bailouts between these two teams">🛟</span>
           </div>
           ${pairs.map(p => `
             <div style="display:grid;grid-template-columns:6.5em 2em 1fr 2.4em 2.4em;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-lt,rgba(255,255,255,0.04));font-size:.78rem;">
               <span>${dot(p.a)}${p.a.name}</span>
               <span style="color:var(--muted);text-align:center;">vs</span>
               <span>${dot(p.b)}${p.b.name}</span>
-              <strong title="Friendly saves" style="text-align:right;color:${p.g > 0 ? 'var(--mint)' : 'var(--muted)'}">${p.g}</strong>
               <strong title="Hostile clashes" style="text-align:right;color:${p.n > 0 ? 'var(--rec)' : 'var(--muted)'}">${p.n}</strong>
+              <strong title="Friendly saves" style="text-align:right;color:${p.g > 0 ? 'var(--mint)' : 'var(--muted)'}">${p.g}</strong>
             </div>`).join('')}
           <div style="margin-top:14px;">
             <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">Rap Sheets</div>
