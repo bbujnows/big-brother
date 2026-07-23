@@ -88,34 +88,52 @@
       "week": 1
     },
     {
-      "week": 2,
       "airDate": "2026-07-19",
       "events": [
         {
-          "type": "hoh",
+          "description": "Won Head of Household (Week 2)",
           "houseguestId": "hg_rick_devens",
           "points": 10,
-          "description": "Won Head of Household (Week 2)"
+          "type": "hoh"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 2)",
           "houseguestId": "hg_jason_de_puy",
           "points": -3,
-          "description": "Nominated for eviction (Week 2)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 2)",
           "houseguestId": "hg_melody_morris",
           "points": -3,
-          "description": "Nominated for eviction (Week 2)"
+          "type": "nominated"
+        },
+        {
+          "description": "Nominated for eviction (Week 2)",
+          "houseguestId": "hg_lyric_medeiros",
+          "points": -3,
+          "type": "nominated"
+        },
+        {
+          "type": "veto",
+          "houseguestId": "hg_rick_devens",
+          "points": 5,
+          "description": "Won Power of Veto (Week 2)"
+        },
+        {
+          "type": "takenOffBlock",
+          "houseguestId": "hg_lyric_medeiros",
+          "points": 5,
+          "description": "Taken off the block (Week 2)"
         },
         {
           "type": "nominated",
-          "houseguestId": "hg_lyric_medeiros",
+          "houseguestId": "hg_rome_seymour",
           "points": -3,
-          "description": "Nominated for eviction (Week 2)"
+          "description": "Named replacement nominee (Week 2)"
         }
-      ]
+      ],
+      "week": 2
     }
   ],
   "houseguests": [
@@ -153,7 +171,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett holds a quiet but protected spot as a member of the Crossovers alongside Dee, Devens, Angela, and Drew. He survived Kamu's early lobbying to put him on the block and enters Week 2 under the radar with two alliances above him and no comp wins needed yet."
+      "summary": "Barrett holds a quiet but protected spot as a member of the Crossovers alongside Dee, Devens, Angela, and Drew. He survived Kamu's early lobbying to put him on the block and enters the current week under the radar with no comp wins needed yet."
     },
     {
       "age": 27,
@@ -174,7 +192,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Chuk parlayed his premiere night safety win and fast bond with Kamu and Haley into founding membership in the Red Corner with Dee, Devens, Kamu, and Haley. He endured a Have-Not opening week but heads into Week 2 competition-credentialed and alliance-protected."
+      "summary": "Chuk parlayed his premiere night safety win and fast bond with Kamu and Haley into founding membership in the Red Corner with Dee, Devens, Kamu, and Haley. He endured a Have-Not opening week but heads deeper into the game competition-credentialed and alliance-protected."
     },
     {
       "age": 22,
@@ -199,7 +217,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley is a founding member of the Red Corner with Dee, Devens, Chuk, and Kamu, giving her strong alliance footing heading into Week 2. A Have-Not opening week was the low point, but her social game looks like her biggest asset so far."
+      "summary": "Haley is a founding member of the Red Corner with Dee, Devens, Chuk, and Kamu, giving her strong alliance footing as the game moves forward. A Have-Not opening week was the low point, but her social game looks like her biggest asset so far."
     },
     {
       "age": 35,
@@ -214,11 +232,11 @@
           "week": 1
         },
         {
-          "week": 2,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-07-20T05:53:43.321278+00:00",
           "description": "Nominated for eviction (Week 2)",
-          "addedAt": "2026-07-20T05:53:43.321278+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 2
         }
       ],
       "hometown": "San Francisco, CA",
@@ -228,7 +246,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "active",
-      "summary": "Jason won his group's premiere night memory challenge and brought Rachel Reilly into the house, but he now finds himself on the block under Devens' Week 2 HOH. The early comp win looks less like armor than it once did."
+      "summary": "Jason won his group's premiere night memory challenge and brought Rachel Reilly into the house, but he now sits on the block under Devens' Week 2 HOH facing eviction. The early comp win looks like far less armor than it once did."
     },
     {
       "age": 32,
@@ -240,7 +258,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu is a founding member of the Red Corner with Dee, Devens, Chuk, and Haley, but already showed an independent streak by lobbying Dee to target Barrett instead of following her original plan — a push Dee firmly rejected. How that early friction echoes under Devens' HOH remains to be seen."
+      "summary": "Kamu is a founding member of the Red Corner with Dee, Devens, Chuk, and Haley, but already showed an independent streak by lobbying Dee to target Barrett instead of following her original plan — a push Dee firmly rejected. How that early friction shapes his game under Devens' HOH remains a key thread to watch."
     },
     {
       "age": 57,
@@ -253,11 +271,27 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "LaTrice competed in the premiere night balance challenge without winning safety and has kept a low profile since — no block appearances, no alliances mentioned, no comp wins. She remains one of the quietest players in the house heading into Week 2."
+      "summary": "LaTrice competed in the premiere night balance challenge without winning safety and has kept a low profile since — no block appearances, no alliances mentioned, no comp wins. She remains one of the quietest players in the house heading into the Week 2 eviction."
     },
     {
       "age": 25,
       "bio": "Outgoing, positive and funny — often underestimated. Passed the bar at 23 (youngest in Hawaii, she says). Plans to be both a social player and comp threat; people see sweet and kind but don't realize she's athletic (gym twice a day, sings in a luau show). Open to a showmance if it doesn't hurt her game. Her father sang 'Nothing's Gonna Change My Love for You' in the '80s.",
+      "events": [
+        {
+          "addedAt": "2026-07-20T05:53:43.321295+00:00",
+          "description": "Nominated for eviction (Week 2)",
+          "points": -3,
+          "type": "nominated",
+          "week": 2
+        },
+        {
+          "week": 2,
+          "type": "takenOffBlock",
+          "points": 5,
+          "description": "Taken off the block (Week 2)",
+          "addedAt": "2026-07-23T05:39:11.012341+00:00"
+        }
+      ],
       "hometown": "Honolulu, HI",
       "id": "hg_lyric_medeiros",
       "name": "Lyric Medeiros",
@@ -265,16 +299,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "active",
-      "summary": "Lyric's flirtation with Rome made her one of the most socially visible players early on, but she now finds herself on the block under Devens' Week 2 HOH. The spotlight that made her noticeable may have also made her a target.",
-      "events": [
-        {
-          "week": 2,
-          "type": "nominated",
-          "points": -3,
-          "description": "Nominated for eviction (Week 2)",
-          "addedAt": "2026-07-20T05:53:43.321295+00:00"
-        }
-      ]
+      "summary": "Lyric's flirtation with Rome made her one of the most socially visible players early on, and while she landed on the block under Devens' Week 2 HOH, she was pulled off the block before the eviction vote. She escapes the immediate danger but carries no comp wins and no named alliance."
     },
     {
       "age": 24,
@@ -309,12 +334,21 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory survived Dee's Week 1 nomination by winning the veto and pulling herself off the block. She carries both a comp win and a narrow escape into Week 2, emerging as one of the tougher early-game stories among the newbies."
+      "summary": "Mallory survived Dee's Week 1 nomination by winning the veto and pulling herself off the block. She carries both a comp win and a narrow escape into the current week, emerging as one of the tougher early-game stories among the newbies."
     },
     {
       "age": 24,
       "bio": "Ambitious, bold and funny — watched BB since she was 'in the womb.' Strategy: align with the right people and let others underestimate the 'dumb blonde sorority girl' look; she's intelligent and quick-witted. Won't reveal her real job — she'll say she's a waitress (also true). Not interested in a showmance; sensitivity is a weakness.",
       "currentCity": "Maricopa, AZ",
+      "events": [
+        {
+          "addedAt": "2026-07-20T05:53:43.321288+00:00",
+          "description": "Nominated for eviction (Week 2)",
+          "points": -3,
+          "type": "nominated",
+          "week": 2
+        }
+      ],
       "hometown": "Thornton, CO",
       "id": "hg_melody_morris",
       "name": "Melody Morris",
@@ -322,20 +356,27 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Melody stayed off the block and under the radar through Week 1, but Devens' Week 2 HOH has landed her on the block for the first time. She heads into the eviction vote without a comp win or a named alliance to lean on.",
-      "events": [
-        {
-          "week": 2,
-          "type": "nominated",
-          "points": -3,
-          "description": "Nominated for eviction (Week 2)",
-          "addedAt": "2026-07-20T05:53:43.321288+00:00"
-        }
-      ]
+      "summary": "Melody stayed off the block and under the radar through Week 1, but Devens' Week 2 HOH has landed her on the block heading into the eviction vote. She faces that pressure without a comp win or a named alliance to lean on."
     },
     {
       "age": 42,
       "bio": "Survivor legend crossing over as a surprise premiere-night entrant — his first time playing Big Brother. Finished fourth on Survivor: Edge of Extinction (2019), falling in the fire-making challenge, then became the breakout star of Survivor 50: saved himself at back-to-back Tribal Councils and won a MrBeast coin flip that doubled the season's prize to $2 million, finishing seventh. A morning news anchor whose hometown declared an official 'Rick Devens Day' for his charity work with wheelchair sports and animal rescue.",
+      "events": [
+        {
+          "addedAt": "2026-07-20T05:53:43.321087+00:00",
+          "description": "Won Head of Household (Week 2)",
+          "points": 10,
+          "type": "hoh",
+          "week": 2
+        },
+        {
+          "week": 2,
+          "type": "veto",
+          "points": 5,
+          "description": "Won Power of Veto (Week 2)",
+          "addedAt": "2026-07-23T05:39:11.011896+00:00"
+        }
+      ],
       "hometown": "Macon, GA",
       "id": "hg_rick_devens",
       "name": "Rick Devens",
@@ -343,16 +384,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens is the reigning Week 2 Head of Household, giving him the power to act on the overlapping alliances he built in Week 1 — the Red Corner with Dee, Kamu, Chuk, and Haley, and the Crossovers with Dee, Angela, Barrett, and Drew. His nominations of Jason, Lyric, and Melody will reveal how he intends to use that position.",
-      "events": [
-        {
-          "week": 2,
-          "type": "hoh",
-          "points": 10,
-          "description": "Won Head of Household (Week 2)",
-          "addedAt": "2026-07-20T05:53:43.321087+00:00"
-        }
-      ]
+      "summary": "Devens is the reigning Week 2 Head of Household and also holds the Week 2 veto, giving him enormous control this week. A member of both the Red Corner and the Crossovers, he has nominations of Jason, Rome, and Melody on the line as the eviction vote approaches."
     },
     {
       "age": 28,
@@ -365,6 +397,13 @@
           "points": 3,
           "type": "safety",
           "week": 1
+        },
+        {
+          "week": 2,
+          "type": "nominated",
+          "points": -3,
+          "description": "Named replacement nominee (Week 2)",
+          "addedAt": "2026-07-23T05:39:11.012408+00:00"
         }
       ],
       "hometown": "Traverse City, MI",
@@ -374,7 +413,7 @@
       "ownerId": "brittany",
       "photo": "photos/rome.jpg",
       "status": "active",
-      "summary": "Rome won his group's premiere night balance challenge for early safety, and his growing flirtation with Lyric became the house's most-noticed developing connection — though Lyric now sits on the block under Devens' HOH. Rome heads into Week 2 comp-credentialed and socially invested."
+      "summary": "Rome won his group's premiere night balance challenge for early safety, but he now sits on the block under Devens' Week 2 HOH heading into the eviction vote. His growing flirtation with Lyric was the house's most-noticed developing connection, and Lyric herself just narrowly escaped the block this same week."
     },
     {
       "age": 27,
@@ -395,7 +434,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor survived the Week 1 block after being nominated by Dee and enduring a Have-Not week following her group's last-place HOH finish. She escapes eviction but heads into Week 2 without a comp win, an alliance, or much of a safety net."
+      "summary": "Taylor survived the Week 1 block after being nominated by Dee and enduring a Have-Not week following her group's last-place HOH finish. She heads deeper into the game without a comp win, an alliance, or much of a safety net, but survival itself is a story."
     },
     {
       "age": 52,
@@ -408,7 +447,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela entered as the season's first returning icon, gave Dee key Week 1 HOH advice, and secured a spot in the Crossovers alongside Dee, Devens, Barrett, and Drew. She's well-connected and comfortable as the game moves under Devens' HOH."
+      "summary": "Angela entered as the season's first returning icon, gave Dee key Week 1 HOH advice, and secured a spot in the Crossovers alongside Dee, Devens, Barrett, and Drew. She remains well-connected and comfortable as the game moves through Devens' Week 2 HOH."
     },
     {
       "age": 24,
@@ -443,7 +482,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash landed on the block as Dee's Week 1 nominee, then won the Blockbuster competition to pull himself off. He heads into Week 2 with a comp win and a dramatic survival story already on his résumé."
+      "summary": "Yash landed on the block as Dee's Week 1 nominee, then won the Blockbuster competition to pull himself off. He heads further into the game with a comp win and a dramatic survival story already on his résumé."
     },
     {
       "age": 29,
@@ -463,10 +502,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee won the Week 1 HOH, built two overlapping alliances — the Red Corner with Devens, Kamu, Chuk, and Haley, and the Crossovers adding Angela, Barrett, and Drew — and held her original nomination plan despite Kamu's pushback. With Devens now holding the HOH, she moves from power seat to trusted partner, testing how well those alliances hold."
+      "summary": "Dee won the Week 1 HOH, built two overlapping alliances — the Red Corner with Devens, Kamu, Chuk, and Haley, and the Crossovers adding Angela, Barrett, and Drew — and held her original nomination plan despite Kamu's pushback. With Devens now controlling the Week 2 HOH and veto, she moves from power seat to trusted partner as their shared alliances face their first real test."
     }
   ],
-  "lastUpdated": "2026-07-20",
+  "lastUpdated": "2026-07-23",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -561,5 +600,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "83dcaa370fc475302bf4fb57d7f64a5687e9aa78299ede2a2a257ac7397e893b"
+  "summaryDigest": "d6f01d8cfd0fd46987cbd0fb710fc151d8a5754260f1cce2dfbc0503add26f90"
 }
