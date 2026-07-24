@@ -73,7 +73,8 @@ function isOnBlock(data, hg) {
   const nomWeeks = evs.filter(e => e.type === 'nominated').map(e => e.week);
   if (nomWeeks.length === 0) return false;
   const w = Math.max(...nomWeeks);
-  if (evs.some(e => (e.type === 'savedSelf' || e.type === 'takenOffBlock') && e.week === w)) return false;
+  // Saved by veto/self-save, or won the Blockbuster (which auto-clears the block)
+  if (evs.some(e => (e.type === 'savedSelf' || e.type === 'takenOffBlock' || e.type === 'bbBlockbuster') && e.week === w)) return false;
   if (data.houseguests.some(h => h.weekEvicted === w)) return false;
   return true;
 }

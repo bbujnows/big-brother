@@ -304,18 +304,16 @@ def apply_week(data, week, results, published, held, unmatched):
         final_ids = {h["id"]: h for h in resolve(final)}
         saved = [h for hid, h in init_ids.items() if hid not in final_ids]
         replacements = [h for hid, h in final_ids.items() if hid not in init_ids]
-        # A nominee who won the veto or Blockbuster that week pulled
-        # themselves off (+3); anyone else who came off the block was saved
-        # by someone else (+5). Blockbuster self-saves gate on Thursday.
+        # A nominee who used the veto on themselves scores savedSelf (+3);
+        # anyone else pulled off by the veto winner scores takenOffBlock
+        # (+5). A Blockbuster winner comes off the block automatically —
+        # the bbBlockbuster win (+5) already covers it, no extra points.
         veto_ids = {h["id"] for h in resolve(results.get("veto") or set())}
         bb_ids = {h["id"] for h in resolve(results.get("blockbuster") or set())}
         self_veto = [h for h in saved if h["id"] in veto_ids]
-        self_bb = [h for h in saved if h["id"] in bb_ids and h["id"] not in veto_ids]
         other_saved = [h for h in saved if h["id"] not in veto_ids and h["id"] not in bb_ids]
         emit([h["name"] for h in self_veto], "savedSelf",
              lambda h: f"Took themselves off the block (Week {week})")
-        emit([h["name"] for h in self_bb], "savedSelf",
-             lambda h: f"Took themselves off the block (Week {week})", gate_type="bbBlockbuster")
         emit([h["name"] for h in other_saved], "takenOffBlock",
              lambda h: f"Taken off the block (Week {week})")
         emit([h["name"] for h in replacements], "nominated",
@@ -335,21 +333,29 @@ def apply_week(data, week, results, published, held, unmatched):
 
 
 def reclassify_self_saves(data):
-    """Rescore legacy takenOffBlock events that were actually self-saves.
+    """Correct legacy off-block scoring. Two rules:
 
-    A player holding a veto or Blockbuster win AND a takenOffBlock in the
-    same week pulled themselves off — that scores savedSelf (+3), not
-    takenOffBlock (+5, reserved for being saved by someone else). Fixes the
-    player's events and the matching episode-log entries. Returns log lines."""
+    1. takenOffBlock (+5) held by a player who won the veto that week is a
+       self-save — rescored to savedSelf (+3). +5 is reserved for being
+       taken off the block by someone else.
+    2. savedSelf/takenOffBlock held by a player who won the Blockbuster
+       that week (without a veto win) is REMOVED: a Blockbuster win takes
+       the winner off the block automatically, and the bbBlockbuster
+       points already cover it.
+
+    Fixes the player's events and the matching episode-log entries.
+    Returns log lines."""
     pts = get_points(data, "savedSelf")
     lines = []
     for hg in data.get("houseguests") or []:
         events = hg.get("events") or []
-        self_win_weeks = {ev.get("week") for ev in events
-                          if ev.get("type") in ("veto", "bbBlockbuster")}
+        veto_weeks = {ev.get("week") for ev in events if ev.get("type") == "veto"}
+        bb_weeks = {ev.get("week") for ev in events if ev.get("type") == "bbBlockbuster"}
+        keep = []
         for ev in events:
-            if ev.get("type") == "takenOffBlock" and ev.get("week") in self_win_weeks:
-                week = ev["week"]
+            week = ev.get("week")
+            etype = ev.get("type")
+            if etype == "takenOffBlock" and week in veto_weeks:
                 old_pts = ev.get("points")
                 ev["type"] = "savedSelf"
                 ev["points"] = pts
@@ -364,6 +370,19 @@ def reclassify_self_saves(data):
                             le["description"] = ev["description"]
                 lines.append(f"Week {week}: {hg['name']} self-save rescored "
                              f"{'+' if old_pts >= 0 else ''}{old_pts} -> +{pts} (savedSelf)")
+                keep.append(ev)
+            elif etype in ("savedSelf", "takenOffBlock") and week in bb_weeks and week not in veto_weeks:
+                for ep in data.get("episodes") or []:
+                    if ep.get("week") != week:
+                        continue
+                    ep["events"] = [le for le in (ep.get("events") or [])
+                                    if not (le.get("type") == etype and le.get("houseguestId") == hg["id"])]
+                lines.append(f"Week {week}: {hg['name']} off-block points removed "
+                             f"({'+' if ev.get('points', 0) >= 0 else ''}{ev.get('points')}) - "
+                             f"Blockbuster win already covers coming off the block")
+            else:
+                keep.append(ev)
+        hg["events"] = keep
     return lines
 
 
@@ -412,7 +431,10 @@ def build_summary(hg, current_week, evicted_weeks):
 
     nom_weeks = sorted(weeks_of.get("nominated", set()))
     self_saved_weeks = weeks_of.get("savedSelf", set())
-    saved_weeks = weeks_of.get("takenOffBlock", set()) | self_saved_weeks
+    # A Blockbuster win while nominated takes the winner off the block too
+    # (no separate event — the win itself covers it).
+    bb_off_weeks = weeks_of.get("bbBlockbuster", set()) & set(nom_weeks)
+    saved_weeks = weeks_of.get("takenOffBlock", set()) | self_saved_weeks | bb_off_weeks
     status = hg.get("status", "active")
     sents = []
     reigning = False
@@ -460,7 +482,7 @@ def build_summary(hg, current_week, evicted_weeks):
             bits.append(f"pulled themselves off the block in Week {min(self_saved_weeks)}")
         else:
             bits.append(f"pulled themselves off the block {_NUM_WORDS.get(len(self_saved_weeks), len(self_saved_weeks))} times")
-    other_saved = saved_weeks - self_saved_weeks
+    other_saved = weeks_of.get("takenOffBlock", set())
     if other_saved:
         if len(other_saved) == 1:
             bits.append(f"was pulled off the block in Week {min(other_saved)}")
@@ -686,10 +708,12 @@ def main():
     # self-saves BEFORE applying this run's results (so the duplicate guard
     # sees the corrected event types).
     scoring = data.setdefault("scoring", {})
-    config_added = "savedSelf" not in scoring
+    sv = scoring.get("savedSelf")
+    sv_label = "Took Self Off Block (Veto Only)"
+    config_added = not sv or sv.get("label") != sv_label
     if config_added:
-        scoring["savedSelf"] = {"label": "Took Themselves Off Block", "points": 3}
-        print("SCORING  added savedSelf (+3) to the scoring config")
+        scoring["savedSelf"] = {"label": sv_label, "points": (sv or {}).get("points", 3)}
+        print(f"SCORING  savedSelf (+3) config set: '{sv_label}'")
     rescored = reclassify_self_saves(data)
     for line in rescored:
         print(f"RESCORE  {line}")
