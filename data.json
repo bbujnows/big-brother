@@ -77,12 +77,6 @@
           "houseguestId": "hg_yash_patel",
           "points": 5,
           "type": "bbBlockbuster"
-        },
-        {
-          "description": "Took themselves off the block (Week 1)",
-          "houseguestId": "hg_yash_patel",
-          "points": 3,
-          "type": "savedSelf"
         }
       ],
       "week": 1
@@ -133,16 +127,10 @@
           "type": "nominated"
         },
         {
-          "type": "bbBlockbuster",
+          "description": "Won BB Blockbuster (Week 2)",
           "houseguestId": "hg_jason_de_puy",
           "points": 5,
-          "description": "Won BB Blockbuster (Week 2)"
-        },
-        {
-          "type": "savedSelf",
-          "houseguestId": "hg_jason_de_puy",
-          "points": 3,
-          "description": "Took themselves off the block (Week 2)"
+          "type": "bbBlockbuster"
         }
       ],
       "week": 2
@@ -169,7 +157,7 @@
       "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
       "status": "evicted",
-      "summary": "Ashley never got the chance to compete for premiere night safety and couldn't find a foothold before the first eviction arrived. She exits the game in Week 1, leaving behind no comp wins and no alliances to her name.",
+      "summary": "Ashley never earned the chance to compete for premiere night safety and couldn't find a foothold before the first eviction arrived. She exits the game in Week 1 with no comp wins and no named alliances to her name.",
       "weekEvicted": 1
     },
     {
@@ -183,7 +171,8 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett holds a quiet but protected spot as a member of the Crossovers alongside Dee, Devens, Angela, and Drew. He survived Kamu's early lobbying to put him on the block and has kept a low profile with no comp wins needed yet."
+      "summary": "Barrett holds a quiet but protected spot as a member of the Crossovers alongside Dee, Devens, Angela, and Drew. He survived Kamu's early lobbying to put him on the block and has kept a low profile with no comp wins needed yet.",
+      "events": []
     },
     {
       "age": 27,
@@ -204,7 +193,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Chuk parlayed his premiere night safety win and fast bond with Kamu and Haley into founding membership in the Red Corner with Dee, Devens, Kamu, and Haley. He endured a Have-Not opening week but heads deeper into the game competition-credentialed and alliance-protected."
+      "summary": "Chuk parlayed his premiere night safety win and fast bond with Kamu and Haley into founding membership in the Red Corner with Dee, Devens, Kamu, and Haley. A Have-Not opening week was a minor setback, but he heads deeper into the game competition-credentialed and alliance-protected."
     },
     {
       "age": 22,
@@ -216,7 +205,8 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew is a Crossovers alliance member alongside Dee, Devens, Angela, and Barrett, giving him solid early cover despite no comp wins. A Have-Not opening week was the only real bump so far as he continues to play quietly protected."
+      "summary": "Drew is a Crossovers member alongside Dee, Devens, Angela, and Barrett, giving him solid early cover despite no comp wins. A Have-Not opening week was the only real bump as he continues to play quietly protected.",
+      "events": []
     },
     {
       "age": 29,
@@ -229,7 +219,8 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley is a founding member of the Red Corner with Dee, Devens, Chuk, and Kamu, giving her strong alliance footing as the game moves forward. A Have-Not opening week was the low point, but her social game looks like her biggest asset so far."
+      "summary": "Haley is a founding member of the Red Corner with Dee, Devens, Chuk, and Kamu, giving her strong alliance footing heading forward. A Have-Not opening week was the low point, but her social game looks like her biggest asset so far.",
+      "events": []
     },
     {
       "age": 35,
@@ -251,18 +242,11 @@
           "week": 2
         },
         {
-          "week": 2,
-          "type": "bbBlockbuster",
-          "points": 5,
+          "addedAt": "2026-07-24T05:35:36.977987+00:00",
           "description": "Won BB Blockbuster (Week 2)",
-          "addedAt": "2026-07-24T05:35:36.977987+00:00"
-        },
-        {
-          "week": 2,
-          "type": "savedSelf",
-          "points": 3,
-          "description": "Took themselves off the block (Week 2)",
-          "addedAt": "2026-07-24T05:35:36.978435+00:00"
+          "points": 5,
+          "type": "bbBlockbuster",
+          "week": 2
         }
       ],
       "hometown": "San Francisco, CA",
@@ -272,7 +256,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "active",
-      "summary": "Jason has been one of the season's most resourceful players, winning premiere night safety and then winning the Week 2 Blockbuster competition to pull himself off the block under Devens' HOH. Two clutch comp wins in two weeks have kept him alive when it mattered most."
+      "summary": "Jason has been one of the season's most resourceful players, winning premiere night safety and then the Week 2 Blockbuster competition to pull himself off the block. Two clutch comp wins in two weeks have kept him alive when it mattered most."
     },
     {
       "age": 32,
@@ -284,7 +268,8 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu is a founding member of the Red Corner with Dee, Devens, Chuk, and Haley, but already showed an independent streak by lobbying Dee to target Barrett instead of following her plan — a push Dee firmly rejected. How that early friction shapes his relationships going forward is a key thread to watch."
+      "summary": "Kamu is a founding member of the Red Corner with Dee, Devens, Chuk, and Haley, but already showed an independent streak by lobbying Dee to target Barrett instead of following her plan — a push Dee firmly rejected. How that early friction shapes his game remains a key thread to watch.",
+      "events": []
     },
     {
       "age": 57,
@@ -297,7 +282,8 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "LaTrice competed in the premiere night balance challenge without winning safety and has kept a low profile since — no block appearances, no named alliances, no comp wins. She remains one of the quietest players in the house through the first two weeks."
+      "summary": "LaTrice competed in the premiere night balance challenge without winning safety and has kept a low profile since — no block appearances, no named alliances, no comp wins. She remains one of the quietest players in the house through the first two weeks.",
+      "events": []
     },
     {
       "age": 25,
@@ -325,7 +311,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "active",
-      "summary": "Lyric's flirtation with Rome made her one of the most socially visible players early on, and while she landed on the block under Devens' Week 2 HOH, she was pulled off before the eviction vote. Rome's subsequent eviction closes that chapter, leaving her without a comp win or named alliance heading forward."
+      "summary": "Lyric landed on the block under Devens' Week 2 HOH but was pulled off before the eviction vote, surviving the week's danger. Rome's subsequent eviction closes their early flirtation chapter, leaving her without a comp win or named alliance heading forward."
     },
     {
       "age": 24,
@@ -360,7 +346,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory survived Dee's Week 1 nomination by winning the veto and pulling herself off the block. She carries both a comp win and a narrow escape into the game's later weeks, emerging as one of the tougher early-game stories among the newbies."
+      "summary": "Mallory survived Dee's Week 1 nomination by winning the veto and pulling herself off the block. She carries both a comp win and a narrow early escape into the game's later weeks, emerging as one of the tougher early-game stories among the newbies."
     },
     {
       "age": 24,
@@ -410,7 +396,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens is coming off a dominant Week 2, holding both the HOH and the veto and sending Rome out the door. A member of both the Red Corner and the Crossovers, he's one of the most connected and comp-credentialed players in the house."
+      "summary": "Devens is coming off a dominant Week 2, holding both the HOH and veto and sending Rome out the door. A member of both the Red Corner and the Crossovers, he's one of the most connected and comp-credentialed players in the house."
     },
     {
       "age": 28,
@@ -439,7 +425,7 @@
       "ownerId": "brittany",
       "photo": "photos/rome.jpg",
       "status": "evicted",
-      "summary": "Rome won his group's premiere night balance challenge for early safety and became the house's most-noticed developing romance with Lyric, but he couldn't escape Devens' Week 2 HOH. He exits the game in Week 2 with one comp win and a memorable first impression.",
+      "summary": "Rome won his group's premiere night balance challenge for early safety and became the house's most-noticed developing romance with Lyric, but he couldn't escape Devens' Week 2 HOH. He exits in Week 2 with one comp win and a memorable first impression.",
       "weekEvicted": 2
     },
     {
@@ -461,7 +447,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor survived the Week 1 block after being nominated by Dee and enduring a Have-Not week following her group's last-place HOH finish. She heads deeper into the game without a comp win, a named alliance, or much of a safety net, but survival itself is a story."
+      "summary": "Taylor survived the Week 1 block after being nominated by Dee and endured a Have-Not week following her group's last-place HOH finish. She heads deeper into the game without a comp win, a named alliance, or much of a safety net, but survival itself is a story."
     },
     {
       "age": 52,
@@ -474,7 +460,8 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela entered as the season's first returning icon, gave Dee key Week 1 HOH advice, and secured a spot in the Crossovers alongside Dee, Devens, Barrett, and Drew. She remains well-connected and comfortable with no block appearances through the first two weeks."
+      "summary": "Angela entered as the season's first returning icon, gave Dee key Week 1 HOH advice, and secured a spot in the Crossovers alongside Dee, Devens, Barrett, and Drew. She remains well-connected and comfortable with no block appearances through the first two weeks.",
+      "events": []
     },
     {
       "age": 24,
@@ -492,13 +479,6 @@
           "description": "Won BB Blockbuster (Week 1)",
           "points": 5,
           "type": "bbBlockbuster",
-          "week": 1
-        },
-        {
-          "addedAt": "2026-07-17T05:26:55.745007+00:00",
-          "description": "Took themselves off the block (Week 1)",
-          "points": 3,
-          "type": "savedSelf",
           "week": 1
         }
       ],
@@ -602,7 +582,7 @@
       "points": 3
     },
     "savedSelf": {
-      "label": "Took Themselves Off Block",
+      "label": "Took Self Off Block (Veto Only)",
       "points": 3
     },
     "second": {
@@ -627,5 +607,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "bda75e2c8e099ad22ea85a1aa201df879aee5ea3b19e9b1bd34dc4df731c6304"
+  "summaryDigest": "e219c3004c171413741cd247f9e9b03609d7008d167355331de20e704803bc6d"
 }
