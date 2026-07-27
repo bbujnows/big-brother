@@ -607,9 +607,9 @@
 
       const sortedIncidents = [...incidents].sort((a, b) => b.week - a.week);
       const logCard = `
-        <div class="card" style="padding:18px;">
+        <div class="card" style="padding:18px;display:flex;flex-direction:column;">
           <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;">🥩 The Beef Log</div>
-          <div style="max-height:340px;overflow-y:auto;">
+          <div style="flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;">
           ${sortedIncidents.length
             ? sortedIncidents.map(i => `
                 <div style="font-family:var(--mono);font-size:.68rem;line-height:1.55;padding:8px 0;border-bottom:1px solid var(--border-lt,rgba(255,255,255,0.04));">
