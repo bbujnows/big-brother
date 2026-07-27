@@ -134,6 +134,36 @@
         }
       ],
       "week": 2
+    },
+    {
+      "week": 3,
+      "airDate": "2026-07-26",
+      "events": [
+        {
+          "type": "hoh",
+          "houseguestId": "hg_kamu_kirk",
+          "points": 10,
+          "description": "Won Head of Household (Week 3)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_mallory_aurichio",
+          "points": -3,
+          "description": "Nominated for eviction (Week 3)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_latrice_verrett",
+          "points": -3,
+          "description": "Nominated for eviction (Week 3)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_lyric_medeiros",
+          "points": -3,
+          "description": "Nominated for eviction (Week 3)"
+        }
+      ]
     }
   ],
   "houseguests": [
@@ -171,7 +201,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett holds a quiet but protected spot as a member of the Crossovers alongside Dee, Devens, Angela, and Drew. He survived Kamu's early lobbying to put him on the block and continues to play without a comp win or a block appearance.",
+      "summary": "Barrett holds a quiet but protected spot as a member of the Crossovers alongside Dee, Devens, Angela, and Drew. He survived Kamu's early lobbying to put him on the block and continues to play without a comp win or a block appearance into Week 3.",
       "events": []
     },
     {
@@ -193,7 +223,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Chuk parlayed his premiere night safety win and fast bond with Kamu and Haley into founding membership in the Red Corner with Dee, Devens, Kamu, and Haley. A Have-Not opening week was a minor setback, but he heads into Week 3 competition-credentialed and alliance-protected."
+      "summary": "Chuk parlayed his premiere night safety win and fast bond with Kamu and Haley into founding membership in the Red Corner with Dee, Devens, Kamu, and Haley. Competition-credentialed and alliance-protected, he remains one of the better-positioned newbies heading deeper into the game."
     },
     {
       "age": 22,
@@ -205,7 +235,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew is a Crossovers member alongside Dee, Devens, Angela, and Barrett, giving him solid cover despite no comp wins. A Have-Not opening week was the only real bump as he continues to play quietly and protected heading into Week 3.",
+      "summary": "Drew is a Crossovers member alongside Dee, Devens, Angela, and Barrett, giving him solid cover despite no comp wins or block appearances. A Have-Not opening week was the only real bump as he continues to play quietly and protected into Week 3.",
       "events": []
     },
     {
@@ -219,7 +249,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley is a founding member of the Red Corner with Dee, Devens, Chuk, and Kamu, giving her strong alliance footing. A Have-Not opening week was the low point, but her social game remains her biggest asset with no block appearances through two weeks.",
+      "summary": "Haley is a founding member of the Red Corner with Dee, Devens, Chuk, and Kamu, giving her strong alliance footing heading into Week 3. A Have-Not opening week was the low point, but her social game and block-free record remain her biggest assets.",
       "events": []
     },
     {
@@ -268,8 +298,16 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu is a founding member of the Red Corner with Dee, Devens, Chuk, and Haley, but already showed an independent streak by lobbying Dee to target Barrett — a push she firmly rejected. How that early friction shapes his game remains a key thread heading into Week 3.",
-      "events": []
+      "summary": "Kamu converted his Red Corner alliance membership and independent streak into a Week 3 HOH win, nominating LaTrice, Lyric, and Mallory for eviction. His early lobbying to target Barrett was rejected by Dee, but now he holds the power himself and is making his own moves.",
+      "events": [
+        {
+          "week": 3,
+          "type": "hoh",
+          "points": 10,
+          "description": "Won Head of Household (Week 3)",
+          "addedAt": "2026-07-27T06:04:26.897134+00:00"
+        }
+      ]
     },
     {
       "age": 57,
@@ -282,8 +320,16 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "LaTrice competed in the premiere night balance challenge without winning safety and has kept a low profile since — no block appearances, no named alliances, no comp wins. She remains one of the quietest players in the house through the first two weeks.",
-      "events": []
+      "summary": "LaTrice finds herself on the block for the first time under Kamu's Week 3 HOH, a rough outcome for a player who had stayed off the radar with no comp wins or named alliances through the season's opening weeks. Survival is now the only thing on her agenda.",
+      "events": [
+        {
+          "week": 3,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 3)",
+          "addedAt": "2026-07-27T06:04:26.897314+00:00"
+        }
+      ]
     },
     {
       "age": 25,
@@ -302,6 +348,13 @@
           "points": 5,
           "type": "takenOffBlock",
           "week": 2
+        },
+        {
+          "week": 3,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 3)",
+          "addedAt": "2026-07-27T06:04:26.897321+00:00"
         }
       ],
       "hometown": "Honolulu, HI",
@@ -311,7 +364,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "active",
-      "summary": "Lyric landed on the block under Devens' Week 2 HOH but was pulled off before the eviction vote, surviving the week's danger. Rome's subsequent eviction closes their early flirtation chapter, leaving her without a comp win or named alliance heading into Week 3."
+      "summary": "Lyric survived being pulled off the block in Week 2 only to land back on it under Kamu's Week 3 HOH. Rome's eviction already closed the house's most-noticed early flirtation, and she still carries no comp wins or named alliance as she fights to stay alive."
     },
     {
       "age": 24,
@@ -337,6 +390,13 @@
           "points": 3,
           "type": "savedSelf",
           "week": 1
+        },
+        {
+          "week": 3,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 3)",
+          "addedAt": "2026-07-27T06:04:26.897306+00:00"
         }
       ],
       "hometown": "Washington Township, NJ",
@@ -346,7 +406,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory survived Dee's Week 1 nomination by winning the veto and pulling herself off the block. She carries both a comp win and a narrow early escape into the game's later weeks, emerging as one of the tougher early-game stories among the newbies."
+      "summary": "Mallory saved herself from Dee's Week 1 nomination by winning the veto, but she's right back on the block under Kamu's Week 3 HOH. She owns the only comp win of the three current nominees, making her a dangerous but compelling figure in this week's eviction battle."
     },
     {
       "age": 24,
@@ -368,7 +428,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Melody stayed off the block through Week 1, landed on the block under Devens' Week 2 HOH, and survived the eviction vote. She's outlasted immediate danger but still carries no comp wins and no named alliance as the game moves into Week 3."
+      "summary": "Melody landed on the block under Devens' Week 2 HOH and survived the eviction vote, outlasting immediate danger. She still carries no comp wins and no named alliance heading into Week 3, but surviving two nomination cycles is a quiet accomplishment in itself."
     },
     {
       "age": 42,
@@ -396,7 +456,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens dominated Week 2, holding both the HOH and veto and sending Rome out the door. A member of both the Red Corner and the Crossovers, he's one of the most connected and comp-credentialed players in the house heading into Week 3."
+      "summary": "Devens dominated Week 2 with both the HOH and veto, sending Rome out the door, and remains a member of both the Red Corner and the Crossovers. He is the most comp-credentialed and politically connected player in the house through three weeks."
     },
     {
       "age": 28,
@@ -447,7 +507,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor survived the Week 1 block after being nominated by Dee and endured a Have-Not week following her group's last-place HOH finish. She heads into Week 3 without a comp win, a named alliance, or much of a safety net, but survival itself is a story."
+      "summary": "Taylor survived Dee's Week 1 nomination and endured a Have-Not week after her group finished last in the HOH comp. She heads into Week 3 without a comp win, a named alliance, or a safety net — but surviving the season's first block is a story all its own."
     },
     {
       "age": 52,
@@ -460,7 +520,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela entered as the season's first returning icon, gave Dee key Week 1 HOH advice, and secured a spot in the Crossovers alongside Dee, Devens, Barrett, and Drew. She remains well-connected and comfortable with no block appearances through the first two weeks.",
+      "summary": "Angela entered as the season's first returning icon, gave Dee key Week 1 HOH advice, and secured a spot in the Crossovers alongside Dee, Devens, Barrett, and Drew. She remains well-connected and comfortable with no block appearances through the first three weeks.",
       "events": []
     },
     {
@@ -489,7 +549,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash landed on the block as one of Dee's Week 1 nominees, then won the Blockbuster competition to pull himself off. He heads further into the game with a comp win and a dramatic survival story already on his résumé."
+      "summary": "Yash landed on Dee's Week 1 block, then won the Blockbuster competition to pull himself off and stay alive. He heads deeper into the game with a dramatic early survival story and a comp win already on his résumé."
     },
     {
       "age": 29,
@@ -509,10 +569,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee won the Week 1 HOH and built two overlapping alliances — the Red Corner with Devens, Kamu, Chuk, and Haley, and the Crossovers adding Angela, Barrett, and Drew — holding her original nomination plan despite Kamu's pushback. With Devens running a successful Week 2 HOH, their shared alliances look strong heading into Week 3."
+      "summary": "Dee won the Week 1 HOH and built two overlapping alliances — the Red Corner with Devens, Kamu, Chuk, and Haley, and the Crossovers adding Angela, Barrett, and Drew — holding her original nomination plan despite Kamu's pushback. With Devens' dominant Week 2 and Kamu now running Week 3, her alliance web looks formidable."
     }
   ],
-  "lastUpdated": "2026-07-25",
+  "lastUpdated": "2026-07-27",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -607,5 +667,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "1424824fce60f7c5de33fe991982eb684c0633f4d0a4cb1f4f17feca3ac5862c"
+  "summaryDigest": "ba90637a72484229c8336f2b85f85e705a94c06c290a83eb42e7b8c436abb8bf"
 }
