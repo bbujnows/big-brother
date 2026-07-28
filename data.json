@@ -136,34 +136,34 @@
       "week": 2
     },
     {
-      "week": 3,
       "airDate": "2026-07-26",
       "events": [
         {
-          "type": "hoh",
+          "description": "Won Head of Household (Week 3)",
           "houseguestId": "hg_kamu_kirk",
           "points": 10,
-          "description": "Won Head of Household (Week 3)"
+          "type": "hoh"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 3)",
           "houseguestId": "hg_mallory_aurichio",
           "points": -3,
-          "description": "Nominated for eviction (Week 3)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 3)",
           "houseguestId": "hg_latrice_verrett",
           "points": -3,
-          "description": "Nominated for eviction (Week 3)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 3)",
           "houseguestId": "hg_lyric_medeiros",
           "points": -3,
-          "description": "Nominated for eviction (Week 3)"
+          "type": "nominated"
         }
-      ]
+      ],
+      "week": 3
     }
   ],
   "houseguests": [
@@ -286,11 +286,20 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "active",
-      "summary": "Jason has been one of the season's most clutch players, winning premiere night safety and then the Week 2 Blockbuster competition to save himself when it mattered most. Two comp wins in two weeks have kept him alive and built a compelling early résumé."
+      "summary": "Jason has been one of the season's most clutch players, winning premiere night safety and then the Week 2 Blockbuster competition to save himself when it mattered most. Two comp wins in two weeks have built a compelling early résumé and kept him alive."
     },
     {
       "age": 32,
       "bio": "Full name Kamuela 'Kamu' Kirk. Battle-tested from MMA — 11 or 12 surgeries from fighting. Plans a strong social game plus comp wins, but doesn't want to be pegged as a physical threat right away; may hide that he's fought at the sport's highest level and that his family owns his training facility. People may assume he's mean, but he cares about people. Possible weakness: too trusting.",
+      "events": [
+        {
+          "addedAt": "2026-07-27T06:04:26.897134+00:00",
+          "description": "Won Head of Household (Week 3)",
+          "points": 10,
+          "type": "hoh",
+          "week": 3
+        }
+      ],
       "hometown": "Phoenix, AZ",
       "id": "hg_kamu_kirk",
       "name": "Kamu Kirk",
@@ -298,21 +307,21 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu converted his Red Corner alliance membership and independent streak into a Week 3 HOH win, nominating LaTrice, Lyric, and Mallory for eviction. His early lobbying to target Barrett was rejected by Dee, but now he holds the power himself and is making his own moves.",
-      "events": [
-        {
-          "week": 3,
-          "type": "hoh",
-          "points": 10,
-          "description": "Won Head of Household (Week 3)",
-          "addedAt": "2026-07-27T06:04:26.897134+00:00"
-        }
-      ]
+      "summary": "Kamu converted his Red Corner alliance membership and independent streak into a Week 3 HOH win, nominating LaTrice, Lyric, and Mallory for eviction. His early lobbying to target Barrett was rejected by Dee, but now he holds the power himself and is making his own moves."
     },
     {
       "age": 57,
       "bio": "Goes by 'Lala' — 'fantabulistic fantastic,' watching BB since Season 2. Wants to become the oldest winner in BB history; social game plus physical play (she's competed in bodybuilding). Divorced mother of four; her weakness may be caring too much. Open to a showmance. Was part of Sounds of Blackness and is now tour coordinator for Kool & the Gang — Kool is her uncle.",
       "currentCity": "Maplewood, NJ",
+      "events": [
+        {
+          "addedAt": "2026-07-27T06:04:26.897314+00:00",
+          "description": "Nominated for eviction (Week 3)",
+          "points": -3,
+          "type": "nominated",
+          "week": 3
+        }
+      ],
       "hometown": "Kankakee, IL",
       "id": "hg_latrice_verrett",
       "name": "LaTrice Verrett",
@@ -320,16 +329,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "LaTrice finds herself on the block for the first time under Kamu's Week 3 HOH, a rough outcome for a player who had stayed off the radar with no comp wins or named alliances through the season's opening weeks. Survival is now the only thing on her agenda.",
-      "events": [
-        {
-          "week": 3,
-          "type": "nominated",
-          "points": -3,
-          "description": "Nominated for eviction (Week 3)",
-          "addedAt": "2026-07-27T06:04:26.897314+00:00"
-        }
-      ]
+      "summary": "LaTrice finds herself on the block for the first time under Kamu's Week 3 HOH, a rough outcome for a player who had stayed off the radar with no comp wins or named alliances through the season's opening weeks. Survival is now the only thing on her agenda."
     },
     {
       "age": 25,
@@ -350,11 +350,11 @@
           "week": 2
         },
         {
-          "week": 3,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-07-27T06:04:26.897321+00:00",
           "description": "Nominated for eviction (Week 3)",
-          "addedAt": "2026-07-27T06:04:26.897321+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 3
         }
       ],
       "hometown": "Honolulu, HI",
@@ -392,11 +392,11 @@
           "week": 1
         },
         {
-          "week": 3,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-07-27T06:04:26.897306+00:00",
           "description": "Nominated for eviction (Week 3)",
-          "addedAt": "2026-07-27T06:04:26.897306+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 3
         }
       ],
       "hometown": "Washington Township, NJ",
@@ -572,7 +572,7 @@
       "summary": "Dee won the Week 1 HOH and built two overlapping alliances — the Red Corner with Devens, Kamu, Chuk, and Haley, and the Crossovers adding Angela, Barrett, and Drew — holding her original nomination plan despite Kamu's pushback. With Devens' dominant Week 2 and Kamu now running Week 3, her alliance web looks formidable."
     }
   ],
-  "lastUpdated": "2026-07-27",
+  "lastUpdated": "2026-07-28",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -667,5 +667,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "ba90637a72484229c8336f2b85f85e705a94c06c290a83eb42e7b8c436abb8bf"
+  "summaryDigest": "a67f9791904d5d228667319f38aabb32d094631d9f51a1797d801e6bd2bfd464"
 }
