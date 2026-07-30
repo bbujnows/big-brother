@@ -163,22 +163,22 @@
           "type": "nominated"
         },
         {
-          "type": "veto",
+          "description": "Won Power of Veto (Week 3)",
           "houseguestId": "hg_lyric_medeiros",
           "points": 5,
-          "description": "Won Power of Veto (Week 3)"
+          "type": "veto"
         },
         {
-          "type": "savedSelf",
+          "description": "Took themselves off the block (Week 3)",
           "houseguestId": "hg_lyric_medeiros",
           "points": 3,
-          "description": "Took themselves off the block (Week 3)"
+          "type": "savedSelf"
         },
         {
-          "type": "nominated",
+          "description": "Named replacement nominee (Week 3)",
           "houseguestId": "hg_jason_de_puy",
           "points": -3,
-          "description": "Named replacement nominee (Week 3)"
+          "type": "nominated"
         }
       ],
       "week": 3
@@ -205,7 +205,7 @@
       "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
       "status": "evicted",
-      "summary": "Ashley never earned the chance to compete for premiere night safety and couldn't find a foothold before the first eviction arrived. She exits the game in Week 1 with no comp wins and no named alliances to her name.",
+      "summary": "Ashley never earned the chance to compete for premiere night safety and couldn't find a foothold before the first eviction arrived. She exits in Week 1 with no comp wins and no named alliances to her name.",
       "weekEvicted": 1
     },
     {
@@ -219,7 +219,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett holds a quiet but protected spot as a member of the Crossovers alongside Dee, Devens, Angela, and Drew. He survived Kamu's early lobbying to put him on the block and continues to play without a comp win or a block appearance heading into the third eviction.",
+      "summary": "Barrett holds a quiet but protected spot as a member of the Crossovers alongside Dee, Devens, Angela, and Drew. He survived Kamu's early lobbying to put him on the block and continues to play without a comp win or a block appearance heading into the Week 3 eviction.",
       "events": []
     },
     {
@@ -241,7 +241,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Chuk parlayed his premiere night safety win and fast bond with Kamu and Haley into founding membership in the Red Corner with Dee, Devens, Kamu, and Haley. Competition-credentialed and alliance-protected, he remains one of the better-positioned newbies as the season heads deeper."
+      "summary": "Chuk parlayed his premiere night safety win and fast bond with Kamu and Haley into founding membership in the Red Corner with Dee, Devens, Kamu, and Haley. Competition-credentialed and alliance-protected, he remains one of the better-positioned newbies heading into the Week 3 eviction."
     },
     {
       "age": 22,
@@ -267,7 +267,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley is a founding member of the Red Corner with Dee, Devens, Chuk, and Kamu, giving her strong alliance footing as the season progresses. A Have-Not opening week was the low point, but her social game and block-free record remain her biggest assets.",
+      "summary": "Haley is a founding member of the Red Corner with Dee, Devens, Chuk, and Kamu, giving her strong alliance footing as the season progresses. A Have-Not opening week was the low point, but her social game and block-free record remain her biggest assets heading into the third eviction.",
       "events": []
     },
     {
@@ -297,11 +297,11 @@
           "week": 2
         },
         {
-          "week": 3,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-07-30T05:23:47.618258+00:00",
           "description": "Named replacement nominee (Week 3)",
-          "addedAt": "2026-07-30T05:23:47.618258+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 3
         }
       ],
       "hometown": "San Francisco, CA",
@@ -311,7 +311,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "active",
-      "summary": "Jason has been one of the season's most clutch players, winning premiere night safety and the Week 2 Blockbuster competition, but now sits on the block heading into the Week 3 eviction after being named as a replacement nominee. Two comp wins make him a threat, and surviving this week would only add to his résumé."
+      "summary": "Jason has been one of the season's most clutch players, winning premiere night safety and the Week 2 Blockbuster competition, but now sits on the block heading into the Week 3 eviction as a replacement nominee. Two comp wins make him a threat, and surviving this week would only add to his résumé."
     },
     {
       "age": 32,
@@ -332,7 +332,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu converted his Red Corner alliance membership into a Week 3 HOH win, nominating LaTrice, Lyric, and Mallory before ultimately sitting Jason on the block as a replacement nominee. His early lobbying to target Barrett was rejected by Dee, but now he holds the power and is making his own moves."
+      "summary": "Kamu converted his Red Corner alliance membership into a Week 3 HOH win, nominating LaTrice, Lyric, and Mallory before sitting Jason on the block as a replacement nominee after Lyric won the veto. His early lobbying to target Barrett was rejected by Dee in Week 1, but now he holds the power and is making his own moves."
     },
     {
       "age": 57,
@@ -382,18 +382,18 @@
           "week": 3
         },
         {
-          "week": 3,
-          "type": "veto",
-          "points": 5,
+          "addedAt": "2026-07-30T05:23:47.617781+00:00",
           "description": "Won Power of Veto (Week 3)",
-          "addedAt": "2026-07-30T05:23:47.617781+00:00"
+          "points": 5,
+          "type": "veto",
+          "week": 3
         },
         {
-          "week": 3,
-          "type": "savedSelf",
-          "points": 3,
+          "addedAt": "2026-07-30T05:23:47.618195+00:00",
           "description": "Took themselves off the block (Week 3)",
-          "addedAt": "2026-07-30T05:23:47.618195+00:00"
+          "points": 3,
+          "type": "savedSelf",
+          "week": 3
         }
       ],
       "hometown": "Honolulu, HI",
@@ -403,7 +403,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "active",
-      "summary": "Lyric was pulled off the block in Week 2 by someone else, landed on it again under Kamu's Week 3 HOH, then won the veto to pull herself off and escape danger. Rome's eviction already closed the house's most-noticed early flirtation, but her veto win has given her game a needed boost."
+      "summary": "Lyric was pulled off the block in Week 2, landed on it again under Kamu's Week 3 HOH, then won the veto to pull herself off and escape danger a second time. Her veto win has given her game a needed boost, though Rome's eviction already closed the house's most-noticed early flirtation."
     },
     {
       "age": 24,
@@ -445,7 +445,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory saved herself from Dee's Week 1 nomination by winning the veto, but she's right back on the block heading into the Week 3 eviction under Kamu's HOH. Her veto win is the only comp credit she can lean on as she battles to survive another week."
+      "summary": "Mallory saved herself from Dee's Week 1 nomination by winning the veto, but she's right back on the block heading into the Week 3 eviction under Kamu's HOH. Her Week 1 veto win is the only comp credit she can lean on as she battles to survive another week."
     },
     {
       "age": 24,
@@ -706,5 +706,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "14dc9716cef64eaa7de846a65a62fc1783116668f684447862da4e74abbf8d52"
+  "summaryDigest": "b467dfdbfdca38df6cd46e7810bb8023689b3e16e4954bb0678d7d76af621a67"
 }
