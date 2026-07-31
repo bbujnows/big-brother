@@ -149,12 +149,30 @@ def cell_names(cell):
     return names
 
 
+MAX_LABEL_LEN = 40  # real row labels are short; recap prose is not
+
+
 def find_results_table(soup):
-    """Find the voting-history-style grid: rows labeled HOH/Nominations/etc."""
+    """Find the voting-history-style grid: rows labeled HOH/Nominations/etc.
+
+    Matches on short ROW LABELS plus a 'Week N' header row. Substring
+    matching alone is not enough: the episodes table appears earlier on
+    the page and its recap prose mentions both 'Head of Household' and
+    'evicted', so it would win a naive search."""
     for table in soup.find_all("table", class_=re.compile(r"wikitable", re.I)):
         matrix = expand_table(table)
-        labels = " | ".join(cell_text(row[0]).lower() for row in matrix if row)
-        if "head of household" in labels and "evicted" in labels:
+        if not matrix:
+            continue
+        labels = [re.sub(r"\s+", " ", cell_text(row[0])).lower()
+                  for row in matrix if row and cell_text(row[0])]
+        labels = [l for l in labels if len(l) <= MAX_LABEL_LEN]
+        has_hoh = any(l.startswith("head of household") for l in labels)
+        has_evicted = any(l.startswith("evicted") for l in labels)
+        has_weeks = any(
+            len({int(m.group(1)) for cell in row
+                 for m in [re.search(r"week\s*(\d+)", cell_text(cell), re.I)] if m}) >= 2
+            for row in matrix)
+        if has_hoh and has_evicted and has_weeks:
             return matrix
     return None
 
@@ -700,8 +718,11 @@ def main():
 
     weeks = parse_weeks(matrix)
     if not weeks:
-        print("Results grid found but no week columns parsed. Skipping update.")
-        return
+        # Exit non-zero so the Action goes red — a silent no-op here once let
+        # a parser break go unnoticed for a full episode cycle.
+        print("ERROR: results grid found but no week columns parsed — "
+              "the Wikipedia table layout likely changed. Nothing updated.")
+        sys.exit(1)
     print(f"Parsed results grid: weeks {sorted(weeks)}")
 
     # Make sure the savedSelf scoring rule exists, then rescore any legacy
