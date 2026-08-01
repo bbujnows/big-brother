@@ -211,7 +211,7 @@
       "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 1.",
+      "summary": "Ashley was evicted in Week 1 and never got her footing in the house. She finished without a competition win to her name.",
       "weekEvicted": 1
     },
     {
@@ -225,7 +225,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett has kept himself comp-free and off the block, but his position is shakier than it looks. Both he and Drew have been identified as sitting at the bottom of their respective alliances, leaving him caught in the middle as the house weighs loyalties heading into the next eviction.",
+      "summary": "Barrett remains comp-free and off the block, but his position is precarious. He and Drew have been identified as sitting at the bottom of both of their alliances, leaving him caught in the middle as the house continues to weigh loyalties.",
       "events": []
     },
     {
@@ -247,7 +247,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Chuk is still riding the quiet game after his premiere-night safety win. He became a stated target of Jason's chaotic Week 3 scheming, but Jason was evicted before any of those plans could materialize, leaving Chuk safely in the background for now."
+      "summary": "Chuk is still riding the quiet game after his premiere-night safety win. He briefly became a stated target of Jason's chaotic Week 3 scheming, but Jason was evicted before anything could materialize, and Lyric's ongoing flirtations with him keep his name in casual house conversation."
     },
     {
       "age": 22,
@@ -259,7 +259,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew is playing both sides and it is starting to show. He formed the Handymen alliance with Kamu, yet houseguests on the other side of the house suspect him of casting the rogue Week 2 vote, and his closeness with Melody has Dee and Angela questioning his true loyalties.",
+      "summary": "Drew is playing both sides and the cracks are showing. He formed the Handymen alliance with Kamu, yet Angela suspects him of casting the rogue Week 2 vote, his closeness with Melody has Dee and Angela questioning his loyalty, and both he and Barrett have been identified as sitting at the bottom of their alliances.",
       "events": []
     },
     {
@@ -273,7 +273,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley has yet to win a competition but remains socially active. She helped expose Jason's manipulation during Week 2 and was selected to compete in the Week 3 veto, where Jason — knowing she was onto him — falsely promised he would use the veto on her.",
+      "summary": "Haley has yet to win a competition but stays socially active. She helped expose Jason's manipulation during Week 2 and competed in the Week 3 veto, where Jason falsely promised he would use it on her while simultaneously telling everyone different stories — a move that hastened his own eviction.",
       "events": []
     },
     {
@@ -317,7 +317,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 3 by a unanimous 12-0 vote. Jason's game unraveled after his history of manipulation was publicly exposed at the Week 2 nomination ceremony, and a desperate Week 3 chaos campaign — including a literal tea-kettle stunt — only accelerated his exit. He finishes with a premiere-night safety win and a Week 2 Block Buster win.",
+      "summary": "Evicted in Week 3 by a unanimous 12-0 vote. Jason's game unraveled after his manipulation was publicly exposed at the Week 2 nomination ceremony, and a desperate Week 3 chaos campaign — including a literal tea-kettle stunt — only accelerated his exit. He finishes with a premiere-night safety win and a Week 2 Block Buster win.",
       "weekEvicted": 3
     },
     {
@@ -339,7 +339,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu made a bold Week 3 HOH move, targeting Jason and Mallory while forming the Handymen alliance with Drew. He had to break his word to Lyric to get Jason on the block, but it paid off: Jason was evicted unanimously, and Kamu's targets are now squarely in his sights."
+      "summary": "Kamu made a bold Week 3 HOH move, forming the Handymen alliance with Drew and successfully targeting Jason. He had to break his word to Lyric to get Jason on the block and went back on a promise to Jason as well, but it all paid off with a unanimous eviction and Kamu's primary target out the door."
     },
     {
       "age": 57,
@@ -361,7 +361,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "La Trice survived the Week 3 eviction after sitting on the block alongside Jason, who was sent home unanimously. She was also blindsided by Rome's betrayal in Week 2 and received a personal apology from him before his own eviction, making for an emotionally turbulent stretch in the house."
+      "summary": "LaTrice survived the Week 3 eviction, staying off the block beside Jason as he was sent home unanimously. It capped an emotionally turbulent stretch that included being blindsided by Rome's behind-the-scenes betrayal in Week 2 and receiving a personal apology from him before his own eviction."
     },
     {
       "age": 25,
@@ -410,7 +410,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "active",
-      "summary": "Lyric is one of the week's biggest survivors, having now escaped the block twice. She won the Week 3 Power of Veto to pull herself off the block, after being saved by Devens' veto in Week 2. Her attempted showmance distance from Rome and her flirtations with Chuk and Yash keep the house watching her closely."
+      "summary": "Lyric is one of the season's biggest survivors, having escaped the block twice. She won the Week 3 Power of Veto to pull herself off after being saved by Devens' veto in Week 2. Her attempts to distance from Rome and ongoing flirtations with Chuk and Yash keep the house watching her closely."
     },
     {
       "age": 24,
@@ -459,7 +459,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory has two clutch comp wins to her name — a Week 1 veto and a Week 3 Block Buster — both used to save herself from eviction. With allies Melody and Lyric actively campaigning for her during Week 3, she survived a tense week and is building a quiet but resilient game."
+      "summary": "Mallory has two clutch comp wins — a Week 1 veto and a Week 3 Block Buster — and used both to save herself from eviction. Allies Melody and Lyric campaigned hard for her during Week 3, and she enters the next phase of the game with a resilient if quiet reputation."
     },
     {
       "age": 24,
@@ -481,7 +481,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Melody survived the Week 2 eviction vote but was hurt that Devens chose to save Lyric instead of her. A potential showmance with Drew has since drawn attention from Dee and Angela, who worry it signals divided loyalty, and she spent Week 3 campaigning alongside Lyric to save Mallory."
+      "summary": "Melody survived the Week 2 eviction but was hurt that Devens chose to save Lyric over her. A growing closeness with Drew has since drawn concern from Dee and Angela, who worry about his divided loyalties, and Melody spent Week 3 actively campaigning alongside Lyric to keep Mallory safe."
     },
     {
       "age": 42,
@@ -509,7 +509,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens orchestrated Week 2's biggest move, winning both the HOH and the Power of Veto and using the veto to backdoor Rome, who was evicted. He also quietly earned the Diamond Power of Veto from the BB Time Capsule in Week 3 — a secret he has shared only with Dee."
+      "summary": "Devens orchestrated Week 2's biggest move, winning both the HOH and the Power of Veto to backdoor and evict Rome. In Week 3 he quietly earned the Diamond Power of Veto from the BB Time Capsule — a secret he has shared only with Dee — giving him a potentially game-changing hidden advantage."
     },
     {
       "age": 28,
@@ -538,7 +538,7 @@
       "ownerId": "brittany",
       "photo": "photos/rome.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 2 after being backdoored by Devens. Rome's game fell apart when his behind-the-scenes manipulation was exposed at the nomination ceremony, and he was forced to apologize to La Trice for narrowing his ally list. He finishes with a premiere-night safety win.",
+      "summary": "Evicted in Week 2 after being backdoored by Devens. Rome's game collapsed when his behind-the-scenes manipulation was exposed at the nomination ceremony, and he was forced to apologize to LaTrice for cutting down his ally list. He finishes with a premiere-night safety win.",
       "weekEvicted": 2
     },
     {
@@ -560,7 +560,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor has kept a low profile after surviving the Week 1 vote, but her decision-making has drawn notice. She cast the lone vote to evict Melody in Week 2 and then wavered on whether to vote against La Trice in Week 3, signaling an independent streak that could make her unpredictable."
+      "summary": "Taylor has kept a low profile after surviving the Week 1 vote, but her decision-making draws notice. She cast the lone dissenting vote — to evict Melody — in the otherwise lopsided Week 2 vote, then wavered on whether to vote against LaTrice in Week 3, signaling an independent streak the house is starting to clock."
     },
     {
       "age": 52,
@@ -573,7 +573,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela has no comp wins but has been a vocal force in the house. She confronted Jason's manipulation publicly at the Week 2 nomination ceremony, served an egg punishment that recently ended, and has been working closely with Dee — though she now suspects Drew of casting the rogue Week 2 vote.",
+      "summary": "Angela has no comp wins but has been a vocal strategic presence. She publicly confronted Jason's manipulation at the Week 2 nomination ceremony, served an egg punishment that ended just before the Week 3 HOH, and continues to work closely with Dee while keeping a suspicious eye on Drew as the possible rogue-vote culprit.",
       "events": []
     },
     {
@@ -602,7 +602,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash won the premiere-night Block Buster and has largely stayed under the radar since. During Week 3, Mallory's allies Melody and Lyric attempted to pull him in to help save Mallory, a sign that his quiet game is beginning to attract attention from those looking to build a voting majority."
+      "summary": "Yash has stayed largely under the radar since his premiere-night Block Buster win. During Week 3, Mallory's allies Melody and Lyric attempted to pull him in to build a voting majority — a sign that his quiet game is beginning to attract attention from those looking for reliable numbers."
     },
     {
       "age": 29,
@@ -622,7 +622,7 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee won the Week 1 HOH and has remained a strategic force since. She and Devens celebrated successfully blowing up the house in Week 2, and Devens trusted her enough to privately reveal his Diamond Power of Veto. She is keeping a close eye on Drew, suspecting his loyalty may be wavering."
+      "summary": "Dee won the Week 1 HOH and has remained a central strategic force. She and Devens celebrated blowing up the house together in Week 2, and he trusted her enough to privately reveal his Diamond Power of Veto — a significant bond. She is keeping a watchful eye on Drew, suspecting his loyalty to their side may be wavering."
     }
   ],
   "lastUpdated": "2026-08-01",
@@ -720,5 +720,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "7e10aa1a17148d65a8063f3e236e78f442b5d4b9f1b568b5582977b5d8e072b1"
+  "summaryDigest": "27b41712410cd40d016a3aed289b92484c7f5c3a10426cca4752a45c8a0522f0"
 }
