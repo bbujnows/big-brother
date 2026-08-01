@@ -181,10 +181,10 @@
           "type": "nominated"
         },
         {
-          "type": "bbBlockbuster",
+          "description": "Won BB Blockbuster (Week 3)",
           "houseguestId": "hg_mallory_aurichio",
           "points": 5,
-          "description": "Won BB Blockbuster (Week 3)"
+          "type": "bbBlockbuster"
         }
       ],
       "week": 3
@@ -225,7 +225,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game.",
+      "summary": "Barrett has kept himself comp-free and off the block, but his position is shakier than it looks. Both he and Drew have been identified as sitting at the bottom of their respective alliances, leaving him caught in the middle as the house weighs loyalties heading into the next eviction.",
       "events": []
     },
     {
@@ -247,7 +247,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Owns a safety win from premiere night so far."
+      "summary": "Chuk is still riding the quiet game after his premiere-night safety win. He became a stated target of Jason's chaotic Week 3 scheming, but Jason was evicted before any of those plans could materialize, leaving Chuk safely in the background for now."
     },
     {
       "age": 22,
@@ -259,7 +259,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game.",
+      "summary": "Drew is playing both sides and it is starting to show. He formed the Handymen alliance with Kamu, yet houseguests on the other side of the house suspect him of casting the rogue Week 2 vote, and his closeness with Melody has Dee and Angela questioning his true loyalties.",
       "events": []
     },
     {
@@ -273,7 +273,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game.",
+      "summary": "Haley has yet to win a competition but remains socially active. She helped expose Jason's manipulation during Week 2 and was selected to compete in the Week 3 veto, where Jason — knowing she was onto him — falsely promised he would use the veto on her.",
       "events": []
     },
     {
@@ -317,7 +317,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 3. Finished with a Blockbuster win and a safety win from premiere night.",
+      "summary": "Evicted in Week 3 by a unanimous 12-0 vote. Jason's game unraveled after his history of manipulation was publicly exposed at the Week 2 nomination ceremony, and a desperate Week 3 chaos campaign — including a literal tea-kettle stunt — only accelerated his exit. He finishes with a premiere-night safety win and a Week 2 Block Buster win.",
       "weekEvicted": 3
     },
     {
@@ -339,7 +339,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Owns an HOH win so far."
+      "summary": "Kamu made a bold Week 3 HOH move, targeting Jason and Mallory while forming the Handymen alliance with Drew. He had to break his word to Lyric to get Jason on the block, but it paid off: Jason was evicted unanimously, and Kamu's targets are now squarely in his sights."
     },
     {
       "age": 57,
@@ -361,7 +361,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "Survived the Week 3 eviction vote."
+      "summary": "La Trice survived the Week 3 eviction after sitting on the block alongside Jason, who was sent home unanimously. She was also blindsided by Rome's betrayal in Week 2 and received a personal apology from him before his own eviction, making for an emotionally turbulent stretch in the house."
     },
     {
       "age": 25,
@@ -410,7 +410,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "active",
-      "summary": "Owns a veto win so far. Pulled themselves off the block in Week 3 and was pulled off the block in Week 2."
+      "summary": "Lyric is one of the week's biggest survivors, having now escaped the block twice. She won the Week 3 Power of Veto to pull herself off the block, after being saved by Devens' veto in Week 2. Her attempted showmance distance from Rome and her flirtations with Chuk and Yash keep the house watching her closely."
     },
     {
       "age": 24,
@@ -445,11 +445,11 @@
           "week": 3
         },
         {
-          "week": 3,
-          "type": "bbBlockbuster",
-          "points": 5,
+          "addedAt": "2026-07-31T14:33:17.561527+00:00",
           "description": "Won BB Blockbuster (Week 3)",
-          "addedAt": "2026-07-31T14:33:17.561527+00:00"
+          "points": 5,
+          "type": "bbBlockbuster",
+          "week": 3
         }
       ],
       "hometown": "Washington Township, NJ",
@@ -459,7 +459,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Owns a veto win and a Blockbuster win so far. Pulled themselves off the block in Week 1."
+      "summary": "Mallory has two clutch comp wins to her name — a Week 1 veto and a Week 3 Block Buster — both used to save herself from eviction. With allies Melody and Lyric actively campaigning for her during Week 3, she survived a tense week and is building a quiet but resilient game."
     },
     {
       "age": 24,
@@ -481,7 +481,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Survived the Week 2 eviction vote."
+      "summary": "Melody survived the Week 2 eviction vote but was hurt that Devens chose to save Lyric instead of her. A potential showmance with Drew has since drawn attention from Dee and Angela, who worry it signals divided loyalty, and she spent Week 3 campaigning alongside Lyric to save Mallory."
     },
     {
       "age": 42,
@@ -509,7 +509,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Owns an HOH win and a veto win so far."
+      "summary": "Devens orchestrated Week 2's biggest move, winning both the HOH and the Power of Veto and using the veto to backdoor Rome, who was evicted. He also quietly earned the Diamond Power of Veto from the BB Time Capsule in Week 3 — a secret he has shared only with Dee."
     },
     {
       "age": 28,
@@ -538,7 +538,7 @@
       "ownerId": "brittany",
       "photo": "photos/rome.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 2. Finished with a safety win from premiere night.",
+      "summary": "Evicted in Week 2 after being backdoored by Devens. Rome's game fell apart when his behind-the-scenes manipulation was exposed at the nomination ceremony, and he was forced to apologize to La Trice for narrowing his ally list. He finishes with a premiere-night safety win.",
       "weekEvicted": 2
     },
     {
@@ -560,7 +560,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Survived the Week 1 eviction vote."
+      "summary": "Taylor has kept a low profile after surviving the Week 1 vote, but her decision-making has drawn notice. She cast the lone vote to evict Melody in Week 2 and then wavered on whether to vote against La Trice in Week 3, signaling an independent streak that could make her unpredictable."
     },
     {
       "age": 52,
@@ -573,7 +573,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game.",
+      "summary": "Angela has no comp wins but has been a vocal force in the house. She confronted Jason's manipulation publicly at the Week 2 nomination ceremony, served an egg punishment that recently ended, and has been working closely with Dee — though she now suspects Drew of casting the rogue Week 2 vote.",
       "events": []
     },
     {
@@ -602,7 +602,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Owns a Blockbuster win so far."
+      "summary": "Yash won the premiere-night Block Buster and has largely stayed under the radar since. During Week 3, Mallory's allies Melody and Lyric attempted to pull him in to help save Mallory, a sign that his quiet game is beginning to attract attention from those looking to build a voting majority."
     },
     {
       "age": 29,
@@ -622,10 +622,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Owns an HOH win so far."
+      "summary": "Dee won the Week 1 HOH and has remained a strategic force since. She and Devens celebrated successfully blowing up the house in Week 2, and Devens trusted her enough to privately reveal his Diamond Power of Veto. She is keeping a close eye on Drew, suspecting his loyalty may be wavering."
     }
   ],
-  "lastUpdated": "2026-07-31",
+  "lastUpdated": "2026-08-01",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -720,5 +720,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "b467dfdbfdca38df6cd46e7810bb8023689b3e16e4954bb0678d7d76af621a67"
+  "summaryDigest": "7e10aa1a17148d65a8063f3e236e78f442b5d4b9f1b568b5582977b5d8e072b1"
 }
