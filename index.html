@@ -103,7 +103,7 @@
 
     <div class="section-label" style="margin-top:32px;">Rivalry Desk</div>
     <div id="rivalry-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;"></div>
-    <div id="beef-wrap" style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;"></div>
+    <div id="beef-wrap" style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;align-items:start;"></div>
 
     <div class="divider"></div>
 
@@ -622,7 +622,22 @@
         </div>`;
 
       wrap.innerHTML = feudCard + logCard;
+      matchBeefHeight();
     }
+
+    // Side by side, the Beef Log matches the Feud Meter's height: it fills the
+    // card when there's room and scrolls internally once it runs past the
+    // bottom of the rap sheets. Stacked on narrow screens, it sizes naturally.
+    function matchBeefHeight() {
+      const wrap = document.getElementById('beef-wrap');
+      if (!wrap || wrap.children.length < 2) return;
+      const feud = wrap.children[0], log = wrap.children[1];
+      log.style.height = '';
+      if (Math.abs(feud.offsetTop - log.offsetTop) < 2) {
+        log.style.height = feud.offsetHeight + 'px';
+      }
+    }
+    window.addEventListener('resize', matchBeefHeight);
 
     init();
 
