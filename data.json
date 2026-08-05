@@ -57,13 +57,13 @@
         {
           "description": "Won Power of Veto (Week 1)",
           "houseguestId": "hg_mallory_aurichio",
-          "points": 5,
+          "points": 3,
           "type": "veto"
         },
         {
           "description": "Took themselves off the block (Week 1)",
           "houseguestId": "hg_mallory_aurichio",
-          "points": 3,
+          "points": 2,
           "type": "savedSelf"
         },
         {
@@ -77,6 +77,12 @@
           "houseguestId": "hg_yash_patel",
           "points": 5,
           "type": "bbBlockbuster"
+        },
+        {
+          "type": "survivedVote",
+          "houseguestId": "hg_taylor_brown",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 1)"
         }
       ],
       "week": 1
@@ -111,7 +117,7 @@
         {
           "description": "Won Power of Veto (Week 2)",
           "houseguestId": "hg_rick_devens",
-          "points": 5,
+          "points": 3,
           "type": "veto"
         },
         {
@@ -131,6 +137,12 @@
           "houseguestId": "hg_jason_de_puy",
           "points": 5,
           "type": "bbBlockbuster"
+        },
+        {
+          "type": "survivedVote",
+          "houseguestId": "hg_melody_morris",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 2)"
         }
       ],
       "week": 2
@@ -165,13 +177,13 @@
         {
           "description": "Won Power of Veto (Week 3)",
           "houseguestId": "hg_lyric_medeiros",
-          "points": 5,
+          "points": 3,
           "type": "veto"
         },
         {
           "description": "Took themselves off the block (Week 3)",
           "houseguestId": "hg_lyric_medeiros",
-          "points": 3,
+          "points": 2,
           "type": "savedSelf"
         },
         {
@@ -185,39 +197,45 @@
           "houseguestId": "hg_mallory_aurichio",
           "points": 5,
           "type": "bbBlockbuster"
+        },
+        {
+          "type": "survivedVote",
+          "houseguestId": "hg_latrice_verrett",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 3)"
         }
       ],
       "week": 3
     },
     {
-      "week": 4,
       "airDate": "2026-08-02",
       "events": [
         {
-          "type": "hoh",
+          "description": "Won Head of Household (Week 4)",
           "houseguestId": "hg_haley_thogmartin",
           "points": 10,
-          "description": "Won Head of Household (Week 4)"
+          "type": "hoh"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 4)",
           "houseguestId": "hg_drew_campbell",
           "points": -3,
-          "description": "Nominated for eviction (Week 4)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 4)",
           "houseguestId": "hg_taylor_brown",
           "points": -3,
-          "description": "Nominated for eviction (Week 4)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 4)",
           "houseguestId": "hg_melody_morris",
           "points": -3,
-          "description": "Nominated for eviction (Week 4)"
+          "type": "nominated"
         }
-      ]
+      ],
+      "week": 4
     }
   ],
   "houseguests": [
@@ -282,6 +300,15 @@
     {
       "age": 22,
       "bio": "Outgoing, fun and unpredictable; watched BB since he was 8. Plans to make friends while knowing when to cut them. Viewers may see a 'beach bum without a brain,' but he graduated summa cum laude. Biggest strength: connecting with people; biggest weakness: his 'big fat mouth.' Expects to play from the shadows — and jokes the house may be rocking the 'Drewth' haircut by season's end.",
+      "events": [
+        {
+          "addedAt": "2026-08-03T05:57:14.156693+00:00",
+          "description": "Nominated for eviction (Week 4)",
+          "points": -3,
+          "type": "nominated",
+          "week": 4
+        }
+      ],
       "hometown": "Temecula, CA",
       "id": "hg_drew_campbell",
       "name": "Drew Campbell",
@@ -289,21 +316,21 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew is on the block under Haley's Week 4 HOH, and the walls are closing in. His Handymen alliance with Kamu hasn't shielded him from scrutiny — Toolshed members have questioned his loyalty, Angela suspects him of the rogue Week 2 vote, and a perceived showmance with Melody has only deepened doubts about which side he truly plays for.",
-      "events": [
-        {
-          "week": 4,
-          "type": "nominated",
-          "points": -3,
-          "description": "Nominated for eviction (Week 4)",
-          "addedAt": "2026-08-03T05:57:14.156693+00:00"
-        }
-      ]
+      "summary": "Drew is on the block under Haley's Week 4 HOH, and the walls are closing in. His Handymen alliance with Kamu hasn't shielded him from scrutiny — Toolshed members have questioned his loyalty, Angela suspects him of the rogue Week 2 vote, and a perceived showmance with Melody has only deepened doubts about which side he truly plays for."
     },
     {
       "age": 29,
       "bio": "Outgoing, bubbly and fun — but a new watcher, not a longtime fan. Believes she can win with strategy, intelligence and physical ability. Plan: listen, make friends fast, be everyone's friend early, then turn up the pressure. People may find her intimidating, but she's a bubbly non-stop talker. Biggest strength: her heart and handling conflict well.",
       "currentCity": "Wildwood, MO",
+      "events": [
+        {
+          "addedAt": "2026-08-03T05:57:14.156523+00:00",
+          "description": "Won Head of Household (Week 4)",
+          "points": 10,
+          "type": "hoh",
+          "week": 4
+        }
+      ],
       "hometown": "Neosho, MO",
       "id": "hg_haley_thogmartin",
       "name": "Haley Thogmartin",
@@ -311,16 +338,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley is the Week 4 Head of Household and wasting no time making her mark. After winning the Jack the Ripper comp, she confronted the women who spoke negatively about her, got Melody to admit she would have put her on the block, and nominated Drew, Melody, and Taylor for eviction.",
-      "events": [
-        {
-          "week": 4,
-          "type": "hoh",
-          "points": 10,
-          "description": "Won Head of Household (Week 4)",
-          "addedAt": "2026-08-03T05:57:14.156523+00:00"
-        }
-      ]
+      "summary": "Haley is the Week 4 Head of Household and wasting no time making her mark. After winning the Jack the Ripper comp, she confronted the women who spoke negatively about her, got Melody to admit she would have put her on the block, and nominated Drew, Melody, and Taylor for eviction."
     },
     {
       "age": 35,
@@ -398,6 +416,13 @@
           "points": -3,
           "type": "nominated",
           "week": 3
+        },
+        {
+          "week": 3,
+          "type": "survivedVote",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 3)",
+          "addedAt": "2026-08-05T19:26:44.814982+00:00"
         }
       ],
       "hometown": "Kankakee, IL",
@@ -437,14 +462,14 @@
         {
           "addedAt": "2026-07-30T05:23:47.617781+00:00",
           "description": "Won Power of Veto (Week 3)",
-          "points": 5,
+          "points": 3,
           "type": "veto",
           "week": 3
         },
         {
           "addedAt": "2026-07-30T05:23:47.618195+00:00",
           "description": "Took themselves off the block (Week 3)",
-          "points": 3,
+          "points": 2,
           "type": "savedSelf",
           "week": 3
         }
@@ -472,14 +497,14 @@
         {
           "addedAt": "2026-07-16T05:25:11.029380+00:00",
           "description": "Won Power of Veto (Week 1)",
-          "points": 5,
+          "points": 3,
           "type": "veto",
           "week": 1
         },
         {
           "addedAt": "2026-07-16T05:25:11.029619+00:00",
           "description": "Took themselves off the block (Week 1)",
-          "points": 3,
+          "points": 2,
           "type": "savedSelf",
           "week": 1
         },
@@ -520,11 +545,18 @@
           "week": 2
         },
         {
-          "week": 4,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-08-03T05:57:14.156709+00:00",
           "description": "Nominated for eviction (Week 4)",
-          "addedAt": "2026-08-03T05:57:14.156709+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 4
+        },
+        {
+          "week": 2,
+          "type": "survivedVote",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 2)",
+          "addedAt": "2026-08-05T19:26:44.813740+00:00"
         }
       ],
       "hometown": "Thornton, CO",
@@ -550,7 +582,7 @@
         {
           "addedAt": "2026-07-23T05:39:11.011896+00:00",
           "description": "Won Power of Veto (Week 2)",
-          "points": 5,
+          "points": 3,
           "type": "veto",
           "week": 2
         }
@@ -606,11 +638,18 @@
           "week": 1
         },
         {
-          "week": 4,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-08-03T05:57:14.156702+00:00",
           "description": "Nominated for eviction (Week 4)",
-          "addedAt": "2026-08-03T05:57:14.156702+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 4
+        },
+        {
+          "week": 1,
+          "type": "survivedVote",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 1)",
+          "addedAt": "2026-08-05T19:26:44.812463+00:00"
         }
       ],
       "hometown": "Deerfield Beach, FL",
@@ -685,7 +724,7 @@
       "summary": "Dee won the Week 1 HOH and has stayed a central strategic force ever since. She is one of only two people who know Devens holds the Diamond Power of Veto, and she recently won the BB Bribe power from the BB Time Capsule — giving her two major advantages quietly orbiting the game. She continues to keep a close eye on Drew's loyalties."
     }
   ],
-  "lastUpdated": "2026-08-03",
+  "lastUpdated": "2026-08-05",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -712,7 +751,7 @@
   "scoring": {
     "afh": {
       "label": "America's Favorite Houseguest",
-      "points": 20
+      "points": 25
     },
     "bbBlockbuster": {
       "label": "BB Blockbuster Win",
@@ -720,7 +759,7 @@
     },
     "bbComics": {
       "label": "BB Comics Win",
-      "points": 5
+      "points": 2
     },
     "first": {
       "label": "Winner (1st Place)",
@@ -740,7 +779,7 @@
     },
     "otev": {
       "label": "OTEV Win",
-      "points": 5
+      "points": 2
     },
     "pickedVeto": {
       "label": "Picked to Play in Veto",
@@ -756,7 +795,7 @@
     },
     "savedSelf": {
       "label": "Took Self Off Block (Veto Only)",
-      "points": 3
+      "points": 2
     },
     "second": {
       "label": "Runner-Up (2nd Place)",
@@ -772,11 +811,15 @@
     },
     "veto": {
       "label": "Veto Win",
-      "points": 5
+      "points": 3
     },
     "wallHang": {
       "label": "Wall Hang Win",
-      "points": 5
+      "points": 3
+    },
+    "survivedVote": {
+      "label": "Survived Eviction Vote",
+      "points": 4
     }
   },
   "season": 28,
