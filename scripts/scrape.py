@@ -53,13 +53,74 @@ REVEAL_CADENCE = {
     "replacementNom": "wed",  # replacement nominee revealed at veto ceremony
     "bbBlockbuster":  "thu",
     "evicted":        "thu",  # live eviction Thursday
+    "survivedVote":   "thu",  # revealed at the same moment as the eviction
 }
 
-# Fallback points if a type is missing from the database's scoring config.
-SCORING_FALLBACK = {
-    "hoh": 10, "veto": 5, "bbBlockbuster": 5, "nominated": -3,
-    "takenOffBlock": 5, "savedSelf": 3, "safety": 3, "madeJury": 10,
+# ── The scoring board (league-voted 2026-08-05) ───────────────────────────
+# This is the source of truth. Each run syncs it into the database and
+# rescores every existing event to match, so rule changes apply
+# retroactively without any manual re-entry. An event carrying
+# "lockPoints": true keeps its stored value (manual admin overrides).
+SCORING_BOARD = {
+    "hoh":           ("Head of Household Win",            10),
+    "veto":          ("Veto Win",                          3),
+    "bbBlockbuster": ("BB Blockbuster Win",                5),
+    "wallHang":      ("Wall Hang Win",                     3),
+    "otev":          ("OTEV Win",                          2),
+    "bbComics":      ("BB Comics Win",                     2),
+    "safety":        ("Safety for the Week",               3),
+    "nominated":     ("Nominated for Eviction",           -3),
+    "survivedVote":  ("Survived Eviction Vote",            4),
+    "pickedVeto":    ("Picked to Play in Veto",            2),
+    "takenOffBlock": ("Taken Off Block by Someone Else",   5),
+    "savedSelf":     ("Took Self Off Block (Veto Only)",   2),
+    "madeJury":      ("Made It to Jury",                  10),
+    "resurrection":  ("Resurrection / Battle Back Win",   15),
+    "first":         ("Winner (1st Place)",               60),
+    "second":        ("Runner-Up (2nd Place)",            40),
+    "third":         ("3rd Place",                        20),
+    "afh":           ("America's Favorite Houseguest",    25),
 }
+
+SCORING_FALLBACK = {k: pts for k, (_, pts) in SCORING_BOARD.items()}
+
+
+def sync_scoring_board(data):
+    """Write the canonical board into the data; returns changed labels/points."""
+    scoring = data.setdefault("scoring", {})
+    changes = []
+    for key, (label, pts) in SCORING_BOARD.items():
+        cur = scoring.get(key) or {}
+        if cur.get("points") != pts or cur.get("label") != label:
+            was = f"{cur.get('points')}" if cur else "new"
+            scoring[key] = {"label": label, "points": pts}
+            changes.append(f"{key}: {was} -> {pts:+d} ({label})")
+    return changes
+
+
+def resync_event_points(data):
+    """Rescore stored events to the current board (retroactive rule changes)."""
+    lines = []
+    for hg in data.get("houseguests") or []:
+        for ev in hg.get("events") or []:
+            if ev.get("lockPoints"):
+                continue
+            want = get_points(data, ev.get("type"))
+            if ev.get("points") == want:
+                continue
+            old = ev.get("points")
+            ev["points"] = want
+            for ep in data.get("episodes") or []:
+                if ep.get("week") != ev.get("week"):
+                    continue
+                for le in ep.get("events") or []:
+                    if (le.get("type") == ev.get("type")
+                            and le.get("houseguestId") == hg["id"]
+                            and not le.get("lockPoints")):
+                        le["points"] = want
+            lines.append(f"Week {ev.get('week')}: {hg['name']} {ev.get('type')} "
+                         f"{old:+d} -> {want:+d}")
+    return lines
 
 
 def week_date(week, day_key):
@@ -336,6 +397,16 @@ def apply_week(data, week, results, published, held, unmatched):
              lambda h: f"Taken off the block (Week {week})")
         emit([h["name"] for h in replacements], "nominated",
              lambda h: f"Named replacement nominee (Week {week})", gate_type="replacementNom")
+
+        # Survived the eviction vote: on the final block, still standing after
+        # the live show. Only once the eviction itself is known, so nobody is
+        # credited before the vote actually happens.
+        evicted_now = results.get("evicted") or set()
+        if evicted_now:
+            evicted_ids = {h["id"] for h in resolve(evicted_now)}
+            survivors = [h for hid, h in final_ids.items() if hid not in evicted_ids]
+            emit([h["name"] for h in survivors], "survivedVote",
+                 lambda h: f"Survived the eviction vote (Week {week})")
 
     # Evictions: status change only (no points)
     evicted = results.get("evicted") or set()
@@ -725,17 +796,14 @@ def main():
         sys.exit(1)
     print(f"Parsed results grid: weeks {sorted(weeks)}")
 
-    # Make sure the savedSelf scoring rule exists, then rescore any legacy
-    # self-saves BEFORE applying this run's results (so the duplicate guard
-    # sees the corrected event types).
-    scoring = data.setdefault("scoring", {})
-    sv = scoring.get("savedSelf")
-    sv_label = "Took Self Off Block (Veto Only)"
-    config_added = not sv or sv.get("label") != sv_label
-    if config_added:
-        scoring["savedSelf"] = {"label": sv_label, "points": (sv or {}).get("points", 3)}
-        print(f"SCORING  savedSelf (+3) config set: '{sv_label}'")
+    # Sync the league-voted scoring board, fix any legacy self-save types, then
+    # rescore stored events to the current board. All three run BEFORE this
+    # run's results so the duplicate guard sees corrected data.
+    board_changes = sync_scoring_board(data)
+    for line in board_changes:
+        print(f"SCORING  {line}")
     rescored = reclassify_self_saves(data)
+    rescored += resync_event_points(data)
     for line in rescored:
         print(f"RESCORE  {line}")
 
@@ -755,12 +823,14 @@ def main():
     for name in sorted(unmatched):
         print(f"UNMATCHED name on Wikipedia (not on our roster): {name}")
 
-    if not published and not refreshed and not rescored and not config_added:
+    if not published and not refreshed and not rescored and not board_changes:
         print("No new aired events to publish; summaries already current.")
         return
 
     if dry_run:
-        print(f"DRY RUN — {len(published)} event(s), {len(rescored)} rescore(s), and {refreshed} summary rewrite(s) would publish. Nothing written.")
+        print(f"DRY RUN — {len(published)} event(s), {len(rescored)} rescore(s), "
+              f"{len(board_changes)} board change(s), and {refreshed} summary "
+              f"rewrite(s) would publish. Nothing written.")
         return
 
     data["lastUpdated"] = str(date.today())

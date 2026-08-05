@@ -229,8 +229,12 @@ async function addEvent() {
   if (!hg) return;
 
   const description = note || (_adminData.scoring[type] ? _adminData.scoring[type].label : type);
+  // Points typed by hand that differ from the board are a deliberate override —
+  // flag them so the scraper's retroactive rescore leaves them alone.
+  const lockPoints = points !== getPointsForType(_adminData, type);
   hg.events = hg.events || [];
-  hg.events.push({ week, type, points, description, addedAt: new Date().toISOString() });
+  hg.events.push({ week, type, points, description, addedAt: new Date().toISOString(),
+                   ...(lockPoints ? { lockPoints: true } : {}) });
 
   // Also add to episodes log
   let ep = _adminData.episodes.find(e => e.week === week);
@@ -240,7 +244,8 @@ async function addEvent() {
     _adminData.episodes.sort((a,b) => a.week - b.week);
   }
   ep.events = ep.events || [];
-  ep.events.push({ type, houseguestId: hgId, points, description });
+  ep.events.push({ type, houseguestId: hgId, points, description,
+                   ...(lockPoints ? { lockPoints: true } : {}) });
 
   const ok = await saveData(_adminData);
   if (ok) {
