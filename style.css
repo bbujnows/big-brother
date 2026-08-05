@@ -514,6 +514,13 @@ tr:hover td { background: rgba(95,255,194,0.03); }
   border: 1px solid currentColor;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
 }
+/* HOH is the one inverted badge (dark text on solid mint), so the dark
+   card background above would erase it — keep it solid and let it pop. */
+.hg-card .status-hoh {
+  background: var(--mint);
+  color: #04211a;
+  border-color: var(--mint);
+}
 
 /* ── EPISODE LOG ── */
 .episode-block {
