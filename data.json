@@ -889,5 +889,117 @@
     }
   },
   "season": 28,
-  "summaryDigest": "3ed59a7edada2e649ee02f1cf8d691387f93212ffb66b7d0ef05ff4d1b5f03ca"
+  "summaryDigest": "3ed59a7edada2e649ee02f1cf8d691387f93212ffb66b7d0ef05ff4d1b5f03ca",
+  "schedule": [
+    {
+      "ep": 1,
+      "title": "Season Premiere",
+      "date": "2026-07-09"
+    },
+    {
+      "ep": 2,
+      "title": "Big Brother: Unlocked",
+      "date": "2026-07-10"
+    },
+    {
+      "ep": 3,
+      "title": "Episode 3",
+      "date": "2026-07-12"
+    },
+    {
+      "ep": 4,
+      "title": "Episode 4",
+      "date": "2026-07-15"
+    },
+    {
+      "ep": 5,
+      "title": "Episode 5",
+      "date": "2026-07-16"
+    },
+    {
+      "ep": 6,
+      "title": "Episode 6",
+      "date": "2026-07-19"
+    },
+    {
+      "ep": 7,
+      "title": "Episode 7",
+      "date": "2026-07-22"
+    },
+    {
+      "ep": 8,
+      "title": "Episode 8",
+      "date": "2026-07-23"
+    },
+    {
+      "ep": 9,
+      "title": "Big Brother: Unlocked",
+      "date": "2026-07-24"
+    },
+    {
+      "ep": 10,
+      "title": "Episode 10",
+      "date": "2026-07-26"
+    },
+    {
+      "ep": 11,
+      "title": "Episode 11",
+      "date": "2026-07-29"
+    },
+    {
+      "ep": 12,
+      "title": "Episode 12",
+      "date": "2026-07-30"
+    },
+    {
+      "ep": 13,
+      "title": "Episode 13",
+      "date": "2026-08-02"
+    },
+    {
+      "ep": 14,
+      "title": "Episode 14",
+      "date": "2026-08-05"
+    },
+    {
+      "ep": 15,
+      "title": "Episode 15",
+      "date": "2026-08-06"
+    },
+    {
+      "ep": 16,
+      "title": "Big Brother: Unlocked",
+      "date": "2026-08-07"
+    },
+    {
+      "ep": 17,
+      "title": "Episode 17",
+      "date": "2026-08-09"
+    },
+    {
+      "ep": 18,
+      "title": "Episode 18",
+      "date": "2026-08-12"
+    },
+    {
+      "ep": 19,
+      "title": "Episode 19",
+      "date": "2026-08-13"
+    },
+    {
+      "ep": 20,
+      "title": "Episode 20",
+      "date": "2026-08-16"
+    },
+    {
+      "ep": 21,
+      "title": "Episode 21",
+      "date": "2026-08-19"
+    },
+    {
+      "ep": 22,
+      "title": "Episode 22",
+      "date": "2026-08-20"
+    }
+  ]
 }
