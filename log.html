@@ -72,6 +72,18 @@
             <span class="sched-chip ${state}">${chip}</span>
           </div>`;
       }).join('');
+
+      // Show the 15 most recent episodes; earlier ones are a scroll up.
+      const VISIBLE_ROWS = 15;
+      const rows = el.querySelectorAll('.sched-row');
+      el.style.maxHeight = '';
+      el.style.overflowY = '';
+      if (rows.length > VISIBLE_ROWS) {
+        const pad = el.clientHeight - Array.from(rows).reduce((s, r) => s + r.offsetHeight, 0);
+        el.style.maxHeight = (rows[0].offsetHeight * VISIBLE_ROWS + Math.max(pad, 0)) + 'px';
+        el.style.overflowY = 'auto';
+        el.scrollTop = el.scrollHeight;  // newest at the bottom
+      }
     }
 
     async function init() {
