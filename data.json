@@ -235,22 +235,34 @@
           "type": "nominated"
         },
         {
-          "type": "veto",
+          "description": "Won Power of Veto (Week 4)",
           "houseguestId": "hg_taylor_brown",
           "points": 3,
-          "description": "Won Power of Veto (Week 4)"
+          "type": "veto"
         },
         {
-          "type": "savedSelf",
+          "description": "Took themselves off the block (Week 4)",
           "houseguestId": "hg_taylor_brown",
           "points": 2,
-          "description": "Took themselves off the block (Week 4)"
+          "type": "savedSelf"
         },
         {
-          "type": "nominated",
+          "description": "Named replacement nominee (Week 4)",
           "houseguestId": "hg_lyric_medeiros",
           "points": -3,
-          "description": "Named replacement nominee (Week 4)"
+          "type": "nominated"
+        },
+        {
+          "type": "bbBlockbuster",
+          "houseguestId": "hg_drew_campbell",
+          "points": 5,
+          "description": "Won BB Blockbuster (Week 4)"
+        },
+        {
+          "type": "survivedVote",
+          "houseguestId": "hg_melody_morris",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 4)"
         }
       ],
       "week": 4
@@ -291,7 +303,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett remains comp-free and off the block, but his safety is far from guaranteed. He and Drew were identified as sitting at the bottom of their alliances, and with Dee warning him that the target had shifted to Drew, Barrett knows he could be next in the crosshairs.",
+      "summary": "Barrett remains comp-free and off the block, but the pressure around him is rising. His Toolshed alliance has been questioning his loyalty alongside Drew's, and Dee's warning that Drew was the target served as a reminder that Barrett could easily be next in the crosshairs.",
       "events": []
     },
     {
@@ -313,7 +325,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Chuk has kept a low profile since his premiere-night safety win, but Week 4 pulled him closer to the action. He competed in the veto comp and was eliminated after drinking poison twice, handing Taylor the win."
+      "summary": "Chuk has kept a low profile since his premiere-night safety win, but Week 4 pulled him into the action. He competed in the veto competition and was eliminated after drinking the poisoned wine twice, handing Taylor the win that ultimately reshuffled the block."
     },
     {
       "age": 22,
@@ -325,6 +337,13 @@
           "points": -3,
           "type": "nominated",
           "week": 4
+        },
+        {
+          "week": 4,
+          "type": "bbBlockbuster",
+          "points": 5,
+          "description": "Won BB Blockbuster (Week 4)",
+          "addedAt": "2026-08-07T04:36:27.785983+00:00"
         }
       ],
       "hometown": "Temecula, CA",
@@ -334,7 +353,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew sits on the block under Haley's Week 4 HOH with the odds stacking against him. His Handymen alliance with Kamu hasn't protected him from Toolshed members questioning his loyalty, Angela still suspects him of the rogue Week 2 vote, and he has yet to win a single competition."
+      "summary": "Drew pulled off a crucial Week 4 save, winning the Block Buster to take himself off the block after Haley made him her primary target. He is a member of both the Handymen with Kamu and the Toolshed, but both alliances have questioned his loyalty — and the heat on him is far from over."
     },
     {
       "age": 29,
@@ -356,7 +375,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley is the reigning Week 4 HOH and has run a turbulent week. After confronting the women who spoke negatively about her and getting Melody to admit she would have targeted her, Haley nominated Drew, Melody, and Taylor — and when Taylor won the veto, she named Lyric as the replacement."
+      "summary": "Haley capped her Week 4 HOH by engineering Lyric's eviction in an 8–3 vote. After confronting the women who spoke negatively about her, nominating Drew, Melody, and Taylor, and replacing Taylor with Lyric after the veto, Haley proved willing to make sharp, personal moves — though her friction with Kamu over the renom hints at cracks ahead."
     },
     {
       "age": 35,
@@ -421,7 +440,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu's bold Week 3 HOH saw him form the Handymen alliance with Drew and successfully evict Jason, though he had to break his word to both Lyric and Jason along the way. Under Haley's HOH he pushed for Mallory as a replacement nominee — a move that visibly rubbed Haley the wrong way — and now watches his closest ally Drew sitting on the block."
+      "summary": "Kamu's Week 3 HOH successfully ousted Jason, though he broke his word to both Lyric and Jason along the way. His attempt to shape Haley's Week 4 nominations by pushing for Mallory as a replacement nominee visibly rubbed her the wrong way, and his closest ally Drew's close call on the block signals his influence may be slipping."
     },
     {
       "age": 57,
@@ -450,7 +469,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "LaTrice survived the block in Week 3 and has since made a meaningful social play, tipping off Haley that Melody and Mallory had been speaking negatively about her. That intel helped shape Haley's Week 4 nominations and may have earned LaTrice a valuable new ally."
+      "summary": "LaTrice survived the block in Week 3 and has since made a meaningful social play, tipping off Haley that Melody and Mallory had been speaking negatively about her. That intel helped shape Haley's nominations and may have earned LaTrice a valuable new ally heading into the weeks ahead."
     },
     {
       "age": 25,
@@ -492,11 +511,11 @@
           "week": 3
         },
         {
-          "week": 4,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-08-06T05:33:15.478564+00:00",
           "description": "Named replacement nominee (Week 4)",
-          "addedAt": "2026-08-06T05:33:15.478564+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 4
         }
       ],
       "hometown": "Honolulu, HI",
@@ -505,8 +524,9 @@
       "occupation": "Attorney",
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
-      "status": "active",
-      "summary": "Lyric finds herself on the block as Haley's Week 4 replacement nominee after Taylor used the veto on herself. It's a sharp reversal — Lyric won the Week 3 veto to pull herself off the block — and it comes after Haley noticed her throwing her own allies under the bus to get closer to the other side."
+      "status": "evicted",
+      "summary": "Lyric was evicted in Week 4 by a vote of 8–3. After winning the Week 3 veto to save herself, she overplayed by throwing allies Mallory and Melody under the bus to get closer to the other side — a move Haley noticed — and ended up as the replacement nominee and then the boot.",
+      "weekEvicted": 4
     },
     {
       "age": 24,
@@ -555,7 +575,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory has now saved herself from eviction twice — a Week 1 veto and a Week 3 Block Buster — and enters Week 4's vote in a safer spot. Her ally Melody sits on the block after admitting to Haley she would have targeted her, putting their alliance under serious pressure."
+      "summary": "Mallory has now saved herself from eviction twice — a Week 1 veto and a Week 3 Block Buster — and survived Week 4 without ever touching the block. However, she learned that ally Lyric had been throwing both her and Melody under the bus, a betrayal that tested the trio just as Lyric was sent out the door."
     },
     {
       "age": 24,
@@ -582,6 +602,13 @@
           "points": 4,
           "type": "survivedVote",
           "week": 2
+        },
+        {
+          "week": 4,
+          "type": "survivedVote",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 4)",
+          "addedAt": "2026-08-07T04:36:27.786664+00:00"
         }
       ],
       "hometown": "Thornton, CO",
@@ -591,7 +618,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Melody is on the block under Haley's Week 4 HOH, and it was largely self-inflicted — she admitted to Haley's face that she would have put her on the block. With no competition wins and a candid confession that made her a direct target, her path to safety this week is steep."
+      "summary": "Melody survived Week 4's eviction vote after Lyric was sent home 8–3 in her place. She remains without a competition win and is still paying the price for admitting to Haley she would have targeted her — a candid moment that put her on the block in the first place and keeps a target on her back."
     },
     {
       "age": 42,
@@ -619,7 +646,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens remains one of the most dangerous players in the house. His Week 2 HOH and veto double made him a proven comp threat, and he quietly holds the Diamond Power of Veto from the BB Time Capsule — a secret shared only with Dee. His visible celebration of Haley's HOH win signals yet another useful relationship."
+      "summary": "Devens remains one of the most dangerous players in the house, armed with a Week 2 HOH, a Week 2 veto, and the secretly held Diamond Power of Veto from the BB Time Capsule — a secret shared only with Dee. His visible bond with Haley following her HOH win shows he continues to build useful relationships on every side."
     },
     {
       "age": 28,
@@ -677,18 +704,18 @@
           "week": 1
         },
         {
-          "week": 4,
-          "type": "veto",
-          "points": 3,
+          "addedAt": "2026-08-06T05:33:15.478064+00:00",
           "description": "Won Power of Veto (Week 4)",
-          "addedAt": "2026-08-06T05:33:15.478064+00:00"
+          "points": 3,
+          "type": "veto",
+          "week": 4
         },
         {
-          "week": 4,
-          "type": "savedSelf",
-          "points": 2,
+          "addedAt": "2026-08-06T05:33:15.478499+00:00",
           "description": "Took themselves off the block (Week 4)",
-          "addedAt": "2026-08-06T05:33:15.478499+00:00"
+          "points": 2,
+          "type": "savedSelf",
+          "week": 4
         }
       ],
       "hometown": "Deerfield Beach, FL",
@@ -698,7 +725,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor's Week 4 story is a clean save — she won the Power of Veto and immediately used it on herself, escaping Haley's block. Her independent streak, including wavering votes in Weeks 2 and 3, continues to define her game and likely put the target on her back in the first place."
+      "summary": "Taylor's Week 4 story was a clean escape — she won the Power of Veto and immediately used it on herself, forcing Haley to find a new target. Her independent streak continues to define her game, and a competition win now on her résumé makes her an increasingly dangerous player to leave in the house."
     },
     {
       "age": 52,
@@ -711,7 +738,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela has no competition wins but remains a sharp strategic presence. She continues to work closely with Dee, still suspects Drew of casting the rogue Week 2 vote, and watched her egg punishment end just before Kamu's HOH. With Drew now sitting on the block, her read on him may soon be vindicated.",
+      "summary": "Angela has no competition wins but remains a sharp strategic presence, working closely with Dee and continuing to suspect Drew of casting the rogue Week 2 vote. Her egg punishment ended just before Kamu's HOH, and with Drew having narrowly saved himself in Week 4, her read on him has yet to be fully vindicated.",
       "events": []
     },
     {
@@ -740,7 +767,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash has kept a low profile since his premiere-night Block Buster win, but he made the final round of the Week 4 HOH before losing to Haley. Melody and Lyric tried to pull him into their voting bloc in Week 3, a sign his quiet game is drawing interest from those building numbers."
+      "summary": "Yash has kept a low profile since his premiere-night Block Buster win, but he made the final round of the Week 4 HOH competition before losing to Haley. His quiet game continues to draw interest from those looking to build voting numbers."
     },
     {
       "age": 29,
@@ -760,10 +787,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee won the Week 1 HOH and has remained a central strategic force. She is one of only two people who know Devens holds the Diamond Power of Veto, and she recently won the BB Bribe power from the BB Time Capsule — two major advantages quietly orbiting her game as she keeps a close eye on Drew's loyalties."
+      "summary": "Dee won the Week 1 HOH and has quietly accumulated serious hidden leverage since. She is one of only two people who know Devens holds the Diamond Power of Veto, and she won the BB Bribe power from the BB Time Capsule herself — two major advantages running beneath the surface as she keeps a careful eye on the shifting alliances around her."
     }
   ],
-  "lastUpdated": "2026-08-06",
+  "lastUpdated": "2026-08-07",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -862,5 +889,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "dd0f762ffe4d5efeb5bc9a603dbdc02e43ff764e3551cdb871c1cac868b035e2"
+  "summaryDigest": "e590ddaf442696b0086e8fc86be29a828cab7bf87a1e3047edf87a012a3dcd25"
 }
