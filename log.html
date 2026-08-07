@@ -23,7 +23,7 @@
     <div class="section-label">Broadcast Schedule</div>
     <div class="card" id="schedule-list" style="padding:6px 0;margin-bottom:36px;"></div>
     <p style="font-size:.72rem;color:var(--muted);margin:-24px 0 36px;font-family:var(--mono);letter-spacing:.5px;">
-      // CBS announces episodes a few weeks out — this list grows as new dates are confirmed
+      // CBS announces episodes a few weeks out — this list updates itself nightly as new dates are confirmed
     </p>
 
     <div class="section-label">Weekly Results</div>
@@ -32,8 +32,10 @@
 
   <script src="app.js"></script>
   <script>
-    // Known episodes (from the official CBS schedule). Add rows as more are announced.
-    const EPISODE_SCHEDULE = [
+    // Fallback only. The live schedule is scraped from Wikipedia into
+    // data.schedule every night, so this list is used just until the first
+    // scraper run lands (or if the fetch ever fails).
+    const EPISODE_SCHEDULE_FALLBACK = [
       { ep: 1,  title: 'Season Premiere',        date: '2026-07-09' },
       { ep: 2,  title: 'Big Brother: Unlocked',  date: '2026-07-10' },
       { ep: 3,  title: 'Episode 3',              date: '2026-07-12' },
@@ -49,15 +51,17 @@
       { ep: 13, title: 'Episode 13',             date: '2026-08-02' },
     ];
 
-    function renderSchedule() {
+    function renderSchedule(data) {
       const el = document.getElementById('schedule-list');
+      const schedule = (data && data.schedule && data.schedule.length)
+        ? data.schedule : EPISODE_SCHEDULE_FALLBACK;
       const now = new Date();
       const pad = n => String(n).padStart(2, '0');
       const todayStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
       const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-      el.innerHTML = EPISODE_SCHEDULE.map(e => {
+      el.innerHTML = schedule.map(e => {
         const d = new Date(e.date + 'T20:00:00');
         const state = e.date === todayStr ? 'tonight' : (e.date < todayStr ? 'aired' : 'upcoming');
         const chip = state === 'tonight' ? 'TONIGHT' : state === 'aired' ? 'AIRED' : 'UPCOMING';
@@ -71,8 +75,8 @@
     }
 
     async function init() {
-      renderSchedule();
       const data = await loadData();
+      renderSchedule(data);
       const container = document.getElementById('log-content');
 
       if (!data.episodes || data.episodes.length === 0) {

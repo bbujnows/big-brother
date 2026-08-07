@@ -616,8 +616,14 @@ def _strip_wiki_markup(text):
     return re.sub(r"\s+", " ", text).strip()
 
 
-def fetch_episode_blurbs():
-    """Return aired, non-empty episode recap texts from Wikipedia, oldest first."""
+_EPISODES_WIKITEXT = None  # fetched at most once per run
+
+
+def fetch_episodes_wikitext():
+    """Raw wikitext of the article's Episodes section (cached per run)."""
+    global _EPISODES_WIKITEXT
+    if _EPISODES_WIKITEXT is not None:
+        return _EPISODES_WIKITEXT
     api = "https://en.wikipedia.org/w/api.php"
     try:
         r = requests.get(api, params={"action": "parse", "page": "Big_Brother_28_(American_season)",
@@ -628,9 +634,48 @@ def fetch_episode_blurbs():
         r = requests.get(api, params={"action": "parse", "page": "Big_Brother_28_(American_season)",
                                       "prop": "wikitext", "section": idx, "format": "json"},
                          headers=HEADERS, timeout=20)
-        wikitext = r.json()["parse"]["wikitext"]["*"]
+        _EPISODES_WIKITEXT = r.json()["parse"]["wikitext"]["*"]
     except Exception as e:
-        print(f"Could not fetch episode recaps: {e}")
+        print(f"Could not fetch the Episodes section: {e}")
+        _EPISODES_WIKITEXT = ""
+    return _EPISODES_WIKITEXT
+
+
+def _clean_episode_title(raw, number):
+    """Tidy Wikipedia's episode titles for display."""
+    title = _strip_wiki_markup(raw or "").strip().strip('"').strip()
+    if number == 1:
+        return "Season Premiere"
+    if "unlocked" in title.lower():
+        return "Big Brother: Unlocked"          # drop the trailing air date
+    return title or f"Episode {number}"
+
+
+def fetch_episode_schedule():
+    """Every announced episode: number, display title, and air date.
+
+    Schedule data only — no results — so future episodes are safe to show."""
+    schedule = []
+    for block in fetch_episodes_wikitext().split("{{Episode list/sublist")[1:]:
+        m_num = re.search(r"EpisodeNumber2\s*=\s*(\d+)", block)
+        m_date = re.search(r"OriginalAirDate\s*=\s*\{\{Start date\|(\d{4})\|(\d{1,2})\|(\d{1,2})", block)
+        if not m_num or not m_date:
+            continue
+        m_title = re.search(r"Title\s*=\s*(.*)", block)
+        number = int(m_num.group(1))
+        schedule.append({
+            "ep": number,
+            "title": _clean_episode_title(m_title.group(1) if m_title else "", number),
+            "date": str(date(int(m_date.group(1)), int(m_date.group(2)), int(m_date.group(3)))),
+        })
+    schedule.sort(key=lambda e: (e["date"], e["ep"]))
+    return schedule
+
+
+def fetch_episode_blurbs():
+    """Return aired, non-empty episode recap texts from Wikipedia, oldest first."""
+    wikitext = fetch_episodes_wikitext()
+    if not wikitext:
         return []
 
     blurbs = []
@@ -807,6 +852,16 @@ def main():
     for line in rescored:
         print(f"RESCORE  {line}")
 
+    # Broadcast schedule — refreshed from Wikipedia so the Episode Log page
+    # never goes stale as CBS announces more dates.
+    schedule = fetch_episode_schedule()
+    schedule_changed = bool(schedule) and data.get("schedule") != schedule
+    if schedule_changed:
+        was = len(data.get("schedule") or [])
+        data["schedule"] = schedule
+        print(f"SCHEDULE {was} -> {len(schedule)} episode(s) listed "
+              f"(through {schedule[-1]['date']})")
+
     published, held, unmatched = [], [], set()
     for week in sorted(weeks):
         apply_week(data, week, weeks[week], published, held, unmatched)
@@ -823,14 +878,14 @@ def main():
     for name in sorted(unmatched):
         print(f"UNMATCHED name on Wikipedia (not on our roster): {name}")
 
-    if not published and not refreshed and not rescored and not board_changes:
-        print("No new aired events to publish; summaries already current.")
+    if not published and not refreshed and not rescored and not board_changes and not schedule_changed:
+        print("No new aired events to publish; summaries and schedule already current.")
         return
 
     if dry_run:
         print(f"DRY RUN — {len(published)} event(s), {len(rescored)} rescore(s), "
-              f"{len(board_changes)} board change(s), and {refreshed} summary "
-              f"rewrite(s) would publish. Nothing written.")
+              f"{len(board_changes)} board change(s), {int(schedule_changed)} schedule "
+              f"update(s), and {refreshed} summary rewrite(s) would publish. Nothing written.")
         return
 
     data["lastUpdated"] = str(date.today())
