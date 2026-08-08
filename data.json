@@ -303,7 +303,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett remains comp-free and off the block, but the walls are closing in. His Toolshed alliance has openly questioned his loyalty alongside Drew's, and Dee's warning that Drew was the week's true target was a stark reminder that Barrett could easily be next.",
+      "summary": "Barrett remains comp-free and off the block, but the pressure keeps building. His Toolshed alliance has openly questioned his loyalty, Dee tipped him off that Drew had become the week's true target, and with a new HOH competition now underway, his quiet game is growing harder to maintain.",
       "events": []
     },
     {
@@ -353,7 +353,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew survived Week 4 by winning the Block Buster to pull himself off the block after Haley made him her primary target. He is a member of both the Handymen with Kamu and the Toolshed, but both alliances continue to question his loyalty, keeping a target firmly on his back."
+      "summary": "Drew survived Week 4 by winning the Block Buster after Haley made him her primary target, but the heat has barely cooled. His Toolshed alliance continued to question his loyalty even as he campaigned to keep himself and Melody safe, and a new HOH competition is already underway."
     },
     {
       "age": 29,
@@ -375,7 +375,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley capped her Week 4 HOH by engineering Lyric's eviction 8–3. She confronted the women who spoke negatively about her, nominated Drew, Melody, and Taylor, and replaced Taylor with Lyric after the veto — though her friction with Kamu over the replacement nominee hints at cracks ahead."
+      "summary": "Haley's Week 4 HOH reign ended with Lyric evicted 8–3 after a week of confrontations, strategic maneuvering, and friction with Kamu over the replacement nominee. Now without her HOH safety net, she heads into the Week 5 HOH competition as a known threat with some fresh enemies."
     },
     {
       "age": 35,
@@ -418,7 +418,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 3 by a unanimous 12–0 vote. His behind-the-scenes scheming was publicly exposed by Kamu at a tea party, and a desperate chaos campaign — including a literal tea-kettle stunt — only sealed his fate. He finished with a premiere-night safety win and a Week 2 Block Buster.",
+      "summary": "Evicted in Week 3 by a unanimous 12–0 vote. His behind-the-scenes scheming was publicly exposed by Kamu at a tea party, and a desperate chaos campaign including a literal tea-kettle stunt only sealed his fate. He finished with a premiere-night safety win and a Week 2 Block Buster.",
       "weekEvicted": 3
     },
     {
@@ -440,7 +440,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu's Week 3 HOH successfully ousted Jason, though he broke his word to both Lyric and Jason along the way. His push to nominate Mallory as Haley's Week 4 replacement nominee visibly rubbed her the wrong way, and with his Handymen partner Drew barely surviving the week, his influence may be slipping."
+      "summary": "Kamu's Week 3 HOH successfully ousted Jason, but his influence has since slipped. His push to nominate Mallory as Haley's Week 4 replacement nominee visibly rubbed her the wrong way, and with the new HOH competition now underway he needs to rebuild his standing in the house."
     },
     {
       "age": 57,
@@ -525,7 +525,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "evicted",
-      "summary": "Lyric was evicted in Week 4 by a vote of 8–3. After winning the Week 3 veto to save herself, she overplayed by throwing allies Mallory and Melody under the bus to get closer to the other side — a move Haley noticed — and ended up as the replacement nominee and then the boot.",
+      "summary": "Lyric was evicted in Week 4 by a vote of 8–3. After winning the Week 3 veto to save herself, she overplayed by throwing allies Mallory and Melody under the bus to get closer to the other side, ended up as the replacement nominee, and was sent out the door.",
       "weekEvicted": 4
     },
     {
@@ -575,7 +575,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory has now saved herself from eviction twice — a Week 1 veto and a Week 3 Block Buster — and survived Week 4 without touching the block. However, she learned that ally Lyric had been throwing both her and Melody under the bus, a betrayal that tested the trio just before Lyric was sent out the door."
+      "summary": "Mallory has now saved herself from eviction twice — a Week 1 veto and a Week 3 Block Buster — and survived Week 4 without touching the block. She learned that ally Lyric had been throwing her under the bus, a betrayal that cost Lyric her game. Now Mallory has been voted to enter the BB Time Capsule next."
     },
     {
       "age": 24,
@@ -618,7 +618,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Melody survived Week 4's eviction vote after Lyric was sent home 8–3 in her place. Still without a competition win, she continues to pay the price for admitting to Haley she would have targeted her — a candid moment that put her on the block and keeps a target on her back."
+      "summary": "Melody survived Week 4's eviction vote after Lyric was sent home 8–3 in her place, and she and Drew celebrated making it through together. Still without a competition win, she remains a target after admitting to Haley she would have put her up — candor that landed her on the block in the first place."
     },
     {
       "age": 42,
@@ -646,7 +646,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens remains one of the most dangerous players in the house, holding a Week 2 HOH, a Week 2 veto, and the secretly held Diamond Power of Veto from the BB Time Capsule — shared only with Dee. His visible bond with Haley following her HOH win shows he keeps building useful relationships across the house."
+      "summary": "Devens remains one of the most dangerous players in the house with a Week 2 HOH and veto to his name. He celebrated Haley's HOH win alongside her and was the first person Drew confided in about targeting the Red Corner, cementing his role as a central strategic hub."
     },
     {
       "age": 28,
@@ -675,7 +675,7 @@
       "ownerId": "brittany",
       "photo": "photos/rome.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 2 after being backdoored by Devens. Rome's game unraveled when his behind-the-scenes manipulation was exposed, and he finished with only his premiere-night safety win to show for it.",
+      "summary": "Rome was evicted in Week 2 after being backdoored by Devens. His behind-the-scenes manipulation was exposed, and he finished with only his premiere-night safety win to show for it.",
       "weekEvicted": 2
     },
     {
@@ -725,7 +725,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor's Week 4 story was a clean escape — she won the Power of Veto and immediately used it on herself, forcing Haley to find a new target. A competition win now on her résumé and a continued independent streak make her an increasingly dangerous player to leave in the house."
+      "summary": "Taylor's Week 4 story was a clean escape — she won the Power of Veto and immediately used it on herself, forcing Haley to find a replacement. A competition win now on her résumé and a continued independent streak make her an increasingly dangerous player heading into the new HOH competition."
     },
     {
       "age": 52,
@@ -738,7 +738,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela has no competition wins but remains a sharp strategic presence, working closely with Dee and continuing to suspect Drew of casting the rogue Week 2 vote. Her egg punishment ended just before Kamu's HOH, and with Drew having narrowly saved himself in Week 4, her read on him has yet to be fully vindicated.",
+      "summary": "Angela has no competition wins but continues to operate quietly near the center of the game. She and Dee lied to the house about voting to keep Lyric, a coordinated deception that kept their cards hidden as the houseguests scrambled to identify who flipped the vote.",
       "events": []
     },
     {
@@ -767,7 +767,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash has kept a low profile since his premiere-night Block Buster win, but he made the final round of the Week 4 HOH before losing to Haley. His quiet game continues to draw interest from those looking to build voting numbers."
+      "summary": "Yash has kept a low profile since his premiere-night Block Buster win, but he made the final round of the Week 4 HOH before losing to Haley. His quiet game continues to draw interest from those looking to build voting numbers, and a new HOH competition is now underway."
     },
     {
       "age": 29,
@@ -787,10 +787,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee won the Week 1 HOH and has quietly accumulated serious hidden leverage since. She is one of only two people who know Devens holds the Diamond Power of Veto, and she won the BB Bribe power from the BB Time Capsule herself — two major advantages running beneath the surface as she navigates the shifting alliances around her."
+      "summary": "Dee won the Week 1 HOH and has been quietly accumulating leverage ever since. She won the BB Bribe power from the BB Time Capsule, keeping it secret even from Devens, and she and Angela coordinated a lie about their votes to conceal who voted to keep Lyric — leaving her true position well hidden."
     }
   ],
-  "lastUpdated": "2026-08-07",
+  "lastUpdated": "2026-08-08",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -814,6 +814,118 @@
     }
   ],
   "premiereDate": "2026-07-09",
+  "schedule": [
+    {
+      "date": "2026-07-09",
+      "ep": 1,
+      "title": "Season Premiere"
+    },
+    {
+      "date": "2026-07-10",
+      "ep": 2,
+      "title": "Big Brother: Unlocked"
+    },
+    {
+      "date": "2026-07-12",
+      "ep": 3,
+      "title": "Episode 3"
+    },
+    {
+      "date": "2026-07-15",
+      "ep": 4,
+      "title": "Episode 4"
+    },
+    {
+      "date": "2026-07-16",
+      "ep": 5,
+      "title": "Episode 5"
+    },
+    {
+      "date": "2026-07-19",
+      "ep": 6,
+      "title": "Episode 6"
+    },
+    {
+      "date": "2026-07-22",
+      "ep": 7,
+      "title": "Episode 7"
+    },
+    {
+      "date": "2026-07-23",
+      "ep": 8,
+      "title": "Episode 8"
+    },
+    {
+      "date": "2026-07-24",
+      "ep": 9,
+      "title": "Big Brother: Unlocked"
+    },
+    {
+      "date": "2026-07-26",
+      "ep": 10,
+      "title": "Episode 10"
+    },
+    {
+      "date": "2026-07-29",
+      "ep": 11,
+      "title": "Episode 11"
+    },
+    {
+      "date": "2026-07-30",
+      "ep": 12,
+      "title": "Episode 12"
+    },
+    {
+      "date": "2026-08-02",
+      "ep": 13,
+      "title": "Episode 13"
+    },
+    {
+      "date": "2026-08-05",
+      "ep": 14,
+      "title": "Episode 14"
+    },
+    {
+      "date": "2026-08-06",
+      "ep": 15,
+      "title": "Episode 15"
+    },
+    {
+      "date": "2026-08-07",
+      "ep": 16,
+      "title": "Big Brother: Unlocked"
+    },
+    {
+      "date": "2026-08-09",
+      "ep": 17,
+      "title": "Episode 17"
+    },
+    {
+      "date": "2026-08-12",
+      "ep": 18,
+      "title": "Episode 18"
+    },
+    {
+      "date": "2026-08-13",
+      "ep": 19,
+      "title": "Episode 19"
+    },
+    {
+      "date": "2026-08-16",
+      "ep": 20,
+      "title": "Episode 20"
+    },
+    {
+      "date": "2026-08-19",
+      "ep": 21,
+      "title": "Episode 21"
+    },
+    {
+      "date": "2026-08-20",
+      "ep": 22,
+      "title": "Episode 22"
+    }
+  ],
   "scoring": {
     "afh": {
       "label": "America's Favorite Houseguest",
@@ -889,117 +1001,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "3ed59a7edada2e649ee02f1cf8d691387f93212ffb66b7d0ef05ff4d1b5f03ca",
-  "schedule": [
-    {
-      "ep": 1,
-      "title": "Season Premiere",
-      "date": "2026-07-09"
-    },
-    {
-      "ep": 2,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-07-10"
-    },
-    {
-      "ep": 3,
-      "title": "Episode 3",
-      "date": "2026-07-12"
-    },
-    {
-      "ep": 4,
-      "title": "Episode 4",
-      "date": "2026-07-15"
-    },
-    {
-      "ep": 5,
-      "title": "Episode 5",
-      "date": "2026-07-16"
-    },
-    {
-      "ep": 6,
-      "title": "Episode 6",
-      "date": "2026-07-19"
-    },
-    {
-      "ep": 7,
-      "title": "Episode 7",
-      "date": "2026-07-22"
-    },
-    {
-      "ep": 8,
-      "title": "Episode 8",
-      "date": "2026-07-23"
-    },
-    {
-      "ep": 9,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-07-24"
-    },
-    {
-      "ep": 10,
-      "title": "Episode 10",
-      "date": "2026-07-26"
-    },
-    {
-      "ep": 11,
-      "title": "Episode 11",
-      "date": "2026-07-29"
-    },
-    {
-      "ep": 12,
-      "title": "Episode 12",
-      "date": "2026-07-30"
-    },
-    {
-      "ep": 13,
-      "title": "Episode 13",
-      "date": "2026-08-02"
-    },
-    {
-      "ep": 14,
-      "title": "Episode 14",
-      "date": "2026-08-05"
-    },
-    {
-      "ep": 15,
-      "title": "Episode 15",
-      "date": "2026-08-06"
-    },
-    {
-      "ep": 16,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-08-07"
-    },
-    {
-      "ep": 17,
-      "title": "Episode 17",
-      "date": "2026-08-09"
-    },
-    {
-      "ep": 18,
-      "title": "Episode 18",
-      "date": "2026-08-12"
-    },
-    {
-      "ep": 19,
-      "title": "Episode 19",
-      "date": "2026-08-13"
-    },
-    {
-      "ep": 20,
-      "title": "Episode 20",
-      "date": "2026-08-16"
-    },
-    {
-      "ep": 21,
-      "title": "Episode 21",
-      "date": "2026-08-19"
-    },
-    {
-      "ep": 22,
-      "title": "Episode 22",
-      "date": "2026-08-20"
-    }
-  ]
+  "summaryDigest": "53213d5b92c99c37635ed29e8c27f0a5f0a517e34637bc0d723ffe3a286b32d7"
 }
