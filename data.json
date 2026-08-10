@@ -266,6 +266,36 @@
         }
       ],
       "week": 4
+    },
+    {
+      "week": 5,
+      "airDate": "2026-08-09",
+      "events": [
+        {
+          "type": "hoh",
+          "houseguestId": "hg_latrice_verrett",
+          "points": 10,
+          "description": "Won Head of Household (Week 5)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_barrett_pfeiffer",
+          "points": -3,
+          "description": "Nominated for eviction (Week 5)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_chuk_anyanwu",
+          "points": -3,
+          "description": "Nominated for eviction (Week 5)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_haley_thogmartin",
+          "points": -3,
+          "description": "Nominated for eviction (Week 5)"
+        }
+      ]
     }
   ],
   "houseguests": [
@@ -303,8 +333,16 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett remains comp-free and off the block, but the pressure keeps building. His Toolshed alliance has openly questioned his loyalty, Dee tipped him off that Drew had become the week's true target, and with a new HOH competition now underway, his quiet game is growing harder to maintain.",
-      "events": []
+      "summary": "Barrett is on the block for the first time after LaTrice nominated him alongside Chuk and Haley. Still without a comp win, his Toolshed alliance has repeatedly questioned his loyalty, and surviving this week will require some fast maneuvering.",
+      "events": [
+        {
+          "week": 5,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 5)",
+          "addedAt": "2026-08-10T04:13:12.663315+00:00"
+        }
+      ]
     },
     {
       "age": 27,
@@ -316,6 +354,13 @@
           "points": 3,
           "type": "safety",
           "week": 1
+        },
+        {
+          "week": 5,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 5)",
+          "addedAt": "2026-08-10T04:13:12.663323+00:00"
         }
       ],
       "hometown": "Dallas, TX",
@@ -325,7 +370,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Chuk has kept a low profile since his premiere-night safety win, but Week 4 pulled him into the action. He competed in the veto competition and was eliminated after drinking the poisoned wine twice, handing Taylor the win that reshuffled the block."
+      "summary": "Chuk is on the block after LaTrice nominated him alongside Barrett and Haley — in part because Yash and Kamu warned Taylor that Chuk has been targeting LaTrice. His only competition win remains his premiere-night safety, and his path to staying gets trickier by the day."
     },
     {
       "age": 22,
@@ -353,7 +398,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew survived Week 4 by winning the Block Buster after Haley made him her primary target, but the heat has barely cooled. His Toolshed alliance continued to question his loyalty even as he campaigned to keep himself and Melody safe, and a new HOH competition is already underway."
+      "summary": "Drew pulled off a clutch Week 4 Block Buster win to survive Haley's HOH after she made him her primary target, then celebrated with Melody when Lyric was evicted instead. His Toolshed alliance has questioned his loyalty all season, but he's still standing and off the block heading into Week 5."
     },
     {
       "age": 29,
@@ -366,6 +411,13 @@
           "points": 10,
           "type": "hoh",
           "week": 4
+        },
+        {
+          "week": 5,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 5)",
+          "addedAt": "2026-08-10T04:13:12.663329+00:00"
         }
       ],
       "hometown": "Neosho, MO",
@@ -375,7 +427,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley's Week 4 HOH reign ended with Lyric evicted 8–3 after a week of confrontations, strategic maneuvering, and friction with Kamu over the replacement nominee. Now without her HOH safety net, she heads into the Week 5 HOH competition as a known threat with some fresh enemies."
+      "summary": "Haley's Week 4 HOH reign ended with Lyric evicted 8–3 after a week of confrontations with her fellow houseguests and friction with Kamu over the replacement nominee. Now she's on the block as LaTrice's nominee, and La Trice has openly discussed backdooring her as the week's primary target."
     },
     {
       "age": 35,
@@ -418,7 +470,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 3 by a unanimous 12–0 vote. His behind-the-scenes scheming was publicly exposed by Kamu at a tea party, and a desperate chaos campaign including a literal tea-kettle stunt only sealed his fate. He finished with a premiere-night safety win and a Week 2 Block Buster.",
+      "summary": "Jason was evicted in Week 3 by a unanimous 12–0 vote. His scheming was exposed and a last-ditch chaos campaign couldn't save him. He finished with a premiere-night safety win and a Week 2 Block Buster.",
       "weekEvicted": 3
     },
     {
@@ -440,7 +492,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu's Week 3 HOH successfully ousted Jason, but his influence has since slipped. His push to nominate Mallory as Haley's Week 4 replacement nominee visibly rubbed her the wrong way, and with the new HOH competition now underway he needs to rebuild his standing in the house."
+      "summary": "Kamu's Week 3 HOH successfully ousted Jason, but his influence has wobbled since. His push to nominate Mallory as Haley's Week 4 replacement nominee visibly rubbed her the wrong way, though he partially regained relevance by warning Taylor that Chuk has been targeting LaTrice — intelligence that helped reshape Week 5 nominations."
     },
     {
       "age": 57,
@@ -460,6 +512,13 @@
           "points": 4,
           "type": "survivedVote",
           "week": 3
+        },
+        {
+          "week": 5,
+          "type": "hoh",
+          "points": 10,
+          "description": "Won Head of Household (Week 5)",
+          "addedAt": "2026-08-10T04:13:12.663146+00:00"
         }
       ],
       "hometown": "Kankakee, IL",
@@ -469,7 +528,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "LaTrice survived the block in Week 3 and made a savvy social play afterward, tipping off Haley that Melody and Mallory had been speaking negatively about her. That intel helped shape Haley's nominations and may have earned LaTrice a valuable new ally heading into the weeks ahead."
+      "summary": "LaTrice is the reigning Week 5 Head of Household after outlasting Drew, Kamu, and Yash in the endurance comp. She survived the block in Week 3 and has been building allies ever since, nominating Barrett, Chuk, and Haley this week with Haley as her reported primary target."
     },
     {
       "age": 25,
@@ -525,7 +584,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "evicted",
-      "summary": "Lyric was evicted in Week 4 by a vote of 8–3. After winning the Week 3 veto to save herself, she overplayed by throwing allies Mallory and Melody under the bus to get closer to the other side, ended up as the replacement nominee, and was sent out the door.",
+      "summary": "Lyric was evicted in Week 4 by a vote of 8–3. After winning the Week 3 veto to save herself, she overplayed by throwing allies Mallory and Melody under the bus, ended up as the replacement nominee, and was sent out the door.",
       "weekEvicted": 4
     },
     {
@@ -575,7 +634,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory has now saved herself from eviction twice — a Week 1 veto and a Week 3 Block Buster — and survived Week 4 without touching the block. She learned that ally Lyric had been throwing her under the bus, a betrayal that cost Lyric her game. Now Mallory has been voted to enter the BB Time Capsule next."
+      "summary": "Mallory has twice saved herself from eviction — via a Week 1 veto and a Week 3 Block Buster — and she joined the majority that blindsided ally Lyric in Week 4. Her BB Time Capsule visit brought bad news: she earned the Adam and Eve punishment and spent 48 hours chained to Melody."
     },
     {
       "age": 24,
@@ -618,7 +677,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Melody survived Week 4's eviction vote after Lyric was sent home 8–3 in her place, and she and Drew celebrated making it through together. Still without a competition win, she remains a target after admitting to Haley she would have put her up — candor that landed her on the block in the first place."
+      "summary": "Melody has survived two eviction votes while sitting on the block and still has no competition wins to show for it. She and Drew celebrated making it through Week 4 together, and she was chained to Mallory for 48 hours after Mallory's BB Time Capsule visit earned the Adam and Eve punishment."
     },
     {
       "age": 42,
@@ -646,7 +705,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens remains one of the most dangerous players in the house with a Week 2 HOH and veto to his name. He celebrated Haley's HOH win alongside her and was the first person Drew confided in about targeting the Red Corner, cementing his role as a central strategic hub."
+      "summary": "Devens remains one of the most dangerous players in the house with a Week 2 HOH and veto to his name. He was Drew's confidant for targeting the Red Corner and co-orchestrated the Week 4 blindside of Lyric alongside Dee and Angela, cementing himself as a central strategic force."
     },
     {
       "age": 28,
@@ -725,7 +784,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor's Week 4 story was a clean escape — she won the Power of Veto and immediately used it on herself, forcing Haley to find a replacement. A competition win now on her résumé and a continued independent streak make her an increasingly dangerous player heading into the new HOH competition."
+      "summary": "Taylor won the Week 4 Power of Veto and immediately used it on herself, then helped Dee, Devens, and Angela orchestrate the blindside that sent Lyric home 8–3. She also tipped off LaTrice about the plan, continuing to build connections across the house as a versatile and increasingly dangerous player."
     },
     {
       "age": 52,
@@ -738,7 +797,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela has no competition wins but continues to operate quietly near the center of the game. She and Dee lied to the house about voting to keep Lyric, a coordinated deception that kept their cards hidden as the houseguests scrambled to identify who flipped the vote.",
+      "summary": "Angela has no competition wins but continues to operate quietly near the center of the game. She was part of the Dee and Devens plot to blindside Lyric, then lied to the house about her vote alongside Dee, successfully deflecting suspicion onto Chuk and Kamu.",
       "events": []
     },
     {
@@ -767,7 +826,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash has kept a low profile since his premiere-night Block Buster win, but he made the final round of the Week 4 HOH before losing to Haley. His quiet game continues to draw interest from those looking to build voting numbers, and a new HOH competition is now underway."
+      "summary": "Yash has kept a low profile since his premiere-night Block Buster win but made the final round of the Week 4 HOH before losing to Haley. He also delivered key intelligence to Taylor — warning her that Chuk was targeting LaTrice — intel that helped reshape LaTrice's Week 5 nominations."
     },
     {
       "age": 29,
@@ -787,10 +846,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee won the Week 1 HOH and has been quietly accumulating leverage ever since. She won the BB Bribe power from the BB Time Capsule, keeping it secret even from Devens, and she and Angela coordinated a lie about their votes to conceal who voted to keep Lyric — leaving her true position well hidden."
+      "summary": "Dee won the Week 1 HOH and has been quietly accumulating leverage ever since. She won the BB Bribe power from the BB Time Capsule, co-orchestrated the blindside that evicted Lyric alongside Devens and Angela, and then lied about her vote to keep her true position hidden — all while keeping her power secret from everyone."
     }
   ],
-  "lastUpdated": "2026-08-08",
+  "lastUpdated": "2026-08-10",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -1001,5 +1060,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "53213d5b92c99c37635ed29e8c27f0a5f0a517e34637bc0d723ffe3a286b32d7"
+  "summaryDigest": "dcc2b606a96ac387e7a08406b95322ee17b58950c78958fa6ade884d1121a049"
 }
