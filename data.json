@@ -268,34 +268,34 @@
       "week": 4
     },
     {
-      "week": 5,
       "airDate": "2026-08-09",
       "events": [
         {
-          "type": "hoh",
+          "description": "Won Head of Household (Week 5)",
           "houseguestId": "hg_latrice_verrett",
           "points": 10,
-          "description": "Won Head of Household (Week 5)"
+          "type": "hoh"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 5)",
           "houseguestId": "hg_barrett_pfeiffer",
           "points": -3,
-          "description": "Nominated for eviction (Week 5)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 5)",
           "houseguestId": "hg_chuk_anyanwu",
           "points": -3,
-          "description": "Nominated for eviction (Week 5)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 5)",
           "houseguestId": "hg_haley_thogmartin",
           "points": -3,
-          "description": "Nominated for eviction (Week 5)"
+          "type": "nominated"
         }
-      ]
+      ],
+      "week": 5
     }
   ],
   "houseguests": [
@@ -326,6 +326,15 @@
       "age": 27,
       "bio": "Has watched BB since he was 8 and applied for years. Charming, spicy and social — strategy is becoming everyone's best friend. At 6'6\" he's often underestimated and thinks the game could be a 'breeze.' Admits his mouth can get ahead of his brain; could become a villain by smiling in someone's face while planning to stab them in the back. Wears his emotions on his sleeve.",
       "currentCity": "Austin, TX",
+      "events": [
+        {
+          "addedAt": "2026-08-10T04:13:12.663315+00:00",
+          "description": "Nominated for eviction (Week 5)",
+          "points": -3,
+          "type": "nominated",
+          "week": 5
+        }
+      ],
       "hometown": "Benton, AR",
       "id": "hg_barrett_pfeiffer",
       "name": "Barrett Pfeiffer",
@@ -333,16 +342,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett is on the block for the first time after LaTrice nominated him alongside Chuk and Haley. Still without a comp win, his Toolshed alliance has repeatedly questioned his loyalty, and surviving this week will require some fast maneuvering.",
-      "events": [
-        {
-          "week": 5,
-          "type": "nominated",
-          "points": -3,
-          "description": "Nominated for eviction (Week 5)",
-          "addedAt": "2026-08-10T04:13:12.663315+00:00"
-        }
-      ]
+      "summary": "Barrett is on the block for the first time after LaTrice nominated him alongside Chuk and Haley. Still without a comp win, his Toolshed alliance has repeatedly questioned his loyalty, and surviving this week will require some fast maneuvering."
     },
     {
       "age": 27,
@@ -356,11 +356,11 @@
           "week": 1
         },
         {
-          "week": 5,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-08-10T04:13:12.663323+00:00",
           "description": "Nominated for eviction (Week 5)",
-          "addedAt": "2026-08-10T04:13:12.663323+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 5
         }
       ],
       "hometown": "Dallas, TX",
@@ -413,11 +413,11 @@
           "week": 4
         },
         {
-          "week": 5,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-08-10T04:13:12.663329+00:00",
           "description": "Nominated for eviction (Week 5)",
-          "addedAt": "2026-08-10T04:13:12.663329+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 5
         }
       ],
       "hometown": "Neosho, MO",
@@ -514,11 +514,11 @@
           "week": 3
         },
         {
-          "week": 5,
-          "type": "hoh",
-          "points": 10,
+          "addedAt": "2026-08-10T04:13:12.663146+00:00",
           "description": "Won Head of Household (Week 5)",
-          "addedAt": "2026-08-10T04:13:12.663146+00:00"
+          "points": 10,
+          "type": "hoh",
+          "week": 5
         }
       ],
       "hometown": "Kankakee, IL",
@@ -849,7 +849,7 @@
       "summary": "Dee won the Week 1 HOH and has been quietly accumulating leverage ever since. She won the BB Bribe power from the BB Time Capsule, co-orchestrated the blindside that evicted Lyric alongside Devens and Angela, and then lied about her vote to keep her true position hidden — all while keeping her power secret from everyone."
     }
   ],
-  "lastUpdated": "2026-08-10",
+  "lastUpdated": "2026-08-12",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -875,114 +875,154 @@
   "premiereDate": "2026-07-09",
   "schedule": [
     {
-      "date": "2026-07-09",
       "ep": 1,
-      "title": "Season Premiere"
+      "title": "Season Premiere",
+      "date": "2026-07-09"
     },
     {
-      "date": "2026-07-10",
       "ep": 2,
-      "title": "Big Brother: Unlocked"
+      "title": "Big Brother: Unlocked",
+      "date": "2026-07-10"
     },
     {
-      "date": "2026-07-12",
       "ep": 3,
-      "title": "Episode 3"
+      "title": "Episode 3",
+      "date": "2026-07-12"
     },
     {
-      "date": "2026-07-15",
       "ep": 4,
-      "title": "Episode 4"
+      "title": "Episode 4",
+      "date": "2026-07-15"
     },
     {
-      "date": "2026-07-16",
       "ep": 5,
-      "title": "Episode 5"
+      "title": "Episode 5",
+      "date": "2026-07-16"
     },
     {
-      "date": "2026-07-19",
       "ep": 6,
-      "title": "Episode 6"
+      "title": "Episode 6",
+      "date": "2026-07-19"
     },
     {
-      "date": "2026-07-22",
       "ep": 7,
-      "title": "Episode 7"
+      "title": "Episode 7",
+      "date": "2026-07-22"
     },
     {
-      "date": "2026-07-23",
       "ep": 8,
-      "title": "Episode 8"
+      "title": "Episode 8",
+      "date": "2026-07-23"
     },
     {
-      "date": "2026-07-24",
       "ep": 9,
-      "title": "Big Brother: Unlocked"
+      "title": "Big Brother: Unlocked",
+      "date": "2026-07-24"
     },
     {
-      "date": "2026-07-26",
       "ep": 10,
-      "title": "Episode 10"
+      "title": "Episode 10",
+      "date": "2026-07-26"
     },
     {
-      "date": "2026-07-29",
       "ep": 11,
-      "title": "Episode 11"
+      "title": "Episode 11",
+      "date": "2026-07-29"
     },
     {
-      "date": "2026-07-30",
       "ep": 12,
-      "title": "Episode 12"
+      "title": "Episode 12",
+      "date": "2026-07-30"
     },
     {
-      "date": "2026-08-02",
       "ep": 13,
-      "title": "Episode 13"
+      "title": "Episode 13",
+      "date": "2026-08-02"
     },
     {
-      "date": "2026-08-05",
       "ep": 14,
-      "title": "Episode 14"
+      "title": "Episode 14",
+      "date": "2026-08-05"
     },
     {
-      "date": "2026-08-06",
       "ep": 15,
-      "title": "Episode 15"
+      "title": "Episode 15",
+      "date": "2026-08-06"
     },
     {
-      "date": "2026-08-07",
       "ep": 16,
-      "title": "Big Brother: Unlocked"
+      "title": "Big Brother: Unlocked",
+      "date": "2026-08-07"
     },
     {
-      "date": "2026-08-09",
       "ep": 17,
-      "title": "Episode 17"
+      "title": "Episode 17",
+      "date": "2026-08-09"
     },
     {
-      "date": "2026-08-12",
       "ep": 18,
-      "title": "Episode 18"
+      "title": "Episode 18",
+      "date": "2026-08-12"
     },
     {
-      "date": "2026-08-13",
       "ep": 19,
-      "title": "Episode 19"
+      "title": "Episode 19",
+      "date": "2026-08-13"
     },
     {
-      "date": "2026-08-16",
       "ep": 20,
-      "title": "Episode 20"
+      "title": "Episode 20",
+      "date": "2026-08-16"
     },
     {
-      "date": "2026-08-19",
       "ep": 21,
-      "title": "Episode 21"
+      "title": "Episode 21",
+      "date": "2026-08-19"
     },
     {
-      "date": "2026-08-20",
       "ep": 22,
-      "title": "Episode 22"
+      "title": "Episode 22",
+      "date": "2026-08-20"
+    },
+    {
+      "ep": 23,
+      "title": "Episode 23",
+      "date": "2026-08-23"
+    },
+    {
+      "ep": 24,
+      "title": "Episode 24",
+      "date": "2026-08-26"
+    },
+    {
+      "ep": 25,
+      "title": "Episode 25",
+      "date": "2026-08-27"
+    },
+    {
+      "ep": 26,
+      "title": "Episode 26",
+      "date": "2026-08-30"
+    },
+    {
+      "ep": 27,
+      "title": "Episode 27",
+      "date": "2026-09-02"
+    },
+    {
+      "ep": 28,
+      "title": "Episode 28",
+      "date": "2026-09-03"
+    },
+    {
+      "ep": 29,
+      "title": "Big Brother: Unlocked",
+      "date": "2026-09-04"
+    },
+    {
+      "ep": 30,
+      "title": "Episode 30",
+      "date": "2026-09-06"
     }
   ],
   "scoring": {
