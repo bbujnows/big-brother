@@ -293,6 +293,12 @@
           "houseguestId": "hg_haley_thogmartin",
           "points": -3,
           "type": "nominated"
+        },
+        {
+          "type": "veto",
+          "houseguestId": "hg_kamu_kirk",
+          "points": 3,
+          "description": "Won Power of Veto (Week 5)"
         }
       ],
       "week": 5
@@ -319,7 +325,7 @@
       "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
       "status": "evicted",
-      "summary": "Ashley was evicted in Week 1 before she could find her footing in the house. She finished without a single competition win to her name.",
+      "summary": "Evicted in Week 1.",
       "weekEvicted": 1
     },
     {
@@ -342,7 +348,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett is on the block for the first time after LaTrice nominated him alongside Chuk and Haley. Still without a comp win, his Toolshed alliance has repeatedly questioned his loyalty, and surviving this week will require some fast maneuvering."
+      "summary": "Currently on the block ahead of the next eviction."
     },
     {
       "age": 27,
@@ -370,7 +376,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "active",
-      "summary": "Chuk is on the block after LaTrice nominated him alongside Barrett and Haley — in part because Yash and Kamu warned Taylor that Chuk has been targeting LaTrice. His only competition win remains his premiere-night safety, and his path to staying gets trickier by the day."
+      "summary": "Currently on the block ahead of the next eviction. Owns a safety win from premiere night so far."
     },
     {
       "age": 22,
@@ -398,7 +404,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew pulled off a clutch Week 4 Block Buster win to survive Haley's HOH after she made him her primary target, then celebrated with Melody when Lyric was evicted instead. His Toolshed alliance has questioned his loyalty all season, but he's still standing and off the block heading into Week 5."
+      "summary": "Owns a Blockbuster win so far."
     },
     {
       "age": 29,
@@ -427,7 +433,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley's Week 4 HOH reign ended with Lyric evicted 8–3 after a week of confrontations with her fellow houseguests and friction with Kamu over the replacement nominee. Now she's on the block as LaTrice's nominee, and La Trice has openly discussed backdooring her as the week's primary target."
+      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win so far."
     },
     {
       "age": 35,
@@ -470,7 +476,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "evicted",
-      "summary": "Jason was evicted in Week 3 by a unanimous 12–0 vote. His scheming was exposed and a last-ditch chaos campaign couldn't save him. He finished with a premiere-night safety win and a Week 2 Block Buster.",
+      "summary": "Evicted in Week 3. Finished with a Blockbuster win and a safety win from premiere night.",
       "weekEvicted": 3
     },
     {
@@ -483,6 +489,13 @@
           "points": 10,
           "type": "hoh",
           "week": 3
+        },
+        {
+          "week": 5,
+          "type": "veto",
+          "points": 3,
+          "description": "Won Power of Veto (Week 5)",
+          "addedAt": "2026-08-13T04:25:58.381217+00:00"
         }
       ],
       "hometown": "Phoenix, AZ",
@@ -492,7 +505,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu's Week 3 HOH successfully ousted Jason, but his influence has wobbled since. His push to nominate Mallory as Haley's Week 4 replacement nominee visibly rubbed her the wrong way, though he partially regained relevance by warning Taylor that Chuk has been targeting LaTrice — intelligence that helped reshape Week 5 nominations."
+      "summary": "Owns an HOH win and a veto win so far."
     },
     {
       "age": 57,
@@ -528,7 +541,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "LaTrice is the reigning Week 5 Head of Household after outlasting Drew, Kamu, and Yash in the endurance comp. She survived the block in Week 3 and has been building allies ever since, nominating Barrett, Chuk, and Haley this week with Haley as her reported primary target."
+      "summary": "Reigning Head of Household after winning the Week 5 comp. Survived the Week 3 eviction vote."
     },
     {
       "age": 25,
@@ -584,7 +597,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "evicted",
-      "summary": "Lyric was evicted in Week 4 by a vote of 8–3. After winning the Week 3 veto to save herself, she overplayed by throwing allies Mallory and Melody under the bus, ended up as the replacement nominee, and was sent out the door.",
+      "summary": "Evicted in Week 4. Finished with a veto win. Pulled themselves off the block in Week 3 and was pulled off the block in Week 2.",
       "weekEvicted": 4
     },
     {
@@ -634,7 +647,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory has twice saved herself from eviction — via a Week 1 veto and a Week 3 Block Buster — and she joined the majority that blindsided ally Lyric in Week 4. Her BB Time Capsule visit brought bad news: she earned the Adam and Eve punishment and spent 48 hours chained to Melody."
+      "summary": "Owns a veto win and a Blockbuster win so far. Pulled themselves off the block in Week 1."
     },
     {
       "age": 24,
@@ -677,7 +690,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Melody has survived two eviction votes while sitting on the block and still has no competition wins to show for it. She and Drew celebrated making it through Week 4 together, and she was chained to Mallory for 48 hours after Mallory's BB Time Capsule visit earned the Adam and Eve punishment."
+      "summary": "Survived two eviction votes on the block."
     },
     {
       "age": 42,
@@ -705,7 +718,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens remains one of the most dangerous players in the house with a Week 2 HOH and veto to his name. He was Drew's confidant for targeting the Red Corner and co-orchestrated the Week 4 blindside of Lyric alongside Dee and Angela, cementing himself as a central strategic force."
+      "summary": "Owns an HOH win and a veto win so far."
     },
     {
       "age": 28,
@@ -734,7 +747,7 @@
       "ownerId": "brittany",
       "photo": "photos/rome.jpg",
       "status": "evicted",
-      "summary": "Rome was evicted in Week 2 after being backdoored by Devens. His behind-the-scenes manipulation was exposed, and he finished with only his premiere-night safety win to show for it.",
+      "summary": "Evicted in Week 2. Finished with a safety win from premiere night.",
       "weekEvicted": 2
     },
     {
@@ -784,7 +797,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor won the Week 4 Power of Veto and immediately used it on herself, then helped Dee, Devens, and Angela orchestrate the blindside that sent Lyric home 8–3. She also tipped off LaTrice about the plan, continuing to build connections across the house as a versatile and increasingly dangerous player."
+      "summary": "Owns a veto win so far. Pulled themselves off the block in Week 4 and survived the Week 1 eviction vote."
     },
     {
       "age": 52,
@@ -797,7 +810,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela has no competition wins but continues to operate quietly near the center of the game. She was part of the Dee and Devens plot to blindside Lyric, then lied to the house about her vote alongside Dee, successfully deflecting suspicion onto Chuk and Kamu.",
+      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game.",
       "events": []
     },
     {
@@ -826,7 +839,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash has kept a low profile since his premiere-night Block Buster win but made the final round of the Week 4 HOH before losing to Haley. He also delivered key intelligence to Taylor — warning her that Chuk was targeting LaTrice — intel that helped reshape LaTrice's Week 5 nominations."
+      "summary": "Owns a Blockbuster win so far."
     },
     {
       "age": 29,
@@ -846,10 +859,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee won the Week 1 HOH and has been quietly accumulating leverage ever since. She won the BB Bribe power from the BB Time Capsule, co-orchestrated the blindside that evicted Lyric alongside Devens and Angela, and then lied about her vote to keep her true position hidden — all while keeping her power secret from everyone."
+      "summary": "Owns an HOH win so far."
     }
   ],
-  "lastUpdated": "2026-08-12",
+  "lastUpdated": "2026-08-13",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -875,154 +888,154 @@
   "premiereDate": "2026-07-09",
   "schedule": [
     {
+      "date": "2026-07-09",
       "ep": 1,
-      "title": "Season Premiere",
-      "date": "2026-07-09"
+      "title": "Season Premiere"
     },
     {
+      "date": "2026-07-10",
       "ep": 2,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-07-10"
+      "title": "Big Brother: Unlocked"
     },
     {
+      "date": "2026-07-12",
       "ep": 3,
-      "title": "Episode 3",
-      "date": "2026-07-12"
+      "title": "Episode 3"
     },
     {
+      "date": "2026-07-15",
       "ep": 4,
-      "title": "Episode 4",
-      "date": "2026-07-15"
+      "title": "Episode 4"
     },
     {
+      "date": "2026-07-16",
       "ep": 5,
-      "title": "Episode 5",
-      "date": "2026-07-16"
+      "title": "Episode 5"
     },
     {
+      "date": "2026-07-19",
       "ep": 6,
-      "title": "Episode 6",
-      "date": "2026-07-19"
+      "title": "Episode 6"
     },
     {
+      "date": "2026-07-22",
       "ep": 7,
-      "title": "Episode 7",
-      "date": "2026-07-22"
+      "title": "Episode 7"
     },
     {
+      "date": "2026-07-23",
       "ep": 8,
-      "title": "Episode 8",
-      "date": "2026-07-23"
+      "title": "Episode 8"
     },
     {
+      "date": "2026-07-24",
       "ep": 9,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-07-24"
+      "title": "Big Brother: Unlocked"
     },
     {
+      "date": "2026-07-26",
       "ep": 10,
-      "title": "Episode 10",
-      "date": "2026-07-26"
+      "title": "Episode 10"
     },
     {
+      "date": "2026-07-29",
       "ep": 11,
-      "title": "Episode 11",
-      "date": "2026-07-29"
+      "title": "Episode 11"
     },
     {
+      "date": "2026-07-30",
       "ep": 12,
-      "title": "Episode 12",
-      "date": "2026-07-30"
+      "title": "Episode 12"
     },
     {
+      "date": "2026-08-02",
       "ep": 13,
-      "title": "Episode 13",
-      "date": "2026-08-02"
+      "title": "Episode 13"
     },
     {
+      "date": "2026-08-05",
       "ep": 14,
-      "title": "Episode 14",
-      "date": "2026-08-05"
+      "title": "Episode 14"
     },
     {
+      "date": "2026-08-06",
       "ep": 15,
-      "title": "Episode 15",
-      "date": "2026-08-06"
+      "title": "Episode 15"
     },
     {
+      "date": "2026-08-07",
       "ep": 16,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-08-07"
+      "title": "Big Brother: Unlocked"
     },
     {
+      "date": "2026-08-09",
       "ep": 17,
-      "title": "Episode 17",
-      "date": "2026-08-09"
+      "title": "Episode 17"
     },
     {
+      "date": "2026-08-12",
       "ep": 18,
-      "title": "Episode 18",
-      "date": "2026-08-12"
+      "title": "Episode 18"
     },
     {
+      "date": "2026-08-13",
       "ep": 19,
-      "title": "Episode 19",
-      "date": "2026-08-13"
+      "title": "Episode 19"
     },
     {
+      "date": "2026-08-16",
       "ep": 20,
-      "title": "Episode 20",
-      "date": "2026-08-16"
+      "title": "Episode 20"
     },
     {
+      "date": "2026-08-19",
       "ep": 21,
-      "title": "Episode 21",
-      "date": "2026-08-19"
+      "title": "Episode 21"
     },
     {
+      "date": "2026-08-20",
       "ep": 22,
-      "title": "Episode 22",
-      "date": "2026-08-20"
+      "title": "Episode 22"
     },
     {
+      "date": "2026-08-23",
       "ep": 23,
-      "title": "Episode 23",
-      "date": "2026-08-23"
+      "title": "Episode 23"
     },
     {
+      "date": "2026-08-26",
       "ep": 24,
-      "title": "Episode 24",
-      "date": "2026-08-26"
+      "title": "Episode 24"
     },
     {
+      "date": "2026-08-27",
       "ep": 25,
-      "title": "Episode 25",
-      "date": "2026-08-27"
+      "title": "Episode 25"
     },
     {
+      "date": "2026-08-30",
       "ep": 26,
-      "title": "Episode 26",
-      "date": "2026-08-30"
+      "title": "Episode 26"
     },
     {
+      "date": "2026-09-02",
       "ep": 27,
-      "title": "Episode 27",
-      "date": "2026-09-02"
+      "title": "Episode 27"
     },
     {
+      "date": "2026-09-03",
       "ep": 28,
-      "title": "Episode 28",
-      "date": "2026-09-03"
+      "title": "Episode 28"
     },
     {
+      "date": "2026-09-04",
       "ep": 29,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-09-04"
+      "title": "Big Brother: Unlocked"
     },
     {
+      "date": "2026-09-06",
       "ep": 30,
-      "title": "Episode 30",
-      "date": "2026-09-06"
+      "title": "Episode 30"
     }
   ],
   "scoring": {
