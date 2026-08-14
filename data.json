@@ -295,10 +295,22 @@
           "type": "nominated"
         },
         {
-          "type": "veto",
+          "description": "Won Power of Veto (Week 5)",
           "houseguestId": "hg_kamu_kirk",
           "points": 3,
-          "description": "Won Power of Veto (Week 5)"
+          "type": "veto"
+        },
+        {
+          "type": "bbBlockbuster",
+          "houseguestId": "hg_haley_thogmartin",
+          "points": 5,
+          "description": "Won BB Blockbuster (Week 5)"
+        },
+        {
+          "type": "survivedVote",
+          "houseguestId": "hg_barrett_pfeiffer",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 5)"
         }
       ],
       "week": 5
@@ -339,6 +351,13 @@
           "points": -3,
           "type": "nominated",
           "week": 5
+        },
+        {
+          "week": 5,
+          "type": "survivedVote",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 5)",
+          "addedAt": "2026-08-14T04:22:37.287437+00:00"
         }
       ],
       "hometown": "Benton, AR",
@@ -348,7 +367,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Currently on the block ahead of the next eviction."
+      "summary": "Barrett narrowly survived Week 5 after being nominated by La Trice and sitting on the block until Chuk was evicted 9-1. He's now part of the newly formed F.A.P. alliance with Mallory, Melody, and Drew, giving him a fresh set of allies heading into the next week."
     },
     {
       "age": 27,
@@ -375,8 +394,9 @@
       "occupation": "Supply chain analyst",
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
-      "status": "active",
-      "summary": "Currently on the block ahead of the next eviction. Owns a safety win from premiere night so far."
+      "status": "evicted",
+      "summary": "Evicted in Week 5 by a vote of 9-1, just one week after being blindsided by La Trice's nominations. He finished the game with a safety win from premiere night.",
+      "weekEvicted": 5
     },
     {
       "age": 22,
@@ -404,7 +424,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Owns a Blockbuster win so far."
+      "summary": "Drew's Week 4 Blockbuster win saved him after his own Toolshed allies began conspiring against him, and he's since found a new crew in the F.A.P. alliance with Mallory, Melody, and Barrett. He's quietly building bridges across the house."
     },
     {
       "age": 29,
@@ -424,6 +444,13 @@
           "points": -3,
           "type": "nominated",
           "week": 5
+        },
+        {
+          "week": 5,
+          "type": "bbBlockbuster",
+          "points": 5,
+          "description": "Won BB Blockbuster (Week 5)",
+          "addedAt": "2026-08-14T04:22:37.286821+00:00"
         }
       ],
       "hometown": "Neosho, MO",
@@ -433,7 +460,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win so far."
+      "summary": "Haley saved herself from La Trice's Week 5 block with a Blockbuster win, but the vote-flip fallout has left her burned and isolated. She owns an HOH and a Blockbuster win, though her position in the house looks shakier than ever."
     },
     {
       "age": 35,
@@ -491,11 +518,11 @@
           "week": 3
         },
         {
-          "week": 5,
-          "type": "veto",
-          "points": 3,
+          "addedAt": "2026-08-13T04:25:58.381217+00:00",
           "description": "Won Power of Veto (Week 5)",
-          "addedAt": "2026-08-13T04:25:58.381217+00:00"
+          "points": 3,
+          "type": "veto",
+          "week": 5
         }
       ],
       "hometown": "Phoenix, AZ",
@@ -505,7 +532,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Owns an HOH win and a veto win so far."
+      "summary": "Kamu won the Week 5 veto and chose to keep La Trice's nominations intact, a decision that left Chuk and Haley feeling burned by him. He now holds an HOH and a veto win and appears well-connected on multiple sides of the house."
     },
     {
       "age": 57,
@@ -541,7 +568,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "Reigning Head of Household after winning the Week 5 comp. Survived the Week 3 eviction vote."
+      "summary": "La Trice's Week 5 HOH reign ended with Chuk's eviction, a target she landed on after allies tipped her off that he was gunning for her. She survived a Week 3 eviction vote and now owns an HOH win."
     },
     {
       "age": 25,
@@ -597,7 +624,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 4. Finished with a veto win. Pulled themselves off the block in Week 3 and was pulled off the block in Week 2.",
+      "summary": "Evicted in Week 4 after being named the replacement nominee when Haley grew suspicious of her throwing allies under the bus. Finished with a veto win and was previously pulled off the block in Weeks 2 and 3.",
       "weekEvicted": 4
     },
     {
@@ -647,7 +674,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Owns a veto win and a Blockbuster win so far. Pulled themselves off the block in Week 1."
+      "summary": "Mallory's Week 5 BB Time Capsule trip backfired, earning her an Adam and Eve punishment that chained her to Melody for 48 hours. She and Melody made the most of it by forming the F.A.P. alliance with Barrett and Drew. She owns a veto and a Blockbuster win."
     },
     {
       "age": 24,
@@ -690,7 +717,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Survived two eviction votes on the block."
+      "summary": "After surviving two stints on the block, Melody found a silver lining in her Adam and Eve punishment by forming the F.A.P. alliance with Mallory, Barrett, and Drew. She still has no competition wins, but her social game is quietly growing."
     },
     {
       "age": 42,
@@ -718,7 +745,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Owns an HOH win and a veto win so far."
+      "summary": "Devens was part of the Week 4 blindside that sent Lyric home and learned in Week 5 that Dee had been hiding her BB Bribe power from him. He still holds an HOH and a veto win and remains a central figure in the house's majority."
     },
     {
       "age": 28,
@@ -797,7 +824,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Owns a veto win so far. Pulled themselves off the block in Week 4 and survived the Week 1 eviction vote."
+      "summary": "Taylor used her Week 4 veto to save herself, then turned around and helped orchestrate the blindside vote that sent Lyric home. She's been an active strategic player and owns a veto win heading into the next phase of the game."
     },
     {
       "age": 52,
@@ -810,7 +837,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game.",
+      "summary": "Angela's quiet game cracked open in Week 5 when she was caught lying about the Week 4 vote flip, eventually admitting the truth to her Red Corner allies. She still has no competition wins, but the fallout with Haley has made her a more visible target.",
       "events": []
     },
     {
@@ -839,7 +866,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Owns a Blockbuster win so far."
+      "summary": "Yash helped reshape La Trice's Week 5 HOH plans by tipping her off that Chuk was targeting her, steering nominations away from an original backdoor plan. He owns a Blockbuster win and has been a quiet but influential presence."
     },
     {
       "age": 29,
@@ -859,10 +886,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Owns an HOH win so far."
+      "summary": "Dee spent Week 5 managing fallout from the vote flip she helped engineer, lying about her vote and hiding her BB Bribe power before finally coming clean to Devens and then Kamu. She owns a Week 1 HOH win and has been quietly pulling strings all season."
     }
   ],
-  "lastUpdated": "2026-08-13",
+  "lastUpdated": "2026-08-14",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -1113,5 +1140,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "dcc2b606a96ac387e7a08406b95322ee17b58950c78958fa6ade884d1121a049"
+  "summaryDigest": "2ed65400ed3ce79b2d3624eaa13874ac94ff0ce30c17b6f73691092f6f4e11b0"
 }
