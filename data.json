@@ -337,7 +337,7 @@
       "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 1.",
+      "summary": "Ashley was evicted in Week 1 and never got a chance to make her mark on the season.",
       "weekEvicted": 1
     },
     {
@@ -367,7 +367,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Survived the Week 5 eviction vote."
+      "summary": "Barrett survived a scary Week 5 stint on the block when Chuk was evicted 9–1, with only Haley voting to keep him. He's now part of the newly formed F.A.P alliance alongside Mallory, Melody, and Drew, giving him fresh footing heading deeper into the game."
     },
     {
       "age": 27,
@@ -395,7 +395,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 5. Finished with a safety win from premiere night.",
+      "summary": "Chuk was evicted in Week 5 by a vote of 9–1 after La Trice nominated him and Kamu chose not to use the veto to save him. He finished the game with only a premiere-night safety win to his name.",
       "weekEvicted": 5
     },
     {
@@ -424,7 +424,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Owns a Blockbuster win so far."
+      "summary": "Drew survived being Haley's primary target in Week 4 by winning the Blockbuster competition, then formed the F.A.P alliance with Mallory, Melody, and Barrett. A member of the Toolshed, he's managed to keep himself off the block and relevant on both sides of the house."
     },
     {
       "age": 29,
@@ -460,7 +460,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Owns an HOH win and a Blockbuster win so far."
+      "summary": "Haley won the Week 5 Blockbuster to save herself after being blindsided by La Trice's nominations — a painful turn after her own Week 4 HOH reign. She's been burned by her allies flipping the vote and is now scrambling to rebuild trust in a house that's largely turned against her."
     },
     {
       "age": 35,
@@ -503,7 +503,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 3. Finished with a Blockbuster win and a safety win from premiere night.",
+      "summary": "Jason was evicted in Week 3 and finished the game with a premiere-night safety win and a Week 2 Blockbuster victory.",
       "weekEvicted": 3
     },
     {
@@ -532,7 +532,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Owns an HOH win and a veto win so far."
+      "summary": "Kamu won the Week 5 veto and, with the whole house aligned, chose to leave La Trice's nominations intact — sending Chuk out the door 9–1. His decision stung Chuk and Haley, but cemented his standing as a reliable vote with the majority."
     },
     {
       "age": 57,
@@ -568,7 +568,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "Owns an HOH win so far. Survived the Week 3 eviction vote."
+      "summary": "La Trice won the Week 5 HOH by outlasting the competition on the tilting wall and made a bold move by nominating Barrett, Chuk, and Haley. Her plan largely worked — Chuk was evicted 9–1 — though Haley's Blockbuster win ensured La Trice couldn't fully finish the job."
     },
     {
       "age": 25,
@@ -624,7 +624,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 4. Finished with a veto win. Pulled themselves off the block in Week 3 and was pulled off the block in Week 2.",
+      "summary": "Lyric was evicted in Week 4 after throwing her own allies under the bus backfired badly. Nominated as Haley's replacement after Taylor saved herself with the veto, Lyric couldn't recover and was sent home 8–3. She finished with a Week 3 veto win.",
       "weekEvicted": 4
     },
     {
@@ -674,7 +674,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Owns a veto win and a Blockbuster win so far. Pulled themselves off the block in Week 1."
+      "summary": "Mallory's BB Time Capsule visit earned her only a punishment — she was chained to Melody for 48 hours after drawing the Adam and Eve penalty from Big Brother 16. Once freed, she and Melody joined Barrett and Drew to form the F.A.P alliance, giving her a new power base."
     },
     {
       "age": 24,
@@ -717,7 +717,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Survived two eviction votes on the block."
+      "summary": "Melody has survived two eviction votes while on the block without winning a single competition. After enduring 48 hours chained to Mallory as part of the Adam and Eve punishment, she and Mallory joined Barrett and Drew to form the F.A.P alliance, finally giving her some game structure."
     },
     {
       "age": 42,
@@ -745,7 +745,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Owns an HOH win and a veto win so far."
+      "summary": "Devens, a two-time comp winner from Week 2, has been working the social game hard — he helped plot the blindside eviction of Lyric and was one of the first people Dee trusted with the secret of her BB Time Capsule power. He remains a quiet but active force in the house."
     },
     {
       "age": 28,
@@ -774,7 +774,7 @@
       "ownerId": "brittany",
       "photo": "photos/rome.jpg",
       "status": "evicted",
-      "summary": "Evicted in Week 2. Finished with a safety win from premiere night.",
+      "summary": "Rome was evicted in Week 2 and finished the game with only a premiere-night safety win.",
       "weekEvicted": 2
     },
     {
@@ -824,7 +824,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Owns a veto win so far. Pulled themselves off the block in Week 4 and survived the Week 1 eviction vote."
+      "summary": "Taylor saved herself in Week 4 by winning the veto and pulling herself off the block, then helped engineer the blindside vote against Lyric. She's also been working closely with La Trice, including plotting the Week 5 HOH strategy, making her one of the season's most active players."
     },
     {
       "age": 52,
@@ -837,7 +837,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Has stayed off the block and out of the comp spotlight so far — the quiet game.",
+      "summary": "Angela's quiet game hit turbulence when she was caught lying about her vote in the Lyric blindside. A member of the Red Corner, she eventually came clean to her alliance — but not before Haley pushed her to the breaking point, leaving that relationship badly fractured.",
       "events": []
     },
     {
@@ -866,7 +866,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Owns a Blockbuster win so far."
+      "summary": "Yash's Week 1 Blockbuster win remains his only comp victory, but he's been playing the information game well — tipping off Taylor and La Trice that Chuk was targeting La Trice, which helped reshape the Week 5 nomination plans and steer the house toward Chuk's eviction."
     },
     {
       "age": 29,
@@ -886,10 +886,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Owns an HOH win so far."
+      "summary": "Dee has been sitting on a secret weapon: a BB Bribe power won from the BB Time Capsule that she hid even from her closest ally Devens until Week 5. She helped orchestrate Lyric's blindside eviction and has been one of the most strategically active players in the house, with her Week 1 HOH win still her only official comp victory."
     }
   ],
-  "lastUpdated": "2026-08-15",
+  "lastUpdated": "2026-08-16",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -1140,5 +1140,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "2ed65400ed3ce79b2d3624eaa13874ac94ff0ce30c17b6f73691092f6f4e11b0"
+  "summaryDigest": "af77e827c3eb3ef750df71a313cc7873bfe2e3869d1396f930df00f779d6826e"
 }
