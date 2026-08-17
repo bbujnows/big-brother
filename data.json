@@ -314,6 +314,36 @@
         }
       ],
       "week": 5
+    },
+    {
+      "week": 6,
+      "airDate": "2026-08-16",
+      "events": [
+        {
+          "type": "hoh",
+          "houseguestId": "hg_yash_patel",
+          "points": 10,
+          "description": "Won Head of Household (Week 6)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_dee_valladares",
+          "points": -3,
+          "description": "Nominated for eviction (Week 6)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_haley_thogmartin",
+          "points": -3,
+          "description": "Nominated for eviction (Week 6)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_angela_murray",
+          "points": -3,
+          "description": "Nominated for eviction (Week 6)"
+        }
+      ]
     }
   ],
   "houseguests": [
@@ -337,7 +367,7 @@
       "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
       "status": "evicted",
-      "summary": "Ashley was evicted in Week 1 and never got a chance to make her mark on the season.",
+      "summary": "Ashley was evicted in Week 1 before she could make any real impact on the game, finishing without a single competition win.",
       "weekEvicted": 1
     },
     {
@@ -367,7 +397,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett survived a scary Week 5 stint on the block when Chuk was evicted 9–1, with only Haley voting to keep him. He's now part of the newly formed F.A.P alliance alongside Mallory, Melody, and Drew, giving him fresh footing heading deeper into the game."
+      "summary": "Barrett survived a nerve-wracking Week 5 stint on the block — Haley was the only houseguest who voted to keep him — and has since found new footing as a member of the F.A.P alliance alongside Mallory, Melody, and Drew. He also relayed newbie chatter about targeting certain veterans back to Dee, Devens, and Angela."
     },
     {
       "age": 27,
@@ -395,7 +425,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "evicted",
-      "summary": "Chuk was evicted in Week 5 by a vote of 9–1 after La Trice nominated him and Kamu chose not to use the veto to save him. He finished the game with only a premiere-night safety win to his name.",
+      "summary": "Chuk was evicted in Week 5 by a 9–1 vote after La Trice nominated him and Kamu chose not to use the veto to save him. He felt burned by both moves and finished the game with only a premiere-night safety win to his name.",
       "weekEvicted": 5
     },
     {
@@ -424,7 +454,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew survived being Haley's primary target in Week 4 by winning the Blockbuster competition, then formed the F.A.P alliance with Mallory, Melody, and Barrett. A member of the Toolshed, he's managed to keep himself off the block and relevant on both sides of the house."
+      "summary": "Drew survived being Haley's primary Week 4 target by winning the Blockbuster competition, then helped form the F.A.P alliance with Mallory, Melody, and Barrett. He's managed to stay relevant on multiple sides of the house without landing on the block since."
     },
     {
       "age": 29,
@@ -451,6 +481,13 @@
           "points": 5,
           "type": "bbBlockbuster",
           "week": 5
+        },
+        {
+          "week": 6,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 6)",
+          "addedAt": "2026-08-17T03:27:32.613008+00:00"
         }
       ],
       "hometown": "Neosho, MO",
@@ -460,7 +497,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley won the Week 5 Blockbuster to save herself after being blindsided by La Trice's nominations — a painful turn after her own Week 4 HOH reign. She's been burned by her allies flipping the vote and is now scrambling to rebuild trust in a house that's largely turned against her."
+      "summary": "Haley is on the block for the second time in as many weeks after Yash nominated her, Angela, and Dee. She won the Week 5 Blockbuster to save herself from La Trice's nominations and squared away her rift with Kamu, but the house has largely targeted her all season and her path forward remains difficult."
     },
     {
       "age": 35,
@@ -532,7 +569,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "active",
-      "summary": "Kamu won the Week 5 veto and, with the whole house aligned, chose to leave La Trice's nominations intact — sending Chuk out the door 9–1. His decision stung Chuk and Haley, but cemented his standing as a reliable vote with the majority."
+      "summary": "Kamu won the Week 5 veto and chose not to use it, helping send Chuk out 9–1 — a decision that stung both Chuk and Haley. In Week 6 he shifted gears, throwing Dee's name to Yash as a target, which helped land her on the block."
     },
     {
       "age": 57,
@@ -568,7 +605,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "La Trice won the Week 5 HOH by outlasting the competition on the tilting wall and made a bold move by nominating Barrett, Chuk, and Haley. Her plan largely worked — Chuk was evicted 9–1 — though Haley's Blockbuster win ensured La Trice couldn't fully finish the job."
+      "summary": "La Trice won the Week 5 HOH on the tilting wall and made a bold triple nomination of Barrett, Chuk, and Haley. Chuk was evicted 9–1, though Haley's Blockbuster win kept La Trice from fully finishing the job. She continues to work closely with Taylor."
     },
     {
       "age": 25,
@@ -624,7 +661,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "evicted",
-      "summary": "Lyric was evicted in Week 4 after throwing her own allies under the bus backfired badly. Nominated as Haley's replacement after Taylor saved herself with the veto, Lyric couldn't recover and was sent home 8–3. She finished with a Week 3 veto win.",
+      "summary": "Lyric was evicted in Week 4 after throwing allies Mallory and Melody under the bus backfired badly. Nominated as the replacement after Taylor saved herself with the veto, Lyric was sent home 8–3 and finished the game with a Week 3 veto win.",
       "weekEvicted": 4
     },
     {
@@ -674,7 +711,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory's BB Time Capsule visit earned her only a punishment — she was chained to Melody for 48 hours after drawing the Adam and Eve penalty from Big Brother 16. Once freed, she and Melody joined Barrett and Drew to form the F.A.P alliance, giving her a new power base."
+      "summary": "Mallory's BB Time Capsule visit earned her only a punishment — 48 hours chained to Melody under the Adam and Eve penalty — but once freed, she helped form the F.A.P alliance with Melody, Barrett, and Drew. She owns a Week 1 veto and a Week 3 Blockbuster win."
     },
     {
       "age": 24,
@@ -717,7 +754,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Melody has survived two eviction votes while on the block without winning a single competition. After enduring 48 hours chained to Mallory as part of the Adam and Eve punishment, she and Mallory joined Barrett and Drew to form the F.A.P alliance, finally giving her some game structure."
+      "summary": "Melody has survived two eviction votes from the block without a single competition win and endured both the Adam and Eve punishment — chained to Mallory for 48 hours — and a Lord of the Latrine punishment from her own BB Time Capsule trip. Forming the F.A.P alliance with Mallory, Barrett, and Drew finally gave her some game structure."
     },
     {
       "age": 42,
@@ -745,7 +782,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens, a two-time comp winner from Week 2, has been working the social game hard — he helped plot the blindside eviction of Lyric and was one of the first people Dee trusted with the secret of her BB Time Capsule power. He remains a quiet but active force in the house."
+      "summary": "Devens owns an HOH and veto from Week 2 and has been quietly active ever since — helping plot Lyric's blindside and being one of the first people Dee trusted with the secret of her BB Bribe power. He invoked the Wolf Pack when pushing back on Yash's nomination plans, signaling he still sees himself as part of a larger alliance."
     },
     {
       "age": 28,
@@ -824,7 +861,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor saved herself in Week 4 by winning the veto and pulling herself off the block, then helped engineer the blindside vote against Lyric. She's also been working closely with La Trice, including plotting the Week 5 HOH strategy, making her one of the season's most active players."
+      "summary": "Taylor saved herself in Week 4 by winning the veto and pulling herself off the block, then helped engineer the Lyric blindside by informing La Trice of the plan. She's continued working closely with La Trice and even took time to give the evicted Chuk game pointers before he left."
     },
     {
       "age": 52,
@@ -837,8 +874,16 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela's quiet game hit turbulence when she was caught lying about her vote in the Lyric blindside. A member of the Red Corner, she eventually came clean to her alliance — but not before Haley pushed her to the breaking point, leaving that relationship badly fractured.",
-      "events": []
+      "summary": "Angela is on the block after Yash nominated her alongside Dee and Haley. Her game hit serious turbulence when she was caught lying about her vote in the Lyric blindside — she eventually came clean to fellow Red Corner member and allies, but not before her relationship with Haley fractured badly.",
+      "events": [
+        {
+          "week": 6,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 6)",
+          "addedAt": "2026-08-17T03:27:32.613014+00:00"
+        }
+      ]
     },
     {
       "age": 24,
@@ -857,6 +902,13 @@
           "points": 5,
           "type": "bbBlockbuster",
           "week": 1
+        },
+        {
+          "week": 6,
+          "type": "hoh",
+          "points": 10,
+          "description": "Won Head of Household (Week 6)",
+          "addedAt": "2026-08-17T03:27:32.612813+00:00"
         }
       ],
       "hometown": "Monroe Township, NJ",
@@ -866,7 +918,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash's Week 1 Blockbuster win remains his only comp victory, but he's been playing the information game well — tipping off Taylor and La Trice that Chuk was targeting La Trice, which helped reshape the Week 5 nomination plans and steer the house toward Chuk's eviction."
+      "summary": "Yash is the reigning HOH after winning Week 6's bug-identification battle, and he made an immediate splash by nominating Angela, Dee, and Haley — declining Dee's offered BB Bribe twice before pulling the trigger. He owns a Week 1 Blockbuster win and has been coordinating closely with Taylor and La Trice."
     },
     {
       "age": 29,
@@ -878,6 +930,13 @@
           "points": 10,
           "type": "hoh",
           "week": 1
+        },
+        {
+          "week": 6,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 6)",
+          "addedAt": "2026-08-17T03:27:32.612999+00:00"
         }
       ],
       "hometown": "Miami, FL",
@@ -886,10 +945,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee has been sitting on a secret weapon: a BB Bribe power won from the BB Time Capsule that she hid even from her closest ally Devens until Week 5. She helped orchestrate Lyric's blindside eviction and has been one of the most strategically active players in the house, with her Week 1 HOH win still her only official comp victory."
+      "summary": "Dee is on the block after Yash rejected her BB Bribe power — an offer she first floated to keep both herself and Angela safe, then scaled back to just herself, but he turned down both versions. The power, won from the BB Time Capsule and kept secret even from Devens until Week 5, remains unused as she faces eviction."
     }
   ],
-  "lastUpdated": "2026-08-16",
+  "lastUpdated": "2026-08-17",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -1140,5 +1199,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "af77e827c3eb3ef750df71a313cc7873bfe2e3869d1396f930df00f779d6826e"
+  "summaryDigest": "fb13559c83eec601571bed7f12a8a8df39989af1d23481f42d78f6aace8df76c"
 }
