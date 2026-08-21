@@ -365,6 +365,18 @@
           "houseguestId": "hg_kamu_kirk",
           "points": -3,
           "type": "nominated"
+        },
+        {
+          "type": "bbBlockbuster",
+          "houseguestId": "hg_angela_murray",
+          "points": 5,
+          "description": "Won BB Blockbuster (Week 6)"
+        },
+        {
+          "type": "survivedVote",
+          "houseguestId": "hg_haley_thogmartin",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 6)"
         }
       ],
       "week": 6
@@ -391,7 +403,7 @@
       "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
       "status": "evicted",
-      "summary": "Ashley was evicted in Week 1, making her the first houseguest sent home this season. She finished without a single competition win to her name.",
+      "summary": "Ashley was the first houseguest evicted this season, going home in Week 1 without a single competition win to her name.",
       "weekEvicted": 1
     },
     {
@@ -421,7 +433,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett survived the Week 5 eviction vote and is now a member of the new 'For the American People' alliance with Mallory, Melody, and Drew. He has been a key information relay this season, reporting newbie conversations about targeting the Icons back to Dee, Devens, and Angela."
+      "summary": "Barrett survived the Week 5 eviction and remains active as a member of the 'For the American People' alliance with Mallory, Melody, and Drew. He has played a key information-relay role this season but has yet to win a competition, and came up short against Yash in both the Week 6 HOH and veto."
     },
     {
       "age": 27,
@@ -449,7 +461,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "evicted",
-      "summary": "Chuk was evicted in Week 5 by a vote of 9-1 after Kamu declined to use the veto to save him. He finished the game with only a safety win from premiere night, never quite finding firm footing after being blindsided by La Trice's nominations.",
+      "summary": "Chuk was evicted in Week 5 by a vote of 9-1 after being blindsided by La Trice's nominations and left on the block when Kamu declined to use the veto. He finished the game with only a safety win from premiere night, never recovering from the chaos of the vote flip that started his downfall.",
       "weekEvicted": 5
     },
     {
@@ -478,7 +490,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew is a member of the 'For the American People' alliance alongside Mallory, Melody, and Barrett, and has become a key information broker, tipping Dee off that Kamu and Yash were targeting her. His one verified competition win remains his Week 4 Blockbuster victory."
+      "summary": "Drew is a member of the 'For the American People' alliance with Mallory, Melody, and Barrett and has served as a key information broker, tipping Dee off that Kamu and Yash were targeting her. His sole competition win remains his Week 4 Blockbuster victory."
     },
     {
       "age": 29,
@@ -512,6 +524,13 @@
           "points": -3,
           "type": "nominated",
           "week": 6
+        },
+        {
+          "week": 6,
+          "type": "survivedVote",
+          "points": 4,
+          "description": "Survived the eviction vote (Week 6)",
+          "addedAt": "2026-08-21T03:29:43.570598+00:00"
         }
       ],
       "hometown": "Neosho, MO",
@@ -521,7 +540,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley is currently on the block heading into the next eviction after Yash nominated her alongside Angela and Dee, with Dee later saved by Devens' Diamond Power of Veto. She saved herself from Week 5's block with a Blockbuster win and has tried to clear the air with both Angela and Kamu following the messy vote-flip fallout."
+      "summary": "Haley survived the Week 6 eviction after Devens' Diamond Power of Veto reshuffled the block and ultimately sent Kamu home instead. She owns an HOH win and a Blockbuster win, saved herself from the Week 5 block with the latter, and has been working to repair her relationships with Angela and Kamu following the messy vote-flip fallout."
     },
     {
       "age": 35,
@@ -564,7 +583,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "evicted",
-      "summary": "Jason was evicted in Week 3 and finished his run with a safety win from premiere night and a Week 2 Blockbuster victory. He was one of two recent evictees who returned to recap the season alongside former winners during the Week 4 recap episode.",
+      "summary": "Jason was evicted in Week 3 and finished his run with a safety win from premiere night and a Week 2 Blockbuster victory.",
       "weekEvicted": 3
     },
     {
@@ -599,8 +618,9 @@
       "occupation": "MMA fighter and coach",
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
-      "status": "active",
-      "summary": "Kamu is now on the block after Devens shocked the house by using his Diamond Power of Veto on Dee and naming Kamu as the replacement nominee. It's a stunning reversal for someone who had been quietly maneuvering behind Yash's HOH reign, throwing Dee and the Icons under the bus while sitting in multiple alliances including 'The Primaries' and 'The Bermuda Triangle' with Devens."
+      "status": "evicted",
+      "summary": "Kamu was evicted in Week 6 by a vote of 8-1 after Devens shocked the house by using his Diamond Power of Veto on Dee and naming him as the replacement nominee. He leaves with an HOH win and a veto win, but his quiet maneuvering behind Yash's HOH — including throwing Dee and the Icons under the bus while sitting in multiple alliances — ultimately made him the house's biggest target.",
+      "weekEvicted": 6
     },
     {
       "age": 57,
@@ -636,7 +656,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "La Trice won the Week 5 HOH competition and made a bold move by nominating Barrett, Chuk, and Haley, ultimately resulting in Chuk's eviction. She survived the Week 3 eviction vote earlier in the season and was seen celebrating Yash's Week 6 HOH victory alongside Taylor."
+      "summary": "La Trice won the Week 5 HOH and made a bold move by nominating Barrett, Chuk, and Haley, resulting in Chuk's eviction. She was the sole vote to evict Haley in Week 6 and celebrated Yash's HOH win, remaining well-positioned in the house after previously surviving the Week 3 eviction vote."
     },
     {
       "age": 25,
@@ -692,7 +712,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "evicted",
-      "summary": "Lyric was evicted in Week 4 after a house majority — organized by Dee, Devens, and Angela — flipped the vote against them. They finished with a veto win from Week 3, having also been pulled off the block in Week 2, but couldn't survive the blindside.",
+      "summary": "Lyric was evicted in Week 4 after a house majority organized by Dee, Devens, and Angela flipped the vote against them. They finished with a veto win from Week 3 but couldn't survive the blindside.",
       "weekEvicted": 4
     },
     {
@@ -742,7 +762,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "active",
-      "summary": "Mallory is a member of the newly formed 'For the American People' alliance with Melody, Barrett, and Drew. Her Week 6 BB Time Capsule visit backfired when she earned the 'Adam and Eve' punishment instead of a power, leaving her chained to Melody for 48 hours. She still holds a veto win and a Blockbuster win on her resume."
+      "summary": "Mallory is a member of the 'For the American People' alliance with Melody, Barrett, and Drew and has been part of the broader 'Mosh Pit' group Devens assembled. Her Week 5 BB Time Capsule visit backfired with the 'Adam and Eve' punishment, leaving her chained to Melody for 48 hours, and she wavered on which side to back during Week 6's drama. She still holds a veto win and a Blockbuster win on her resume."
     },
     {
       "age": 24,
@@ -785,7 +805,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Melody has survived two eviction votes on the block and endured back-to-back BB Time Capsule punishments — first chained to Mallory for the 'Adam and Eve' punishment and then serving 'Lord of the Latrine' duty in Week 6. She has bounced back by joining the new 'For the American People' alliance with Mallory, Barrett, and Drew, though she still has no competition wins to her name."
+      "summary": "Melody has survived two eviction votes on the block and endured back-to-back punishments — chained to Mallory for 'Adam and Eve' and then stuck with 'Lord of the Latrine' duty — without ever winning a competition. She is a member of the 'For the American People' alliance with Mallory, Barrett, and Drew, though she wavered on which side to support during Week 6's Kamu drama."
     },
     {
       "age": 42,
@@ -820,7 +840,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens made the biggest move of the season on Day 42, interrupting Yash's closing statements to use his Diamond Power of Veto on Dee and nominate Kamu as the replacement — a shocking play that blew up multiple alliances at once. He holds an HOH win, two veto wins, and sits at the center of several alliances including 'The Primaries' with Taylor and Kamu, and 'The Bermuda Triangle' with Yash and Kamu."
+      "summary": "Devens delivered the season's biggest move on Day 42, interrupting Yash's closing statements to use his Diamond Power of Veto on Dee and install Kamu as the replacement nominee, ultimately sending him home. He holds an HOH win and two veto wins, sits inside alliances including 'The Primaries' with Taylor and Kamu and 'The Bermuda Triangle' with Yash and Kamu, and has now assembled the seven-person 'Mosh Pit' group."
     },
     {
       "age": 28,
@@ -849,7 +869,7 @@
       "ownerId": "brittany",
       "photo": "photos/rome.jpg",
       "status": "evicted",
-      "summary": "Rome was evicted in Week 2 and finished his brief run with only a safety win from premiere night. He is the second houseguest eliminated this season.",
+      "summary": "Rome was evicted in Week 2 and finished his brief run with only a safety win from premiere night, becoming the second houseguest eliminated this season.",
       "weekEvicted": 2
     },
     {
@@ -899,7 +919,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor is a member of 'The Primaries' alongside Devens and Kamu, and celebrated Yash's Week 6 HOH win alongside La Trice. She holds a Week 4 veto win, previously pulled herself off the block in Week 4, and has survived since Week 1 by staying well-connected on both sides of the house."
+      "summary": "Taylor is a member of 'The Primaries' alliance alongside Devens and Kamu, celebrated Yash's Week 6 HOH win alongside La Trice, and helped orchestrate the Week 4 vote flip by informing La Trice of the blindside plan. She holds a Week 4 veto win and has survived deep into the game by staying well-connected on multiple sides of the house."
     },
     {
       "age": 52,
@@ -912,6 +932,13 @@
           "points": -3,
           "type": "nominated",
           "week": 6
+        },
+        {
+          "week": 6,
+          "type": "bbBlockbuster",
+          "points": 5,
+          "description": "Won BB Blockbuster (Week 6)",
+          "addedAt": "2026-08-21T03:29:43.569979+00:00"
         }
       ],
       "hometown": "Long Beach, CA",
@@ -921,7 +948,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela is currently on the block heading into the next eviction after Yash nominated her alongside Haley and Dee. Her game took a hit when the vote-flip chaos exposed her lies, fracturing her relationship with Haley and forcing her to admit the truth to fellow 'Red Corner' members, and she was visibly uncomfortable the moment Yash won HOH."
+      "summary": "Angela saved herself from the block by winning the Week 6 Blockbuster competition, taking herself off the nominations and watching Kamu get evicted instead. It was a much-needed bounce-back after a bruising stretch that saw the vote-flip chaos expose her lies, fracture her relationship with Haley, and leave her visibly rattled from the moment Yash won HOH."
     },
     {
       "age": 24,
@@ -963,7 +990,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash is the reigning HOH and also won the Week 6 veto, giving him total control of the week — though that control was dramatically undercut when Devens used his Diamond Power of Veto to pull Dee off the block and install Kamu as a replacement nominee. He turned down Dee's bribe offers twice before nominations, and now holds a Blockbuster win, an HOH win, and a veto win on his competition record."
+      "summary": "Yash dominated Week 6 by winning both the HOH and the veto, though his control was dramatically undercut when Devens used his Diamond Power of Veto to pull Dee off the block and replace her with Kamu, who was then evicted. He declined Dee's bribe attempts twice before nominations and holds a Blockbuster win, an HOH win, and a veto win on his competition resume."
     },
     {
       "age": 29,
@@ -997,10 +1024,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee was dramatically saved from the block when Devens used his Diamond Power of Veto on her, in what became the season's most shocking moment so far. She spent the week navigating Yash's HOH with failed bribe attempts and later clued Angela in on Devens' plans, all while still carrying the weight of her earlier vote-flip lies that threw the house into chaos."
+      "summary": "Dee was dramatically saved when Devens used his Diamond Power of Veto on her in the season's most shocking moment, and she celebrated Kamu's subsequent eviction. She spent the week attempting and failing twice to bribe Yash for safety, all while managing the fallout from her earlier vote-flip lies, and she still carries her Week 1 HOH win as her only competition victory."
     }
   ],
-  "lastUpdated": "2026-08-20",
+  "lastUpdated": "2026-08-21",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -1256,5 +1283,5 @@
     }
   },
   "season": 28,
-  "summaryDigest": "dc12f7e3f374691ce8b1455b31b704bf31f96ac9fcb2ff4da3daed474dec4dcc"
+  "summaryDigest": "f1b6a3c1eeb8a414beb91177732923e381ae7086f41a23c832a5c3e97b58a2e0"
 }
