@@ -463,7 +463,7 @@
       "ownerId": "brandon",
       "photo": "photos/ashley.jpg",
       "status": "evicted",
-      "summary": "Ashley was evicted in Week 1, finishing the game before it barely began and without a single competition win to her name.",
+      "summary": "Evicted in Week 1.",
       "weekEvicted": 1
     },
     {
@@ -493,7 +493,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Barrett is deep in the game but in a precarious position after Dee's HOH targeted his ally Drew and then placed Mallory on the block. A member of the Mosh Pit, he has yet to win a competition and growing tensions with The Icons are putting his game at risk."
+      "summary": "Survived the Week 5 eviction vote."
     },
     {
       "age": 27,
@@ -521,7 +521,7 @@
       "ownerId": "vicky",
       "photo": "photos/chuk.jpg",
       "status": "evicted",
-      "summary": "Chuk was evicted in Week 5, finishing with only a premiere-night safety win after failing to find footing in the game's shifting alliances.",
+      "summary": "Evicted in Week 5. Finished with a safety win from premiere night.",
       "weekEvicted": 5
     },
     {
@@ -564,7 +564,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Drew survived Week 7 by winning the Blockbuster competition, but not before publicly admitting he is the biggest liar in the house and burning bridges with La Trice, Yash, and Taylor. Now armed with a Never-Not Pass power from the BB Time Capsule, he holds two Blockbuster wins but faces serious trust issues from all sides."
+      "summary": "Owns two Blockbuster wins so far."
     },
     {
       "age": 29,
@@ -614,7 +614,7 @@
       "ownerId": "melissa",
       "photo": "photos/haley.jpg",
       "status": "active",
-      "summary": "Haley survived being nominated in Week 6 alongside Angela and Dee, and she and Kamu even cleared the air before his eviction. With an HOH win and a Blockbuster win on her resume, she is currently on the outside looking in but off the block entering Week 8."
+      "summary": "Owns an HOH win and a Blockbuster win so far. Survived the Week 6 eviction vote."
     },
     {
       "age": 35,
@@ -657,7 +657,7 @@
       "ownerId": "vicky",
       "photo": "photos/jason.jpg",
       "status": "evicted",
-      "summary": "Jason was evicted in Week 3, finishing with a premiere-night safety win and a Week 2 Blockbuster win but unable to survive long enough to capitalize on them.",
+      "summary": "Evicted in Week 3. Finished with a Blockbuster win and a safety win from premiere night.",
       "weekEvicted": 3
     },
     {
@@ -693,7 +693,7 @@
       "ownerId": "brittany",
       "photo": "photos/kamu.jpg",
       "status": "evicted",
-      "summary": "Kamu was evicted in Week 6 after Devens used his Diamond Power of Veto to pull Dee off the block and nominate him as a shocking replacement. He finished with an HOH win and a veto win, but his move of throwing the Icons under the bus to Yash ultimately backfired spectacularly.",
+      "summary": "Evicted in Week 6. Finished with an HOH win and a veto win.",
       "weekEvicted": 6
     },
     {
@@ -751,7 +751,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "active",
-      "summary": "LaTrice pulled herself off the block in Week 7 with a veto win, surviving yet another close call after also weathering a Week 3 eviction vote. She threw F.A.P. under the bus to Dee, but Dee still nominated her initially, reminding her that her position in the house remains fragile."
+      "summary": "Owns an HOH win and a veto win so far. Pulled themselves off the block in Week 7 and survived the Week 3 eviction vote."
     },
     {
       "age": 25,
@@ -807,7 +807,7 @@
       "ownerId": "vicky",
       "photo": "photos/lyric.jpg",
       "status": "evicted",
-      "summary": "Lyric was evicted in Week 4, finishing with a veto win that saved them in Week 3, though a second chance in Week 4 never materialized.",
+      "summary": "Evicted in Week 4. Finished with a veto win. Pulled themselves off the block in Week 3 and was pulled off the block in Week 2.",
       "weekEvicted": 4
     },
     {
@@ -864,7 +864,7 @@
       "ownerId": "melissa",
       "photo": "photos/mallory.jpg",
       "status": "evicted",
-      "summary": "Mallory was evicted in Week 7 after being nominated as Dee's replacement nominee when La Trice won the veto. Despite being part of the Mosh Pit alliance, she was caught in the crossfire between The Icons and F.A.P., finishing with a Week 1 veto win and a Week 3 Blockbuster win.",
+      "summary": "Evicted in Week 7. Finished with a veto win and a Blockbuster win. Pulled themselves off the block in Week 1.",
       "weekEvicted": 7
     },
     {
@@ -908,7 +908,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Melody has survived two eviction votes while on the block and endured the humiliating Lord of the Latrine punishment after a failed BB Time Capsule attempt. A Mosh Pit member, she found herself rattled in Week 7 when Dee floated the idea of putting up her ally Mallory, who was ultimately evicted."
+      "summary": "Survived two eviction votes on the block."
     },
     {
       "age": 42,
@@ -943,7 +943,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Devens made one of the season's biggest moves by using his Diamond Power of Veto on Dee and nominating Kamu, then helped engineer Kamu's eviction. A member of the Mosh Pit, The Primaries, and The Bermuda Triangle, he has two veto wins and an HOH win and continues to position himself as a central power player."
+      "summary": "Owns an HOH win and two veto wins so far."
     },
     {
       "age": 28,
@@ -972,7 +972,7 @@
       "ownerId": "brittany",
       "photo": "photos/rome.jpg",
       "status": "evicted",
-      "summary": "Rome was evicted in Week 2, leaving with only a premiere-night safety win to show for his brief time in the house.",
+      "summary": "Evicted in Week 2. Finished with a safety win from premiere night.",
       "weekEvicted": 2
     },
     {
@@ -1036,7 +1036,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Taylor survived being nominated in Week 7 when Mallory was evicted instead, extending a streak that now includes two eviction-vote survivals on the block and a Week 4 veto win. She celebrated Yash's Week 6 HOH victory and remains on the outside of the dominant Mosh Pit alliance."
+      "summary": "Owns a veto win so far. Pulled themselves off the block in Week 4 and survived two eviction votes on the block."
     },
     {
       "age": 52,
@@ -1065,7 +1065,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Angela saved herself from Week 6 eviction by winning the Blockbuster competition, pulling herself off the block after being nominated alongside Dee and Haley. A member of the Mosh Pit, she has been a willing partner in The Icons' plans and enters Week 8 off the block and in a stronger position."
+      "summary": "Owns a Blockbuster win so far."
     },
     {
       "age": 24,
@@ -1107,7 +1107,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Yash had a dominant Week 6 as HOH, winning both the veto and a Blockbuster win to his resume, but Devens' Diamond Power of Veto upended his plans by replacing Dee with Kamu. He accepted a $5,000 BB Bribe from The Icons during Dee's HOH, but his decision to lie about Drew has made him a target heading deeper into the game."
+      "summary": "Owns an HOH win, a veto win, and a Blockbuster win so far."
     },
     {
       "age": 29,
@@ -1148,7 +1148,7 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Dee is playing from a position of strength as the current HOH, having secured her second HOH win after Barrett and Mallory threw the competition her way. She nominated Drew, La Trice, and Taylor, and after La Trice won the veto and saved herself, successfully pushed to put Mallory on the block, sending her out the door in a 6-2 vote."
+      "summary": "Owns two HOH wins so far. Was pulled off the block in Week 6."
     }
   ],
   "lastUpdated": "2026-08-29",
