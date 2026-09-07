@@ -499,37 +499,67 @@
           "type": "nominated"
         },
         {
-          "type": "bbBlockbuster",
+          "description": "Won BB Blockbuster (Week 8)",
           "houseguestId": "hg_rick_devens",
           "points": 5,
-          "description": "Won BB Blockbuster (Week 8)"
+          "type": "bbBlockbuster"
         },
         {
-          "type": "survivedVote",
+          "description": "Survived the eviction vote (Week 8)",
           "houseguestId": "hg_barrett_pfeiffer",
           "points": 4,
-          "description": "Survived the eviction vote (Week 8)"
+          "type": "survivedVote"
         },
         {
-          "type": "survivedVote",
+          "description": "Survived the eviction vote (Week 8)",
           "houseguestId": "hg_drew_campbell",
           "points": 4,
-          "description": "Survived the eviction vote (Week 8)"
+          "type": "survivedVote"
         },
         {
-          "type": "survivedVote",
+          "description": "Survived the eviction vote (Week 8)",
           "houseguestId": "hg_taylor_brown",
           "points": 4,
-          "description": "Survived the eviction vote (Week 8)"
+          "type": "survivedVote"
         },
         {
-          "type": "survivedVote",
+          "description": "Survived the eviction vote (Week 8)",
           "houseguestId": "hg_yash_patel",
           "points": 4,
-          "description": "Survived the eviction vote (Week 8)"
+          "type": "survivedVote"
         }
       ],
       "week": 8
+    },
+    {
+      "week": 9,
+      "airDate": "2026-09-06",
+      "events": [
+        {
+          "type": "hoh",
+          "houseguestId": "hg_barrett_pfeiffer",
+          "points": 10,
+          "description": "Won Head of Household (Week 9)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_rick_devens",
+          "points": -3,
+          "description": "Nominated for eviction (Week 9)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_angela_murray",
+          "points": -3,
+          "description": "Nominated for eviction (Week 9)"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_dee_valladares",
+          "points": -3,
+          "description": "Nominated for eviction (Week 9)"
+        }
+      ]
     }
   ],
   "houseguests": [
@@ -583,11 +613,18 @@
           "week": 8
         },
         {
-          "week": 8,
-          "type": "survivedVote",
-          "points": 4,
+          "addedAt": "2026-09-04T07:21:54.490859+00:00",
           "description": "Survived the eviction vote (Week 8)",
-          "addedAt": "2026-09-04T07:21:54.490859+00:00"
+          "points": 4,
+          "type": "survivedVote",
+          "week": 8
+        },
+        {
+          "week": 9,
+          "type": "hoh",
+          "points": 10,
+          "description": "Won Head of Household (Week 9)",
+          "addedAt": "2026-09-07T07:28:49.057381+00:00"
         }
       ],
       "hometown": "Benton, AR",
@@ -597,7 +634,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Survived two eviction votes on the block."
+      "summary": "Reigning Head of Household after winning the Week 9 comp. Survived two eviction votes on the block."
     },
     {
       "age": 27,
@@ -675,11 +712,11 @@
           "week": 8
         },
         {
-          "week": 8,
-          "type": "survivedVote",
-          "points": 4,
+          "addedAt": "2026-09-04T07:21:54.490868+00:00",
           "description": "Survived the eviction vote (Week 8)",
-          "addedAt": "2026-09-04T07:21:54.490868+00:00"
+          "points": 4,
+          "type": "survivedVote",
+          "week": 8
         }
       ],
       "hometown": "Temecula, CA",
@@ -1084,11 +1121,18 @@
           "week": 8
         },
         {
-          "week": 8,
-          "type": "bbBlockbuster",
-          "points": 5,
+          "addedAt": "2026-09-04T07:21:54.489601+00:00",
           "description": "Won BB Blockbuster (Week 8)",
-          "addedAt": "2026-09-04T07:21:54.489601+00:00"
+          "points": 5,
+          "type": "bbBlockbuster",
+          "week": 8
+        },
+        {
+          "week": 9,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 9)",
+          "addedAt": "2026-09-07T07:28:49.057556+00:00"
         }
       ],
       "hometown": "Macon, GA",
@@ -1098,7 +1142,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Owns an HOH win, two veto wins, and a Blockbuster win so far."
+      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win, two veto wins, and a Blockbuster win so far."
     },
     {
       "age": 28,
@@ -1191,11 +1235,11 @@
           "week": 8
         },
         {
-          "week": 8,
-          "type": "survivedVote",
-          "points": 4,
+          "addedAt": "2026-09-04T07:21:54.490874+00:00",
           "description": "Survived the eviction vote (Week 8)",
-          "addedAt": "2026-09-04T07:21:54.490874+00:00"
+          "points": 4,
+          "type": "survivedVote",
+          "week": 8
         }
       ],
       "hometown": "Deerfield Beach, FL",
@@ -1225,6 +1269,13 @@
           "points": 5,
           "type": "bbBlockbuster",
           "week": 6
+        },
+        {
+          "week": 9,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 9)",
+          "addedAt": "2026-09-07T07:28:49.057565+00:00"
         }
       ],
       "hometown": "Long Beach, CA",
@@ -1234,7 +1285,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "active",
-      "summary": "Owns a Blockbuster win so far."
+      "summary": "Currently on the block ahead of the next eviction. Owns a Blockbuster win so far."
     },
     {
       "age": 24,
@@ -1283,11 +1334,11 @@
           "week": 8
         },
         {
-          "week": 8,
-          "type": "survivedVote",
-          "points": 4,
+          "addedAt": "2026-09-04T07:21:54.490879+00:00",
           "description": "Survived the eviction vote (Week 8)",
-          "addedAt": "2026-09-04T07:21:54.490879+00:00"
+          "points": 4,
+          "type": "survivedVote",
+          "week": 8
         }
       ],
       "hometown": "Monroe Township, NJ",
@@ -1330,6 +1381,13 @@
           "points": 10,
           "type": "hoh",
           "week": 7
+        },
+        {
+          "week": 9,
+          "type": "nominated",
+          "points": -3,
+          "description": "Nominated for eviction (Week 9)",
+          "addedAt": "2026-09-07T07:28:49.057571+00:00"
         }
       ],
       "hometown": "Miami, FL",
@@ -1338,10 +1396,10 @@
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
       "status": "active",
-      "summary": "Owns two HOH wins so far. Was pulled off the block in Week 6."
+      "summary": "Currently on the block ahead of the next eviction. Owns two HOH wins so far. Was pulled off the block in Week 6."
     }
   ],
-  "lastUpdated": "2026-09-04",
+  "lastUpdated": "2026-09-07",
   "owners": [
     {
       "color": "#ff6b9d",
