@@ -532,34 +532,40 @@
       "week": 8
     },
     {
-      "week": 9,
       "airDate": "2026-09-06",
       "events": [
         {
-          "type": "hoh",
+          "description": "Won Head of Household (Week 9)",
           "houseguestId": "hg_barrett_pfeiffer",
           "points": 10,
-          "description": "Won Head of Household (Week 9)"
+          "type": "hoh"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 9)",
           "houseguestId": "hg_rick_devens",
           "points": -3,
-          "description": "Nominated for eviction (Week 9)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 9)",
           "houseguestId": "hg_angela_murray",
           "points": -3,
-          "description": "Nominated for eviction (Week 9)"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "description": "Nominated for eviction (Week 9)",
           "houseguestId": "hg_dee_valladares",
           "points": -3,
-          "description": "Nominated for eviction (Week 9)"
+          "type": "nominated"
+        },
+        {
+          "type": "veto",
+          "houseguestId": "hg_yash_patel",
+          "points": 3,
+          "description": "Won Power of Veto (Week 9)"
         }
-      ]
+      ],
+      "week": 9
     }
   ],
   "houseguests": [
@@ -620,11 +626,11 @@
           "week": 8
         },
         {
-          "week": 9,
-          "type": "hoh",
-          "points": 10,
+          "addedAt": "2026-09-07T07:28:49.057381+00:00",
           "description": "Won Head of Household (Week 9)",
-          "addedAt": "2026-09-07T07:28:49.057381+00:00"
+          "points": 10,
+          "type": "hoh",
+          "week": 9
         }
       ],
       "hometown": "Benton, AR",
@@ -1128,11 +1134,11 @@
           "week": 8
         },
         {
-          "week": 9,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-09-07T07:28:49.057556+00:00",
           "description": "Nominated for eviction (Week 9)",
-          "addedAt": "2026-09-07T07:28:49.057556+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 9
         }
       ],
       "hometown": "Macon, GA",
@@ -1271,11 +1277,11 @@
           "week": 6
         },
         {
-          "week": 9,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-09-07T07:28:49.057565+00:00",
           "description": "Nominated for eviction (Week 9)",
-          "addedAt": "2026-09-07T07:28:49.057565+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 9
         }
       ],
       "hometown": "Long Beach, CA",
@@ -1339,6 +1345,13 @@
           "points": 4,
           "type": "survivedVote",
           "week": 8
+        },
+        {
+          "week": 9,
+          "type": "veto",
+          "points": 3,
+          "description": "Won Power of Veto (Week 9)",
+          "addedAt": "2026-09-10T07:27:20.137090+00:00"
         }
       ],
       "hometown": "Monroe Township, NJ",
@@ -1348,7 +1361,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Owns an HOH win, two veto wins, and a Blockbuster win so far. Survived the Week 8 eviction vote."
+      "summary": "Owns an HOH win, three veto wins, and a Blockbuster win so far. Survived the Week 8 eviction vote."
     },
     {
       "age": 29,
@@ -1383,11 +1396,11 @@
           "week": 7
         },
         {
-          "week": 9,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-09-07T07:28:49.057571+00:00",
           "description": "Nominated for eviction (Week 9)",
-          "addedAt": "2026-09-07T07:28:49.057571+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 9
         }
       ],
       "hometown": "Miami, FL",
@@ -1399,7 +1412,7 @@
       "summary": "Currently on the block ahead of the next eviction. Owns two HOH wins so far. Was pulled off the block in Week 6."
     }
   ],
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-09-10",
   "owners": [
     {
       "color": "#ff6b9d",
