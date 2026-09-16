@@ -571,10 +571,10 @@
           "type": "survivedVote"
         },
         {
-          "type": "madeJury",
+          "description": "Made it to the jury (Week 8)",
           "houseguestId": "hg_latrice_verrett",
           "points": 10,
-          "description": "Made it to the jury (Week 8)"
+          "type": "madeJury"
         }
       ],
       "week": 8
@@ -625,10 +625,10 @@
           "type": "survivedVote"
         },
         {
-          "type": "madeJury",
+          "description": "Made it to the jury (Week 9)",
           "houseguestId": "hg_angela_murray",
           "points": 10,
-          "description": "Made it to the jury (Week 9)"
+          "type": "madeJury"
         }
       ],
       "week": 9
@@ -750,7 +750,7 @@
       "ownerId": "brittany",
       "photo": "photos/barrett.jpg",
       "status": "active",
-      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win so far. Survived two eviction votes on the block."
+      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win so far. Came off a twist block in Week 8 and survived the Week 5 eviction vote."
     },
     {
       "age": 27,
@@ -853,7 +853,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win and two Blockbuster wins so far. Survived the Week 8 eviction vote."
+      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win and two Blockbuster wins so far. Came off a twist block in Week 8."
     },
     {
       "age": 29,
@@ -1066,11 +1066,11 @@
           "week": 8
         },
         {
-          "week": 8,
-          "type": "madeJury",
-          "points": 10,
+          "addedAt": "2026-09-16T18:07:11.484223+00:00",
           "description": "Made it to the jury (Week 8)",
-          "addedAt": "2026-09-16T18:07:11.484223+00:00"
+          "points": 10,
+          "type": "madeJury",
+          "week": 8
         }
       ],
       "hometown": "Kankakee, IL",
@@ -1080,7 +1080,7 @@
       "ownerId": "melissa",
       "photo": "photos/latrice.jpg",
       "status": "jury",
-      "summary": "Evicted in Week 8. Finished with an HOH win and a veto win. Pulled themselves off the block in Week 7 and survived the Week 3 eviction vote.",
+      "summary": "Evicted in Week 8 and now sits on the jury. Finished with an HOH win and a veto win. Pulled themselves off the block in Week 7 and survived the Week 3 eviction vote.",
       "weekEvicted": 8
     },
     {
@@ -1441,11 +1441,11 @@
           "week": 9
         },
         {
-          "week": 9,
-          "type": "madeJury",
-          "points": 10,
+          "addedAt": "2026-09-16T18:07:11.484223+00:00",
           "description": "Made it to the jury (Week 9)",
-          "addedAt": "2026-09-16T18:07:11.484223+00:00"
+          "points": 10,
+          "type": "madeJury",
+          "week": 9
         }
       ],
       "hometown": "Long Beach, CA",
@@ -1455,7 +1455,7 @@
       "ownerId": "brandon",
       "photo": "photos/angela.jpg",
       "status": "jury",
-      "summary": "Evicted in Week 9. Finished with a Blockbuster win.",
+      "summary": "Evicted in Week 9 and now sits on the jury. Finished with a Blockbuster win.",
       "weekEvicted": 9
     },
     {
@@ -1561,7 +1561,7 @@
       "ownerId": "vicky",
       "photo": "photos/yash.jpg",
       "status": "active",
-      "summary": "Reigning Head of Household after winning the Week 10 comp. Owns an HOH win, three veto wins, and a Blockbuster win so far. Survived the Week 8 eviction vote."
+      "summary": "Reigning Head of Household after winning the Week 10 comp. Owns an HOH win, three veto wins, and a Blockbuster win so far. Pulled themselves off the block in Week 8 and single-handedly decided the Week 8 eviction and came off a twist block in Week 8."
     },
     {
       "age": 29,
