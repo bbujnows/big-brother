@@ -473,19 +473,57 @@
       const records = {};
       data.owners.forEach(o => records[o.id] = { fired: 0, taken: 0, saves: 0, kills: 0, rescues: 0, ownGoals: 0 });
 
+      // A late-season week can hold two separate evictions across two day-columns.
+      // Work out which day each evicted player actually went out on — the day
+      // they were nominated and never picked up survival points — so a twist
+      // casualty doesn't get pinned on that week's HOH.
+      const dayOf = e => e.day || null;
+      const dayOut = h => {
+        const evs = h.events || [];
+        const noms = evs.filter(e => e.type === 'nominated');
+        if (!noms.length) return null;
+        const unsurvived = noms.filter(n => !evs.some(e =>
+          e.type === 'survivedVote' && dayOf(e) === dayOf(n)));
+        const list = unsurvived.length ? unsurvived : noms;
+        return dayOf(list[list.length - 1]);
+      };
+
       for (let w = 1; w <= maxWeek; w++) {
         const withEv = t => data.houseguests.filter(h => (h.events || []).some(e => e.type === t && e.week === w));
+        const evOf = (h, t) => (h.events || []).find(e => e.type === t && e.week === w);
         const hohs  = withEv('hoh');
         const vetos = withEv('veto');
-        const noms  = withEv('nominated');
-        // Only saves by someone else count as beef/goodwill — savedSelf
-        // (veto or Blockbuster self-save) credits nobody.
-        const saved = data.houseguests.filter(h => (h.events || []).some(e =>
-          e.type === 'takenOffBlock' && e.week === w));
         const evictedNow = data.houseguests.filter(h => h.weekEvicted === w);
+
+        // Someone handed a unilateral power chose the casualty themselves —
+        // that is the most hostile act in the game, and it belongs to them,
+        // not to whoever happened to be HOH later that week.
+        data.houseguests.forEach(p => {
+          const pe = evOf(p, 'evictionPower');
+          if (!pe) return;
+          const atk = ownerOf(p);
+          evictedNow.filter(h => dayOut(h) === dayOf(pe)).forEach(ev => {
+            const vic = ownerOf(ev);
+            if (!atk || !vic) return;
+            if (atk.id === vic.id) {
+              incidents.push({ week: w, icon: '💥', tag: 'SELF-DESTRUCT', clr: 'var(--gold)',
+                text: `${atk.name}'s ${p.name} held the power and eliminated their own ${ev.name}` });
+              records[atk.id].ownGoals++;
+            } else {
+              incidents.push({ week: w, icon: '🩸', tag: 'EXECUTION', clr: 'var(--rec)',
+                text: `${atk.name}'s ${p.name} single-handedly eliminated ${vic.name}'s ${ev.name}` });
+              records[atk.id].kills++;
+              bump(atk.id, vic.id);
+            }
+          });
+        });
 
         if (hohs.length === 1) {
           const hoh = hohs[0], atk = ownerOf(hoh);
+          // Only what happened on the HOH's own day is theirs to answer for.
+          const hohDay = dayOf(evOf(hoh, 'hoh'));
+          const noms = data.houseguests.filter(h => (h.events || []).some(e =>
+            e.type === 'nominated' && e.week === w && dayOf(e) === hohDay));
           noms.forEach(n => {
             const vic = ownerOf(n);
             if (!atk || !vic) return;
@@ -500,7 +538,7 @@
               bump(atk.id, vic.id);
             }
           });
-          evictedNow.forEach(ev => {
+          evictedNow.filter(h => dayOut(h) === hohDay).forEach(ev => {
             const vic = ownerOf(ev);
             if (!atk || !vic) return;
             if (atk.id === vic.id) {
@@ -518,6 +556,12 @@
 
         if (vetos.length === 1) {
           const v = vetos[0], sav = ownerOf(v);
+          // Only saves by someone else count as beef/goodwill — a self-save
+          // (veto or Blockbuster) credits nobody, and a twist save has no
+          // author to credit. Matched to the veto's own day.
+          const vetoDay = dayOf(evOf(v, 'veto'));
+          const saved = data.houseguests.filter(h => (h.events || []).some(e =>
+            e.type === 'takenOffBlock' && e.week === w && dayOf(e) === vetoDay));
           saved.forEach(s => {
             if (s.id === v.id) return; // self-save isn't beef
             const ben = ownerOf(s);

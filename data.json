@@ -445,88 +445,130 @@
       "airDate": "2026-08-30",
       "events": [
         {
-          "description": "Won Head of Household (Week 8)",
+          "type": "nominated",
           "houseguestId": "hg_drew_campbell",
-          "points": 10,
-          "type": "hoh"
-        },
-        {
-          "description": "Nominated for eviction (Week 8)",
-          "houseguestId": "hg_taylor_brown",
           "points": -3,
-          "type": "nominated"
+          "day": "Day 52",
+          "description": "Nominated in a twist (Week 8 (Day 52))"
         },
         {
-          "description": "Nominated for eviction (Week 8)",
+          "type": "nominated",
+          "houseguestId": "hg_barrett_pfeiffer",
+          "points": -3,
+          "day": "Day 52",
+          "description": "Nominated in a twist (Week 8 (Day 52))"
+        },
+        {
+          "type": "nominated",
           "houseguestId": "hg_yash_patel",
           "points": -3,
-          "type": "nominated"
+          "day": "Day 52",
+          "description": "Nominated in a twist (Week 8 (Day 52))"
         },
         {
-          "description": "Nominated for eviction (Week 8)",
+          "type": "nominated",
           "houseguestId": "hg_latrice_verrett",
           "points": -3,
-          "type": "nominated"
+          "day": "Day 52",
+          "description": "Nominated in a twist (Week 8 (Day 52))"
         },
         {
-          "description": "Won Power of Veto (Week 8)",
-          "houseguestId": "hg_yash_patel",
-          "points": 3,
-          "type": "veto"
-        },
-        {
-          "description": "Named replacement nominee (Week 8)",
-          "houseguestId": "hg_barrett_pfeiffer",
-          "points": -3,
-          "type": "nominated"
-        },
-        {
-          "description": "Named replacement nominee (Week 8)",
-          "houseguestId": "hg_rick_devens",
-          "points": -3,
-          "type": "nominated"
-        },
-        {
-          "description": "Named replacement nominee (Week 8)",
-          "houseguestId": "hg_drew_campbell",
-          "points": -3,
-          "type": "nominated"
-        },
-        {
-          "description": "Named replacement nominee (Week 8)",
+          "type": "nominated",
           "houseguestId": "hg_haley_thogmartin",
           "points": -3,
-          "type": "nominated"
+          "day": "Day 52",
+          "description": "Nominated in a twist (Week 8 (Day 52))"
         },
         {
-          "description": "Won BB Blockbuster (Week 8)",
+          "type": "twistSave",
+          "houseguestId": "hg_drew_campbell",
+          "points": 3,
+          "day": "Day 52",
+          "description": "Saved from the twist block (Week 8 (Day 52))"
+        },
+        {
+          "type": "twistSave",
+          "houseguestId": "hg_barrett_pfeiffer",
+          "points": 3,
+          "day": "Day 52",
+          "description": "Saved from the twist block (Week 8 (Day 52))"
+        },
+        {
+          "type": "twistSave",
+          "houseguestId": "hg_yash_patel",
+          "points": 3,
+          "day": "Day 52",
+          "description": "Saved from the twist block (Week 8 (Day 52))"
+        },
+        {
+          "type": "evictionPower",
+          "houseguestId": "hg_yash_patel",
+          "points": 5,
+          "day": "Day 52",
+          "description": "Held the power to eliminate (Week 8 (Day 52))"
+        },
+        {
+          "type": "survivedVote",
+          "houseguestId": "hg_latrice_verrett",
+          "points": 4,
+          "day": "Day 52",
+          "description": "Survived the twist (Week 8 (Day 52))"
+        },
+        {
+          "type": "hoh",
+          "houseguestId": "hg_drew_campbell",
+          "points": 10,
+          "day": "Day 53",
+          "description": "Won Head of Household (Week 8 (Day 53))"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_latrice_verrett",
+          "points": -3,
+          "day": "Day 53",
+          "description": "Nominated for eviction (Week 8 (Day 53))"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_taylor_brown",
+          "points": -3,
+          "day": "Day 53",
+          "description": "Nominated for eviction (Week 8 (Day 53))"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_yash_patel",
+          "points": -3,
+          "day": "Day 53",
+          "description": "Nominated for eviction (Week 8 (Day 53))"
+        },
+        {
+          "type": "veto",
+          "houseguestId": "hg_yash_patel",
+          "points": 3,
+          "day": "Day 53",
+          "description": "Won Power of Veto (Week 8 (Day 53))"
+        },
+        {
+          "type": "bbBlockbuster",
           "houseguestId": "hg_rick_devens",
           "points": 5,
-          "type": "bbBlockbuster"
+          "day": "Day 53",
+          "description": "Won BB Blockbuster (Week 8 (Day 53))"
         },
         {
-          "description": "Survived the eviction vote (Week 8)",
-          "houseguestId": "hg_barrett_pfeiffer",
-          "points": 4,
-          "type": "survivedVote"
+          "type": "savedSelf",
+          "houseguestId": "hg_yash_patel",
+          "points": 2,
+          "day": "Day 53",
+          "description": "Took themselves off the block (Week 8 (Day 53))"
         },
         {
-          "description": "Survived the eviction vote (Week 8)",
-          "houseguestId": "hg_drew_campbell",
-          "points": 4,
-          "type": "survivedVote"
-        },
-        {
-          "description": "Survived the eviction vote (Week 8)",
+          "type": "survivedVote",
           "houseguestId": "hg_taylor_brown",
           "points": 4,
-          "type": "survivedVote"
-        },
-        {
-          "description": "Survived the eviction vote (Week 8)",
-          "houseguestId": "hg_yash_patel",
-          "points": 4,
-          "type": "survivedVote"
+          "day": "Day 53",
+          "description": "Survived the eviction vote (Week 8 (Day 53))"
         }
       ],
       "week": 8
@@ -580,34 +622,38 @@
       "week": 9
     },
     {
-      "week": 10,
       "airDate": "2026-09-13",
       "events": [
         {
           "type": "hoh",
           "houseguestId": "hg_yash_patel",
           "points": 10,
-          "description": "Won Head of Household (Week 10)"
-        },
-        {
-          "type": "nominated",
-          "houseguestId": "hg_melody_morris",
-          "points": -3,
-          "description": "Nominated for eviction (Week 10)"
-        },
-        {
-          "type": "nominated",
-          "houseguestId": "hg_drew_campbell",
-          "points": -3,
-          "description": "Nominated for eviction (Week 10)"
+          "day": "Day 67",
+          "description": "Won Head of Household (Week 10 (Day 67))"
         },
         {
           "type": "nominated",
           "houseguestId": "hg_barrett_pfeiffer",
           "points": -3,
-          "description": "Nominated for eviction (Week 10)"
+          "day": "Day 67",
+          "description": "Nominated for eviction (Week 10 (Day 67))"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_drew_campbell",
+          "points": -3,
+          "day": "Day 67",
+          "description": "Nominated for eviction (Week 10 (Day 67))"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_melody_morris",
+          "points": -3,
+          "day": "Day 67",
+          "description": "Nominated for eviction (Week 10 (Day 67))"
         }
-      ]
+      ],
+      "week": 10
     }
   ],
   "houseguests": [
@@ -654,20 +700,6 @@
           "week": 5
         },
         {
-          "addedAt": "2026-09-03T07:19:18.523226+00:00",
-          "description": "Named replacement nominee (Week 8)",
-          "points": -3,
-          "type": "nominated",
-          "week": 8
-        },
-        {
-          "addedAt": "2026-09-04T07:21:54.490859+00:00",
-          "description": "Survived the eviction vote (Week 8)",
-          "points": 4,
-          "type": "survivedVote",
-          "week": 8
-        },
-        {
           "addedAt": "2026-09-07T07:28:49.057381+00:00",
           "description": "Won Head of Household (Week 9)",
           "points": 10,
@@ -675,11 +707,28 @@
           "week": 9
         },
         {
+          "week": 8,
+          "type": "nominated",
+          "points": -3,
+          "day": "Day 52",
+          "description": "Nominated in a twist (Week 8 (Day 52))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
+          "week": 8,
+          "type": "twistSave",
+          "points": 3,
+          "day": "Day 52",
+          "description": "Saved from the twist block (Week 8 (Day 52))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
           "week": 10,
           "type": "nominated",
           "points": -3,
-          "description": "Nominated for eviction (Week 10)",
-          "addedAt": "2026-09-14T08:03:02.275422+00:00"
+          "day": "Day 67",
+          "description": "Nominated for eviction (Week 10 (Day 67))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         }
       ],
       "hometown": "Benton, AR",
@@ -753,32 +802,36 @@
           "week": 7
         },
         {
-          "addedAt": "2026-08-31T08:49:47.830330+00:00",
-          "description": "Won Head of Household (Week 8)",
-          "points": 10,
-          "type": "hoh",
-          "week": 8
-        },
-        {
-          "addedAt": "2026-09-03T07:19:18.523241+00:00",
-          "description": "Named replacement nominee (Week 8)",
-          "points": -3,
+          "week": 8,
           "type": "nominated",
-          "week": 8
+          "points": -3,
+          "day": "Day 52",
+          "description": "Nominated in a twist (Week 8 (Day 52))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         },
         {
-          "addedAt": "2026-09-04T07:21:54.490868+00:00",
-          "description": "Survived the eviction vote (Week 8)",
-          "points": 4,
-          "type": "survivedVote",
-          "week": 8
+          "week": 8,
+          "type": "twistSave",
+          "points": 3,
+          "day": "Day 52",
+          "description": "Saved from the twist block (Week 8 (Day 52))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
+          "week": 8,
+          "type": "hoh",
+          "points": 10,
+          "day": "Day 53",
+          "description": "Won Head of Household (Week 8 (Day 53))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         },
         {
           "week": 10,
           "type": "nominated",
           "points": -3,
-          "description": "Nominated for eviction (Week 10)",
-          "addedAt": "2026-09-14T08:03:02.275402+00:00"
+          "day": "Day 67",
+          "description": "Nominated for eviction (Week 10 (Day 67))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         }
       ],
       "hometown": "Temecula, CA",
@@ -831,11 +884,12 @@
           "week": 6
         },
         {
-          "addedAt": "2026-09-03T07:19:18.523246+00:00",
-          "description": "Named replacement nominee (Week 8)",
-          "points": -3,
+          "week": 8,
           "type": "nominated",
-          "week": 8
+          "points": -3,
+          "day": "Day 52",
+          "description": "Nominated in a twist (Week 8 (Day 52))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         }
       ],
       "hometown": "Neosho, MO",
@@ -976,11 +1030,28 @@
           "week": 7
         },
         {
-          "addedAt": "2026-08-31T08:49:47.830481+00:00",
-          "description": "Nominated for eviction (Week 8)",
-          "points": -3,
+          "week": 8,
           "type": "nominated",
-          "week": 8
+          "points": -3,
+          "day": "Day 52",
+          "description": "Nominated in a twist (Week 8 (Day 52))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
+          "week": 8,
+          "type": "survivedVote",
+          "points": 4,
+          "day": "Day 52",
+          "description": "Survived the twist (Week 8 (Day 52))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
+          "week": 8,
+          "type": "nominated",
+          "points": -3,
+          "day": "Day 53",
+          "description": "Nominated for eviction (Week 8 (Day 53))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         }
       ],
       "hometown": "Kankakee, IL",
@@ -1144,8 +1215,9 @@
           "week": 10,
           "type": "nominated",
           "points": -3,
-          "description": "Nominated for eviction (Week 10)",
-          "addedAt": "2026-09-14T08:03:02.275392+00:00"
+          "day": "Day 67",
+          "description": "Nominated for eviction (Week 10 (Day 67))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         }
       ],
       "hometown": "Thornton, CO",
@@ -1183,20 +1255,6 @@
           "week": 6
         },
         {
-          "addedAt": "2026-09-03T07:19:18.523235+00:00",
-          "description": "Named replacement nominee (Week 8)",
-          "points": -3,
-          "type": "nominated",
-          "week": 8
-        },
-        {
-          "addedAt": "2026-09-04T07:21:54.489601+00:00",
-          "description": "Won BB Blockbuster (Week 8)",
-          "points": 5,
-          "type": "bbBlockbuster",
-          "week": 8
-        },
-        {
           "addedAt": "2026-09-07T07:28:49.057556+00:00",
           "description": "Nominated for eviction (Week 9)",
           "points": -3,
@@ -1209,6 +1267,14 @@
           "points": 5,
           "type": "bbBlockbuster",
           "week": 9
+        },
+        {
+          "week": 8,
+          "type": "bbBlockbuster",
+          "points": 5,
+          "day": "Day 53",
+          "description": "Won BB Blockbuster (Week 8 (Day 53))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         }
       ],
       "hometown": "Macon, GA",
@@ -1304,18 +1370,20 @@
           "week": 7
         },
         {
-          "addedAt": "2026-08-31T08:49:47.830469+00:00",
-          "description": "Nominated for eviction (Week 8)",
-          "points": -3,
+          "week": 8,
           "type": "nominated",
-          "week": 8
+          "points": -3,
+          "day": "Day 53",
+          "description": "Nominated for eviction (Week 8 (Day 53))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         },
         {
-          "addedAt": "2026-09-04T07:21:54.490874+00:00",
-          "description": "Survived the eviction vote (Week 8)",
-          "points": 4,
+          "week": 8,
           "type": "survivedVote",
-          "week": 8
+          "points": 4,
+          "day": "Day 53",
+          "description": "Survived the eviction vote (Week 8 (Day 53))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         }
       ],
       "hometown": "Deerfield Beach, FL",
@@ -1397,27 +1465,6 @@
           "week": 6
         },
         {
-          "addedAt": "2026-08-31T08:49:47.830476+00:00",
-          "description": "Nominated for eviction (Week 8)",
-          "points": -3,
-          "type": "nominated",
-          "week": 8
-        },
-        {
-          "addedAt": "2026-09-03T07:19:18.522460+00:00",
-          "description": "Won Power of Veto (Week 8)",
-          "points": 3,
-          "type": "veto",
-          "week": 8
-        },
-        {
-          "addedAt": "2026-09-04T07:21:54.490879+00:00",
-          "description": "Survived the eviction vote (Week 8)",
-          "points": 4,
-          "type": "survivedVote",
-          "week": 8
-        },
-        {
           "addedAt": "2026-09-10T07:27:20.137090+00:00",
           "description": "Won Power of Veto (Week 9)",
           "points": 3,
@@ -1425,11 +1472,60 @@
           "week": 9
         },
         {
+          "week": 8,
+          "type": "nominated",
+          "points": -3,
+          "day": "Day 52",
+          "description": "Nominated in a twist (Week 8 (Day 52))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
+          "week": 8,
+          "type": "twistSave",
+          "points": 3,
+          "day": "Day 52",
+          "description": "Saved from the twist block (Week 8 (Day 52))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
+          "week": 8,
+          "type": "evictionPower",
+          "points": 5,
+          "day": "Day 52",
+          "description": "Held the power to eliminate (Week 8 (Day 52))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
+          "week": 8,
+          "type": "nominated",
+          "points": -3,
+          "day": "Day 53",
+          "description": "Nominated for eviction (Week 8 (Day 53))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
+          "week": 8,
+          "type": "veto",
+          "points": 3,
+          "day": "Day 53",
+          "description": "Won Power of Veto (Week 8 (Day 53))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
+          "week": 8,
+          "type": "savedSelf",
+          "points": 2,
+          "day": "Day 53",
+          "description": "Took themselves off the block (Week 8 (Day 53))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
+        },
+        {
           "week": 10,
           "type": "hoh",
           "points": 10,
-          "description": "Won Head of Household (Week 10)",
-          "addedAt": "2026-09-14T08:03:02.275214+00:00"
+          "day": "Day 67",
+          "description": "Won Head of Household (Week 10 (Day 67))",
+          "addedAt": "2026-09-16T17:26:25.719227+00:00"
         }
       ],
       "hometown": "Monroe Township, NJ",
@@ -1497,7 +1593,7 @@
       "summary": "Owns two HOH wins so far. Was pulled off the block in Week 6 and survived the Week 9 eviction vote."
     }
   ],
-  "lastUpdated": "2026-09-14",
+  "lastUpdated": "2026-09-16",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -1805,6 +1901,14 @@
     "wallHang": {
       "label": "Wall Hang Win",
       "points": 3
+    },
+    "twistSave": {
+      "label": "Saved from a Twist Block",
+      "points": 3
+    },
+    "evictionPower": {
+      "label": "Unilateral Eviction Power",
+      "points": 5
     }
   },
   "season": 28,

@@ -54,6 +54,8 @@ REVEAL_CADENCE = {
     "bbBlockbuster":  "thu",
     "evicted":        "thu",  # live eviction Thursday
     "survivedVote":   "thu",  # revealed at the same moment as the eviction
+    "twistSave":      "thu",  # twist blocks resolve on the live show
+    "evictionPower":  "thu",  # ...as does who was holding the power
 }
 
 # ── The scoring board (league-voted 2026-08-05) ───────────────────────────
@@ -74,6 +76,13 @@ SCORING_BOARD = {
     "pickedVeto":    ("Picked to Play in Veto",            2),
     "takenOffBlock": ("Taken Off Block by Someone Else",   5),
     "savedSelf":     ("Took Self Off Block (Veto Only)",   2),
+    # Twist nights: a mass block nobody was nominated onto by an HOH, cleared
+    # by the twist itself rather than by a veto holder choosing you. Worth
+    # less than takenOffBlock (+5), which is earned social capital.
+    "twistSave":     ("Saved from a Twist Block",           3),
+    # Handed unilateral control over who goes home. Comp-win-tier impact, so
+    # it pays like one.
+    "evictionPower": ("Unilateral Eviction Power",          5),
     "madeJury":      ("Made It to Jury",                  10),
     "resurrection":  ("Resurrection / Battle Back Win",   15),
     "first":         ("Winner (1st Place)",               60),
@@ -210,6 +219,47 @@ def cell_names(cell):
     return names
 
 
+STRUCK_TAGS = ("s", "del", "strike")
+
+
+def cell_names_split(cell):
+    """Return (live_names, struck_names) for a grid cell.
+
+    Wikipedia strikes through a name that was on a list and then came off it —
+    on a twist night the nominations cell holds the whole block with the saved
+    houseguests struck out. Reading the raw text treats those saved players as
+    live nominees, which is what scrambled Week 8: everyone stayed 'on the
+    block' and the veto maths found nobody to credit with a save."""
+    if cell is None:
+        return [], []
+    clone = BeautifulSoup(str(cell), "html.parser")
+    struck = []
+    for node in clone.find_all(STRUCK_TAGS):
+        struck.extend(cell_names(node))
+        node.decompose()
+    return cell_names(clone), struck
+
+
+EVICT_CHOICE_RE = re.compile(r"(.+?)'s\s+choice\s+to\s+(?:evict|eliminate)", re.I)
+
+
+def parse_eviction(cell):
+    """Split an eviction cell into (evicted_names, chooser_name or None).
+
+    The first line is who went home; the rest is how. Normally that reads
+    '9 of 10 votes to evict', but when a twist hands one houseguest the call
+    it reads "<Name>'s choice to eliminate" — and that houseguest earns the
+    eviction-power points."""
+    if cell is None:
+        return [], None
+    lines = [ln.strip() for ln in cell_text(cell).split("\n") if ln.strip()]
+    if not lines or lines[0].lower() in PLACEHOLDERS:
+        return [], None
+    evicted = [n.strip() for n in re.split(r"[,/]| & | and ", lines[0]) if n.strip()]
+    m = EVICT_CHOICE_RE.match(" ".join(lines[1:]))
+    return evicted, (m.group(1).strip() if m else None)
+
+
 MAX_LABEL_LEN = 40  # real row labels are short; recap prose is not
 
 
@@ -248,24 +298,47 @@ ROW_TYPES = [
 ]
 
 
-def parse_weeks(matrix):
-    """Return {week_number: {category: set(names)}} from the expanded grid."""
+def parse_segments(matrix):
+    """Return an ordered list of column segments from the expanded grid:
+
+        [{"week": 8, "day": "Day 52", "col": 8, "cells": {category: cell}}, ...]
+
+    One segment per COLUMN, not per week. Late in the season a single "Week N"
+    header spans two day-columns (a twist night plus a regular cycle, or a
+    double eviction), and each of those is a self-contained game: its own
+    nominations, its own veto, its own eviction. Merging them into one bucket
+    scrambles the maths — a player nominated on day one and saved on day two
+    looks like they were never saved at all."""
     # Map column index -> week number from the header row containing "Week N" cells
-    col_week = {}
-    for row in matrix:
+    col_week, header_row = {}, -1
+    for ri, row in enumerate(matrix):
         hits = {}
         for i, cell in enumerate(row):
             m = re.search(r"week\s*(\d+)", cell_text(cell), re.I)
             if m:
                 hits[i] = int(m.group(1))
         if len(set(hits.values())) >= 2:
-            col_week = hits
+            col_week, header_row = hits, ri
             break
     if not col_week:
         print("Could not find a 'Week N' header row in the results table.")
-        return {}
+        return []
 
-    weeks = {}
+    # The row under the header carries a sub-label ("Day 52", "Finale") for any
+    # week that was split across columns. A column whose sub-label just repeats
+    # the week name is an ordinary single-column week.
+    col_day = {}
+    if header_row + 1 < len(matrix):
+        sub = matrix[header_row + 1]
+        for i in col_week:
+            if i < len(sub):
+                label = re.sub(r"\s+", " ", cell_text(sub[i])).strip()
+                if label and not re.fullmatch(r"week\s*\d+", label, re.I):
+                    col_day[i] = label
+
+    segments = {i: {"week": w, "day": col_day.get(i), "col": i, "cells": {}}
+                for i, w in col_week.items()}
+
     seen_noms_plain = False
     for row in matrix:
         label = re.sub(r"\s+", " ", cell_text(row[0]))
@@ -281,12 +354,13 @@ def parse_weeks(matrix):
         if category is None:
             continue
         for i, cell in enumerate(row):
-            wk = col_week.get(i)
-            if wk is None or cell is row[0]:
+            if i not in segments or cell is row[0]:
                 continue
-            bucket = weeks.setdefault(wk, {})
-            bucket.setdefault(category, set()).update(cell_names(cell))
-    return weeks
+            # Keep the cell itself, not its text: strikethrough markup inside it
+            # is the only record of who came off a twist block.
+            segments[i]["cells"].setdefault(category, cell)
+
+    return [segments[i] for i in sorted(segments)]
 
 
 # ── Roster matching / event helpers ───────────────────────────────────────
@@ -316,20 +390,25 @@ def get_points(data, event_type):
     return SCORING_FALLBACK.get(event_type, 0)
 
 
-def already_has_event(hg, week, event_type):
+def already_has_event(hg, week, event_type, day=None):
+    # `day` is part of the identity: a week split across two day-columns can
+    # legitimately nominate the same player twice, and those are two real
+    # trips to the block, not a duplicate.
     for ev in (hg.get("events") or []):
-        if ev.get("week") == week and ev.get("type") == event_type:
+        if (ev.get("week") == week and ev.get("type") == event_type
+                and ev.get("day") == day):
             return True
     return False
 
 
-def add_event(data, hg, week, event_type, description):
-    if already_has_event(hg, week, event_type):
+def add_event(data, hg, week, event_type, description, day=None):
+    if already_has_event(hg, week, event_type, day):
         return False
     pts = get_points(data, event_type)
+    tag = {"day": day} if day else {}
     hg["events"] = hg.get("events") or []
     hg["events"].append({
-        "week": week, "type": event_type, "points": pts,
+        "week": week, "type": event_type, "points": pts, **tag,
         "description": description, "addedAt": datetime.now(timezone.utc).isoformat(),
     })
 
@@ -341,16 +420,32 @@ def add_event(data, hg, week, event_type, description):
         data["episodes"].sort(key=lambda x: x["week"])
     ep["events"] = ep.get("events") or []
     ep["events"].append({
-        "type": event_type, "houseguestId": hg["id"], "points": pts, "description": description,
+        "type": event_type, "houseguestId": hg["id"], "points": pts, **tag,
+        "description": description,
     })
     return True
 
 
 # ── Apply scraped results ─────────────────────────────────────────────────
-def apply_week(data, week, results, published, held, unmatched):
-    def resolve(names):
+def apply_segment(data, seg, published, held, unmatched):
+    """Score one column of the results grid.
+
+    Two shapes turn up. A regular cycle has an HOH who nominates, a veto that
+    may shuffle the block, and a house vote. A TWIST night has no HOH, no
+    initial nominations and no veto — a mass block appears, some of it is
+    struck through (saved), and somebody is sent home, sometimes by a single
+    houseguest holding a power rather than by a vote."""
+    week = seg["week"]
+    day = seg.get("day")
+    cells = seg["cells"]
+    where = f"Week {week}" + (f" ({day})" if day else "")
+
+    def names(category):
+        return cell_names_split(cells.get(category))
+
+    def resolve(raw):
         out = []
-        for name in names:
+        for name in raw:
             hg = find_guest_by_name(data, name)
             if hg:
                 out.append(hg)
@@ -358,58 +453,81 @@ def apply_week(data, week, results, published, held, unmatched):
                 unmatched.add(name)
         return out
 
-    def emit(names, event_type, desc_fn, gate_type=None):
+    def emit(raw, event_type, desc, gate_type=None):
         gate = gate_type or event_type
-        if not names:
+        if not raw:
             return
         if not is_aired(week, gate):
-            held.append((week, gate, len(names)))
+            held.append((week, gate, len(raw)))
             return
-        for hg in resolve(names):
-            if add_event(data, hg, week, event_type, desc_fn(hg)):
+        for hg in resolve(raw):
+            if add_event(data, hg, week, event_type, desc, day=day):
                 pts = get_points(data, event_type)
-                published.append(f"Week {week}: {hg['name']} {'+' if pts >= 0 else ''}{pts} ({event_type})")
+                published.append(
+                    f"{where}: {hg['name']} {'+' if pts >= 0 else ''}{pts} ({event_type})")
 
-    emit(results.get("hoh", ()), "hoh", lambda h: f"Won Head of Household (Week {week})")
-    emit(results.get("noms_initial", ()), "nominated", lambda h: f"Nominated for eviction (Week {week})")
-    emit(results.get("veto", ()), "veto", lambda h: f"Won Power of Veto (Week {week})")
-    emit(results.get("blockbuster", ()), "bbBlockbuster", lambda h: f"Won BB Blockbuster (Week {week})")
+    hoh, _ = names("hoh")
+    initial, _ = names("noms_initial")
+    veto, _ = names("veto")
+    blockbuster, _ = names("blockbuster")
+    final_live, final_struck = names("noms_final")
+    evicted, chooser = parse_eviction(cells.get("evicted"))
 
-    # Compare initial vs final nominations: saved / replacement nominees
-    initial = results.get("noms_initial") or set()
-    final = results.get("noms_final") or set()
-    if final:
-        init_ids = {h["id"]: h for h in resolve(initial)}
-        final_ids = {h["id"]: h for h in resolve(final)}
-        saved = [h for hid, h in init_ids.items() if hid not in final_ids]
-        replacements = [h for hid, h in final_ids.items() if hid not in init_ids]
-        # A nominee who used the veto on themselves scores savedSelf (+3);
-        # anyone else pulled off by the veto winner scores takenOffBlock
-        # (+5). A Blockbuster winner comes off the block automatically —
-        # the bbBlockbuster win (+5) already covers it, no extra points.
-        veto_ids = {h["id"] for h in resolve(results.get("veto") or set())}
-        bb_ids = {h["id"] for h in resolve(results.get("blockbuster") or set())}
-        self_veto = [h for h in saved if h["id"] in veto_ids]
-        other_saved = [h for h in saved if h["id"] not in veto_ids and h["id"] not in bb_ids]
-        emit([h["name"] for h in self_veto], "savedSelf",
-             lambda h: f"Took themselves off the block (Week {week})")
-        emit([h["name"] for h in other_saved], "takenOffBlock",
-             lambda h: f"Taken off the block (Week {week})")
-        emit([h["name"] for h in replacements], "nominated",
-             lambda h: f"Named replacement nominee (Week {week})", gate_type="replacementNom")
+    # ── Twist night ──────────────────────────────────────────────────────
+    # No HOH and no initial nominations, but people were still on a block.
+    if not hoh and not initial and (final_live or final_struck):
+        block = final_struck + final_live
+        # The block was real — someone went home off it — so it costs the
+        # same as any other nomination.
+        emit(block, "nominated", f"Nominated in a twist ({where})",
+             gate_type="evicted")
+        # Struck through = pulled off the twist block.
+        emit(final_struck, "twistSave", f"Saved from the twist block ({where})")
+        if chooser:
+            emit([chooser], "evictionPower",
+                 f"Held the power to eliminate ({where})")
+        if evicted:
+            evicted_ids = {h["id"] for h in resolve(evicted)}
+            survivors = [h["name"] for h in resolve(final_live)
+                         if h["id"] not in evicted_ids]
+            emit(survivors, "survivedVote", f"Survived the twist ({where})")
+    # ── Regular cycle ────────────────────────────────────────────────────
+    else:
+        emit(hoh, "hoh", f"Won Head of Household ({where})")
+        emit(initial, "nominated", f"Nominated for eviction ({where})")
+        emit(veto, "veto", f"Won Power of Veto ({where})")
+        emit(blockbuster, "bbBlockbuster", f"Won BB Blockbuster ({where})")
 
-        # Survived the eviction vote: on the final block, still standing after
-        # the live show. Only once the eviction itself is known, so nobody is
-        # credited before the vote actually happens.
-        evicted_now = results.get("evicted") or set()
-        if evicted_now:
-            evicted_ids = {h["id"] for h in resolve(evicted_now)}
-            survivors = [h for hid, h in final_ids.items() if hid not in evicted_ids]
-            emit([h["name"] for h in survivors], "survivedVote",
-                 lambda h: f"Survived the eviction vote (Week {week})")
+        # Compare initial vs final nominations: saved / replacement nominees
+        if final_live or final_struck:
+            init_ids = {h["id"]: h for h in resolve(initial)}
+            final_ids = {h["id"]: h for h in resolve(final_live)}
+            saved = [h for hid, h in init_ids.items() if hid not in final_ids]
+            replacements = [h for hid, h in final_ids.items() if hid not in init_ids]
+            # A nominee who used the veto on themselves scores savedSelf (+2);
+            # anyone else pulled off by the veto winner scores takenOffBlock
+            # (+5). A Blockbuster winner comes off the block automatically —
+            # the bbBlockbuster points already cover it, no extra award.
+            veto_ids = {h["id"] for h in resolve(veto)}
+            bb_ids = {h["id"] for h in resolve(blockbuster)}
+            self_veto = [h["name"] for h in saved if h["id"] in veto_ids]
+            other_saved = [h["name"] for h in saved
+                           if h["id"] not in veto_ids and h["id"] not in bb_ids]
+            emit(self_veto, "savedSelf", f"Took themselves off the block ({where})")
+            emit(other_saved, "takenOffBlock", f"Taken off the block ({where})")
+            emit([h["name"] for h in replacements], "nominated",
+                 f"Named replacement nominee ({where})", gate_type="replacementNom")
+
+            # Survived the eviction vote: on the final block, still standing
+            # after the live show. Only once the eviction itself is known, so
+            # nobody is credited before the vote actually happens.
+            if evicted:
+                evicted_ids = {h["id"] for h in resolve(evicted)}
+                survivors = [h["name"] for hid, h in final_ids.items()
+                             if hid not in evicted_ids]
+                emit(survivors, "survivedVote", f"Survived the eviction vote ({where})")
 
     # Evictions: status change only (no points)
-    evicted = results.get("evicted") or set()
     if evicted:
         if not is_aired(week, "evicted"):
             held.append((week, "evicted", len(evicted)))
@@ -418,7 +536,47 @@ def apply_week(data, week, results, published, held, unmatched):
                 if hg.get("status") == "active":
                     hg["status"] = "evicted"
                     hg["weekEvicted"] = week
-                    published.append(f"Week {week}: {hg['name']} marked evicted")
+                    published.append(f"{where}: {hg['name']} marked evicted")
+
+
+def clear_merged_week_events(data, split_weeks):
+    """Drop auto-scraped events for a week that is split across day-columns but
+    whose stored events predate the split (no `day` tag).
+
+    Those were scored from the two days mashed together and are wrong in ways
+    no in-place edit can fix — phantom nominations, missing self-saves,
+    survival points for players who were never on that block. Dropping them
+    lets apply_segment rebuild the week correctly from Wikipedia on this same
+    run. Manual admin entries (lockPoints) are never touched.
+
+    Also clears the evicted status for those weeks so it re-derives; a player
+    who really was evicted is re-marked moments later from the same grid."""
+    if not split_weeks:
+        return []
+    weeks = set(split_weeks)
+    lines = []
+    for hg in data.get("houseguests") or []:
+        keep, dropped = [], []
+        for ev in (hg.get("events") or []):
+            if (ev.get("week") in weeks and not ev.get("day")
+                    and not ev.get("lockPoints")):
+                dropped.append(ev["week"])
+            else:
+                keep.append(ev)
+        if dropped:
+            hg["events"] = keep
+            for wk in sorted(set(dropped)):
+                n = sum(1 for w in dropped if w == wk)
+                lines.append(f"Week {wk}: cleared {n} merged-week event(s) for "
+                             f"{hg['name']} — rebuilding per day")
+        if hg.get("weekEvicted") in weeks:
+            hg["status"] = "active"
+            hg["weekEvicted"] = None
+    for ep in data.get("episodes") or []:
+        if ep.get("week") in weeks:
+            ep["events"] = [le for le in (ep.get("events") or [])
+                            if le.get("day") or le.get("lockPoints")]
+    return lines
 
 
 def reclassify_self_saves(data):
@@ -523,7 +681,9 @@ def build_summary(hg, current_week, evicted_weeks):
     # A Blockbuster win while nominated takes the winner off the block too
     # (no separate event — the win itself covers it).
     bb_off_weeks = weeks_of.get("bbBlockbuster", set()) & set(nom_weeks)
-    saved_weeks = weeks_of.get("takenOffBlock", set()) | self_saved_weeks | bb_off_weeks
+    twist_saved_weeks = weeks_of.get("twistSave", set())
+    saved_weeks = (weeks_of.get("takenOffBlock", set()) | self_saved_weeks
+                   | bb_off_weeks | twist_saved_weeks)
     status = hg.get("status", "active")
     sents = []
     reigning = False
@@ -571,6 +731,14 @@ def build_summary(hg, current_week, evicted_weeks):
             bits.append(f"pulled themselves off the block in Week {min(self_saved_weeks)}")
         else:
             bits.append(f"pulled themselves off the block {_NUM_WORDS.get(len(self_saved_weeks), len(self_saved_weeks))} times")
+    power_weeks = weeks_of.get("evictionPower", set())
+    if power_weeks:
+        bits.append(f"single-handedly decided the Week {min(power_weeks)} eviction")
+    if twist_saved_weeks:
+        if len(twist_saved_weeks) == 1:
+            bits.append(f"came off a twist block in Week {min(twist_saved_weeks)}")
+        else:
+            bits.append(f"came off a twist block {_NUM_WORDS.get(len(twist_saved_weeks), len(twist_saved_weeks))} times")
     other_saved = weeks_of.get("takenOffBlock", set())
     if other_saved:
         if len(other_saved) == 1:
@@ -832,14 +1000,18 @@ def main():
         print("No results grid on the Wikipedia page yet. Skipping update.")
         return
 
-    weeks = parse_weeks(matrix)
-    if not weeks:
+    segments = parse_segments(matrix)
+    if not segments:
         # Exit non-zero so the Action goes red — a silent no-op here once let
         # a parser break go unnoticed for a full episode cycle.
         print("ERROR: results grid found but no week columns parsed — "
               "the Wikipedia table layout likely changed. Nothing updated.")
         sys.exit(1)
-    print(f"Parsed results grid: weeks {sorted(weeks)}")
+    split_weeks = sorted({s["week"] for s in segments
+                          if sum(1 for t in segments if t["week"] == s["week"]) > 1})
+    print(f"Parsed results grid: {len(segments)} column(s) across weeks "
+          f"{sorted({s['week'] for s in segments})}"
+          + (f"; split weeks {split_weeks}" if split_weeks else ""))
 
     # Sync the league-voted scoring board, fix any legacy self-save types, then
     # rescore stored events to the current board. All three run BEFORE this
@@ -847,7 +1019,8 @@ def main():
     board_changes = sync_scoring_board(data)
     for line in board_changes:
         print(f"SCORING  {line}")
-    rescored = reclassify_self_saves(data)
+    rescored = clear_merged_week_events(data, split_weeks)
+    rescored += reclassify_self_saves(data)
     rescored += resync_event_points(data)
     for line in rescored:
         print(f"RESCORE  {line}")
@@ -863,8 +1036,8 @@ def main():
               f"(through {schedule[-1]['date']})")
 
     published, held, unmatched = [], [], set()
-    for week in sorted(weeks):
-        apply_week(data, week, weeks[week], published, held, unmatched)
+    for seg in segments:
+        apply_segment(data, seg, published, held, unmatched)
 
     refreshed = update_summaries(data, dry_run=dry_run)
     if refreshed:

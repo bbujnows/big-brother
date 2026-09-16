@@ -122,7 +122,8 @@
                     <div class="event-row">
                       <span class="event-type ${e.type}">${formatType(e.type)}</span>
                       <div>
-                        <div class="event-name">${hg ? hg.name : e.houseguestId}</div>
+                        <div class="event-name">${hg ? hg.name : e.houseguestId}${e.day
+                          ? ` <span class="event-day">${e.day}</span>` : ''}</div>
                         ${owner ? `<div class="event-owner" style="color:${owner.color}">${owner.name}'s team</div>` : ''}
                       </div>
                       <span class="event-pts ${e.points>0?'pts-pos':'pts-neg'}">${e.points>0?'+':''}${e.points}</span>
@@ -149,6 +150,8 @@
         bbComics:'BB Comics', safety:'Safety', pickedVeto:'Picked for Veto',
         takenOffBlock:'Off Block',
         savedSelf:'Self-Save',
+        twistSave:'Twist Save',
+        evictionPower:'Eviction Power',
         survivedVote:'Survived Vote',
         madeJury:'Jury', resurrection:'Resurrection',
         first:'Winner', second:'Runner-Up', third:'3rd Place', afh:'AFH'

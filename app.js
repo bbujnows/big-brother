@@ -67,15 +67,28 @@ function getPointsForType(data, type) {
 // "On the block" is derived, not stored: nominated in the latest week they
 // were nominated, not saved that week, and that week's eviction hasn't
 // aired yet. Clears automatically when the scraper publishes results.
+// Late-season weeks split into day-columns, and each day is its own block with
+// its own nominations, veto and eviction. Sort events by (week, day) so "the
+// block right now" means the most recent DAY, not the most recent week —
+// otherwise coming off the block on Day 52 wrongly clears a Day 53 nomination.
+function segmentKey(e) {
+  const day = parseInt(String(e.day || '').replace(/\D/g, ''), 10);
+  return e.week * 1000 + (day || 0);
+}
+
 function isOnBlock(data, hg) {
   if (hg.status !== 'active') return false;
   const evs = hg.events || [];
-  const nomWeeks = evs.filter(e => e.type === 'nominated').map(e => e.week);
-  if (nomWeeks.length === 0) return false;
-  const w = Math.max(...nomWeeks);
-  // Saved by veto/self-save, or won the Blockbuster (which auto-clears the block)
-  if (evs.some(e => (e.type === 'savedSelf' || e.type === 'takenOffBlock' || e.type === 'bbBlockbuster') && e.week === w)) return false;
-  if (data.houseguests.some(h => h.weekEvicted === w)) return false;
+  const noms = evs.filter(e => e.type === 'nominated');
+  if (noms.length === 0) return false;
+  const k = Math.max(...noms.map(segmentKey));
+  // Pulled off by the veto, self-saved, won the Blockbuster, or cleared by a
+  // twist — all on that same day.
+  const CLEARS = ['savedSelf', 'takenOffBlock', 'bbBlockbuster', 'twistSave'];
+  if (evs.some(e => CLEARS.includes(e.type) && segmentKey(e) === k)) return false;
+  // Survival points are awarded the moment that day's eviction airs, so having
+  // them means this block has already been resolved.
+  if (evs.some(e => e.type === 'survivedVote' && segmentKey(e) === k)) return false;
   return true;
 }
 
