@@ -591,6 +591,7 @@ tr:hover td { background: rgba(95,255,194,0.03); }
 .event-type.evictionPower{ background: rgba(167,139,250,0.22); color: var(--violet); }
 .event-type.resurrection { background: rgba(167,139,250,0.18); color: var(--violet); }
 .event-type.jury         { background: rgba(167,139,250,0.15); color: var(--violet); }
+.event-type.madeJury     { background: rgba(255,217,61,0.15);  color: var(--gold); }
 .event-type.winner       { background: rgba(255,217,61,0.22);  color: var(--gold); }
 
 .event-name { font-weight: 600; }

@@ -539,6 +539,60 @@ def apply_segment(data, seg, published, held, unmatched):
                     published.append(f"{where}: {hg['name']} marked evicted")
 
 
+# Event types apply_segment derives from a single day-column. Anything outside
+# this set is a week-level award and is not rebuilt per day.
+SEGMENT_EVENT_TYPES = {
+    "hoh", "nominated", "veto", "bbBlockbuster", "savedSelf", "takenOffBlock",
+    "twistSave", "evictionPower", "survivedVote",
+}
+
+JURY_RE = re.compile(r"jury\s*member", re.I)
+
+
+def parse_jury(matrix):
+    """Names the grid tags as jury members.
+
+    Wikipedia adds a 'Jury Member' cell to a houseguest's row once their
+    eviction lands them on the jury, so we never have to work out where the
+    jury phase started or how big the jury is."""
+    names = set()
+    for row in matrix:
+        label = re.sub(r"\s+", " ", cell_text(row[0])).strip()
+        if not label or len(label) > MAX_LABEL_LEN:
+            continue
+        seen = set()
+        for cell in row[1:]:
+            if cell is None or id(cell) in seen:
+                continue
+            seen.add(id(cell))
+            if JURY_RE.search(cell_text(cell)):
+                names.add(label)
+                break
+    return names
+
+
+def apply_jury(data, jury_names, published, unmatched):
+    """Award jury points and flip the status to 'jury'.
+
+    Gated on the eviction rather than on a date: a houseguest only reaches the
+    jury by being evicted, so if we haven't published that they left, we say
+    nothing about the jury either. Spoiler-safe for free."""
+    for name in sorted(jury_names):
+        hg = find_guest_by_name(data, name)
+        if not hg:
+            unmatched.add(name)
+            continue
+        week = hg.get("weekEvicted")
+        if hg.get("status") not in ("evicted", "jury") or not week:
+            continue  # their eviction hasn't aired — nothing to reveal yet
+        if add_event(data, hg, week, "madeJury", f"Made it to the jury (Week {week})"):
+            pts = get_points(data, "madeJury")
+            published.append(f"Week {week}: {hg['name']} +{pts} (madeJury)")
+        if hg.get("status") != "jury":
+            hg["status"] = "jury"
+            published.append(f"Week {week}: {hg['name']} marked a jury member")
+
+
 def clear_merged_week_events(data, split_weeks):
     """Drop auto-scraped events for a week that is split across day-columns but
     whose stored events predate the split (no `day` tag).
@@ -549,8 +603,9 @@ def clear_merged_week_events(data, split_weeks):
     lets apply_segment rebuild the week correctly from Wikipedia on this same
     run. Manual admin entries (lockPoints) are never touched.
 
-    Also clears the evicted status for those weeks so it re-derives; a player
-    who really was evicted is re-marked moments later from the same grid."""
+    Only the per-day event types are in scope. Week-level awards like madeJury
+    have no day of their own, so clearing them here would drop and re-add them
+    on every single run."""
     if not split_weeks:
         return []
     weeks = set(split_weeks)
@@ -559,23 +614,28 @@ def clear_merged_week_events(data, split_weeks):
         keep, dropped = [], []
         for ev in (hg.get("events") or []):
             if (ev.get("week") in weeks and not ev.get("day")
+                    and ev.get("type") in SEGMENT_EVENT_TYPES
                     and not ev.get("lockPoints")):
                 dropped.append(ev["week"])
             else:
                 keep.append(ev)
-        if dropped:
-            hg["events"] = keep
-            for wk in sorted(set(dropped)):
-                n = sum(1 for w in dropped if w == wk)
-                lines.append(f"Week {wk}: cleared {n} merged-week event(s) for "
-                             f"{hg['name']} — rebuilding per day")
+        if not dropped:
+            continue
+        hg["events"] = keep
+        for wk in sorted(set(dropped)):
+            n = sum(1 for w in dropped if w == wk)
+            lines.append(f"Week {wk}: cleared {n} merged-week event(s) for "
+                         f"{hg['name']} — rebuilding per day")
+        # Only re-derive the eviction for someone we actually rebuilt, so a
+        # settled week never churns its statuses on later runs.
         if hg.get("weekEvicted") in weeks:
             hg["status"] = "active"
             hg["weekEvicted"] = None
     for ep in data.get("episodes") or []:
         if ep.get("week") in weeks:
             ep["events"] = [le for le in (ep.get("events") or [])
-                            if le.get("day") or le.get("lockPoints")]
+                            if le.get("day") or le.get("lockPoints")
+                            or le.get("type") not in SEGMENT_EVENT_TYPES]
     return lines
 
 
@@ -1038,6 +1098,9 @@ def main():
     published, held, unmatched = [], [], set()
     for seg in segments:
         apply_segment(data, seg, published, held, unmatched)
+    # After the segments, so a houseguest evicted on this very run is picked up
+    # in the same pass rather than waiting a day for their jury points.
+    apply_jury(data, parse_jury(matrix), published, unmatched)
 
     refreshed = update_summaries(data, dry_run=dry_run)
     if refreshed:

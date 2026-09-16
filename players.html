@@ -100,7 +100,7 @@
         const owner = window._data.owners.find(o => o.id === hg.ownerId);
         const pts = computeGuestScore(hg);
         const card = document.createElement('div');
-        card.className = `hg-card ${hg.status === 'evicted' ? 'evicted' : ''}`;
+        card.className = `hg-card ${isOut(hg) ? 'evicted' : ''}`;
         card.onclick = () => openModal(hg);
         card.innerHTML = `
           ${statusBadge(window._data, hg)}

@@ -64,6 +64,13 @@ function getPointsForType(data, type) {
 }
 
 // ── STATUS DISPLAY ───────────────────────────────────────────────────
+// Jurors are out of the house just like anyone else evicted — they simply get
+// paid for how far they made it. Anything that dims, strikes through or filters
+// an evicted player has to treat them the same way.
+function isOut(hg) {
+  return !!hg && (hg.status === 'evicted' || hg.status === 'jury');
+}
+
 // "On the block" is derived, not stored: nominated in the latest week they
 // were nominated, not saved that week, and that week's eviction hasn't
 // aired yet. Clears automatically when the scraper publishes results.

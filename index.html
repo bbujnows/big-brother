@@ -176,7 +176,7 @@
           <div class="owner-score">${score}<span> pts</span></div>
           <div class="owner-players">
             ${players.length
-              ? players.map(p => `<span class="player-pill ${p.status==='evicted'?'evicted':''}">${p.name}</span>`).join('')
+              ? players.map(p => `<span class="player-pill ${isOut(p)?'evicted':''}">${p.name}</span>`).join('')
               : '<span class="player-pill">No players yet</span>'}
           </div>
           <div class="owner-expand-hint" style="text-align:center;margin-top:10px;font-family:var(--mono);font-size:.58rem;letter-spacing:1.5px;color:var(--muted);">▾ POINT BREAKDOWN</div>`;
@@ -194,7 +194,7 @@
             return `
               <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0 3px;">
                 <a href="players.html?hg=${p.id}"
-                   style="font-weight:700;font-size:.85rem;color:var(--text);text-decoration:none;border-bottom:1px dotted var(--muted);${p.status==='evicted'?'opacity:.45;text-decoration:line-through;':''}">${p.name}</a>
+                   style="font-weight:700;font-size:.85rem;color:var(--text);text-decoration:none;border-bottom:1px dotted var(--muted);${isOut(p)?'opacity:.45;text-decoration:line-through;':''}">${p.name}</a>
                 <span style="font-family:var(--mono);font-weight:800;font-size:.85rem;color:${ptsColor(pPts)};text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;">${pPts > 0 ? '+' : ''}${pPts}</span>
               </div>
               ${evs.length
