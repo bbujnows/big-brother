@@ -686,82 +686,109 @@
           "type": "nominated"
         },
         {
-          "type": "bbBlockbuster",
+          "day": "Day 67",
+          "description": "Won BB Blockbuster (Week 10 (Day 67))",
           "houseguestId": "hg_melody_morris",
           "points": 5,
-          "day": "Day 67",
-          "description": "Won BB Blockbuster (Week 10 (Day 67))"
+          "type": "bbBlockbuster"
         },
         {
-          "type": "survivedVote",
+          "day": "Day 67",
+          "description": "Survived the eviction vote (Week 10 (Day 67))",
           "houseguestId": "hg_taylor_brown",
           "points": 4,
-          "day": "Day 67",
-          "description": "Survived the eviction vote (Week 10 (Day 67))"
+          "type": "survivedVote"
         },
         {
-          "type": "hoh",
+          "day": "Day 73",
+          "description": "Won Head of Household (Week 10 (Day 73))",
           "houseguestId": "hg_melody_morris",
           "points": 10,
-          "day": "Day 73",
-          "description": "Won Head of Household (Week 10 (Day 73))"
+          "type": "hoh"
         },
         {
-          "type": "nominated",
+          "day": "Day 73",
+          "description": "Nominated for eviction (Week 10 (Day 73))",
           "houseguestId": "hg_dee_valladares",
           "points": -3,
-          "day": "Day 73",
-          "description": "Nominated for eviction (Week 10 (Day 73))"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "day": "Day 73",
+          "description": "Nominated for eviction (Week 10 (Day 73))",
           "houseguestId": "hg_rick_devens",
           "points": -3,
-          "day": "Day 73",
-          "description": "Nominated for eviction (Week 10 (Day 73))"
+          "type": "nominated"
         },
         {
-          "type": "veto",
+          "day": "Day 73",
+          "description": "Won Power of Veto (Week 10 (Day 73))",
           "houseguestId": "hg_rick_devens",
           "points": 3,
-          "day": "Day 73",
-          "description": "Won Power of Veto (Week 10 (Day 73))"
+          "type": "veto"
         },
         {
-          "type": "savedSelf",
+          "day": "Day 73",
+          "description": "Took themselves off the block (Week 10 (Day 73))",
           "houseguestId": "hg_rick_devens",
           "points": 2,
-          "day": "Day 73",
-          "description": "Took themselves off the block (Week 10 (Day 73))"
+          "type": "savedSelf"
         },
         {
-          "type": "nominated",
+          "day": "Day 73",
+          "description": "Named replacement nominee (Week 10 (Day 73))",
           "houseguestId": "hg_yash_patel",
           "points": -3,
-          "day": "Day 73",
-          "description": "Named replacement nominee (Week 10 (Day 73))"
+          "type": "nominated"
         },
         {
-          "type": "survivedVote",
+          "day": "Day 73",
+          "description": "Survived the eviction vote (Week 10 (Day 73))",
           "houseguestId": "hg_dee_valladares",
           "points": 4,
-          "day": "Day 73",
-          "description": "Survived the eviction vote (Week 10 (Day 73))"
+          "type": "survivedVote"
         },
         {
-          "type": "madeJury",
+          "description": "Made it to the jury (Week 10)",
           "houseguestId": "hg_barrett_pfeiffer",
           "points": 10,
-          "description": "Made it to the jury (Week 10)"
+          "type": "madeJury"
         },
         {
-          "type": "madeJury",
+          "description": "Made it to the jury (Week 10)",
           "houseguestId": "hg_yash_patel",
           "points": 10,
-          "description": "Made it to the jury (Week 10)"
+          "type": "madeJury"
         }
       ],
       "week": 10
+    },
+    {
+      "week": 11,
+      "airDate": "2026-09-20",
+      "events": [
+        {
+          "type": "hoh",
+          "houseguestId": "hg_rick_devens",
+          "points": 10,
+          "day": "Day 74",
+          "description": "Won Head of Household (Week 11 (Day 74))"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_drew_campbell",
+          "points": -3,
+          "day": "Day 74",
+          "description": "Nominated for eviction (Week 11 (Day 74))"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_melody_morris",
+          "points": -3,
+          "day": "Day 74",
+          "description": "Nominated for eviction (Week 11 (Day 74))"
+        }
+      ]
     }
   ],
   "houseguests": [
@@ -839,11 +866,11 @@
           "week": 10
         },
         {
-          "week": 10,
-          "type": "madeJury",
-          "points": 10,
+          "addedAt": "2026-09-18T07:33:27.822022+00:00",
           "description": "Made it to the jury (Week 10)",
-          "addedAt": "2026-09-18T07:33:27.822022+00:00"
+          "points": 10,
+          "type": "madeJury",
+          "week": 10
         }
       ],
       "hometown": "Benton, AR",
@@ -964,6 +991,14 @@
           "points": 2,
           "type": "savedSelf",
           "week": 10
+        },
+        {
+          "week": 11,
+          "type": "nominated",
+          "points": -3,
+          "day": "Day 74",
+          "description": "Nominated for eviction (Week 11 (Day 74))",
+          "addedAt": "2026-09-21T08:08:03.259481+00:00"
         }
       ],
       "hometown": "Temecula, CA",
@@ -973,7 +1008,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Owns an HOH win, a veto win, and two Blockbuster wins so far. Pulled themselves off the block in Week 10 and came off a twist block in Week 8."
+      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win, a veto win, and two Blockbuster wins so far. Pulled themselves off the block in Week 10 and came off a twist block in Week 8."
     },
     {
       "age": 29,
@@ -1359,20 +1394,28 @@
           "week": 10
         },
         {
-          "week": 10,
-          "type": "bbBlockbuster",
-          "points": 5,
+          "addedAt": "2026-09-18T07:33:27.815110+00:00",
           "day": "Day 67",
           "description": "Won BB Blockbuster (Week 10 (Day 67))",
-          "addedAt": "2026-09-18T07:33:27.815110+00:00"
+          "points": 5,
+          "type": "bbBlockbuster",
+          "week": 10
         },
         {
-          "week": 10,
-          "type": "hoh",
-          "points": 10,
+          "addedAt": "2026-09-18T07:33:27.816820+00:00",
           "day": "Day 73",
           "description": "Won Head of Household (Week 10 (Day 73))",
-          "addedAt": "2026-09-18T07:33:27.816820+00:00"
+          "points": 10,
+          "type": "hoh",
+          "week": 10
+        },
+        {
+          "week": 11,
+          "type": "nominated",
+          "points": -3,
+          "day": "Day 74",
+          "description": "Nominated for eviction (Week 11 (Day 74))",
+          "addedAt": "2026-09-21T08:08:03.259491+00:00"
         }
       ],
       "hometown": "Thornton, CO",
@@ -1382,7 +1425,7 @@
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
       "status": "active",
-      "summary": "Owns an HOH win and a Blockbuster win so far. Survived two eviction votes on the block."
+      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win and a Blockbuster win so far. Survived two eviction votes on the block."
     },
     {
       "age": 42,
@@ -1432,28 +1475,36 @@
           "week": 8
         },
         {
-          "week": 10,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-09-18T07:33:27.816951+00:00",
           "day": "Day 73",
           "description": "Nominated for eviction (Week 10 (Day 73))",
-          "addedAt": "2026-09-18T07:33:27.816951+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 10
         },
         {
-          "week": 10,
-          "type": "veto",
-          "points": 3,
+          "addedAt": "2026-09-18T07:33:27.817021+00:00",
           "day": "Day 73",
           "description": "Won Power of Veto (Week 10 (Day 73))",
-          "addedAt": "2026-09-18T07:33:27.817021+00:00"
+          "points": 3,
+          "type": "veto",
+          "week": 10
         },
         {
-          "week": 10,
-          "type": "savedSelf",
-          "points": 2,
+          "addedAt": "2026-09-18T07:33:27.817347+00:00",
           "day": "Day 73",
           "description": "Took themselves off the block (Week 10 (Day 73))",
-          "addedAt": "2026-09-18T07:33:27.817347+00:00"
+          "points": 2,
+          "type": "savedSelf",
+          "week": 10
+        },
+        {
+          "week": 11,
+          "type": "hoh",
+          "points": 10,
+          "day": "Day 74",
+          "description": "Won Head of Household (Week 11 (Day 74))",
+          "addedAt": "2026-09-21T08:08:03.259344+00:00"
         }
       ],
       "hometown": "Macon, GA",
@@ -1463,7 +1514,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Owns an HOH win, three veto wins, and two Blockbuster wins so far. Pulled themselves off the block in Week 10."
+      "summary": "Reigning Head of Household after winning the Week 11 comp. Owns an HOH win, three veto wins, and two Blockbuster wins so far. Pulled themselves off the block in Week 10."
     },
     {
       "age": 28,
@@ -1573,12 +1624,12 @@
           "week": 10
         },
         {
-          "week": 10,
-          "type": "survivedVote",
-          "points": 4,
+          "addedAt": "2026-09-18T07:33:27.815790+00:00",
           "day": "Day 67",
           "description": "Survived the eviction vote (Week 10 (Day 67))",
-          "addedAt": "2026-09-18T07:33:27.815790+00:00"
+          "points": 4,
+          "type": "survivedVote",
+          "week": 10
         }
       ],
       "hometown": "Deerfield Beach, FL",
@@ -1730,19 +1781,19 @@
           "week": 10
         },
         {
-          "week": 10,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-09-18T07:33:27.817411+00:00",
           "day": "Day 73",
           "description": "Named replacement nominee (Week 10 (Day 73))",
-          "addedAt": "2026-09-18T07:33:27.817411+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 10
         },
         {
-          "week": 10,
-          "type": "madeJury",
-          "points": 10,
+          "addedAt": "2026-09-18T07:33:27.822149+00:00",
           "description": "Made it to the jury (Week 10)",
-          "addedAt": "2026-09-18T07:33:27.822149+00:00"
+          "points": 10,
+          "type": "madeJury",
+          "week": 10
         }
       ],
       "hometown": "Monroe Township, NJ",
@@ -1802,20 +1853,20 @@
           "week": 9
         },
         {
-          "week": 10,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-09-18T07:33:27.816943+00:00",
           "day": "Day 73",
           "description": "Nominated for eviction (Week 10 (Day 73))",
-          "addedAt": "2026-09-18T07:33:27.816943+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 10
         },
         {
-          "week": 10,
-          "type": "survivedVote",
-          "points": 4,
+          "addedAt": "2026-09-18T07:33:27.817529+00:00",
           "day": "Day 73",
           "description": "Survived the eviction vote (Week 10 (Day 73))",
-          "addedAt": "2026-09-18T07:33:27.817529+00:00"
+          "points": 4,
+          "type": "survivedVote",
+          "week": 10
         }
       ],
       "hometown": "Miami, FL",
@@ -1827,7 +1878,7 @@
       "summary": "Owns two HOH wins so far. Was pulled off the block in Week 6 and survived two eviction votes on the block."
     }
   ],
-  "lastUpdated": "2026-09-18",
+  "lastUpdated": "2026-09-21",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -1853,214 +1904,214 @@
   "premiereDate": "2026-07-09",
   "schedule": [
     {
+      "date": "2026-07-09",
       "ep": 1,
-      "title": "Season Premiere",
-      "date": "2026-07-09"
+      "title": "Season Premiere"
     },
     {
+      "date": "2026-07-10",
       "ep": 2,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-07-10"
+      "title": "Big Brother: Unlocked"
     },
     {
+      "date": "2026-07-12",
       "ep": 3,
-      "title": "Episode 3",
-      "date": "2026-07-12"
+      "title": "Episode 3"
     },
     {
+      "date": "2026-07-15",
       "ep": 4,
-      "title": "Episode 4",
-      "date": "2026-07-15"
+      "title": "Episode 4"
     },
     {
+      "date": "2026-07-16",
       "ep": 5,
-      "title": "Episode 5",
-      "date": "2026-07-16"
+      "title": "Episode 5"
     },
     {
+      "date": "2026-07-19",
       "ep": 6,
-      "title": "Episode 6",
-      "date": "2026-07-19"
+      "title": "Episode 6"
     },
     {
+      "date": "2026-07-22",
       "ep": 7,
-      "title": "Episode 7",
-      "date": "2026-07-22"
+      "title": "Episode 7"
     },
     {
+      "date": "2026-07-23",
       "ep": 8,
-      "title": "Episode 8",
-      "date": "2026-07-23"
+      "title": "Episode 8"
     },
     {
+      "date": "2026-07-24",
       "ep": 9,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-07-24"
+      "title": "Big Brother: Unlocked"
     },
     {
+      "date": "2026-07-26",
       "ep": 10,
-      "title": "Episode 10",
-      "date": "2026-07-26"
+      "title": "Episode 10"
     },
     {
+      "date": "2026-07-29",
       "ep": 11,
-      "title": "Episode 11",
-      "date": "2026-07-29"
+      "title": "Episode 11"
     },
     {
+      "date": "2026-07-30",
       "ep": 12,
-      "title": "Episode 12",
-      "date": "2026-07-30"
+      "title": "Episode 12"
     },
     {
+      "date": "2026-08-02",
       "ep": 13,
-      "title": "Episode 13",
-      "date": "2026-08-02"
+      "title": "Episode 13"
     },
     {
+      "date": "2026-08-05",
       "ep": 14,
-      "title": "Episode 14",
-      "date": "2026-08-05"
+      "title": "Episode 14"
     },
     {
+      "date": "2026-08-06",
       "ep": 15,
-      "title": "Episode 15",
-      "date": "2026-08-06"
+      "title": "Episode 15"
     },
     {
+      "date": "2026-08-07",
       "ep": 16,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-08-07"
+      "title": "Big Brother: Unlocked"
     },
     {
+      "date": "2026-08-09",
       "ep": 17,
-      "title": "Episode 17",
-      "date": "2026-08-09"
+      "title": "Episode 17"
     },
     {
+      "date": "2026-08-12",
       "ep": 18,
-      "title": "Episode 18",
-      "date": "2026-08-12"
+      "title": "Episode 18"
     },
     {
+      "date": "2026-08-13",
       "ep": 19,
-      "title": "Episode 19",
-      "date": "2026-08-13"
+      "title": "Episode 19"
     },
     {
+      "date": "2026-08-16",
       "ep": 20,
-      "title": "Episode 20",
-      "date": "2026-08-16"
+      "title": "Episode 20"
     },
     {
+      "date": "2026-08-19",
       "ep": 21,
-      "title": "Episode 21",
-      "date": "2026-08-19"
+      "title": "Episode 21"
     },
     {
+      "date": "2026-08-20",
       "ep": 22,
-      "title": "Episode 22",
-      "date": "2026-08-20"
+      "title": "Episode 22"
     },
     {
+      "date": "2026-08-23",
       "ep": 23,
-      "title": "Episode 23",
-      "date": "2026-08-23"
+      "title": "Episode 23"
     },
     {
+      "date": "2026-08-26",
       "ep": 24,
-      "title": "Episode 24",
-      "date": "2026-08-26"
+      "title": "Episode 24"
     },
     {
+      "date": "2026-08-27",
       "ep": 25,
-      "title": "Episode 25",
-      "date": "2026-08-27"
+      "title": "Episode 25"
     },
     {
+      "date": "2026-08-30",
       "ep": 26,
-      "title": "Episode 26",
-      "date": "2026-08-30"
+      "title": "Episode 26"
     },
     {
+      "date": "2026-09-02",
       "ep": 27,
-      "title": "Episode 27",
-      "date": "2026-09-02"
+      "title": "Episode 27"
     },
     {
+      "date": "2026-09-03",
       "ep": 28,
-      "title": "Episode 28",
-      "date": "2026-09-03"
+      "title": "Episode 28"
     },
     {
+      "date": "2026-09-04",
       "ep": 29,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-09-04"
+      "title": "Big Brother: Unlocked"
     },
     {
+      "date": "2026-09-06",
       "ep": 30,
-      "title": "Episode 30",
-      "date": "2026-09-06"
+      "title": "Episode 30"
     },
     {
+      "date": "2026-09-09",
       "ep": 31,
-      "title": "Episode 31",
-      "date": "2026-09-09"
+      "title": "Episode 31"
     },
     {
+      "date": "2026-09-10",
       "ep": 32,
-      "title": "Episode 32",
-      "date": "2026-09-10"
+      "title": "Episode 32"
     },
     {
+      "date": "2026-09-13",
       "ep": 33,
-      "title": "Episode 33",
-      "date": "2026-09-13"
+      "title": "Episode 33"
     },
     {
+      "date": "2026-09-16",
       "ep": 34,
-      "title": "Episode 34",
-      "date": "2026-09-16"
+      "title": "Episode 34"
     },
     {
+      "date": "2026-09-17",
       "ep": 35,
-      "title": "Episode 35",
-      "date": "2026-09-17"
+      "title": "Episode 35"
     },
     {
+      "date": "2026-09-18",
       "ep": 36,
-      "title": "Big Brother: Unlocked",
-      "date": "2026-09-18"
+      "title": "Big Brother: Unlocked"
     },
     {
+      "date": "2026-09-20",
       "ep": 37,
-      "title": "Episode 37",
-      "date": "2026-09-20"
+      "title": "Episode 37"
     },
     {
+      "date": "2026-09-23",
       "ep": 38,
-      "title": "Episode 38",
-      "date": "2026-09-23"
+      "title": "Episode 38"
     },
     {
+      "date": "2026-09-24",
       "ep": 39,
-      "title": "Episode 39",
-      "date": "2026-09-24"
+      "title": "Episode 39"
     },
     {
+      "date": "2026-09-25",
       "ep": 40,
-      "title": "Episode 40",
-      "date": "2026-09-25"
+      "title": "Episode 40"
     },
     {
+      "date": "2026-09-27",
       "ep": 41,
-      "title": "Episode 41",
-      "date": "2026-09-27"
+      "title": "Episode 41"
     },
     {
+      "date": "2026-10-01",
       "ep": 42,
-      "title": "Episode 42",
-      "date": "2026-10-01"
+      "title": "Episode 42"
     }
   ],
   "scoring": {
