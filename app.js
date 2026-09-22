@@ -99,16 +99,18 @@ function isOnBlock(data, hg) {
   return true;
 }
 
-// Reigning HOH = won the most recent week's HOH comp; the badge hands off
+// Reigning HOH = won the most recent HOH comp; the badge hands off
 // automatically when the next HOH win publishes.
+// Compared by segment, not by week: a split week runs two full cycles with two
+// different HOHs, so matching on the week alone would crown both of them.
 function isReigningHOH(data, hg) {
   if (hg.status !== 'active') return false;
-  let maxHohWeek = 0;
+  let maxHohKey = 0;
   data.houseguests.forEach(h => (h.events || []).forEach(e => {
-    if (e.type === 'hoh') maxHohWeek = Math.max(maxHohWeek, e.week);
+    if (e.type === 'hoh') maxHohKey = Math.max(maxHohKey, segmentKey(e));
   }));
-  if (!maxHohWeek) return false;
-  return (hg.events || []).some(e => e.type === 'hoh' && e.week === maxHohWeek);
+  if (!maxHohKey) return false;
+  return (hg.events || []).some(e => e.type === 'hoh' && segmentKey(e) === maxHohKey);
 }
 
 function statusBadge(data, hg) {
