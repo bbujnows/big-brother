@@ -809,32 +809,32 @@
           "type": "nominated"
         },
         {
-          "type": "veto",
+          "day": "Day 74",
+          "description": "Won Power of Veto (Week 11 (Day 74))",
           "houseguestId": "hg_drew_campbell",
           "points": 3,
-          "day": "Day 74",
-          "description": "Won Power of Veto (Week 11 (Day 74))"
+          "type": "veto"
         },
         {
-          "type": "savedSelf",
+          "day": "Day 74",
+          "description": "Took themselves off the block (Week 11 (Day 74))",
           "houseguestId": "hg_drew_campbell",
           "points": 2,
-          "day": "Day 74",
-          "description": "Took themselves off the block (Week 11 (Day 74))"
+          "type": "savedSelf"
         },
         {
-          "type": "nominated",
+          "day": "Day 74",
+          "description": "Named replacement nominee (Week 11 (Day 74))",
           "houseguestId": "hg_taylor_brown",
           "points": -3,
-          "day": "Day 74",
-          "description": "Named replacement nominee (Week 11 (Day 74))"
+          "type": "nominated"
         },
         {
-          "type": "veto",
+          "day": "Day 77",
+          "description": "Won Power of Veto (Week 11 (Day 77))",
           "houseguestId": "hg_drew_campbell",
           "points": 3,
-          "day": "Day 77",
-          "description": "Won Power of Veto (Week 11 (Day 77))"
+          "type": "veto"
         }
       ],
       "week": 11
@@ -1058,28 +1058,28 @@
           "week": 11
         },
         {
-          "week": 11,
-          "type": "veto",
-          "points": 3,
+          "addedAt": "2026-09-24T07:44:53.263598+00:00",
           "day": "Day 74",
           "description": "Won Power of Veto (Week 11 (Day 74))",
-          "addedAt": "2026-09-24T07:44:53.263598+00:00"
+          "points": 3,
+          "type": "veto",
+          "week": 11
         },
         {
-          "week": 11,
-          "type": "savedSelf",
-          "points": 2,
+          "addedAt": "2026-09-24T07:44:53.263927+00:00",
           "day": "Day 74",
           "description": "Took themselves off the block (Week 11 (Day 74))",
-          "addedAt": "2026-09-24T07:44:53.263927+00:00"
+          "points": 2,
+          "type": "savedSelf",
+          "week": 11
         },
         {
-          "week": 11,
-          "type": "veto",
-          "points": 3,
+          "addedAt": "2026-09-24T07:44:53.265021+00:00",
           "day": "Day 77",
           "description": "Won Power of Veto (Week 11 (Day 77))",
-          "addedAt": "2026-09-24T07:44:53.265021+00:00"
+          "points": 3,
+          "type": "veto",
+          "week": 11
         }
       ],
       "hometown": "Temecula, CA",
@@ -1721,12 +1721,12 @@
           "week": 11
         },
         {
-          "week": 11,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-09-24T07:44:53.263993+00:00",
           "day": "Day 74",
           "description": "Named replacement nominee (Week 11 (Day 74))",
-          "addedAt": "2026-09-24T07:44:53.263993+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 11
         }
       ],
       "hometown": "Deerfield Beach, FL",
@@ -2009,214 +2009,209 @@
   "premiereDate": "2026-07-09",
   "schedule": [
     {
-      "date": "2026-07-09",
       "ep": 1,
-      "title": "Season Premiere"
+      "title": "Season Premiere",
+      "date": "2026-07-09"
     },
     {
-      "date": "2026-07-10",
       "ep": 2,
-      "title": "Big Brother: Unlocked"
+      "title": "Big Brother: Unlocked",
+      "date": "2026-07-10"
     },
     {
-      "date": "2026-07-12",
       "ep": 3,
-      "title": "Episode 3"
+      "title": "Episode 3",
+      "date": "2026-07-12"
     },
     {
-      "date": "2026-07-15",
       "ep": 4,
-      "title": "Episode 4"
+      "title": "Episode 4",
+      "date": "2026-07-15"
     },
     {
-      "date": "2026-07-16",
       "ep": 5,
-      "title": "Episode 5"
+      "title": "Episode 5",
+      "date": "2026-07-16"
     },
     {
-      "date": "2026-07-19",
       "ep": 6,
-      "title": "Episode 6"
+      "title": "Episode 6",
+      "date": "2026-07-19"
     },
     {
-      "date": "2026-07-22",
       "ep": 7,
-      "title": "Episode 7"
+      "title": "Episode 7",
+      "date": "2026-07-22"
     },
     {
-      "date": "2026-07-23",
       "ep": 8,
-      "title": "Episode 8"
+      "title": "Episode 8",
+      "date": "2026-07-23"
     },
     {
-      "date": "2026-07-24",
       "ep": 9,
-      "title": "Big Brother: Unlocked"
+      "title": "Big Brother: Unlocked",
+      "date": "2026-07-24"
     },
     {
-      "date": "2026-07-26",
       "ep": 10,
-      "title": "Episode 10"
+      "title": "Episode 10",
+      "date": "2026-07-26"
     },
     {
-      "date": "2026-07-29",
       "ep": 11,
-      "title": "Episode 11"
+      "title": "Episode 11",
+      "date": "2026-07-29"
     },
     {
-      "date": "2026-07-30",
       "ep": 12,
-      "title": "Episode 12"
+      "title": "Episode 12",
+      "date": "2026-07-30"
     },
     {
-      "date": "2026-08-02",
       "ep": 13,
-      "title": "Episode 13"
+      "title": "Episode 13",
+      "date": "2026-08-02"
     },
     {
-      "date": "2026-08-05",
       "ep": 14,
-      "title": "Episode 14"
+      "title": "Episode 14",
+      "date": "2026-08-05"
     },
     {
-      "date": "2026-08-06",
       "ep": 15,
-      "title": "Episode 15"
+      "title": "Episode 15",
+      "date": "2026-08-06"
     },
     {
-      "date": "2026-08-07",
       "ep": 16,
-      "title": "Big Brother: Unlocked"
+      "title": "Big Brother: Unlocked",
+      "date": "2026-08-07"
     },
     {
-      "date": "2026-08-09",
       "ep": 17,
-      "title": "Episode 17"
+      "title": "Episode 17",
+      "date": "2026-08-09"
     },
     {
-      "date": "2026-08-12",
       "ep": 18,
-      "title": "Episode 18"
+      "title": "Episode 18",
+      "date": "2026-08-12"
     },
     {
-      "date": "2026-08-13",
       "ep": 19,
-      "title": "Episode 19"
+      "title": "Episode 19",
+      "date": "2026-08-13"
     },
     {
-      "date": "2026-08-16",
       "ep": 20,
-      "title": "Episode 20"
+      "title": "Episode 20",
+      "date": "2026-08-16"
     },
     {
-      "date": "2026-08-19",
       "ep": 21,
-      "title": "Episode 21"
+      "title": "Episode 21",
+      "date": "2026-08-19"
     },
     {
-      "date": "2026-08-20",
       "ep": 22,
-      "title": "Episode 22"
+      "title": "Episode 22",
+      "date": "2026-08-20"
     },
     {
-      "date": "2026-08-23",
       "ep": 23,
-      "title": "Episode 23"
+      "title": "Episode 23",
+      "date": "2026-08-23"
     },
     {
-      "date": "2026-08-26",
       "ep": 24,
-      "title": "Episode 24"
+      "title": "Episode 24",
+      "date": "2026-08-26"
     },
     {
-      "date": "2026-08-27",
       "ep": 25,
-      "title": "Episode 25"
+      "title": "Episode 25",
+      "date": "2026-08-27"
     },
     {
-      "date": "2026-08-30",
       "ep": 26,
-      "title": "Episode 26"
+      "title": "Episode 26",
+      "date": "2026-08-30"
     },
     {
-      "date": "2026-09-02",
       "ep": 27,
-      "title": "Episode 27"
+      "title": "Episode 27",
+      "date": "2026-09-02"
     },
     {
-      "date": "2026-09-03",
       "ep": 28,
-      "title": "Episode 28"
+      "title": "Episode 28",
+      "date": "2026-09-03"
     },
     {
-      "date": "2026-09-04",
       "ep": 29,
-      "title": "Big Brother: Unlocked"
+      "title": "Big Brother: Unlocked",
+      "date": "2026-09-04"
     },
     {
-      "date": "2026-09-06",
       "ep": 30,
-      "title": "Episode 30"
+      "title": "Episode 30",
+      "date": "2026-09-06"
     },
     {
-      "date": "2026-09-09",
       "ep": 31,
-      "title": "Episode 31"
+      "title": "Episode 31",
+      "date": "2026-09-09"
     },
     {
-      "date": "2026-09-10",
       "ep": 32,
-      "title": "Episode 32"
+      "title": "Episode 32",
+      "date": "2026-09-10"
     },
     {
-      "date": "2026-09-13",
       "ep": 33,
-      "title": "Episode 33"
+      "title": "Episode 33",
+      "date": "2026-09-13"
     },
     {
-      "date": "2026-09-16",
       "ep": 34,
-      "title": "Episode 34"
+      "title": "Episode 34",
+      "date": "2026-09-16"
     },
     {
-      "date": "2026-09-17",
       "ep": 35,
-      "title": "Episode 35"
+      "title": "Episode 35",
+      "date": "2026-09-17"
     },
     {
-      "date": "2026-09-18",
       "ep": 36,
-      "title": "Big Brother: Unlocked"
+      "title": "Big Brother: Unlocked",
+      "date": "2026-09-18"
     },
     {
-      "date": "2026-09-20",
       "ep": 37,
-      "title": "Episode 37"
+      "title": "Episode 37",
+      "date": "2026-09-20"
     },
     {
-      "date": "2026-09-23",
       "ep": 38,
-      "title": "Episode 38"
+      "title": "Episode 38",
+      "date": "2026-09-23"
     },
     {
-      "date": "2026-09-24",
       "ep": 39,
-      "title": "Episode 39"
+      "title": "Episode 39",
+      "date": "2026-09-24"
     },
     {
-      "date": "2026-09-25",
       "ep": 40,
-      "title": "Episode 40"
+      "title": "Episode 41",
+      "date": "2026-09-27"
     },
     {
-      "date": "2026-09-27",
       "ep": 41,
-      "title": "Episode 41"
-    },
-    {
-      "date": "2026-10-01",
-      "ep": 42,
-      "title": "Episode 42"
+      "title": "Episode 42",
+      "date": "2026-10-01"
     }
   ],
   "scoring": {
