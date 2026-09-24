@@ -788,25 +788,53 @@
           "type": "nominated"
         },
         {
-          "type": "hoh",
+          "day": "Day 77",
+          "description": "Won Head of Household (Week 11 (Day 77))",
           "houseguestId": "hg_taylor_brown",
           "points": 10,
-          "day": "Day 77",
-          "description": "Won Head of Household (Week 11 (Day 77))"
+          "type": "hoh"
         },
         {
-          "type": "nominated",
+          "day": "Day 77",
+          "description": "Nominated for eviction (Week 11 (Day 77))",
           "houseguestId": "hg_dee_valladares",
           "points": -3,
+          "type": "nominated"
+        },
+        {
           "day": "Day 77",
-          "description": "Nominated for eviction (Week 11 (Day 77))"
+          "description": "Nominated for eviction (Week 11 (Day 77))",
+          "houseguestId": "hg_drew_campbell",
+          "points": -3,
+          "type": "nominated"
+        },
+        {
+          "type": "veto",
+          "houseguestId": "hg_drew_campbell",
+          "points": 3,
+          "day": "Day 74",
+          "description": "Won Power of Veto (Week 11 (Day 74))"
+        },
+        {
+          "type": "savedSelf",
+          "houseguestId": "hg_drew_campbell",
+          "points": 2,
+          "day": "Day 74",
+          "description": "Took themselves off the block (Week 11 (Day 74))"
         },
         {
           "type": "nominated",
-          "houseguestId": "hg_drew_campbell",
+          "houseguestId": "hg_taylor_brown",
           "points": -3,
+          "day": "Day 74",
+          "description": "Named replacement nominee (Week 11 (Day 74))"
+        },
+        {
+          "type": "veto",
+          "houseguestId": "hg_drew_campbell",
+          "points": 3,
           "day": "Day 77",
-          "description": "Nominated for eviction (Week 11 (Day 77))"
+          "description": "Won Power of Veto (Week 11 (Day 77))"
         }
       ],
       "week": 11
@@ -1022,12 +1050,36 @@
           "week": 11
         },
         {
-          "week": 11,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-09-22T07:53:45.744996+00:00",
           "day": "Day 77",
           "description": "Nominated for eviction (Week 11 (Day 77))",
-          "addedAt": "2026-09-22T07:53:45.744996+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 11
+        },
+        {
+          "week": 11,
+          "type": "veto",
+          "points": 3,
+          "day": "Day 74",
+          "description": "Won Power of Veto (Week 11 (Day 74))",
+          "addedAt": "2026-09-24T07:44:53.263598+00:00"
+        },
+        {
+          "week": 11,
+          "type": "savedSelf",
+          "points": 2,
+          "day": "Day 74",
+          "description": "Took themselves off the block (Week 11 (Day 74))",
+          "addedAt": "2026-09-24T07:44:53.263927+00:00"
+        },
+        {
+          "week": 11,
+          "type": "veto",
+          "points": 3,
+          "day": "Day 77",
+          "description": "Won Power of Veto (Week 11 (Day 77))",
+          "addedAt": "2026-09-24T07:44:53.265021+00:00"
         }
       ],
       "hometown": "Temecula, CA",
@@ -1037,7 +1089,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "active",
-      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win, a veto win, and two Blockbuster wins so far. Pulled themselves off the block in Week 10 and came off a twist block in Week 8."
+      "summary": "Owns an HOH win, two veto wins, and two Blockbuster wins so far. Pulled themselves off the block two times and came off a twist block in Week 8."
     },
     {
       "age": 29,
@@ -1661,12 +1713,20 @@
           "week": 10
         },
         {
-          "week": 11,
-          "type": "hoh",
-          "points": 10,
+          "addedAt": "2026-09-22T07:53:45.744860+00:00",
           "day": "Day 77",
           "description": "Won Head of Household (Week 11 (Day 77))",
-          "addedAt": "2026-09-22T07:53:45.744860+00:00"
+          "points": 10,
+          "type": "hoh",
+          "week": 11
+        },
+        {
+          "week": 11,
+          "type": "nominated",
+          "points": -3,
+          "day": "Day 74",
+          "description": "Named replacement nominee (Week 11 (Day 74))",
+          "addedAt": "2026-09-24T07:44:53.263993+00:00"
         }
       ],
       "hometown": "Deerfield Beach, FL",
@@ -1906,12 +1966,12 @@
           "week": 10
         },
         {
-          "week": 11,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-09-22T07:53:45.744987+00:00",
           "day": "Day 77",
           "description": "Nominated for eviction (Week 11 (Day 77))",
-          "addedAt": "2026-09-22T07:53:45.744987+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 11
         }
       ],
       "hometown": "Miami, FL",
@@ -1923,7 +1983,7 @@
       "summary": "Currently on the block ahead of the next eviction. Owns two HOH wins so far. Was pulled off the block in Week 6 and survived two eviction votes on the block."
     }
   ],
-  "lastUpdated": "2026-09-22",
+  "lastUpdated": "2026-09-24",
   "owners": [
     {
       "color": "#ff6b9d",
