@@ -835,6 +835,46 @@
           "houseguestId": "hg_drew_campbell",
           "points": 3,
           "type": "veto"
+        },
+        {
+          "type": "survivedVote",
+          "houseguestId": "hg_taylor_brown",
+          "points": 4,
+          "day": "Day 74",
+          "description": "Survived the eviction vote (Week 11 (Day 74))"
+        },
+        {
+          "type": "savedSelf",
+          "houseguestId": "hg_drew_campbell",
+          "points": 2,
+          "day": "Day 77",
+          "description": "Took themselves off the block (Week 11 (Day 77))"
+        },
+        {
+          "type": "nominated",
+          "houseguestId": "hg_rick_devens",
+          "points": -3,
+          "day": "Day 77",
+          "description": "Named replacement nominee (Week 11 (Day 77))"
+        },
+        {
+          "type": "survivedVote",
+          "houseguestId": "hg_rick_devens",
+          "points": 4,
+          "day": "Day 77",
+          "description": "Survived the eviction vote (Week 11 (Day 77))"
+        },
+        {
+          "type": "madeJury",
+          "houseguestId": "hg_dee_valladares",
+          "points": 10,
+          "description": "Made it to the jury (Week 11)"
+        },
+        {
+          "type": "madeJury",
+          "houseguestId": "hg_melody_morris",
+          "points": 10,
+          "description": "Made it to the jury (Week 11)"
         }
       ],
       "week": 11
@@ -1080,6 +1120,14 @@
           "points": 3,
           "type": "veto",
           "week": 11
+        },
+        {
+          "week": 11,
+          "type": "savedSelf",
+          "points": 2,
+          "day": "Day 77",
+          "description": "Took themselves off the block (Week 11 (Day 77))",
+          "addedAt": "2026-09-25T08:05:33.482932+00:00"
         }
       ],
       "hometown": "Temecula, CA",
@@ -1497,6 +1545,13 @@
           "points": -3,
           "type": "nominated",
           "week": 11
+        },
+        {
+          "week": 11,
+          "type": "madeJury",
+          "points": 10,
+          "description": "Made it to the jury (Week 11)",
+          "addedAt": "2026-09-25T08:05:33.485466+00:00"
         }
       ],
       "hometown": "Thornton, CO",
@@ -1505,8 +1560,9 @@
       "occupation": "Corporate game show host",
       "ownerId": "melissa",
       "photo": "photos/melody.jpg",
-      "status": "active",
-      "summary": "Currently on the block ahead of the next eviction. Owns an HOH win and a Blockbuster win so far. Survived two eviction votes on the block."
+      "status": "jury",
+      "summary": "Evicted in Week 11 and now sits on the jury. Finished with an HOH win and a Blockbuster win. Survived two eviction votes on the block.",
+      "weekEvicted": 11
     },
     {
       "age": 42,
@@ -1586,6 +1642,22 @@
           "points": 10,
           "type": "hoh",
           "week": 11
+        },
+        {
+          "week": 11,
+          "type": "nominated",
+          "points": -3,
+          "day": "Day 77",
+          "description": "Named replacement nominee (Week 11 (Day 77))",
+          "addedAt": "2026-09-25T08:05:33.482981+00:00"
+        },
+        {
+          "week": 11,
+          "type": "survivedVote",
+          "points": 4,
+          "day": "Day 77",
+          "description": "Survived the eviction vote (Week 11 (Day 77))",
+          "addedAt": "2026-09-25T08:05:33.483066+00:00"
         }
       ],
       "hometown": "Macon, GA",
@@ -1595,7 +1667,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "active",
-      "summary": "Reigning Head of Household after winning the Week 11 comp. Owns an HOH win, three veto wins, and two Blockbuster wins so far. Pulled themselves off the block in Week 10."
+      "summary": "Owns two HOH wins, three veto wins, and two Blockbuster wins so far. Pulled themselves off the block in Week 10 and survived the Week 11 eviction vote."
     },
     {
       "age": 28,
@@ -1727,6 +1799,14 @@
           "points": -3,
           "type": "nominated",
           "week": 11
+        },
+        {
+          "week": 11,
+          "type": "survivedVote",
+          "points": 4,
+          "day": "Day 74",
+          "description": "Survived the eviction vote (Week 11 (Day 74))",
+          "addedAt": "2026-09-25T08:05:33.481971+00:00"
         }
       ],
       "hometown": "Deerfield Beach, FL",
@@ -1736,7 +1816,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "active",
-      "summary": "Reigning Head of Household after winning the Week 11 comp. Owns a veto win so far. Pulled themselves off the block in Week 4 and survived four eviction votes on the block."
+      "summary": "Owns an HOH win and a veto win so far. Pulled themselves off the block in Week 4 and survived five eviction votes on the block."
     },
     {
       "age": 52,
@@ -1972,6 +2052,13 @@
           "points": -3,
           "type": "nominated",
           "week": 11
+        },
+        {
+          "week": 11,
+          "type": "madeJury",
+          "points": 10,
+          "description": "Made it to the jury (Week 11)",
+          "addedAt": "2026-09-25T08:05:33.485374+00:00"
         }
       ],
       "hometown": "Miami, FL",
@@ -1979,11 +2066,12 @@
       "name": "Dee Valladares",
       "occupation": "Entrepreneur",
       "photo": "photos/dee.png",
-      "status": "active",
-      "summary": "Currently on the block ahead of the next eviction. Owns two HOH wins so far. Was pulled off the block in Week 6 and survived two eviction votes on the block."
+      "status": "jury",
+      "summary": "Evicted in Week 11 and now sits on the jury. Finished with two HOH wins. Was pulled off the block in Week 6 and survived two eviction votes on the block.",
+      "weekEvicted": 11
     }
   ],
-  "lastUpdated": "2026-09-24",
+  "lastUpdated": "2026-09-25",
   "owners": [
     {
       "color": "#ff6b9d",
@@ -2205,12 +2293,12 @@
     },
     {
       "ep": 40,
-      "title": "Episode 41",
+      "title": "Episode 40",
       "date": "2026-09-27"
     },
     {
       "ep": 41,
-      "title": "Episode 42",
+      "title": "Episode 41",
       "date": "2026-10-01"
     }
   ],
