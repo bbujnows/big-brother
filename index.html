@@ -145,11 +145,14 @@
       // Hero subtitle
       const heroSub = document.getElementById('hero-sub');
       if (data.currentWeek === 0) {
+        const champ = data.houseguests.find(h => h.status === 'winner');
         const remaining = data.houseguests.filter(h => h.status === 'active').length;
         const total = data.houseguests.length;
-        heroSub.textContent = remaining === total
-          ? `${total} houseguests · Season 28 is live`
-          : `${remaining} of ${total} houseguests remain · Season 28 is live`;
+        heroSub.textContent = champ
+          ? `${champ.name} wins Big Brother 28 · Season complete`
+          : remaining === total
+            ? `${total} houseguests · Season 28 is live`
+            : `${remaining} of ${total} houseguests remain · Season 28 is live`;
       } else {
         heroSub.textContent = `Week ${data.currentWeek} · Last updated ${data.lastUpdated}`;
       }
@@ -292,6 +295,8 @@
             ${hg.photo ? `<img src="${hg.photo}" alt="${hg.name}" loading="lazy">` : '👤'}
             ${hg.status === 'evicted' ? `<div class="mw-stamp">EVICTED${hg.weekEvicted ? '·WK' + hg.weekEvicted : ''}</div>` : ''}
             ${hg.status === 'jury' ? `<div class="mw-stamp jury">JURY</div>` : ''}
+            ${hg.status === 'winner' ? `<div class="mw-stamp winner">WINNER</div>` : ''}
+            ${hg.status === 'runnerUp' ? `<div class="mw-stamp runnerUp">2ND</div>` : ''}
           </div>
           <div class="mw-name">${hg.name.split(' ')[0]}</div>
         </a>`).join('');

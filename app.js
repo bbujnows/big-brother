@@ -113,10 +113,13 @@ function isReigningHOH(data, hg) {
   return (hg.events || []).some(e => e.type === 'hoh' && segmentKey(e) === maxHohKey);
 }
 
+// Stored statuses are camelCase keys; these are how they read on a badge.
+const STATUS_LABELS = { winner: 'WINNER 👑', runnerUp: 'runner-up' };
+
 function statusBadge(data, hg) {
   if (isReigningHOH(data, hg)) return '<span class="status-badge status-hoh">HOH 👑</span>';
   if (isOnBlock(data, hg)) return '<span class="status-badge status-onblock">on the block</span>';
-  return `<span class="status-badge status-${hg.status}">${hg.status}</span>`;
+  return `<span class="status-badge status-${hg.status}">${STATUS_LABELS[hg.status] || hg.status}</span>`;
 }
 
 // ── FIREBASE SAVE (no token, no SHA, instant) ────────────────────────

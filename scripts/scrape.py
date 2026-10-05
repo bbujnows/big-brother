@@ -56,6 +56,12 @@ REVEAL_CADENCE = {
     "survivedVote":   "thu",  # revealed at the same moment as the eviction
     "twistSave":      "thu",  # twist blocks resolve on the live show
     "evictionPower":  "thu",  # ...as does who was holding the power
+    # The finale is its own Thursday-night live show: placements and the
+    # America's Favorite reveal all land at the very end of it.
+    "first":          "thu",
+    "second":         "thu",
+    "third":          "thu",
+    "afh":            "thu",
 }
 
 # ── The scoring board (league-voted 2026-08-05) ───────────────────────────
@@ -241,6 +247,10 @@ def cell_names_split(cell):
 
 
 EVICT_CHOICE_RE = re.compile(r"(.+?)'s\s+choice\s+to\s+(?:evict|eliminate)", re.I)
+# The finale reuses the eviction row to report the jury vote ("Devens, 6 votes
+# to win"). Read literally that marks the season winner as evicted, so the
+# cell has to be recognised and handed to the finale parser instead.
+WIN_VOTE_RE = re.compile(r"\bvotes?\s+to\s+win\b", re.I)
 
 
 def parse_eviction(cell):
@@ -255,8 +265,11 @@ def parse_eviction(cell):
     lines = [ln.strip() for ln in cell_text(cell).split("\n") if ln.strip()]
     if not lines or lines[0].lower() in PLACEHOLDERS:
         return [], None
+    tail = " ".join(lines[1:])
+    if WIN_VOTE_RE.search(tail):
+        return [], None  # finale jury vote, not an eviction
     evicted = [n.strip() for n in re.split(r"[,/]| & | and ", lines[0]) if n.strip()]
-    m = EVICT_CHOICE_RE.match(" ".join(lines[1:]))
+    m = EVICT_CHOICE_RE.match(tail)
     return evicted, (m.group(1).strip() if m else None)
 
 
@@ -549,6 +562,33 @@ SEGMENT_EVENT_TYPES = {
 JURY_RE = re.compile(r"jury\s*member", re.I)
 
 
+# Mid-season the grid labels jurors outright. At the finale that column is
+# reused for how each juror voted, so the label disappears and this alone
+# would silently stop finding anyone — which is how the last juror went unpaid.
+NOT_A_VOTE_RE = re.compile(
+    r"winner|runner[-\s]?up|evicted|eliminated|votes?\s+to\s+win|^\(?none\)?$", re.I)
+
+
+def parse_finale_voters(matrix, finale_col):
+    """Rows whose finale cell holds a name: those are the jury's votes."""
+    names = set()
+    if finale_col is None:
+        return names
+    for row in matrix:
+        if finale_col >= len(row):
+            continue
+        label = re.sub(r"\s+", " ", cell_text(row[0])).strip()
+        if not label or len(label) > MAX_LABEL_LEN:
+            continue
+        cell = row[finale_col]
+        if cell is None:
+            continue
+        vote = re.sub(r"\s+", " ", cell_text(cell)).strip()
+        if vote and len(vote) <= MAX_LABEL_LEN and not NOT_A_VOTE_RE.search(vote):
+            names.add(label)
+    return names
+
+
 def parse_jury(matrix):
     """Names the grid tags as jury members.
 
@@ -591,6 +631,94 @@ def apply_jury(data, jury_names, published, unmatched):
         if hg.get("status") != "jury":
             hg["status"] = "jury"
             published.append(f"Week {week}: {hg['name']} marked a jury member")
+
+
+# ── Finale ────────────────────────────────────────────────────────────────
+# Placements do not live in the results grid. The grid's last column records
+# how each juror voted, and its eviction row reports the jury tally; the actual
+# finish is stated in the article infobox, which is both cleaner and stable.
+FINALE_RE = re.compile(r"finale", re.I)
+
+PLACEMENT_LABELS = [
+    (re.compile(r"^winner$", re.I),                "first"),
+    (re.compile(r"^runner[-\s]?up$", re.I),        "second"),
+    (re.compile(r"america'?s\s+favou?rite", re.I), "afh"),
+]
+
+FINALE_EVENTS = [
+    ("first",  "Won Big Brother 28"),
+    ("second", "Finished as runner-up"),
+    ("third",  "Finished in third place"),
+    ("afh",    "Voted America's Favorite Houseguest"),
+]
+
+# A finalist was never evicted, so neither status is a flavour of "out".
+FINALE_STATUS = {"first": "winner", "second": "runnerUp"}
+
+
+def parse_placements(soup):
+    """Read Winner / Runner-up / America's Favorite from the article infobox."""
+    out = {}
+    box = soup.find("table", class_=re.compile(r"infobox", re.I))
+    if box is None:
+        return out
+    for tr in box.find_all("tr"):
+        th, td = tr.find("th"), tr.find("td")
+        if not th or not td:
+            continue
+        key = re.sub(r"\s+", " ", th.get_text()).strip()
+        val = re.sub(r"\s+", " ", td.get_text()).strip()
+        if not val or len(val) > 60:
+            continue
+        for pat, slot in PLACEMENT_LABELS:
+            if pat.search(key) and slot not in out:
+                out[slot] = val
+    return out
+
+
+def find_third_place(segments):
+    """Third place is whoever was evicted in the last cycle before the finale.
+
+    Only meaningful once a finale column exists; mid-season the last eviction
+    is just the last eviction."""
+    if not any(FINALE_RE.search(s["day"] or "") for s in segments):
+        return None
+    last = None
+    for seg in segments:
+        evicted, _ = parse_eviction(seg["cells"].get("evicted"))
+        if evicted:
+            last = evicted
+    return last[0] if last and len(last) == 1 else None
+
+
+def apply_finale(data, placements, week, published, held, unmatched):
+    """Award placements and America's Favorite, and mark the two finalists.
+
+    Gated on the finale having aired. Third place keeps the jury status it
+    already earned — they were evicted at the final three."""
+    if not placements:
+        return
+    if not is_aired(week, "first"):
+        held.append((week, "finale", len(placements)))
+        return
+    for slot, blurb in FINALE_EVENTS:
+        name = placements.get(slot)
+        if not name:
+            continue
+        hg = find_guest_by_name(data, name)
+        if not hg:
+            unmatched.add(name)
+            continue
+        if add_event(data, hg, week, slot, f"{blurb} (Week {week})"):
+            pts = get_points(data, slot)
+            published.append(f"Week {week}: {hg['name']} +{pts} ({slot})")
+        status = FINALE_STATUS.get(slot)
+        if status and hg.get("status") != status:
+            hg["status"] = status
+            # The grid's finale row reads "<name>, N votes to win"; before
+            # WIN_VOTE_RE that scored the champion as an eviction.
+            hg["weekEvicted"] = None
+            published.append(f"Week {week}: {hg['name']} marked {status}")
 
 
 def clear_merged_week_events(data, split_weeks):
@@ -1100,7 +1228,19 @@ def main():
         apply_segment(data, seg, published, held, unmatched)
     # After the segments, so a houseguest evicted on this very run is picked up
     # in the same pass rather than waiting a day for their jury points.
-    apply_jury(data, parse_jury(matrix), published, unmatched)
+    finale = next((s for s in segments if FINALE_RE.search(s["day"] or "")), None)
+    jurors = parse_jury(matrix)
+    if finale:
+        jurors |= parse_finale_voters(matrix, finale["col"])
+    apply_jury(data, jurors, published, unmatched)
+
+    # Placements last: third place has to be a juror before it can be paid.
+    if finale:
+        placements = parse_placements(soup)
+        third = find_third_place(segments)
+        if third:
+            placements["third"] = third
+        apply_finale(data, placements, finale["week"], published, held, unmatched)
 
     refreshed = update_summaries(data, dry_run=dry_run)
     if refreshed:

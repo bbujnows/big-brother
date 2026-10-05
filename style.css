@@ -1511,3 +1511,31 @@ input:focus, select:focus, textarea:focus {
 /* Keep the compose box clear of the iPhone home indicator */
 .chat-footer { padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
 #chat-tab { padding-right: calc(10px + env(safe-area-inset-right)); }
+
+/* ── Finale ───────────────────────────────────────────────────────────── */
+/* The two finalists were never evicted, so neither tile is dimmed the way
+   .mw-tile.evicted and .mw-tile.jury are. The winner's is lit instead. */
+.status-runnerUp { background: rgba(203,213,225,0.14); color: #cbd5e1; }
+
+.mw-tile.winner .mw-photo {
+  border-color: var(--gold);
+  box-shadow: 0 0 14px rgba(255, 217, 61, 0.45);
+}
+.mw-tile.winner .mw-name { color: var(--gold); font-weight: 800; }
+.mw-tile.runnerUp .mw-photo { border-color: rgba(203, 213, 225, 0.6); }
+.mw-tile.runnerUp .mw-name { color: #cbd5e1; }
+
+.mw-stamp.winner {
+  color: var(--gold);
+  border-top-color: rgba(255, 217, 61, 0.55);
+  background: rgba(20, 16, 4, 0.82);
+}
+.mw-stamp.runnerUp {
+  color: #cbd5e1;
+  border-top-color: rgba(203, 213, 225, 0.4);
+}
+
+.event-type.first  { background: rgba(255,217,61,0.22);  color: var(--gold); }
+.event-type.second { background: rgba(203,213,225,0.16); color: #cbd5e1; }
+.event-type.third  { background: rgba(205,127,50,0.18);  color: #d08c4a; }
+.event-type.afh    { background: rgba(255,107,157,0.16); color: #ff6b9d; }

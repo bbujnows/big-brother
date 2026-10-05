@@ -880,38 +880,68 @@
       "week": 11
     },
     {
-      "week": 12,
       "airDate": "2026-09-27",
       "events": [
         {
-          "type": "hoh",
+          "day": "Day 87",
+          "description": "Won Head of Household (Week 12 (Day 87))",
           "houseguestId": "hg_rick_devens",
           "points": 10,
-          "day": "Day 87",
-          "description": "Won Head of Household (Week 12 (Day 87))"
+          "type": "hoh"
         },
         {
-          "type": "nominated",
+          "day": "Day 87",
+          "description": "Named replacement nominee (Week 12 (Day 87))",
           "houseguestId": "hg_drew_campbell",
           "points": -3,
-          "day": "Day 87",
-          "description": "Named replacement nominee (Week 12 (Day 87))"
+          "type": "nominated"
         },
         {
-          "type": "nominated",
+          "day": "Day 87",
+          "description": "Named replacement nominee (Week 12 (Day 87))",
           "houseguestId": "hg_taylor_brown",
           "points": -3,
-          "day": "Day 87",
-          "description": "Named replacement nominee (Week 12 (Day 87))"
+          "type": "nominated"
         },
         {
-          "type": "survivedVote",
+          "day": "Day 87",
+          "description": "Survived the eviction vote (Week 12 (Day 87))",
           "houseguestId": "hg_taylor_brown",
           "points": 4,
-          "day": "Day 87",
-          "description": "Survived the eviction vote (Week 12 (Day 87))"
+          "type": "survivedVote"
+        },
+        {
+          "type": "madeJury",
+          "houseguestId": "hg_drew_campbell",
+          "points": 10,
+          "description": "Made it to the jury (Week 12)"
+        },
+        {
+          "type": "first",
+          "houseguestId": "hg_rick_devens",
+          "points": 60,
+          "description": "Won Big Brother 28 (Week 12)"
+        },
+        {
+          "type": "second",
+          "houseguestId": "hg_taylor_brown",
+          "points": 40,
+          "description": "Finished as runner-up (Week 12)"
+        },
+        {
+          "type": "third",
+          "houseguestId": "hg_drew_campbell",
+          "points": 20,
+          "description": "Finished in third place (Week 12)"
+        },
+        {
+          "type": "afh",
+          "houseguestId": "hg_rick_devens",
+          "points": 25,
+          "description": "Voted America's Favorite Houseguest (Week 12)"
         }
-      ]
+      ],
+      "week": 12
     }
   ],
   "houseguests": [
@@ -1164,12 +1194,26 @@
           "week": 11
         },
         {
-          "week": 12,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-10-02T08:50:40.365414+00:00",
           "day": "Day 87",
           "description": "Named replacement nominee (Week 12 (Day 87))",
-          "addedAt": "2026-10-02T08:50:40.365414+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 12
+        },
+        {
+          "week": 12,
+          "type": "madeJury",
+          "points": 10,
+          "description": "Made it to the jury (Week 12)",
+          "addedAt": "2026-10-05T14:13:06.665237+00:00"
+        },
+        {
+          "week": 12,
+          "type": "third",
+          "points": 20,
+          "description": "Finished in third place (Week 12)",
+          "addedAt": "2026-10-05T14:13:06.665237+00:00"
         }
       ],
       "hometown": "Temecula, CA",
@@ -1178,7 +1222,7 @@
       "occupation": "Surgical dental assistant",
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
-      "status": "evicted",
+      "status": "jury",
       "summary": "Evicted in Week 12. Finished with an HOH win, two veto wins, and two Blockbuster wins. Pulled themselves off the block two times and came off a twist block in Week 8.",
       "weekEvicted": 12
     },
@@ -1703,12 +1747,26 @@
           "week": 11
         },
         {
-          "week": 12,
-          "type": "hoh",
-          "points": 10,
+          "addedAt": "2026-10-02T08:50:40.365176+00:00",
           "day": "Day 87",
           "description": "Won Head of Household (Week 12 (Day 87))",
-          "addedAt": "2026-10-02T08:50:40.365176+00:00"
+          "points": 10,
+          "type": "hoh",
+          "week": 12
+        },
+        {
+          "week": 12,
+          "type": "first",
+          "points": 60,
+          "description": "Won Big Brother 28 (Week 12)",
+          "addedAt": "2026-10-05T14:13:06.665237+00:00"
+        },
+        {
+          "week": 12,
+          "type": "afh",
+          "points": 25,
+          "description": "Voted America's Favorite Houseguest (Week 12)",
+          "addedAt": "2026-10-05T14:13:06.665237+00:00"
         }
       ],
       "hometown": "Macon, GA",
@@ -1717,9 +1775,9 @@
       "occupation": "News anchor",
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
-      "status": "evicted",
+      "status": "winner",
       "summary": "Evicted in Week 12. Finished with three HOH wins, three veto wins, and two Blockbuster wins. Pulled themselves off the block in Week 10 and survived the Week 11 eviction vote.",
-      "weekEvicted": 12
+      "weekEvicted": null
     },
     {
       "age": 28,
@@ -1861,20 +1919,27 @@
           "week": 11
         },
         {
-          "week": 12,
-          "type": "nominated",
-          "points": -3,
+          "addedAt": "2026-10-02T08:50:40.365424+00:00",
           "day": "Day 87",
           "description": "Named replacement nominee (Week 12 (Day 87))",
-          "addedAt": "2026-10-02T08:50:40.365424+00:00"
+          "points": -3,
+          "type": "nominated",
+          "week": 12
+        },
+        {
+          "addedAt": "2026-10-02T08:50:40.365539+00:00",
+          "day": "Day 87",
+          "description": "Survived the eviction vote (Week 12 (Day 87))",
+          "points": 4,
+          "type": "survivedVote",
+          "week": 12
         },
         {
           "week": 12,
-          "type": "survivedVote",
-          "points": 4,
-          "day": "Day 87",
-          "description": "Survived the eviction vote (Week 12 (Day 87))",
-          "addedAt": "2026-10-02T08:50:40.365539+00:00"
+          "type": "second",
+          "points": 40,
+          "description": "Finished as runner-up (Week 12)",
+          "addedAt": "2026-10-05T14:13:06.665237+00:00"
         }
       ],
       "hometown": "Deerfield Beach, FL",
@@ -1883,8 +1948,9 @@
       "occupation": "Elementary school counselor",
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
-      "status": "active",
-      "summary": "Owns an HOH win and a veto win so far. Pulled themselves off the block in Week 4 and survived six eviction votes on the block."
+      "status": "runnerUp",
+      "summary": "Owns an HOH win and a veto win so far. Pulled themselves off the block in Week 4 and survived six eviction votes on the block.",
+      "weekEvicted": null
     },
     {
       "age": 52,
@@ -2139,7 +2205,7 @@
       "weekEvicted": 11
     }
   ],
-  "lastUpdated": "2026-10-02",
+  "lastUpdated": "2026-10-05",
   "owners": [
     {
       "color": "#ff6b9d",
