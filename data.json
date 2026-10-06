@@ -911,34 +911,34 @@
           "type": "survivedVote"
         },
         {
-          "type": "madeJury",
+          "description": "Made it to the jury (Week 12)",
           "houseguestId": "hg_drew_campbell",
           "points": 10,
-          "description": "Made it to the jury (Week 12)"
+          "type": "madeJury"
         },
         {
-          "type": "first",
+          "description": "Won Big Brother 28 (Week 12)",
           "houseguestId": "hg_rick_devens",
           "points": 60,
-          "description": "Won Big Brother 28 (Week 12)"
+          "type": "first"
         },
         {
-          "type": "second",
+          "description": "Finished as runner-up (Week 12)",
           "houseguestId": "hg_taylor_brown",
           "points": 40,
-          "description": "Finished as runner-up (Week 12)"
+          "type": "second"
         },
         {
-          "type": "third",
+          "description": "Finished in third place (Week 12)",
           "houseguestId": "hg_drew_campbell",
           "points": 20,
-          "description": "Finished in third place (Week 12)"
+          "type": "third"
         },
         {
-          "type": "afh",
+          "description": "Voted America's Favorite Houseguest (Week 12)",
           "houseguestId": "hg_rick_devens",
           "points": 25,
-          "description": "Voted America's Favorite Houseguest (Week 12)"
+          "type": "afh"
         }
       ],
       "week": 12
@@ -1202,18 +1202,18 @@
           "week": 12
         },
         {
-          "week": 12,
-          "type": "madeJury",
-          "points": 10,
+          "addedAt": "2026-10-05T14:13:06.665237+00:00",
           "description": "Made it to the jury (Week 12)",
-          "addedAt": "2026-10-05T14:13:06.665237+00:00"
+          "points": 10,
+          "type": "madeJury",
+          "week": 12
         },
         {
-          "week": 12,
-          "type": "third",
-          "points": 20,
+          "addedAt": "2026-10-05T14:13:06.665237+00:00",
           "description": "Finished in third place (Week 12)",
-          "addedAt": "2026-10-05T14:13:06.665237+00:00"
+          "points": 20,
+          "type": "third",
+          "week": 12
         }
       ],
       "hometown": "Temecula, CA",
@@ -1223,7 +1223,7 @@
       "ownerId": "brandon",
       "photo": "photos/drew.jpg",
       "status": "jury",
-      "summary": "Evicted in Week 12. Finished with an HOH win, two veto wins, and two Blockbuster wins. Pulled themselves off the block two times and came off a twist block in Week 8.",
+      "summary": "Evicted in Week 12 and now sits on the jury. Finished with an HOH win, two veto wins, and two Blockbuster wins. Pulled themselves off the block two times and came off a twist block in Week 8.",
       "weekEvicted": 12
     },
     {
@@ -1755,18 +1755,18 @@
           "week": 12
         },
         {
-          "week": 12,
-          "type": "first",
-          "points": 60,
+          "addedAt": "2026-10-05T14:13:06.665237+00:00",
           "description": "Won Big Brother 28 (Week 12)",
-          "addedAt": "2026-10-05T14:13:06.665237+00:00"
+          "points": 60,
+          "type": "first",
+          "week": 12
         },
         {
-          "week": 12,
-          "type": "afh",
-          "points": 25,
+          "addedAt": "2026-10-05T14:13:06.665237+00:00",
           "description": "Voted America's Favorite Houseguest (Week 12)",
-          "addedAt": "2026-10-05T14:13:06.665237+00:00"
+          "points": 25,
+          "type": "afh",
+          "week": 12
         }
       ],
       "hometown": "Macon, GA",
@@ -1776,8 +1776,7 @@
       "ownerId": "brandon",
       "photo": "photos/rick.jpg",
       "status": "winner",
-      "summary": "Evicted in Week 12. Finished with three HOH wins, three veto wins, and two Blockbuster wins. Pulled themselves off the block in Week 10 and survived the Week 11 eviction vote.",
-      "weekEvicted": null
+      "summary": "Winner of Big Brother 28. Finished with three HOH wins, three veto wins, and two Blockbuster wins. Pulled themselves off the block in Week 10 and survived the Week 11 eviction vote."
     },
     {
       "age": 28,
@@ -1935,11 +1934,11 @@
           "week": 12
         },
         {
-          "week": 12,
-          "type": "second",
-          "points": 40,
+          "addedAt": "2026-10-05T14:13:06.665237+00:00",
           "description": "Finished as runner-up (Week 12)",
-          "addedAt": "2026-10-05T14:13:06.665237+00:00"
+          "points": 40,
+          "type": "second",
+          "week": 12
         }
       ],
       "hometown": "Deerfield Beach, FL",
@@ -1949,8 +1948,7 @@
       "ownerId": "brittany",
       "photo": "photos/taylor.jpg",
       "status": "runnerUp",
-      "summary": "Owns an HOH win and a veto win so far. Pulled themselves off the block in Week 4 and survived six eviction votes on the block.",
-      "weekEvicted": null
+      "summary": "Owns an HOH win and a veto win so far. Pulled themselves off the block in Week 4 and survived six eviction votes on the block."
     },
     {
       "age": 52,
@@ -2205,7 +2203,7 @@
       "weekEvicted": 11
     }
   ],
-  "lastUpdated": "2026-10-05",
+  "lastUpdated": "2026-10-06",
   "owners": [
     {
       "color": "#ff6b9d",
